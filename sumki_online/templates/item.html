@@ -1,0 +1,34 @@
+{% extends 'main.html' %}
+{% load staticfiles %}
+
+{% block new_css%}
+    <link rel="stylesheet" type="text/css" href="{% static 'sumki_online/css/item.css' %}" />
+{% endblock %}
+
+{% block new_js %}
+    <script type="text/javascript" src="{% static 'sumki_online/js/item.js' %}"></script>
+{% endblock %}
+
+{% block main_block %}
+    <div class="main_content col-md-10 col-md-offset-1">
+        <div class="row">
+            <div class="col-md-9 content_item">
+                <div class="item">
+                    <h3 style="font-weight: bold">{{ item.name }}</h3>
+                    <img  width="480" height="480" src="{% static 'sumki_online/images/' %}{{ category.alias }}/{{ item.image }}">
+                    <h3>Описание</h3>
+                    <div class="row">
+                        <div class="item_description col-md-7">{{ item.description }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 right_side_bar">
+                <div class="price_block">
+                    <div class="price_lable">Цена (р.)</div>
+                    <div class="price">{{ item.price }}</div>
+                </div>
+                <button type="button" class="btn btn-primary">Добавить в корзину</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% comment %}
+
+<div id="type_obuv">
+    <div class="name_header"><span class="glyphicon glyphicon-list"></span> Женская обувь</div>
+    {% for value in types_all %}
+    <div class="checkbox">
+        <label><input class="type_value" type="checkbox" value="{{ value.name }}">
+            {{ value.name }}
+            {% for key, number in types.items %}
+                    {% if value.name == key %}
+                        <span>({{ number }})</span>
+                    {% endif %}
+            {% endfor %}
+        </label>
+    </div>
+    {% endfor %}
+</div>
+<div id="size_obuv">
+    <div class="name_header"><span class="glyphicon glyphicon-list"></span> Размер</div>
+    {% for value in sizes_all %}
+    <div class="checkbox">
+        <label>
+            <input class="size_value" type="checkbox" value="{{ value.name }}">
+            {{ value.name }}
+            {% for key, number in sizes.items %}
+                {% if value.name == key %}
+                    <span>({{ number }})</span>
+                {% endif %}
+            {% endfor %}
+        </label>
+    </div>
+    {% endfor %}
+</div>
+<div id="brend_obuv">
+    <div class="name_header"><span class="glyphicon glyphicon-list"></span> Бренд</div>
+    {% for value in brends_all %}
+    <div class="checkbox">
+        <label>
+            <input class="brend_value" type="checkbox" value="{{ value.name }}">
+            {{ value.name }}
+            {% for key, number in brends.items %}
+                {% if value.name == key %}
+                    <span>({{ number }})</span>
+                {% endif %}
+            {% endfor %}
+        </label>
+    </div>
+    {% endfor %}
+</div>{% endcomment %}

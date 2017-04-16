@@ -1,0 +1,96 @@
+{% extends 'main.html' %}
+
+{% load filters %}
+{% load staticfiles %}
+
+{% block new_css%}
+    <link rel="stylesheet" type="text/css" href="{% static 'sumki_online/css/catalog.css' %}" />
+{% endblock %}
+
+{% block new_js %}
+    <script type="text/javascript" src="{% static 'sumki_online/js/catalog.js' %}"></script>
+{% endblock %}
+
+{% block main_block %}
+    <div class="main_content col-md-10 col-md-offset-1">
+        <div class="row">
+            <div class="col-md-3 left_side_bar"  onmousedown="return false" onselectstart="return false">
+            {% if options %}
+                {% for key, option in options.items %}
+                    <div id="{{ key }}_{{ category.alias }}" class="option_items">
+                        <div class="name_header"><span class="glyphicon glyphicon-list"></span> {{ option.label }}</div>
+                        {% for value in option.all %}
+                        <div class="checkbox">
+                            <label><input class="{{ key }}_value" type="checkbox" value="{{ value.name }}">
+                                {{ value.name }}
+                                {% for key, number in option.elements.items %}
+                                        {% if value.name == key %}
+                                            <span>({{ number }})</span>
+                                        {% endif %}
+                                {% endfor %}
+                            </label>
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            </div>
+            <div class="col-md-9 content_items">
+                <div id="sorting">
+                    <span>Сортировать по:</span>
+                    <ul id="sorting_switcher">
+                        <li class="active desc popular_sorting">
+                            <a>
+                                <span><span class="glyphicon glyphicon-arrow-down"></span> популярности</span>
+                            </a>
+                        </li>
+                        <li class="inactive desc price_sorting">
+                            <a>
+                                <span><span class="glyphicon glyphicon-arrow-down"></span> цене</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="pagination_el">
+                    <ul class="pagination">{% comment %}
+                        {% if items.has_previous %}
+                            <li><a href="{% url 'sumki_online:catalog' 'obuv' %}?page={{ items.previous_page_number }}">&laquo;</a></li>
+                        {% endif %}{% endcomment %}
+                        {% for number_page in items.paginator.page_range %}
+                            {% if number_page == items.number %}
+                                <li class="active"><a href="#">{{ number_page }}</a></li>
+                            {% else %}
+                                <li><a href="{% url 'sumki_online:catalog' category.alias%}?page={{ number_page }}">{{ number_page }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                        {% comment %}{% if items.has_next %}
+                            <li><a href="{% url 'sumki_online:catalog' 'obuv' %}?page={{ items.next_page_number }}">&raquo;</a></li>
+                        {% endif %}{% endcomment %}
+                    </ul>
+                </div>
+                <div class="row block_items">
+                    <span class="hidden" id="category_cat">{{ category.alias }}</span>
+                    {% include 'more_inform_window.html' %}
+                    {% include 'items.html' %}
+                </div>
+                <div class="pagination_el">
+                    <ul class="pagination">
+                        {% comment %}{% if items.has_previous %}
+                            <li><a href="{% url 'sumki_online:catalog' 'obuv' %}?page={{ items.previous_page_number }}">&laquo;</a></li>
+                        {% endif %}{% endcomment %}
+                        {% for number_page in items.paginator.page_range %}
+                            {% if number_page == items.number %}
+                                <li class="active"><a href="#">{{ number_page }}</a></li>
+                            {% else %}
+                                <li><a class="href_active" href="{% url 'sumki_online:catalog' 'obuv' %}?page={{ number_page }}">{{ number_page }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                        {% comment %}{% if items.has_next %}
+                            <li><a href="{% url 'sumki_online:catalog' 'obuv' %}?page={{ items.next_page_number }}">&raquo;</a></li>
+                        {% endif %}{% endcomment %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

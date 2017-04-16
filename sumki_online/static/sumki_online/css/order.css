@@ -1,0 +1,114 @@
+#order_korzina a,#order_korzina .img_item{
+    float: left;
+}
+#order_korzina .description_item{
+    float: right;
+}
+.wrapper .body .main_content{
+    min-height: 400px;
+    background: #fff;
+}
+.right_side_bar{
+    min-height: 400px;
+}
+#order_korzina li{
+    overflow: hidden;
+}
+#order_korzina .order_delete_item{
+    font-weight: bold;
+    cursor: pointer;
+}
+#order_korzina .order_delete_item:hover{
+    color: #337ab7;
+}
+#order_korzina .row{
+    height: 100px;
+}
+#order_korzina .row div{
+    height: 100%;
+    text-align: center;
+    padding: 0;
+}
+#order_korzina .block_number_item{
+    position: relative;
+}
+#order_korzina .item_in_order{
+    border-bottom: 1px solid #e1e8ed;
+}
+#order_korzina .name_item{
+    font-weight: bold;
+    font-size: 16px;
+    padding: 0 10px 10px 120px !important;
+    text-align: left !important;
+}
+#order_korzina .block_name_item{
+    overflow: hidden;
+    padding-left: 15px !important;
+}
+#summa_k_oplate{
+    font-size: 25px;
+    font-weight: 700;
+    line-height: 0.6;
+}
+#order_steps{
+    margin-top: 10px;
+}
+#order_steps li{
+    display: inline-block;
+    padding: 10px;
+    border:1px solid #cc6633;
+    background-color: #fff;
+    color: inherit;
+    border-radius: 0 10px 0 0;
+    cursor: pointer;
+}
+#order_steps li.active_step{
+    color: #fff;
+    background-color: #cc6633;
+}
+
+#delivery_order{
+    display: none;
+}
+
+#payment_method{
+    display: none;
+}
+#delivery_order li{
+    display: inline-block;
+    padding: 10px;
+    border:1px solid #ccc;
+    cursor: pointer;
+}
+#delivery_order li.active_el{
+    background-color: #ccc;
+}
+#delivery_export_el,#success_buy{
+    display: none;
+}
+#independent_export_el p,#delivery_export_el p{
+    font-weight: bold;
+    margin-top: 10px;
+}
+#delivery_order form div{
+    width: 50%;
+}
+#success_buy{
+    margin-top: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #cc6a3b;
+}
+.hide_field{
+    display: none;
+}
+
+#summa_k_oplate_right div{
+    padding: 10px;
+}
+#korzina_blank{
+    font-weight: bold;
+}
+#checkout{
+    display: none;
+}

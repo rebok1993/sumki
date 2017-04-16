@@ -1,0 +1,27 @@
+{% load staticfiles %}
+
+{% load filters %}
+<div class="item col-md-4" id="{{ item.id }}">
+    <a href="{% url 'sumki_online:item' item.category_alias item.id %}">
+        <img class="image_item" src="{% static 'sumki_online/images/' %}{{ item.category_alias }}/200_on_200/{{ item.image }}" width="200" height="200">
+        <div class="item_description name_item" data-item-name="{{ item.type }}">{{ item.type }} {{ item.brend }}</div>
+        {% if item.discount > 0 %}
+            <div class="item_description discount_item">{{ item.price|price_format }} руб.</div>
+            <div class="item_description price_item" data-item-price="{{ item.price|discount:item.discount }}">{{ item.price|discount:item.discount|price_format }} руб.</div>
+            <div class="item_description saving_item"><span class="glyphicon glyphicon-tag"></span> {{ item.price|saving:item.discount|price_format }} руб. экономия</div>
+        {% else %}
+            <div class="item_description price_item" data-item-price="{{ item.price }}">{{ item.price|price_format }} руб.</div>
+        {% endif %}
+        {% if item.category_alias == 'obuv' %}
+            <div class="item_description hide_element"><i>Размеры:</i>
+                {% for size in item.size %}
+                    <span class="size_item">{{ size }}</span>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </a>
+    <div class="more_information hide_element">
+        <span class="glyphicon glyphicon-search"></span>
+        <i>Посмотреть подробнее</i>
+    </div>
+</div>

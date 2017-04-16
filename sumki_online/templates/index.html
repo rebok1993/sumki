@@ -1,0 +1,74 @@
+{% extends 'main.html' %}
+
+{% load filters %}
+{% load staticfiles %}
+
+{% block new_css%}
+    <link rel="stylesheet" type="text/css" href="{% static 'sumki_online/css/home.css' %}" />
+{% endblock %}
+
+{% block new_js %}
+    <script type="text/javascript" src="{% static 'sumki_online/js/home.js' %}"></script>
+{% endblock %}
+
+{% block main_block %}
+    <div class="main_offer">
+        <div id="scrolling_elements">
+            <ul>
+                {% for elem in main_offer %}
+                    <li style="background-color: {{ elem.color }}">
+                        <a href="{{ elem.link }}">
+                            <img src="{% static 'images/special_offer/' %}{{ elem.image }}" width="650" height="350">
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div id="scroll_main_offer">
+            {% for i in main_offer %}
+                {% if forloop.first %}
+                    <a class="select_slide selected_slide" data-index="{{ forloop.counter }}"></a>
+                {% else %}
+                    <a class="select_slide" data-index="{{ forloop.counter }}"></a>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <span id="btn_left" class="glyphicon glyphicon-chevron-left"></span>
+        <span id="btn_right" class="glyphicon glyphicon-chevron-right"></span>
+    </div>
+    <div class="main_content col-md-10 col-md-offset-1">
+        <div class="content_items">
+            <div class="switcher_type_tovar row">
+                <span>Специальные предложения</span>
+            </div>
+            <div id="skidki_group">
+                <div class="row block_items">
+                    {% include 'more_inform_window.html' %}
+                    {% for item in items_disc %}
+                        {% include 'item_elem.html' %}
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="switcher_type_tovar row">
+                <span>Хиты продаж</span>
+            </div>
+            <div id="now_buy_group">
+                <div class="row block_items">
+                    {% for item in items_hits %}
+                        {% include 'item_elem.html' %}
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="switcher_type_tovar row">
+                <span>Новые поступления</span>
+            </div>
+            <div id="new_offer_group">
+                <div class="row block_items">
+                    {% for item in items_new_offer %}
+                        {% include 'item_elem.html' %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

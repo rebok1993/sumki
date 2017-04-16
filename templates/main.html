@@ -1,0 +1,90 @@
+<html>
+<head>
+    {% load staticfiles %}
+    <meta http-equiv=content-type content="text/html;charset=UTF-8">
+    <title>Страница</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-select.css' %}" />
+    {% block new_css %}{% endblock %}
+    <script type="text/javascript" src="{% static 'js/jquery-3.1.1.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.cookie.js' %}"></script>
+    {% block new_js %}{% endblock %}
+</head>
+<body>
+    <div id="fon_wait"></div>
+    <div class="wrapper container-fluid main_fon">
+        <div class="header row">
+            <div class="header_inform_row hidden">
+                <div class="contact_data">
+                    <i>
+                    Адрес магазина:
+                    г.Нижний Новгород,
+                    ул.Карла Маркса, д.20
+                    Тел. 8(910)-877-49-69</i>
+                </div>
+            </div>
+            <div class="header_main_area">
+                <a class="logo" href="/"></a>
+                <div id="korzina_block">
+                    <div class="korzina korzina_inactive"></div>
+                    <div id="korzina_content"  onmousedown="return false" onselectstart="return false">
+                        <ul>
+                            <li id="item_absent">
+                                <div>Корзина пуста</div>
+                            </li>
+                            <li style='padding: 20px 0' id='result_block'>
+                                <div class='name_result price_item'>Итого</div>
+                                <div id='result' class='price_item'>0 руб.</div>
+                                <div style="clear: both; text-align: center; padding-top: 20px"><a href="/order" style="display: inline-block"><button type="button" class="btn btn-danger">Перейти в корзину</button></a></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="header_navbar"  onmousedown="return false" onselectstart="return false">
+                <ul>
+                    <li {% if category.alias == 'obuv' %}class="active_elem"{% endif %}>
+                        <a href="{% url 'sumki_online:catalog' 'obuv' %}" class="menu_name">
+                            <span class="obuv_logo">&nbsp;</span>
+                            <span>Женская обувь</span>
+                        </a>
+                    </li>
+                    <li {% if category.alias == 'sumki' %}class="active_elem"{% endif %}>
+                        <a href="{% url 'sumki_online:catalog' 'sumki' %}" class="menu_name">
+                            <span class="sumki_logo">&nbsp;</span>
+                            <span>Сумки</span>
+                        </a>
+                    </li>
+                    {% comment %}<li {% if category.alias == 'accessories' %}class="active_elem"{% endif %}>
+                        <a href="{% url 'sumki_online:catalog' 'accessories' %}" class="menu_name">
+                            <span class="other_logo">&nbsp;</span>
+                            <span>Акссесуары</span>
+                        </a>
+                    </li>{% endcomment %}
+                </ul>
+            </div>
+        </div>
+        <div class="body row">
+            {% block main_block %}{% endblock %}
+            {% comment %}
+            <ul class="list_category">
+                {%for category in categories%}
+                    <li><a href="{{ category.alias }}/">{{ category.name }}</a></li>
+                {%endfor%}
+            </ul>{% endcomment %}
+        </div>
+        <div class="footer row">
+            <div class="contact_data">
+                <i>
+                Адрес магазина:
+                г.Нижний Новгород,
+                ул.Карла Маркса, д.20
+                Тел. 8(910)-877-49-69</i>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
