@@ -16,7 +16,7 @@
         <div id="scrolling_elements">
             <ul>
                 {% for elem in main_offer %}
-                    <li style="background-color: {{ elem.color }}">
+                    <li style="background: {{ elem.color }}">
                         <a href="{{ elem.link }}">
                             <img src="{% static 'images/special_offer/' %}{{ elem.image }}" width="650" height="350">
                         </a>

@@ -8,7 +8,7 @@
     color: #fff !important;
 }
 .main_fon{
-    background-color: #993333;
+    background-color: #b44444;
 }
 .header_navbar ul{
     height: 49px;
@@ -19,8 +19,9 @@
     width: 1%;
 }
 .header_navbar{
-    border-top:1px solid #753333;
+    border-top:1px solid #b44444;
 }
+
 
 .header_navbar .active_elem a{
     color: #337AB7;
@@ -132,7 +133,7 @@ a{
     cursor: pointer;
 }
 #korzina_block:hover{
-    background: #993333;
+    background: #b44444;
 }
 #korzina_block .korzina_inactive{
     background:url("../images/korzina_black.png") no-repeat center transparent;
@@ -158,8 +159,8 @@ a{
     z-index: 1;
     border-left: 1px solid #e1e8ed;
     border-right: 1px solid #e1e8ed;
-    border-top: 3px solid #993333;
-    border-bottom: 7px solid #993333;
+    border-top: 3px solid #b44444;
+    border-bottom: 7px solid #b44444;
     padding: 10px 10px 0;
 }
 #korzina_content li{
@@ -225,7 +226,7 @@ a{
     background-color: #5b5b5b;
 }
 #scroll_main_offer a:hover{
-    background-color: #993333;
+    background-color: #b44444;
 }
 #scroll_main_offer a{
     letter-spacing: 0;
