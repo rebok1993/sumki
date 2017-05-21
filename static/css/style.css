@@ -288,6 +288,7 @@ a{
     transition: all .15s ease-in-out;
 }
 .main_content .content_items .item:hover{
+    z-index: 10;
     border: 1px solid #d4dbe0;
     box-shadow: 0 10px 50px 0 rgba(30, 30, 30, 0.2);
 }
@@ -362,8 +363,9 @@ a{
 #more_information_window{
     display: none;
     position: fixed;
-    top:0;
-    left: 15%;
+    top:10%;
+    left: 50%;
+    margin-left: -480px;
     width: 960px;
     height: 500px;
     background-color: #fff;
@@ -387,16 +389,16 @@ a{
     margin-left: 460px;
 }
 .more_information{
-    position: absolute;
+    /*position: absolute;
     bottom: 0;
     left: 15%;
-    padding: 15px 0;
+    padding: 15px 0;*/
     cursor: pointer;
-    font-weight: bold;
+    /*font-weight: bold;*/
 }
-.more_information:hover{
+/*.more_information:hover{
     color: #337AB7;
-}
+}*/
 .name_item_in_korz{
     float: left;
     max-width:70%;
