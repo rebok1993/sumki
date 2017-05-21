@@ -1,0 +1,31 @@
+.wrapper .body .main_content{
+    min-height: 400px;
+}
+.main_content .item{
+    padding-bottom: 40px;
+    background-color: #fff;
+    border-right: 1px solid #e1e8ed;
+    overflow: hidden;
+    padding-left: 20px;
+}
+.main_content .right_side_bar{
+    background-color: #fff;
+    border-left: 1px solid #e1e8ed;
+    min-height: 100%;
+    text-align: center;
+}
+.right_side_bar .price_block{
+    font-weight: bold;
+    text-align: center;
+    margin: 15px 0;
+}
+.right_side_bar .price_block .price{
+    font-size: 40px;
+    display: inline-block;
+}
+.right_side_bar .price_block .price_lable{
+    display: inline-block;
+}
+.main_content .content_item{
+    background: inherit;
+}
