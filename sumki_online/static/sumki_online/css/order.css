@@ -10,6 +10,7 @@
 }
 .right_side_bar{
     min-height: 400px;
+    background: #0D4646;
 }
 #order_korzina li{
     overflow: hidden;
@@ -49,18 +50,32 @@
     font-size: 25px;
     font-weight: 700;
     line-height: 0.6;
+    color: #fff;
 }
 #order_steps{
     margin-top: 10px;
 }
 #order_steps li{
+    position: relative;
     display: inline-block;
     padding: 10px;
-    border:1px solid #cc6633;
+    /*border:1px solid #cc6633;*/
     background-color: #fff;
-    color: inherit;
-    border-radius: 0 10px 0 0;
+    color: #b8b8b8;
+    border-radius: 10px 10px 2px 2px;
     cursor: pointer;
+    margin-right: 30px;
+}
+
+#order_steps li::after{
+    content: "\2192\A0";
+    position: absolute;
+    color: #b8b8b8;
+    left: 100%;
+    margin-left: .6em;
+}
+#order_steps li:last-child::after{
+    content: "";
 }
 #order_steps li.active_step{
     color: #fff;
@@ -111,4 +126,7 @@
 }
 #checkout{
     display: none;
+}
+#order_ready,.next_step_payment,#checkout{
+    font-size: 20px;
 }
