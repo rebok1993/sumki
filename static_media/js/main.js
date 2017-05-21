@@ -130,7 +130,7 @@ $(function () {
             event.stopPropagation();
         }
         $("#korzina_block").children(".korzina_inactive").toggleClass("korzina_inactive korzina_active");
-        $("#korzina_block").css("background", "#993333");
+        $("#korzina_block").css("background", "#b44444");
         $("#korzina_block").children("#korzina_content").slideDown();
     };
     //функция скрытия корзины
