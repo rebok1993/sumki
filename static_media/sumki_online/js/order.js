@@ -20,14 +20,17 @@ function csrfSafeMethod(method) {
 function delete_order_item_el(el) {
     el.remove();
 }
+
 function set_k_oplate(summa) {
     $("#summa_k_oplate").text(format_price(summa)+" руб.");
 }
+
 $(function () {
     var next_step_payment = function (event) {
         event.preventDefault();
         $("#delivery_order").hide();
         $("#payment_method").fadeIn();
+        $("#delivery_order_btn").removeClass("active_step");
         $("#payment_method_btn").addClass("active_step");
     };
 
@@ -49,6 +52,7 @@ $(function () {
         $(this).hide();
         $("#build_order").hide();
         $("#delivery_order").fadeIn();
+        $("#order_elements").removeClass("active_step");
         $("#delivery_order_btn").addClass("active_step");
     };
 
@@ -82,13 +86,14 @@ $(function () {
                     select+="<option selected>"+i+"</option>";
                 else select+="<option>"+i+"</option>";
             }
+            var image_val = value['image'].replace("64_on_64", "100_on_100");
             var dop_field = "";
             if(value['size']) dop_field = "<br><span style='color: #aaa; font-size: 12px'>"+value['size']+" размер</span>";
             var el = "<li id='"+value['id']+"'>" +
                 "<div class='row item_in_order'>" +
                     "<div class='col-md-6 block_name_item'>" +
                         "<div class='img_item'>" +
-                        "<img src='"+value['image']+"' width='100px' height='100px'>" +
+                        "<img src='"+image_val+"' width='100px' height='100px'>" +
                         "</div>" +
                         "<div class='name_item'>"+value['name']+dop_field+"</div>" +
                     "</div>" +
