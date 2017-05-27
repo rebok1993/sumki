@@ -63,10 +63,11 @@ a{
 }
 .wrapper .header .header_main_area{
     /*background:url("../images/top_fon.png") no-repeat center white;*/
-    height: 100px;
+    height: 160px;
     text-align: center;
     background-color: #fff;
     padding-left: 100px;
+    position: relative;
 }
 .wrapper .body{
     min-height: 600px;
@@ -75,10 +76,16 @@ a{
 }
 .footer{
     height: 300px;
-    background-color: #131a22;
+    background-color: #253636;
 }
 .logo{
-    display: inline-block;
+    /*display: inline-block;*/
+    margin: auto;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
     height: 100px;
     width: 300px;
     background:url("../images/logo.png") no-repeat center transparent;
@@ -122,14 +129,18 @@ a{
     display: none;
 }
 #korzina_block{
-    margin-top: 30px;
-    margin-right: 50px;
+    margin: auto;
+    top: 0;
+    right: 10px;
+    bottom: 0;
+    /*margin-top: 30px;
+    margin-right: 50px;*/
     height: 50px;
     width: 70px;
     background: transparent;
     border-radius: 10px 10px 0 0;
     padding: 7px 5px;
-    position: relative;
+    position: absolute;
     cursor: pointer;
 }
 #korzina_block:hover{
@@ -190,19 +201,19 @@ a{
     width: 90%;
 }
 .btn-danger:hover{
-    background-color: #fff !important;
-    border-color: #cc612c !important;
-    color: inherit;
+    background-color: #e4813c !important;
+    border-color: #dd7a3c !important;
 }
 .btn-danger{
+    padding: 8px 16px 8px 16px !important;
+    font-weight: bold !important;
     border-color: #cc6a3b !important;
     background-color: #cc6a3b !important;
     color: #fff;
 }
 .btn-danger:focus{
-    background-color: #fff !important;
-    border-color: #cc612c !important;
-    color: inherit;
+    background-color: #dd7a3c !important;
+    border-color: #e4813c !important;
 }
 .btn-info:hover{
     background-color: #5bc0de !important;
@@ -322,12 +333,12 @@ a{
 
 #more_information_name{
     font-weight: bold;
-    padding: 10px;
+    padding: 10px 0;
     font-size: 20px;
 }
 #more_information_price{
     font-weight: bold;
-    padding: 10px;
+    padding: 10px 0;
     font-size: 35px;/*
     color: #cc6633;*/
 }
@@ -339,7 +350,6 @@ a{
     padding: 30px;
     display: none;
     position: fixed;
-    width: 400px;
     top:20%;
     left: 50%;
     margin-left: -200px;
@@ -354,23 +364,24 @@ a{
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(255,255,255,0.5);
+    background-color: rgba(0,0,0,0.55);
     z-index: 90;
 }
 #add_or_next_window h4{
     margin-bottom: 20px;
 }
 #more_information_window{
+    padding: 5px;
+    border-radius: 7px;
     display: none;
     position: fixed;
-    top:10%;
+    top:5%;
     left: 50%;
     margin-left: -480px;
     width: 960px;
-    height: 500px;
+    min-height: 500px;
     background-color: #fff;
     z-index: 100;
-    border: 1px solid #ccc;
 }
 #more_information_close{
     text-align: right;
@@ -383,10 +394,13 @@ a{
 #more_information_image{
     float: left;
     width:450px;
-    height: 450px;
+    min-height: 450px;
+}
+#more_information_image img{
+    margin-bottom: 10px;
 }
 #more_information_description{
-    margin-left: 460px;
+    margin-left: 500px;
 }
 .more_information{
     /*position: absolute;
@@ -407,4 +421,24 @@ a{
 }
 .number_in_korz{
     float: right;
+}
+#other_image{
+    overflow: hidden;
+}
+.other_image_item{
+    width: 120px;
+    height: 120px;
+    float: left;
+    border: 1px solid #000;
+    margin-right: 10px;
+}
+#description_item_full{
+
+}
+
+.btn-primary{
+    padding: 8px 16px 8px 16px !important;
+    font-weight: bold !important;
+    /*background-color: rgba(0,132,180,.8);
+    border-color: transparent;*/
 }

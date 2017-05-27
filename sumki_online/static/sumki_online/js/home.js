@@ -5,6 +5,12 @@ $(function () {
     var number_slide = 0;
     var id;
 
+    var number_slide_count = function () {
+        $("#scrolling_elements li").each(function () {
+            number_slide++;
+        });
+    };
+
     var stop_time = function (event) {
         event.stopPropagation();
         clearTimeout(id);
@@ -21,12 +27,12 @@ $(function () {
         $("#scrolling_elements li").each(function () {
             $(this).css("width",width_screen);
             width_ul += width_screen;
-            number_slide++;
         });
         $("#scrolling_elements ul").eq(0).css("width",width_ul);
     };
 
     var select_slide_auto = function (step) {
+        console.log("121");
         step = step || false;
         if(step==1 || !step){
             index_slide++;
@@ -52,9 +58,12 @@ $(function () {
         $("#scrolling_elements ul").css("left", "-"+width_screen*index_slide);
     };
 
+    //запускаются при загрузке сайта
     id = setInterval(select_slide_auto, 7000);
     set_width_el();
-    $(window).resize(set_width_el);
+    number_slide_count();
+
+    $(window).on("resize", set_width_el);
     $(".select_slide").on("click", select_slide);
     $("#scrolling_elements").on("mouseover", stop_time);
     $("#scrolling_elements").on("mouseout", run_time);
