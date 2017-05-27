@@ -368,7 +368,7 @@ a{
     z-index: 90;
 }
 #fon_wait_2{
-    display: none;
+    display: block;
     position: fixed;
     top: 0;
     left: 0;
