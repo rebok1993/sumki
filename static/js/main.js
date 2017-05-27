@@ -261,7 +261,7 @@ $(function () {
 
     //main
     fill_korzina();
-    $(window).onload(function () {
+    $(window).on("beforeunload", function () {
         $("#fon_wait_2").show("slow");
     });
     $("#korzina_block").on("mouseover", show_korzina);
