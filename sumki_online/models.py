@@ -153,7 +153,12 @@ class Order_params(models.Model):
     surname = models.CharField(max_length=255, verbose_name='Фамилия покупателя')
     adress = models.CharField(max_length=255, verbose_name='Адрес доставки', default='Самовывоз')
     data = models.DateTimeField()
+    sent = models.BooleanField(default=False, verbose_name='Отправлено')
+    received = models.BooleanField(default=False, verbose_name='Получено')
 
+    class Meta:
+        verbose_name = "ЗАКАЗЫ"
+        verbose_name_plural = "ЗАКАЗЫ"
 
     def __str__(self):
         return self.name+" "+self.surname
@@ -162,13 +167,13 @@ class Order_params(models.Model):
 # товары в заказе
 class Order_items(models.Model):
     item = models.ForeignKey(Item)
-    order = models.ForeignKey(Order_params)
+    order = models.ForeignKey(Order_params, on_delete=models.CASCADE)
     number = models.SmallIntegerField(verbose_name="Количетсво товара", default=1)
 
 
 #выбранный размер обуви
 class Order_size_obuv(models.Model):
-    order = models.ForeignKey(Order_params)
+    order = models.ForeignKey(Order_params, on_delete=models.CASCADE)
     item = models.ForeignKey(Item)
     size = models.ForeignKey(Size, default=1)
 

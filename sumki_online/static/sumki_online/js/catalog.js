@@ -7,6 +7,7 @@ $(function () {
         'way_sort':'desc'
     };
 
+    //заполняем список опций
     var fill_options = function () {
         $(".option_items").each(function (index,value) {
             var opt_active = [];
@@ -18,6 +19,7 @@ $(function () {
         });
     };
 
+    //сохраняем выбранные опции
     var save_choise = function () {
         var a = [23,24];
         $.cookie('choise', JSON.stringify(choise), {path: '/'});
@@ -26,6 +28,7 @@ $(function () {
         console.log(JSON.stringify(a));*/
     };
 
+    //добавляем выбранную опцию
     var add_choise = function () {
         /*all_parametr();*/
         save_choise();
@@ -147,6 +150,6 @@ $(function () {
 
 
     fill_options();
-    $(".pagination_el").on("click","a.href_active",change_page);
+    $(".content_items").on("click",".href_active",change_page);
     $(".left_side_bar").on("change", "input", change_parametr);
 });
