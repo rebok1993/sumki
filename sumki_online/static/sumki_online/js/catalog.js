@@ -92,7 +92,7 @@ $(function () {
         var href  = $(this).attr("href");
         var obj = JSON.stringify(all_parametr());
         var obj_sort = JSON.stringify(sort);
-        $("#fon_wait_2").show("slow");
+        $("#fon_wait_2").show();
         $.get(href,{"options":obj,"sort":obj_sort}).done(function (data_json) {
             var data = $.parseJSON(data_json);
             update_item(data);
