@@ -262,7 +262,7 @@ $(function () {
     //main
     fill_korzina();
     $(window).on("beforeunload", function () {
-        $("#fon_wait_2").show("slow");
+        $("#fon_wait_2").show();
     });
     $("#korzina_block").on("mouseover", show_korzina);
     $("#korzina_block").on("mouseout", hide_korzina);
