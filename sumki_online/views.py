@@ -12,7 +12,7 @@ from django.views.decorators.cache import cache_control
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.exceptions import ObjectDoesNotExist
 from django.views.decorators.csrf import csrf_exempt
-import http.cookies
+#import http.cookies
 import json
 import re
 import os
