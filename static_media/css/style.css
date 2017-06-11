@@ -24,7 +24,7 @@
 
 
 .header_navbar .active_elem a{
-    color: #337AB7;
+    color: #aaa;
     border-bottom:5px solid #337AB7;
     height: 49px;
 }
@@ -38,7 +38,7 @@
     transition: all .15s ease-in-out;
 }
 .header_navbar li a:hover{
-    color: #337AB7;
+    color: #aaa;
     border-bottom:5px solid #337AB7;
     height: 49px;
 }
@@ -75,7 +75,7 @@ a{
     position: relative;
 }
 .footer{
-    height: 300px;
+    height: 150px;
     background-color: #253636;
 }
 .logo{
@@ -167,7 +167,7 @@ a{
     right: 0;
     width:300px;
     background-color: white;
-    z-index: 1;
+    z-index: 100;
     border-left: 1px solid #e1e8ed;
     border-right: 1px solid #e1e8ed;
     border-top: 3px solid #b44444;
@@ -436,14 +436,28 @@ a{
     overflow: hidden;
 }
 .other_image_item{
-    width: 120px;
-    height: 120px;
+    text-align: center;
+    width: 124px;
+    height: 124px;
     float: left;
-    border: 1px solid #000;
     margin-right: 10px;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
 }
-#description_item_full{
+#description_item_full>div{
+    margin: 10px 0;
+}
 
+#description_item_full .option_elem{
+    font-weight: 500;
+}
+
+#description_item_full .name_option_elem{
+    color: #aaa;
+}
+
+.active_other_image{
+    border-color: #337AB7;
 }
 
 .btn-primary{

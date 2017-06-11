@@ -89,8 +89,8 @@ $(function () {
     //переключаем страницу товаров
     var change_page = function (event) {
         event.preventDefault();
-        var href  = $(this).attr("href");
         var obj = JSON.stringify(all_parametr());
+        var href  = $(this).attr("href");
         var obj_sort = JSON.stringify(sort);
         $("#fon_wait_2").show();
         $.get(href,{"options":obj,"sort":obj_sort}).done(function (data_json) {
