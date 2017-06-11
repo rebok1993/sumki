@@ -56,7 +56,6 @@ $(function () {
         event.stopPropagation();
         var choice = $(this).val();
         korzina["delivery"] = choice;
-        console.log(korzina);
         save_korzina();
         if(choice=="independent_export"){
             $("#independent_export_el").fadeIn();
@@ -75,7 +74,6 @@ $(function () {
     };
 
     var checkout = function () {
-        console.log(korzina);
         if(typeof korzina["delivery"] != 'undefined'){
             if(korzina["delivery"]=="delivery_export"){
                 $("#delivery_export_el,#delivery_order .hide_field").fadeIn();
@@ -202,9 +200,6 @@ $(function () {
                 $("#name_buyer").text(data['name']);
                 $("#success_buy").show();
                 clear_korzina();
-            })
-            .fail(function (data) {
-                console.log(data);
             });
     };
 
