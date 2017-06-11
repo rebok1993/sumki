@@ -3,7 +3,7 @@
 {% load filters %}
 <div class="item more_information col-md-4" id="{{ item.id }}">
     <a {% comment %}href="{% url 'sumki_online:item' item.category_alias item.id %}"{% endcomment %}>
-        <img class="image_item" src="{% static 'sumki_online/images/' %}{{ item.category_alias }}/200_on_200/{{ item.image }}" width="200" height="200">
+        <img class="image_item" src="{% static 'sumki_online/images/' %}{{ item.category_alias }}/200_on_200/{{ item.id }}.jpg" width="200" height="200">
         <div class="item_description name_item" data-item-name="{{ item.type }}">{{ item.type }} {{ item.brend }}</div>
         {% if item.discount > 0 %}
             <div class="item_description discount_item">{{ item.price|price_format }} руб.</div>

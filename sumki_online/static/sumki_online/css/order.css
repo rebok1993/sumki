@@ -46,7 +46,7 @@
     overflow: hidden;
     padding-left: 15px !important;
 }
-#summa_k_oplate{
+#summa_k_oplate, #summa_k_oplate_with_delivery span{
     font-size: 25px;
     font-weight: 700;
     line-height: 0.6;
@@ -89,15 +89,7 @@
 #payment_method{
     display: none;
 }
-#delivery_order li{
-    display: inline-block;
-    padding: 10px;
-    border:1px solid #ccc;
-    cursor: pointer;
-}
-#delivery_order li.active_el{
-    background-color: #ccc;
-}
+
 #delivery_export_el,#success_buy{
     display: none;
 }
@@ -124,9 +116,18 @@
 #korzina_blank{
     font-weight: bold;
 }
-#checkout{
+#checkout, #price_for_delivery, #summa_k_oplate_with_delivery, #summa_k_oplate2{
     display: none;
 }
-#order_ready,.next_step_payment,#checkout{
+#order_ready,.next_step_payment,#checkout, #summa_k_oplate_with_delivery{
     font-size: 20px;
+}
+#summa_k_oplate_with_delivery{
+    color: #fff;
+    font-weight: bold;
+}
+#price_for_delivery, #summa_k_oplate2{
+    color: #cc6633;
+    font-weight: bold;
+    font-size: 16px;
 }

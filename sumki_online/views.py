@@ -29,7 +29,7 @@ def home(request):
     for cat in categories:
         category[cat['id']] = cat
     #товары со скидками
-    items_disc = Item.objects.filter(discount__gt=0, number__gt=0).order_by("?")[:4].values()
+    items_disc = Item.objects.filter(discount__gt=0).order_by("?")[:4].values()
     for itemm in items_disc:
         for option in options_sumki:
             if option.item_id == itemm['id']:
@@ -41,7 +41,7 @@ def home(request):
                 itemm['type'] = option.type.name
         itemm['category_alias'] = category[itemm['category_id']]['alias']
     #новые товары
-    items_new_offer = Item.objects.exclude(id__in=[value['id'] for value in items_disc], number__gt=0).order_by("-data")[:4].values()
+    items_new_offer = Item.objects.exclude(id__in=[value['id'] for value in items_disc]).order_by("-data")[:4].values()
     for itemm in items_new_offer:
         for option in options_sumki:
             if option.item_id == itemm['id']:
@@ -54,7 +54,7 @@ def home(request):
         itemm['category_alias'] = category[itemm['category_id']]['alias']
     # товары с наибольшими просмотрами
     items_hits = Item.objects.filter(
-        numberviews__number__isnull=False, number__gt=0).exclude(
+        numberviews__number__isnull=False).exclude(
         id__in=[value['id'] for value in items_disc]).exclude(
         id__in=[value['id'] for value in items_new_offer]).order_by(
         "-numberviews__number")[:4].values()
@@ -71,28 +71,30 @@ def home(request):
 
 
     main_offer = MainOffer.objects.all()
+    items_common = []
+    items_common.extend([value['id'] for value in items_disc])
+    items_common.extend([value['id'] for value in items_new_offer])
+    items_common.extend([value['id'] for value in items_hits])
+
     #получаем данные со склада обуви
-    stores_disc = StoreObuv.objects.filter(item__in=[value['id'] for value in items_disc])
-    stores_new_offer = StoreObuv.objects.filter(item__in=[value['id'] for value in items_new_offer])
-    stores_hits = StoreObuv.objects.filter(item__in=[value['id'] for value in items_hits])
-    for store in stores_disc:
+    stores = StoreObuv.objects.filter(item__in=items_common)
+
+    for store in stores:
         for itemm in items_disc:
             if itemm['id'] == store.item_id:
-                if not hasattr(itemm, "size"):
+                if not "size" in itemm:
                     itemm['size'] = [store.size.name]
                 else:
                     itemm['size'].append(store.size.name)
-    for store in stores_new_offer:
         for itemm in items_new_offer:
             if itemm['id'] == store.item_id:
-                if not hasattr(itemm, "size"):
+                if not "size" in itemm:
                     itemm['size'] = [store.size.name]
                 else:
                     itemm['size'].append(store.size.name)
-    for store in stores_hits:
         for itemm in items_hits:
             if itemm['id'] == store.item_id:
-                if not hasattr(itemm, "size"):
+                if not "size" in itemm:
                     itemm['size'] = [store.size.name]
                 else:
                     itemm['size'].append(store.size.name)
@@ -199,6 +201,18 @@ def item(request,category, number):
     }
     return HttpResponse(render_to_string('item.html', context))
 
+#количество просмотров
+def add_number_views(request, elem):
+    if request.is_ajax():
+        tovar = Item.objects.get(pk=elem)
+        number_view = NumberViews.objects.filter(item=tovar)
+        if number_view:
+            number_view[0].number += 1
+            number_view[0].save()
+        else:
+            number_v = NumberViews(item=tovar, number=1, data=datetime.today())
+            number_v.save()
+
 #@csrf_exempt
 def checkout(request):
     json_str = {}
@@ -276,6 +290,10 @@ def order(request):
     return HttpResponse(render_to_string('order.html',context))
 
 def catalog_sumki(request, alias):
+    context= {
+
+    }
+    return HttpResponse(render_to_string('warning.html', context))
     try:
         brends = {}
         types = {}
@@ -520,3 +538,9 @@ def catalog(request, alias='obuv'):
     elif alias == 'accessories':
         return catalog_accessories(request, alias)
 
+def get_options_ajax(request, elem='1'):
+    options = OptionsObuv.objects.get(item=elem)
+    context = {
+        "options": options,
+    }
+    return HttpResponse(render_to_string('options_elem.html', context))
