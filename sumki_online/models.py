@@ -34,15 +34,49 @@ class Item(models.Model):
         return "Товар %s" % self.name
 
 #ВСЁ ПО ПАРАМЕТРАМ ОБУВИ
+class MaterialInternal(models.Model):
+    name = models.CharField(max_length=255, verbose_name='Внутренний материал', default='',  blank=True)
+    def __str__(self):
+        return self.name
+    class Meta:
+        verbose_name = "Внутренний материал"
+        verbose_name_plural = "Внутренний материал"
+class Season(models.Model):
+    name = models.CharField(max_length=255, verbose_name='Сезон')
+    def __str__(self):
+        return self.name
+    class Meta:
+        verbose_name = "Сезон"
+        verbose_name_plural = "Сезон"
+class MaterialInsole(models.Model):
+    name = models.CharField(max_length=255, verbose_name='Материал стельки', default='',  blank=True)
+    def __str__(self):
+        return self.name
+    class Meta:
+        verbose_name = "Материал стельки"
+        verbose_name_plural = "Материал стельки"
+class MaterialSole(models.Model):
+    name = models.CharField(max_length=255, verbose_name='Материал подошвы', default='',  blank=True)
+    def __str__(self):
+        return self.name
+    class Meta:
+        verbose_name = "Материал подошвы"
+        verbose_name_plural = "Материал подошвы"
+class TopMaterial(models.Model):
+    name = models.CharField(verbose_name='Материал вверха', max_length=255, default='',  blank=True)
+    def __str__(self):
+        return self.name
+    class Meta:
+        verbose_name = "Материал вверха"
+        verbose_name_plural = "Материал вверха"
 class Size(models.Model):
     name = models.SmallIntegerField(verbose_name='Размер')
+    def __str__(self):
+        return str(self.name)
 
     class Meta:
         verbose_name = "Размеры обуви"
         verbose_name_plural = "Размеры обуви"
-
-    def __str__(self):
-        return "Размер %s" % self.name
 
 class TypeObuv(models.Model):
     name = models.CharField(max_length=255, verbose_name='Тип обуви')
@@ -55,7 +89,7 @@ class TypeObuv(models.Model):
         return "Тип обуви %s" % self.name
 
 class BrendObuv(models.Model):
-    name = models.CharField(max_length=255, verbose_name='Бренд обуви')
+    name = models.CharField(max_length=255, verbose_name='Бренд обуви', default='', blank=True)
 
     class Meta:
         verbose_name = "Бренды обуви"
@@ -66,7 +100,7 @@ class BrendObuv(models.Model):
 #наличие определённых размеров
 class StoreObuv(models.Model):
     item = models.ForeignKey(Item)
-    size = models.ForeignKey(Size)
+    size = models.ForeignKey(Size, verbose_name='Размер')
     number = models.SmallIntegerField(verbose_name='Количество', default=1)
 
     class Meta:
@@ -76,10 +110,17 @@ class StoreObuv(models.Model):
     def __str__(self):
         return self.item.name
 
+
 class OptionsObuv(models.Model):
     item = models.ForeignKey(Item)
-    type = models.ForeignKey(TypeObuv)
-    brend = models.ForeignKey(BrendObuv)
+    type = models.ForeignKey(TypeObuv, verbose_name='Тип обуви')
+    brend = models.ForeignKey(BrendObuv, verbose_name='Бренд обуви')
+    top_material = models.ForeignKey(TopMaterial, default=1, verbose_name='Материал вверха')
+    material_sole = models.ForeignKey(MaterialSole, default=1, verbose_name='Материал подошвы')
+    material_insole = models.ForeignKey(MaterialInsole, default=1, verbose_name='Материал стельки')
+    internal_material = models.ForeignKey(MaterialInternal, default=1, verbose_name='Внутренний материал')
+    season = models.ForeignKey(Season, default=1, verbose_name='Сезон')
+
 
 #ВСЁ ПО ПАРАМЕТРАМ СУМОК
 class TypeSumki(models.Model):
@@ -139,12 +180,17 @@ class OrderForm(forms.Form):
         max_length=100, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Введите фамилию'}))
     fon_number = forms.CharField(
         max_length=100,
-        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Введите номер телефона'}))
+        widget=forms.TextInput(attrs={'class': 'form-control bfh-phone', 'placeholder': 'Введите номер телефона', 'data-format': '+7 (ddd) ddd-dddd'}))
+    city = forms.CharField(
+        max_length=200,
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Введите населённый пункт'}))
+    '''
     city = forms.ChoiceField(
         widget=forms.Select(attrs={'class': 'form-control', 'placeholder': 'Выберите город доставки'}), choices=citis)
+    '''
     adress = forms.CharField(
         max_length=200,
-        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Введите адрес доставки'}))
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Введите улицу, дом, квартиру'}))
 
 
 # данные о покупателе товара и месте доставки(тут ID заказа)

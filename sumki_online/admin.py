@@ -33,17 +33,18 @@ class GetNumberCategory(admin.ModelAdmin):
 
 class OptionObuvInline(admin.TabularInline):
     model = OptionsObuv
-    extra = 0
+    extra = 1
     max_num = 1
 
 
 class OptionSumkiInline(admin.TabularInline):
     model = OptionsSumki
-    extra = 0
+    extra = 1
     max_num = 1
 
 class StoreObuvInline(admin.TabularInline):
     model = StoreObuv
+    extra = 1
 
 class MainOfferAdmin(admin.ModelAdmin):
     list_display = ('image', 'color', 'link')
@@ -108,32 +109,16 @@ class ItemAdmin(admin.ModelAdmin):
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('id', 'name')
 
-class SizeAdmin(admin.ModelAdmin):
-    list_display = ('id','name')
-
-class TypeObuvAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name')
-
-class TypeSumkiAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name')
-
-class BrendObuvAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name')
-
-class BrendSumkiAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name')
-
 class OptionsObuvAdmin(admin.ModelAdmin):
-    list_display = ('id', 'item')
+    list_display = ('id', 'item', 'brend')
 
-class StoresObuvAdmin(admin.ModelAdmin):
+class StoreObuvAdmin(admin.ModelAdmin):
     list_display = ('id', 'item', 'size', 'number')
     list_editable = ('number',)
 
 class OrderParamAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'surname', 'adress', 'data', 'sent', 'received')
     list_editable = ('sent','received')
-
 
 class OrderItemsAdmin(admin.ModelAdmin):
     list_display = ('id', 'get_item', 'get_order', 'number', 'get_name','get_surname','get_adress','get_data')
@@ -168,19 +153,22 @@ class OrderItemsAdmin(admin.ModelAdmin):
     get_data.short_description = 'Дата'
     get_order.short_description = 'Номер заказа'
 
+class BrendObuvAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name')
 
 class OrderOptObuv(admin.ModelAdmin):
     list_display = ('id', 'order', 'item', 'size')
 
-admin.site.register(OptionsObuv, OptionsObuvAdmin)
+admin.site.register(
+    (MaterialInternal,Season,MaterialInsole,
+     MaterialSole,TopMaterial,TypeSumki,
+     TypeObuv,BrendSumki,Size, NumberViews))
+
 admin.site.register(BrendObuv, BrendObuvAdmin)
-admin.site.register(BrendSumki, BrendSumkiAdmin)
-admin.site.register(TypeObuv, TypeObuvAdmin)
-admin.site.register(TypeSumki, TypeSumkiAdmin)
+admin.site.register(OptionsObuv, OptionsObuvAdmin)
 admin.site.register(Item, ItemAdmin)
 admin.site.register(Category, CategoryAdmin)
-admin.site.register(Size, SizeAdmin)
-admin.site.register(StoreObuv, StoresObuvAdmin)
+admin.site.register(StoreObuv, StoreObuvAdmin)
 admin.site.register(MainOffer, MainOfferAdmin)
 admin.site.register(Order_params, OrderParamAdmin)
 admin.site.register(Order_items, OrderItemsAdmin)

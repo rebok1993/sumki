@@ -27,28 +27,70 @@ function set_k_oplate(summa) {
 
 $(function () {
     var next_step_payment = function (event) {
+        var name = $("#id_name");
+        var surname = $("#id_surname");
+        var phone = $("#id_fon_number");
+        if((name.val().length < 2) || (surname.val().length < 2) || (phone.val().length != 17)){
+            if(name.val().length < 2) $("#id_name").parent(".form-group").addClass("has-error");
+            if(surname.val().length < 2) $("#id_surname").parent(".form-group").addClass("has-error");
+            if(phone.val().length != 17) $("#id_fon_number").parent(".form-group").addClass("has-error");
+            return;
+        }
+        if($("#delivery_export").is(':checked')){
+            var city = $("#id_city");
+            var adress = $("#id_adress");
+            if((city.val().length < 2) || (adress.val().length < 2)){
+                if(city.val().length < 2) $("#id_city").parent(".form-group").addClass("has-error");
+                if(adress.val().length < 2) $("#id_adress").parent(".form-group").addClass("has-error");
+                return;
+            }
+        }
         event.preventDefault();
         $("#delivery_order").hide();
         $("#payment_method").fadeIn();
         $("#delivery_order_btn").removeClass("active_step");
         $("#payment_method_btn").addClass("active_step");
     };
-
+    //изменил способ доставки
     var change_method_delivery = function (event) {
         event.stopPropagation();
-        $(this).closest("ul").find("li.active_el").toggleClass("active_el inactive_el");
-        $(this).toggleClass("active_el inactive_el");
-        if($(this).attr("id")=="independent_export"){
+        var choice = $(this).val();
+        korzina["delivery"] = choice;
+        console.log(korzina);
+        save_korzina();
+        if(choice=="independent_export"){
             $("#independent_export_el").fadeIn();
             $("#delivery_export_el, #delivery_order .hide_field").hide();
+            $("#price_for_delivery, #summa_k_oplate_with_delivery, #summa_k_oplate2").hide();
+            $("#summa_k_oplate").fadeIn();
         }
-        if($(this).attr("id")=="delivery_export"){
+        if(choice=="delivery_export"){
             $("#delivery_export_el,#delivery_order .hide_field").fadeIn();
             $("#independent_export_el").hide();
+            $("#price_for_delivery, #summa_k_oplate_with_delivery, #summa_k_oplate2").fadeIn();
+            $("#summa_k_oplate").hide();
+            $("#summa_k_oplate2").text(format_price(korzina['summa'])+" руб.  (покупка)");
+            $("#summa_k_oplate_with_delivery span").text(format_price((korzina['summa']+300))+" руб.");
         }
     };
 
     var checkout = function () {
+        console.log(korzina);
+        if(typeof korzina["delivery"] != 'undefined'){
+            if(korzina["delivery"]=="delivery_export"){
+                $("#delivery_export_el,#delivery_order .hide_field").fadeIn();
+                $("#independent_export_el").hide();
+                $("#delivery_export").attr("checked", true);
+                $("#price_for_delivery, #summa_k_oplate_with_delivery, #summa_k_oplate2").fadeIn();
+                $("#summa_k_oplate").hide();
+                $("#summa_k_oplate2").text(format_price(korzina['summa'])+" руб. (покупка)");
+                $("#summa_k_oplate_with_delivery span").text(format_price((korzina['summa']+300))+" руб.");
+            }
+            else{
+                $("#summa_k_oplate").fadeIn();
+                $("#price_for_delivery, #summa_k_oplate_with_delivery, #summa_k_oplate2").hide();
+            }
+        }
         $(this).hide();
         $("#build_order").hide();
         $("#delivery_order").fadeIn();
@@ -63,7 +105,7 @@ $(function () {
         var number = el.find(".number_item select").val();
 
         change_number_in_mini_korz(id, number);
-        $.each(korzina, function(index, value) {
+        $.each(korzina['products'], function(index, value) {
             if(value['id']==parseInt(id)){
                 el.find(".order_item_summa").text(format_price(value['price']*number)+" руб.");
                 value['number'] = number;
@@ -76,10 +118,10 @@ $(function () {
     };
     //заполняем страницу корзины
     var fill_korzina_full = function () {
-        if(korzina.length==0) return;
+        if(korzina['products'].length==0) return;
         $("#checkout").show();
         $("#korzina_blank").hide();
-        $.each(korzina, function (index, value) {
+        $.each(korzina['products'], function (index, value) {
             var select = '';
             for(var i=1;i<=10;i++){
                 if(i==value['number'])
@@ -129,7 +171,7 @@ $(function () {
         }
 
 
-        data['items'] = korzina;
+        data['items'] = korzina['products'];
         var data_json = JSON.stringify(data);
 
         $.ajaxSetup({
@@ -176,7 +218,7 @@ $(function () {
     //main
     fill_korzina_full();
     $(".next_step_payment").on("click", next_step_payment);
-    $("#delivery_order").on("click",".inactive_el",change_method_delivery);
+    $("#delivery_order").on("click",".delivery_method",change_method_delivery);
     $("#checkout").on("click", checkout);
     $(".order_delete_item").on("click", delete_order_item);
     $(".number_item").on("change", change_number);

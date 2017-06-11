@@ -7,6 +7,7 @@ $(function () {
         'way_sort':'desc'
     };
 
+    //заполняем список опций
     var fill_options = function () {
         $(".option_items").each(function (index,value) {
             var opt_active = [];
@@ -18,6 +19,7 @@ $(function () {
         });
     };
 
+    //сохраняем выбранные опции
     var save_choise = function () {
         var a = [23,24];
         $.cookie('choise', JSON.stringify(choise), {path: '/'});
@@ -26,6 +28,7 @@ $(function () {
         console.log(JSON.stringify(a));*/
     };
 
+    //добавляем выбранную опцию
     var add_choise = function () {
         /*all_parametr();*/
         save_choise();
@@ -80,6 +83,7 @@ $(function () {
                 }
             });
         });
+        $("#fon_wait_2").hide();
     };
 
     //переключаем страницу товаров
@@ -88,6 +92,7 @@ $(function () {
         var href  = $(this).attr("href");
         var obj = JSON.stringify(all_parametr());
         var obj_sort = JSON.stringify(sort);
+        $("#fon_wait_2").show();
         $.get(href,{"options":obj,"sort":obj_sort}).done(function (data_json) {
             var data = $.parseJSON(data_json);
             update_item(data);
@@ -147,6 +152,6 @@ $(function () {
 
 
     fill_options();
-    $(".pagination_el").on("click","a.href_active",change_page);
+    $(".content_items").on("click",".href_active",change_page);
     $(".left_side_bar").on("change", "input", change_parametr);
 });

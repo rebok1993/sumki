@@ -12,7 +12,9 @@ urlpatterns = [
     url(r'^catalog/$', views.catalog, name='all_catalog'),
     url(r'^order/$', views.order, name='order'),
     url(r'^checkout/$', views.checkout, name='checkout'),
-    #url(r'^(?P<alias>[^/]+)', views.get_category, name='category'),
+    url(r'^getOptionsAjax/(?P<elem>[^/]+)/$', views.get_options_ajax, name='getopt'),
+    url(r'^addNumberViews/(?P<elem>[^/]+)/$', views.add_number_views),
+    #url(r'^(?  P<alias>[^/]+)', views.get_category, name='category'),
     # ex: /polls/5/
     #url(r'^(?P<question_id>[0-9]+)/$', views.detail, name='detail'),
     # ex: /polls/5/results/

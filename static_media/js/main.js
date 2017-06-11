@@ -75,6 +75,7 @@ function delete_from_korzina(event, id_item) {
 }
 
 $(function () {
+    $("#fon_wait_2").hide();
     var time_id = 0;
     var json;
 
@@ -260,6 +261,9 @@ $(function () {
 
     //main
     fill_korzina();
+    $(window).on("beforeunload", function () {
+        $("#fon_wait_2").show();
+    });
     $("#korzina_block").on("mouseover", show_korzina);
     $("#korzina_block").on("mouseout", hide_korzina);
     $(".block_items").on("click", ".add_in_korzina", add_in_korzina);

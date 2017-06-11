@@ -7,6 +7,7 @@
 
 {% block new_js %}
     <script type="text/javascript" src="{% static 'sumki_online/js/order.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/bootstrap-formhelpers-phone.js' %}"></script>
 {% endblock %}
 
 {% block main_block %}
@@ -28,19 +29,21 @@
                     </div>
                     <div id="delivery_order">
                         <h3>Способ доставки:</h3>
-                        <ul>
-                            <li id="independent_export" class="active_el">Самовывоз</li>
-                            <li id="delivery_export" class="inactive_el">Доставка</li>
-                        </ul>
-                        <div>
+                        <label class="radio-inline">
+                            <input class="delivery_method" type="radio" name="export" id="independent_export" value="independent_export" checked> Самовывоз
+                        </label>
+                        <label class="radio-inline">
+                            <input class="delivery_method" type="radio" name="export" id="delivery_export" value="delivery_export"> Доставка
+                        </label>
+                        <div style="margin-top: 20px">
                             <div id="independent_export_el">
                                 <p>Вы можете забрать товар по адресу: г.Нижний Новгород, ул.Карла Маркса, д.20</p>
                                 <p>Время работы: с 10-00 до 19-00 ежедневно</p>
                                 <p>Кто заберёт товар:</p>
                             </div>
                             <div id="delivery_export_el">
-                                <p>Мы доставляем товар транспортной компанией DSP</p>
-                                <p>Срок доставки 3 дня</p>
+                                <p>Мы доставляем товар транспортной компанией SPSR express в большинство населённых пунктов России</p>
+                                <p>Срок доставки от 2 дня, в зависимости от региона получателя.</p>
                                 <p>Введите данные получателя:</p>
                             </div>
                             <form role="form">
@@ -63,7 +66,7 @@
                                 </div>
                                 <div class="form-group hide_field">
                                     {{ form.city.errors }}
-                                    <label for="id_city">Город доставки</label>
+                                    <label for="id_city">Адресс доставки</label>
                                     {{ form.city }}
                                 </div>
                                 <div class="form-group hide_field">
@@ -86,6 +89,9 @@
                 <div style="margin-bottom: 20px" id="summa_k_oplate_right">
                     <div style="font-weight: bold; font-size: 18px; color: #fff">Сумма к оплате</div>
                     <div id="summa_k_oplate">0 руб</div>
+                    <div id="summa_k_oplate2">0 руб</div>
+                    <div id="price_for_delivery">+300 руб. (доставка)</div>
+                    <div id="summa_k_oplate_with_delivery">Итого <span>0 руб.</span></div>
                 </div>
                 <div>
                     <button type="button" class="btn btn-danger" id="checkout">Оформить заказ</button>
