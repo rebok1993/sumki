@@ -1,0 +1,22 @@
+<div>
+    <span class="name_option_elem">Материал вверха:</span>
+    <span class="option_elem">{{ options.top_material.name }}</span>
+</div>
+<div>
+    <span class="name_option_elem">Материал подошвы:</span>
+    <span class="option_elem">{{ options.material_sole.name }}</span>
+</div>
+{% if options.material_insole.name != "" %}
+<div>
+    <span class="name_option_elem">Материал стельки:</span>
+    <span class="option_elem">{{ options.material_insole.name }}</span>
+</div>
+{% endif %}
+<div>
+    <span class="name_option_elem">Внутренний материал:</span>
+    <span class="option_elem">{{ options.internal_material.name }}</span>
+</div>
+<div>
+    <span class="name_option_elem">Сезон:</span>
+    <span class="option_elem">{{ options.season.name }}</span>
+</div>
