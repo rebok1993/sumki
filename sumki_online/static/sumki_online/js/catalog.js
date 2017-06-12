@@ -54,7 +54,6 @@ $(function () {
             });
             choise[name_opt] = opt_active;
         });
-        /*console.log(choise);*/
         return choise;
     };
 
@@ -83,16 +82,16 @@ $(function () {
                 }
             });
         });
-        $("#fon_wait_2").hide();
+        fon_2.hide();
     };
 
     //переключаем страницу товаров
     var change_page = function (event) {
         event.preventDefault();
+        fon_2.show();
         var obj = JSON.stringify(all_parametr());
         var href  = $(this).attr("href");
         var obj_sort = JSON.stringify(sort);
-        $("#fon_wait_2").show();
         $.get(href,{"options":obj,"sort":obj_sort}).done(function (data_json) {
             var data = $.parseJSON(data_json);
             update_item(data);
@@ -100,7 +99,9 @@ $(function () {
     };
     //изменяем параметры фильтрации
     var change_parametr = function (event) {
+        console.log("тУТ");
         event.stopPropagation();
+        fon_2.show();
         $(this).closest(".checkbox").toggleClass("active_el");
         var obj = JSON.stringify(all_parametr());
         var obj_sort = JSON.stringify(sort);
@@ -111,6 +112,7 @@ $(function () {
     };
 
     $("#sorting_switcher").on("click",".inactive", function () {
+        fon_2.show();
         var el = $(this);
 
         sort['type_sort'] = $(this).hasClass("popular_sorting")? "popular" : "price";
@@ -125,8 +127,10 @@ $(function () {
 
         el.closest("#sorting_switcher").find(".active").removeClass("active").addClass("inactive");
         el.removeClass("inactive").addClass("active");
+        fon_2.hide();
     });
     $("#sorting_switcher").on("click",".active", function () {
+        fon_2.show();
         var el = $(this);
 
         sort['type_sort'] = $(this).hasClass("popular_sorting")? "popular" : "price";
@@ -147,7 +151,8 @@ $(function () {
         $.get("/catalog/"+category+"/",{"options":obj,"sort":obj_sort}).done(function (data_json) {
             var data = $.parseJSON(data_json);
             update_item(data);
-        })
+        });
+        fon_2.hide();
     });
 
 
