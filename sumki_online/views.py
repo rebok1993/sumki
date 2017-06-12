@@ -213,7 +213,7 @@ def add_number_views(request, elem):
             number_v = NumberViews(item=tovar, number=1, data=datetime.today())
             number_v.save()
 
-#@csrf_exempt
+@csrf_exempt
 def checkout(request):
     json_str = {}
     #return HttpResponse(json.dumps(["Тута"]))
