@@ -95,7 +95,7 @@ $(function () {
         $.get(href,{"options":obj,"sort":obj_sort}).done(function (data_json) {
             var data = $.parseJSON(data_json);
             update_item(data);
-        })
+        });
     };
     //изменяем параметры фильтрации
     var change_parametr = function (event) {
@@ -127,7 +127,6 @@ $(function () {
 
         el.closest("#sorting_switcher").find(".active").removeClass("active").addClass("inactive");
         el.removeClass("inactive").addClass("active");
-        fon_2.hide();
     });
     $("#sorting_switcher").on("click",".active", function () {
         fon_2.show();
@@ -152,7 +151,6 @@ $(function () {
             var data = $.parseJSON(data_json);
             update_item(data);
         });
-        fon_2.hide();
     });
 
 
