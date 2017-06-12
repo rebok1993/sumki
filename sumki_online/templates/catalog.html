@@ -3,6 +3,10 @@
 {% load filters %}
 {% load staticfiles %}
 
+{% block meta_new %}
+    <meta name="description" content="Онлайн магазин предлагает широкий ассортимент обуви (ботинки, кроссовки, туфли, кеды, мокасины, слипоны, ботильоны, босоножки, сандалии, сабо) и сумок по выгодным ценам. Ежемесячные акции и скидки.">
+{% endblock %}
+
 {% block new_css%}
     <link rel="stylesheet" type="text/css" href="{% static 'sumki_online/css/catalog.css' %}" />
 {% endblock %}

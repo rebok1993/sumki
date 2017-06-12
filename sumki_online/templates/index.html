@@ -3,6 +3,10 @@
 {% load filters %}
 {% load staticfiles %}
 
+{% block meta_new %}
+    <meta name="description" content="Специальные предложения, хиты продаж и новые поступления обуви (ботинки, кроссовки, туфли, кеды, мокасины, слипоны, ботильоны, босоножки, сандалии, сабо) и сумок.">
+{% endblock %}
+
 {% block new_css%}
     <link rel="stylesheet" type="text/css" href="{% static 'sumki_online/css/home.css' %}" />
 {% endblock %}
