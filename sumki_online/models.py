@@ -143,10 +143,56 @@ class BrendSumki(models.Model):
     def __str__(self):
         return self.name
 
+class MaterialSumki(models.Model):
+    name = models.CharField(max_length=255, verbose_name='Материал сумки', blank=True)
+
+    class Meta:
+        verbose_name = "Материал сумки"
+        verbose_name_plural = "Материал сумки"
+
+    def __str__(self):
+        return self.name
+
+class WidthSumki(models.Model):
+    name = models.CharField(max_length=255, verbose_name='Ширина сумки', blank=True)
+
+    class Meta:
+        verbose_name = "Ширина сумки"
+        verbose_name_plural = "Ширина сумки"
+
+    def __str__(self):
+        return self.name
+
+class HeightSumki(models.Model):
+    name = models.CharField(max_length=255, verbose_name='Высота сумки', blank=True)
+
+    class Meta:
+        verbose_name = "Высота сумки"
+        verbose_name_plural = "Высота сумки"
+
+    def __str__(self):
+        return self.name
+
+class DepthSumki(models.Model):
+    name = models.CharField(max_length=255, verbose_name='Глубина сумки', blank=True)
+
+    class Meta:
+        verbose_name = "Глубина сумки"
+        verbose_name_plural = "Глубина сумки"
+
+    def __str__(self):
+        return self.name
+
 class OptionsSumki(models.Model):
     item = models.ForeignKey(Item)
     type = models.ForeignKey(TypeSumki)
     brend = models.ForeignKey(BrendSumki)
+    material = models.ForeignKey(MaterialSumki, default='1')
+    width = models.ForeignKey(WidthSumki, default='1')
+    height = models.ForeignKey(HeightSumki, default='1')
+    depth = models.ForeignKey(DepthSumki, default='1')
+    dop_des = models.TextField(verbose_name='Доп. описание', default='')
+
 
 #ПРОЧИК МОДЕЛИ
 class MainOffer(models.Model):

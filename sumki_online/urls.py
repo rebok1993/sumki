@@ -11,6 +11,8 @@ urlpatterns = [
     url(r'^catalog/(?P<alias>[^/]+)/$', views.catalog, name='catalog'),
     url(r'^catalog/$', views.catalog, name='all_catalog'),
     url(r'^order/$', views.order, name='order'),
+    url(r'^order/success$', views.order_success, name='order_success'),
+    url(r'^order/fail$', views.order_fail, name='order_fail'),
     url(r'^checkout/$', views.checkout, name='checkout'),
     url(r'^getOptionsAjax/(?P<elem>[^/]+)/$', views.get_options_ajax, name='getopt'),
     url(r'^addNumberViews/(?P<elem>[^/]+)/$', views.add_number_views),
