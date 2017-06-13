@@ -289,6 +289,18 @@ def order(request):
     }
     return HttpResponse(render_to_string('order.html',context))
 
+def order_success(request):
+    context = {
+
+    }
+    return HttpResponse(render_to_string('order_success.html', context))
+
+def order_fail(request):
+    context = {
+
+    }
+    return HttpResponse(render_to_string('order_fail.html', context))
+
 def catalog_sumki(request, alias):
     context= {
 
