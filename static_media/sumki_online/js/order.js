@@ -154,6 +154,7 @@ $(function () {
     //отправляем заказ
     var order_ready = function (event) {
         event.stopPropagation();
+        fon_2.show();
         var csrftoken = $.cookie('csrftoken');
         var data = {};
         var el = $(".active_el:eq(0)");
@@ -200,6 +201,7 @@ $(function () {
                 $("#name_buyer").text(data['name']);
                 $("#success_buy").show();
                 clear_korzina();
+                fon_2.hide();
             });
     };
 

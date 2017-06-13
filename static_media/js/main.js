@@ -2,6 +2,7 @@ var korzina ={
     'products':[]
 };
 var window_inf;
+var fon_2;
 var add_or_next_window;
 //сохранение корзины в куки
 function save_korzina() {
@@ -86,16 +87,13 @@ function change_image(){
 }
 //учитываем количество просмотров товара в базе
 function add_number_views(id_elem) {
-    $.get("/addNumberViews/"+id_elem+"/").done(function (data) {
-        console.log(data);
-    }).fail(function (data) {
-        console.log(data);
-    });
+    $.get("/addNumberViews/"+id_elem+"/").done(function (data) {}).fail(function (data) {});
 }
 
 
 $(function () {
-    $("#fon_wait_2").hide();
+    fon_2 = $("#fon_wait_2");
+    fon_2.hide();
     var time_id = 0;
     var json;
 
