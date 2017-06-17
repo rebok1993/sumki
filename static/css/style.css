@@ -76,7 +76,7 @@ a{
 }
 .footer{
     height: 150px;
-    background-color: #253636;
+    background-color:#2C2C2C/* #253636*/;
 }
 .logo{
     /*display: inline-block;*/
