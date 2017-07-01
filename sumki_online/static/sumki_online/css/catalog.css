@@ -11,11 +11,13 @@
 }
 .main_content .left_side_bar{
     border-left: 1px solid #e1e8ed;
+    background-color: #fff;/*#E6ECF0*/
 }
 
 .main_content .content_items{
     min-height: 100%;
     border-left: 1px solid #e1e8ed;
+    background-color: #fff;
 }
 #sorting_switcher{
     width: auto !important;
