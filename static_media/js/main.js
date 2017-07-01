@@ -234,7 +234,7 @@ $(function () {
         save_korzina();
         //устанавливаем сумму в мини корзине
         set_summa_korzina(count_summa());
-        window_inf.hide();
+        window_inf.css("display", "None");
 
         if(!add_or_next_window) add_or_next_window = $("#add_or_next_window");
         add_or_next_window.fadeIn();
@@ -296,12 +296,13 @@ $(function () {
         window_inf.find("#more_information_price").text(price);
         window_inf.find("#more_information_name").text(name);
         window_inf.data("itemElement", id);
+
         //показываем мини окно товара
         window_inf.fadeIn();
     };
     //скрываем окно больше информации о товаре
     var hide_more_info = function () {
-        window_inf.fadeOut();
+        window_inf.css("display", "None");
         $("#fon_wait").hide();
         remove_attr_in_more_info();
     };
