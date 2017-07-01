@@ -22,7 +22,7 @@
                 {% for elem in main_offer %}
                     <li style="background: {{ elem.color }}">
                         <a href="{{ elem.link }}">
-                            <img src="{% static 'images/special_offer/' %}{{ elem.image }}" width="650" height="350">
+                            <img src="{% static 'images/special_offer/' %}{{ elem.image }}" width="738" height="350">
                         </a>
                     </li>
                 {% endfor %}
@@ -40,7 +40,9 @@
         <span id="btn_left" class="glyphicon glyphicon-chevron-left"></span>
         <span id="btn_right" class="glyphicon glyphicon-chevron-right"></span>
     </div>
-    <div class="main_content col-md-10 col-md-offset-1">
+    <div class="main_content container-fluid" style="width: 93%; margin: auto">
+    <div class="row">
+    <div class="col-md-12">
         <div class="content_items">
             <div class="switcher_type_tovar row">
                 <span>Специальные предложения</span>
@@ -74,5 +76,7 @@
                 </div>
             </div>
         </div>
+    </div>
+    </div>
     </div>
 {% endblock %}

@@ -16,10 +16,12 @@
 {% endblock %}
 
 {% block main_block %}
-    <div class="main_content col-md-10 col-md-offset-1">
+    <div class="main_content container-fluid" style="width: 93%; margin: auto">
+        <div class="row">
+        <div class="col-md-12">
         <div class="row">
             <div class="col-md-3 left_side_bar"  onmousedown="return false" onselectstart="return false">
-            {% if options %}
+                {% if options %}
                 {% for key, option in options.items %}
                     <div id="{{ key }}_{{ category.alias }}" class="option_items">
                         <div class="name_header"><span class="glyphicon glyphicon-list"></span> {{ option.label }}</div>
@@ -44,6 +46,7 @@
             {% endif %}
             </div>
             <div class="col-md-9 content_items">
+
                 <div id="sorting">
                     <span>Сортировать по:</span>
                     <ul id="sorting_switcher">
@@ -98,7 +101,10 @@
                         {% endif %}{% endcomment %}
                     </ul>
                 </div>
+
             </div>
+        </div>
+        </div>
         </div>
     </div>
 {% endblock %}
