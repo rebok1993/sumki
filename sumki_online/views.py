@@ -414,50 +414,46 @@ def catalog_accessories(request,alias):
     }
     return HttpResponse(render_to_string('catalog.html',context))
 
+def change_key(key, array):
+    new_array = {}
+    for elem_array in array:
+        new_array[elem_array[key]] = elem_array
+    return new_array
+
 def catalog_obuv(request, alias):
     try:
         #получение данных
         category = Category.objects.get(alias=alias)
         category_a = Category.objects.all().values()
-        categoryies = {}
 
-        items_list = None
+        items_list = None #список товаров отправляемых пользователю
+        #получаем атрибуты обуви
         options = OptionsObuv.objects.all()
         sizes_all = Size.objects.filter()
-        sizes = {}
-        brends = {}
-        types = {}
-        options_items = {}
+
         option_query = {
             'category':category,
             'storeobuv__number__gt':0,
         }
-
-        '''
-        if 'age' in request.COOKIES:
-            #return HttpResponse(request.COOKIES['age'])
-            el = request.COOKIES['age']
-            a = json.loads(el)
-
-        if "choise" in request.COOKIES:
-            choise = json.loads(request.COOKIES['choise'])
-            return HttpResponse(choise)
-
-
-            if 'brend_obuv' in choise:
-                option_query['optionsobuv__brend__name__in'] = [value for value in choise['brend_obuv']]
-            '''
+        #если запрос ajax заполняем выбранные в фильтре атрибуты
         if request.is_ajax():
             data_json = request.GET.get('options')
             data_json_sort = request.GET.get('sort')
+            #если установлены фильтры
             if data_json:
                 data = json.loads(request.GET.get('options'))
                 if data['brend_obuv']:
-                    option_query['optionsobuv__brend__name__in'] = [value for value in data['brend_obuv']]
+                    option_query['optionsobuv__brend__name__in'] = [data['brend_obuv'][key] for key in data['brend_obuv']]
                 if data['type_obuv']:
-                    option_query['optionsobuv__type__name__in'] = [value for value in data['type_obuv']]
+                    option_query['optionsobuv__type__name__in'] = [data['type_obuv'][key] for key in data['type_obuv']]
                 if data['size_obuv']:
-                    option_query['storeobuv__size__name__in'] = [value for value in data['size_obuv']]
+                    option_query['storeobuv__size__name__in'] = [data['size_obuv'][key] for key in data['size_obuv']]
+                if 'hit' in data['special_obuv']:
+                    option_query['hit_sales'] = True
+                if 'disc' in data['special_obuv']:
+                    option_query['discount__gt'] = 0
+
+            #если установлена сортировка
             if data_json_sort:
                 data_sort = json.loads(request.GET.get('sort'))
                 if data_sort['type_sort'] == 'popular':
@@ -481,15 +477,16 @@ def catalog_obuv(request, alias):
         brends_all = BrendObuv.objects.filter(optionsobuv__isnull=False).distinct().values()
         types_all = TypeObuv.objects.filter(optionsobuv__isnull=False).distinct().values()
 
+        number_hits = 0
+        number_disc = 0
+        sizes_all = change_key('id', sizes_all)
+        brends_all = change_key('id', brends_all)
+        types_all = change_key('id', types_all)
+
+
         #заполняем список размеров
         for store in stores:
-            if request.is_ajax():
-                if not data['size_obuv']:
-                    sizes[store.size.name] = sizes[store.size.name]+1 if store.size.name in sizes else 1
-                elif str(store.size.name) in data['size_obuv']:
-                    sizes[store.size.name] = sizes[store.size.name] + 1 if store.size.name in sizes else 1
-            else:
-                sizes[store.size.name] = sizes[store.size.name] + 1 if store.size.name in sizes else 1
+            sizes_all[store.size.id]['number'] = sizes_all[store.size.id]['number'] + 1 if 'number' in sizes_all[store.size.id] else 1
             for itemm in items_list:
                 if itemm.id==store.item_id:
                     if not hasattr(itemm, "size"):
@@ -497,15 +494,18 @@ def catalog_obuv(request, alias):
                     else:
                         itemm.size.append(store.size.name)
         #заполняем атрибуты товаров
-        for cat in category_a:
-            categoryies[cat['id']] = cat
+
+        category_a = change_key('id', category_a)
+
         for itemm in items_list:
-            itemm.category_alias = categoryies[itemm.category_id]['alias']
+            if itemm.hit_sales: number_hits+=1
+            if itemm.discount: number_disc+=1
+            itemm.category_alias = category_a[itemm.category_id]['alias']
             for option in options:
                if option.item_id==itemm.id:
                    #добавляем атрибуты обуви
-                   types[option.type.name] = types[option.type.name] + 1 if option.type.name in types else 1
-                   brends[option.brend.name] = brends[option.brend.name] + 1 if option.brend.name in brends else 1
+                   types_all[option.type.id]['number'] = types_all[option.type.id]['number'] + 1 if 'number' in types_all[option.type.id] else 1
+                   brends_all[option.brend.id]['number'] = brends_all[option.brend.id]['number'] + 1 if 'number' in brends_all[option.brend.id] else 1
 
                    # добавляем атрибут бренда к элементу
                    if not hasattr(itemm, "brend"): itemm.brend = option.brend.name
@@ -519,9 +519,19 @@ def catalog_obuv(request, alias):
     except EmptyPage:
         items = paginator.page(paginator.num_pages)
 
-    options_items['brend'] = {'all':brends_all, 'elements':brends, 'label':'Бренд обуви'}
-    options_items['type'] = {'all':types_all, 'elements':types, 'label':'Тип обуви'}
-    options_items['size'] = {'all':sizes_all, 'elements':sizes, 'label':'Размер обуви'}
+    options_items = [
+        {'name':'special',
+                   'all':
+                       {
+                           'hit':{'name':'Хиты продаж', 'number':number_hits},
+                           'disc':{'name':'Товары со скидкой','number':number_disc}
+                       },
+                    'label':'Спецпредложения'},
+        {'name':'type','all':types_all, 'label':'Тип обуви'},
+        {'name':'size','all':sizes_all, 'label':'Размер обуви'},
+        {'name':'brend','all':brends_all, 'label':'Бренд обуви'}
+    ]
+
     context = {
         "options":options_items,
         "items": items,
@@ -530,9 +540,10 @@ def catalog_obuv(request, alias):
 
     if request.is_ajax():
         options_items_ajax = {
-            "brend_obuv": brends,
-            "type_obuv": types,
-            "size_obuv": sizes,
+            "brend_obuv": brends_all,
+            "type_obuv": types_all,
+            "size_obuv": sizes_all,
+            "special_obuv": {'hit':{'name':'Хиты продаж', 'number':number_hits}, 'disc':{'name':'Товары со скидкой','number':number_disc}}
         }
         json_str = json.dumps({
             "paginator":render_to_string('paginator.html', context),

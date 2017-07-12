@@ -10,10 +10,10 @@ $(function () {
     //заполняем список опций
     var fill_options = function () {
         $(".option_items").each(function (index,value) {
-            var opt_active = [];
+            var opt_active = {};
             var name_opt = $(value).attr("id");
-            $(value).find(".checkbox input").each(function (index, value) {
-                opt_active.push($(value).val());
+            $(value).find(".option_item_value").each(function (index, value) {
+                opt_active[$(value).data("optionId")]=$(value).text();
             });
             options[name_opt] = opt_active;
         });
@@ -45,12 +45,12 @@ $(function () {
     var all_parametr = function () {
         var choise = {};
         $(".option_items").each(function (index,value) {
-            var opt_active = [];
+            var opt_active = {};
             var name_opt = $(value).attr("id");
-            $(value).find(".checkbox input").each(function (index, value) {
+            $(value).find(".option_item_value").each(function (index, value) {
                 var el = $(value);
-                if(el.prop("checked"))
-                    opt_active.push(el.val());
+                if(el.hasClass("option_active"))
+                    opt_active[el.data("optionId")]=el.text();
             });
             choise[name_opt] = opt_active;
         });
@@ -73,12 +73,20 @@ $(function () {
 
         $.each(options, function (index, value) {
             var name_opt = index;
+
             $.each(value, function (index, value) {
-                if(value in data.options[name_opt]){
-                    $("#"+name_opt).find('input[value="'+value+'"] ~ span').text("("+data.options[name_opt][value]+")");
+                var el = $("#"+name_opt).find('#'+name_opt+'_'+index+'_option');
+                if((data.options[name_opt][index]['number'] == undefined) || (parseInt(data.options[name_opt][index]['number']) == 0)){
+                    el.next('span').text("");
+                    el.css("color","#ccc").hover(function () {
+                        $(this).css("color", "#999");
+                    },function () {
+                        $(this).css("color", "#ccc");
+                    });
                 }
                 else{
-                    $("#"+name_opt).find('input[value="'+value+'"] ~ span').text("");
+                    el.next('span').text("("+data.options[name_opt][index]['number']+")");
+                    el.css("color","").unbind();
                 }
             });
         });
@@ -99,10 +107,10 @@ $(function () {
     };
     //изменяем параметры фильтрации
     var change_parametr = function (event) {
-        console.log("тУТ");
         event.stopPropagation();
         fon_2.show();
-        $(this).closest(".checkbox").toggleClass("active_el");
+        $(this).toggleClass("option_image_out option_image_in");
+        $(this).find(".option_item_value").toggleClass("option_not_active option_active");
         var obj = JSON.stringify(all_parametr());
         var obj_sort = JSON.stringify(sort);
         $.get("/catalog/"+category+"/",{"options":obj, "sort":obj_sort}).done(function (data_json) {
@@ -156,5 +164,5 @@ $(function () {
 
     fill_options();
     $(".content_items").on("click",".href_active",change_page);
-    $(".left_side_bar").on("change", "input", change_parametr);
+    $(".left_side_bar").on("click", ".option_item", change_parametr);
 });

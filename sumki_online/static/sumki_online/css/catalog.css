@@ -62,16 +62,31 @@
     margin-bottom: 10px;
 }
 .checkbox.active_el{
-    background-color: rgba(99,33,33,0.5);/*rgba(33,33,33,0.5)*/
+    background-color: #999999;/*rgba(33,33,33,0.5)*/
     border: 1px solid #fff;
     color: #fff;
-    border-radius:0 5px 5px 0;
+    border-radius:5px 5px 5px 5px;
 }
 .option_items .checkbox{
-    padding: 5px;
+    border: 1px solid transparent;
+    /*padding: 5px;*/
     font-size: 12px;
     display: inline-block;
 }
 .block_items{
     position: relative;
+}
+.option_item{
+    padding:5px 0 5px 22px;
+    display: inline-block;/*
+    padding: 5px 0 5px 0;*/
+    cursor: pointer;
+}
+.option_image_out{
+    background: url('../images/other/select_out.png') left center no-repeat;
+    background-size: 18px 16px;
+}
+.option_image_in{
+    background: url('../images/other/select_in.png') left center no-repeat;
+    background-size: 18px 16px;
 }
