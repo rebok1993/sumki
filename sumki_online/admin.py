@@ -57,8 +57,8 @@ class ItemAdmin(admin.ModelAdmin):
             "js/my_admin.js",
         )
 
-    list_display = ('id', 'name', 'price', 'image', 'number', 'discount','category_id')
-    list_editable = ('price', 'image', 'discount', 'number')
+    list_display = ('id', 'name', 'price', 'image', 'number', 'discount','category_id', 'hit_sales')
+    list_editable = ('price', 'image', 'discount', 'number', 'hit_sales')
 
     def get_urls(self):
         urls = super(ItemAdmin, self).get_urls()
