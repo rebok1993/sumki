@@ -1,17 +1,17 @@
 .name_result,#korzina_content .img_item,.item_in_korzina{
     float: left;
 }
-.contact_data,#result,#korzina_block,#korzina_content .description_item,#korzina_content .delete_item{
+#result,#korzina_block,#korzina_content .description_item,#korzina_content .delete_item{
     float: right;
 }
 .wrapper .header .header_inform_row,.nav a,.nav .active a:hover{
     color: #fff !important;
 }
 .main_fon{
-    background-color: #b44444;
+    background-color: #E6ECF0;
 }
 .header_navbar ul{
-    height: 49px;
+    height: 60px;/*49px*/
 }
 
 .header_navbar li{
@@ -19,28 +19,30 @@
     width: 1%;
 }
 .header_navbar{
-    border-top:1px solid #b44444;
+    border-top:1px solid #d4dbe0;
+    border-bottom:1px solid #d4dbe0;
 }
 
 
 .header_navbar .active_elem a{
-    color: #aaa;
-    border-bottom:5px solid #337AB7;
-    height: 49px;
+    /*color: #aaa;*/
+    border-bottom:5px solid #cc6a3b; /*#337AB7*/
+    height: 60px;
 }
 .header_navbar li a{
+    line-height: 60px;
     font-weight: bold;
-    height: 54px;
-    color: #fff;
+    height: 65px;
+    color: inherit;
     text-align: center;
     display: block;
     border-bottom:5px solid transparent;
     transition: all .15s ease-in-out;
 }
 .header_navbar li a:hover{
-    color: #aaa;
-    border-bottom:5px solid #337AB7;
-    height: 49px;
+    /*color: #aaa;*/
+    border-bottom:5px solid #cc6a3b;
+    height: 60px;
 }
 ul{
     list-style: none;
@@ -56,6 +58,7 @@ a{
 }
 .wrapper .header{
     min-height: 150px;
+    background-color: #fff;
 }
 .wrapper .header .header_inform_row{
     background-color: #333;
@@ -71,11 +74,11 @@ a{
 }
 .wrapper .body{
     min-height: 600px;
-    background-color: #f5f8fa;
     position: relative;
 }
 .footer{
-    height: 150px;
+    font-style: italic;
+    padding: 20px;
     background-color:#2C2C2C/* #253636*/;
 }
 .logo{
@@ -93,7 +96,11 @@ a{
 .contact_data{
     color:#fff;
     font-weight: bold;
-    padding: 20px;
+}
+.title_footer{
+    margin-top: 10px;
+    font-size: 12px;
+    color: #919191;
 }
 .menu_name{
     padding: 0 !important;
@@ -105,13 +112,13 @@ a{
 .obuv_logo{
     width: 50px;
     height: 50px;
-    background:url("../images/obuv_logo_1.png") no-repeat center transparent;
+    background:url("../images/obuv_logo.png") no-repeat center transparent;
     background-size: 100%;
 }
 .sumki_logo{
     width: 50px;
     height: 50px;
-    background:url("../images/sumki_logo.png") no-repeat center transparent;
+    background:url("../images/sumki_logo_1.png") no-repeat center transparent;
     background-size: 100%;
 }
 .other_logo{
@@ -131,7 +138,7 @@ a{
 #korzina_block{
     margin: auto;
     top: 0;
-    right: 10px;
+    right: 5%;
     bottom: 0;
     /*margin-top: 30px;
     margin-right: 50px;*/
@@ -142,16 +149,17 @@ a{
     padding: 7px 5px;
     position: absolute;
     cursor: pointer;
+    border:1px solid transparent;
 }
 #korzina_block:hover{
-    background: #b44444;
+    /*background: #b44444;*/
 }
 #korzina_block .korzina_inactive{
     background:url("../images/korzina_black.png") no-repeat center transparent;
     background-size: 100%;
 }
 #korzina_block .korzina_active{
-    background:url("../images/korzina_white.png") no-repeat center transparent;
+    background:url("../images/korzina_black.png") no-repeat center transparent;
     background-size: 100%;
 }
 .korzina{
@@ -170,13 +178,17 @@ a{
     z-index: 100;
     border-left: 1px solid #e1e8ed;
     border-right: 1px solid #e1e8ed;
-    border-top: 3px solid #b44444;
-    border-bottom: 7px solid #b44444;
+    border-top: 1px solid #CC6A3B;
+    border-bottom: 1px solid #e1e8ed;
     padding: 10px 10px 0;
+    border-radius: 7px 0 7px 7px;
 }
 #korzina_content li{
     overflow: hidden;
     border-bottom: 2px solid #e1e8ed;
+}
+#korzina_content li:last-child{
+    border: none;
 }
 #korzina_content .delete_item{
     padding: 10px;
@@ -193,6 +205,7 @@ a{
     padding: 20px;
     font-weight: bold;
     text-align: center;
+    border: none !important;
 }
 .item_in_korzina{
     overflow: hidden;
@@ -291,6 +304,9 @@ a{
     right:20%;
     top:35%;
 }
+.main_content{
+    margin-top: 10px;
+}
 .main_content .content_items .item{
     position: relative;
     text-align: center;
@@ -299,9 +315,9 @@ a{
     transition: all .15s ease-in-out;
 }
 .main_content .content_items .item:hover{
-    z-index: 10;
-    border: 1px solid #d4dbe0;
-    box-shadow: 0 10px 50px 0 rgba(30, 30, 30, 0.2);
+    /*z-index: 10;*/
+    /*border: 1px solid #d4dbe0;
+    box-shadow: 0 10px 50px 0 rgba(30, 30, 30, 0.2);*/
 }
 .main_content .content_items .item_description{
     text-align: left;
@@ -309,16 +325,16 @@ a{
 }
 .item .name_item{
     font-weight: bold;
-    color:  #cc6633;
 }
 .item .discount_item{
     text-decoration: line-through;
     color: #999999;
 }
 .item .saving_item{
-    color: #cc6633;
+    color: #CC6A3B;
     font-weight: bold;
 }
+
 .main_content .content_items .item .hide_element{
     visibility: hidden;
 }
@@ -347,6 +363,7 @@ a{
     padding: 0 5px;
 }
 #add_or_next_window{
+    border-radius: 7px;
     padding: 30px;
     display: none;
     position: fixed;

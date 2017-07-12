@@ -149,7 +149,7 @@ $(function () {
             event.stopPropagation();
         }
         $("#korzina_block").children(".korzina_inactive").toggleClass("korzina_inactive korzina_active");
-        $("#korzina_block").css("background", "#b44444");
+        $("#korzina_block").css("border", "1px solid #CC6A3B");
         $("#korzina_block").children("#korzina_content").slideDown();
     };
     //функция скрытия корзины
@@ -158,9 +158,10 @@ $(function () {
             event.stopPropagation();
         }
         time_id = setTimeout(function () {
-            $("#korzina_block").css("background", "transparent");
             $("#korzina_block").find(".korzina_active").toggleClass("korzina_inactive korzina_active");
-            $("#korzina_block").children("#korzina_content").slideUp();
+            $("#korzina_block").children("#korzina_content").slideUp(400, function () {
+                $("#korzina_block").css("border", "1px solid transparent");
+            });
         },500);
     };
 
@@ -170,7 +171,7 @@ $(function () {
         var right = window.innerWidth - 150;
         $("#"+id+" .image_item")
             .clone()
-            .css({'position':'absolute', 'top':pos.top, 'left':pos.left, 'z-index':'100'})
+            .css({'position':'absolute', 'top':pos.top, 'left':pos.left, 'z-index':'100', 'border-radius': '10px'})
             .appendTo(".main_fon")
             .animate({
                 opacity:0.3,
@@ -179,7 +180,11 @@ $(function () {
                 width:20,
                 height:20}, 700, function () {
                     $(this).remove();
-                    show_korzina();
+                    $("#korzina_block").css({"border": "1px solid #CC6A3B", "border-radius":"10px"});
+                    setTimeout(function () {
+                        $("#korzina_block").css({"border": "", "border-radius":""});
+                    }, 2000);
+                    /*show_korzina();*/
             });
         window.scrollTo(0,0);
     };
@@ -239,7 +244,7 @@ $(function () {
         if(!add_or_next_window) add_or_next_window = $("#add_or_next_window");
         add_or_next_window.fadeIn();
         animate_icon_in_korzina(korzina_elem['id']);
-        setTimeout(hide_korzina, 5000);
+        /*setTimeout(hide_korzina, 5000);*/
         remove_attr_in_more_info();
         add_number_views(id_elem);
     };
@@ -329,10 +334,12 @@ $(function () {
 
     $(".main_content .content_items").on("mouseover",".item",function (event) {
         event.stopPropagation();
+        $(this).css({"box-shadow": "0 10px 50px 0 rgba(30, 30, 30, 0.2)","border":"1px solid #d4dbe0","z-index":"10"});
         $(this).find(".hide_element").css("visibility","visible");
     });
     $(".main_content .content_items").on("mouseout",".item",function (event) {
         event.stopPropagation();
+        $(this).css({"box-shadow": "none","border":"","z-index":"1"});
         $(this).find(".hide_element").css("visibility","hidden");
     });
     $(".block_items").on("click", ".more_information", show_more_info);
