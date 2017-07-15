@@ -4,7 +4,7 @@
 #result,#korzina_block,#korzina_content .description_item,#korzina_content .delete_item{
     float: right;
 }
-.wrapper .header .header_inform_row,.nav a,.nav .active a:hover{
+.nav a,.nav .active a:hover{
     color: #fff !important;
 }
 .main_fon{
@@ -61,11 +61,12 @@ a{
     background-color: #fff;
 }
 .wrapper .header .header_inform_row{
+    display: none;
+    height: 30px;
     background-color: #333;
     overflow: hidden;
 }
 .wrapper .header .header_main_area{
-    /*background:url("../images/top_fon.png") no-repeat center white;*/
     height: 160px;
     text-align: center;
     background-color: #fff;
