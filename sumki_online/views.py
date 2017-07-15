@@ -41,7 +41,10 @@ def home(request):
                 itemm['type'] = option.type.name
         itemm['category_alias'] = category[itemm['category_id']]['alias']
     #новые товары
-    items_new_offer = Item.objects.exclude(id__in=[value['id'] for value in items_disc]).order_by("-data")[:4].values()
+    #items_new_offer = Item.objects.exclude(id__in=[value['id'] for value in items_disc]).order_by("-data")[:4].values()
+    items_new_offer = Item.objects.filter(
+        new_item=True).exclude(id__in=[value['id'] for value in items_disc])[:4].values()
+
     for itemm in items_new_offer:
         for option in options_sumki:
             if option.item_id == itemm['id']:
@@ -53,11 +56,16 @@ def home(request):
                 itemm['type'] = option.type.name
         itemm['category_alias'] = category[itemm['category_id']]['alias']
     # товары с наибольшими просмотрами
+    '''
     items_hits = Item.objects.filter(
         numberviews__number__isnull=False).exclude(
         id__in=[value['id'] for value in items_disc]).exclude(
         id__in=[value['id'] for value in items_new_offer]).order_by(
-        "-numberviews__number")[:4].values()
+        "-numberviews__number")[:4].values()'''
+    items_hits = Item.objects.filter(
+        hit_sales=True).exclude(
+        id__in=[value['id'] for value in items_disc]).exclude(
+        id__in=[value['id'] for value in items_new_offer])[:4].values()
     for itemm in items_hits:
         for option in options_sumki:
             if option.item_id == itemm['id']:
@@ -452,6 +460,8 @@ def catalog_obuv(request, alias):
                     option_query['hit_sales'] = True
                 if 'disc' in data['special_obuv']:
                     option_query['discount__gt'] = 0
+                if 'new' in data['special_obuv']:
+                    option_query['new_item'] = True
 
             #если установлена сортировка
             if data_json_sort:
@@ -479,6 +489,7 @@ def catalog_obuv(request, alias):
 
         number_hits = 0
         number_disc = 0
+        number_new = 0
         sizes_all = change_key('id', sizes_all)
         brends_all = change_key('id', brends_all)
         types_all = change_key('id', types_all)
@@ -500,6 +511,7 @@ def catalog_obuv(request, alias):
         for itemm in items_list:
             if itemm.hit_sales: number_hits+=1
             if itemm.discount: number_disc+=1
+            if itemm.new_item: number_new+=1
             itemm.category_alias = category_a[itemm.category_id]['alias']
             for option in options:
                if option.item_id==itemm.id:
@@ -523,10 +535,11 @@ def catalog_obuv(request, alias):
         {'name':'special',
                    'all':
                        {
-                           'hit':{'name':'Хиты продаж', 'number':number_hits},
-                           'disc':{'name':'Товары со скидкой','number':number_disc}
+                           'hit':{'name':'Хит продаж', 'number':number_hits},
+                           'disc':{'name':'Товары со скидкой','number':number_disc},
+                           'new':{'name':'Новинки','number':number_new}
                        },
-                    'label':'Спецпредложения'},
+                    'label':'Статус товара'},
         {'name':'type','all':types_all, 'label':'Тип обуви'},
         {'name':'size','all':sizes_all, 'label':'Размер обуви'},
         {'name':'brend','all':brends_all, 'label':'Бренд обуви'}
@@ -543,7 +556,11 @@ def catalog_obuv(request, alias):
             "brend_obuv": brends_all,
             "type_obuv": types_all,
             "size_obuv": sizes_all,
-            "special_obuv": {'hit':{'name':'Хиты продаж', 'number':number_hits}, 'disc':{'name':'Товары со скидкой','number':number_disc}}
+            "special_obuv": {
+                'hit':{'name':'Хит продаж', 'number':number_hits},
+                'disc':{'name':'Товары со скидкой','number':number_disc},
+                'new':{'name':'Новинки','number':number_new}
+            },
         }
         json_str = json.dumps({
             "paginator":render_to_string('paginator.html', context),

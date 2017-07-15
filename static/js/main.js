@@ -80,10 +80,11 @@ function delete_from_korzina(event, id_item) {
 }
 //изменение изображения в окне товара
 function change_image(){
-    var src = $(this).find("img").attr("src");
-    $(".active_other_image").removeClass("active_other_image");
-    $(this).addClass("active_other_image");
-    window_inf.find("#more_information_image>img").attr("src", src);
+    var index = $(this).data("indexIm");
+    $("#main_image_el").css("left", "-"+index*440);
+    $("#other_image_item_window").css("transform", "translate3d("+index*134+"px, 0px, 0px)");
+    /*$(".active_other_image").removeClass("active_other_image");
+    $(this).addClass("active_other_image");*/
 }
 //учитываем количество просмотров товара в базе
 function add_number_views(id_elem) {
@@ -278,26 +279,39 @@ $(function () {
 
         var i = 1;
         var img_n = [];
-        var new_way, new_li;
-        $("#other_image").append("<li class='active_other_image other_image_item'><img src='"+src+"' width='120' height='120'></li>");
-        while(i!=4){
+        var img_n2 = [];
+        var new_way, new_li_small, new_li_big,number_iter=3, index = 0;
+        $("#main_image_el").append("<li data-index-ib='"+index+"'><img src='"+src+"' width='440px' height='440px'></li>");
+        $("#other_image").append("<li data-index-im='"+index+"' class='active_other_image other_image_item'><img src='"+src+"' width='120' height='120'></li>");
+        while(i<=number_iter){
             new_way = way_bas+"v"+i+".jpg";
             img_n[i] = new Image();
+            img_n2[i] = new Image();
             img_n[i].width = 120;
             img_n[i].height = 120;
+            img_n2[i].width = 440;
+            img_n2[i].height = 440;
             img_n[i].onload = function (x) {
                 return function(){
-                    new_li = "<li class='other_image_item'></li>";
-                    $("#other_image").append($(new_li).append(img_n[x]));
+                    index++;
+                    new_li_small = "<li data-index-im='"+index+"' class='other_image_item'></li>";
+                    $("#other_image").append($(new_li_small).append(img_n[x]));
+                };
+            }(i);
+            img_n2[i].onload = function (x) {
+                return function(){
+                    new_li_big = "<li data-index-ib='"+index+"'></li>";
+                    $("#main_image_el").append($(new_li_big).append(img_n2[x]));
+                    /*set_width_ul();*/
                 };
             }(i);
             img_n[i].src = new_way;
+            img_n2[i].src = new_way;
             i++;
         }
         $.get("/getOptionsAjax/"+id+"/").done(function (data) {
             $("#description_item_full").append(data);
         });
-        window_inf.find("#more_information_image>img").attr("src", src);
         window_inf.find("#more_information_price").text(price);
         window_inf.find("#more_information_name").text(name);
         window_inf.data("itemElement", id);
@@ -312,9 +326,10 @@ $(function () {
         remove_attr_in_more_info();
     };
     var remove_attr_in_more_info = function () {
-        window_inf.find("#more_information_image>img").removeAttr("src");
-        $("#other_image>li").remove();
+        $("#other_image>li.other_image_item, #main_image_el>li").remove();
         $("#description_item_full div").remove();
+        $("#main_image_el").css("left", "0");
+        $("#other_image_item_window").css("transform", "translate3d(0px, 0px, 0px)");
     };
     //действии при продолжении покупки по добавления в корзину
     var next_buy = function () {
