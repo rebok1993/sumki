@@ -97,6 +97,7 @@ $(function () {
     var change_page = function (event) {
         event.preventDefault();
         fon_2.show();
+        window.scrollTo(0,160);
         var obj = JSON.stringify(all_parametr());
         var href  = $(this).attr("href");
         var obj_sort = JSON.stringify(sort);
