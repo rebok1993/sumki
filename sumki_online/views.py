@@ -14,11 +14,24 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.views.decorators.csrf import csrf_exempt
 #import http.cookies
 import json
+from django.views.generic import TemplateView
+from yandex_money.forms import PaymentForm
+from yandex_money.models import Payment
 import re
 import os
 #import random
 #import string
-# Create your views here.
+
+class OrderPage(TemplateView):
+    template_name = 'order_page.html'
+
+    def get_context_data(self, **kwargs):
+        payment = Payment(order_amount=123)
+        payment.save()
+
+        ctx = super(OrderPage, self).get_context_data(**kwargs)
+        ctx['form'] = PaymentForm(instance=payment)
+        return ctx
 
 @cache_control(must_revalidate=0)
 def home(request):
@@ -287,13 +300,19 @@ def checkout(request):
             json_str['number_order'] = order_par.id
             return HttpResponse(json.dumps(json_str))
     json_str['result'] = False
+
     return HttpResponse(json.dumps(json_str))
 
 def order(request):
     form = OrderForm()
+    payment = Payment(order_amount=123)
+    payment.save()
+    payform = PaymentForm(instance=payment)
+
     context = {
         "order":order,
-        "form":form
+        "form":form,
+        "payform":payform
     }
     return HttpResponse(render_to_string('order.html',context))
 
