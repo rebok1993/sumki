@@ -1,6 +1,6 @@
 from django.conf.urls import url
-
 from . import views
+from sumki_online.views import OrderPage
 
 
 app_name = 'sumki_online'
@@ -14,6 +14,7 @@ urlpatterns = [
     url(r'^order/success$', views.order_success, name='order_success'),
     url(r'^order/fail$', views.order_fail, name='order_fail'),
     url(r'^checkout/$', views.checkout, name='checkout'),
+    url(r'payment-form/$', OrderPage.as_view(), name='payment_form'),
     url(r'^getOptionsAjax/(?P<elem>[^/]+)/$', views.get_options_ajax, name='getopt'),
     url(r'^addNumberViews/(?P<elem>[^/]+)/$', views.add_number_views),
     #url(r'^(?  P<alias>[^/]+)', views.get_category, name='category'),

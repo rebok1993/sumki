@@ -79,7 +79,21 @@
                         </div>
                     </div>
                     <div id="payment_method">
-                        <h3>Оплатите Ваш заказ путём перечисления на карту:</h3>
+                        <div style="border: 1px dotted gray; padding: 15px 15px 0; margin: 30px auto; width: 300px;">
+                            <form name="ShopForm" method="POST" action="https://demomoney.yandex.ru/eshop.xml">
+                                <ul style="list-style: none;">
+                                    <li style="margin-bottom: 20px;">
+                                        Сумма заказа: <b>{{ payform.sum.value }}</b>
+                                    </li>
+
+                                    {{ payform.as_ul|safe }}
+
+                                    <li style="margin-top: 20px;">
+                                        <input type="submit" value="Оплатить">
+                                    </li>
+                                </ul>
+                            </form>
+                        </div>
                         <button type="submit" class="btn btn-danger" id="order_ready">Оплатить</button>
                     </div>
                     <div id="success_buy"> <span id="name_buyer"></span>, спасибо за покупку) Номер вашего заказа: №<span id="number_order"></span></div>
