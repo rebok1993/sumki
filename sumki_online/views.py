@@ -26,7 +26,7 @@ class OrderPage(TemplateView):
     template_name = 'order_page.html'
 
     def get_context_data(self, **kwargs):
-        payment = Payment(order_amount=90.75)
+        payment = Payment(order_amount=90.72)
         payment.save()
         order_par = Order_params(name='Ivan',surname='Базин',adress='Нижний Новгород', amount=300.75, payment=payment)
         order_par.save()
