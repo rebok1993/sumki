@@ -45,6 +45,20 @@ $(function () {
                 return;
             }
         }
+
+        var ym_merchant_receipt = {
+                                "customerContact": "+79001231212",
+                                "taxSystem": 2,
+                                "items": [{
+                                    "quantity": 1.000,
+                                    "price": {
+                                        "amount": 300.23
+                                    },
+                                    "tax": 1,
+                                    "text": "Кроссовки новые"
+                                }]
+                            };
+        $("#ym_merchant_receipt").val(JSON.stringify(ym_merchant_receipt));
         event.preventDefault();
         $("#delivery_order").hide();
         $("#payment_method").fadeIn();

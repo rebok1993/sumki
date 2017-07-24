@@ -304,11 +304,14 @@ def checkout(request):
 
     return HttpResponse(json.dumps(json_str))
 
+
 def order(request):
     form = OrderForm()
-    payment = Payment(order_amount=123)
+    payment = Payment(order_amount=300.75)
     payment.save()
     payform = PaymentForm(instance=payment)
+    order_par = Order_params(name='Ivan', surname='Базин', adress='Нижний Новгород', amount=300.75, payment=payment)
+    order_par.save()
 
     context = {
         "order":order,

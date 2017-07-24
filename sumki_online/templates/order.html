@@ -47,7 +47,7 @@
                                 <p>Введите данные получателя:</p>
                             </div>
                             <form role="form">
-                                {% csrf_token %}
+                                {% comment %}{% csrf_token %}{% endcomment %}
                                 {{ form.non_field_errors }}
                                 <div class="form-group">
                                     {{ form.name.errors }}
@@ -88,6 +88,9 @@
 
                                     {{ payform.as_ul|safe }}
 
+                                    <li>
+                                        <input id="ym_merchant_receipt" name="ym_merchant_receipt" value='' type="hidden"/>
+                                    </li>
                                     <li style="margin-top: 20px;">
                                         <input type="submit" value="Оплатить">
                                     </li>
