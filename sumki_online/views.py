@@ -26,9 +26,10 @@ class OrderPage(TemplateView):
     template_name = 'order_page.html'
 
     def get_context_data(self, **kwargs):
-        payment = Payment(order_amount=123)
+        payment = Payment(order_amount=90.75)
         payment.save()
-
+        order_par = Order_params(name='Ivan',surname='Базин',adress='Нижний Новгород', amount=300.75, payment=payment)
+        order_par.save()
         ctx = super(OrderPage, self).get_context_data(**kwargs)
         ctx['form'] = PaymentForm(instance=payment)
         return ctx

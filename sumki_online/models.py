@@ -246,9 +246,11 @@ class Order_params(models.Model):
     name = models.CharField(max_length=255, verbose_name='Имя покупателя')
     surname = models.CharField(max_length=255, verbose_name='Фамилия покупателя')
     adress = models.CharField(max_length=255, verbose_name='Адрес доставки', default='Самовывоз')
-    data = models.DateTimeField()
+    data = models.DateTimeField(auto_now=True)
     sent = models.BooleanField(default=False, verbose_name='Отправлено')
     received = models.BooleanField(default=False, verbose_name='Получено')
+    amount = models.PositiveIntegerField('Сумма заказа', default=0)
+    payment = models.ForeignKey('yandex_money.Payment', verbose_name='Платеж', default=66)
 
     class Meta:
         verbose_name = "ЗАКАЗЫ"
