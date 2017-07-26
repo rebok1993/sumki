@@ -47,12 +47,12 @@ $(function () {
         }
 
         var ym_merchant_receipt = {
-                                "customerContact": "+79001231212",
+                                "customerContact": "+79159364054",
                                 "taxSystem": 2,
                                 "items": [{
                                     "quantity": 1.000,
                                     "price": {
-                                        "amount": 300.23
+                                        "amount": 300.75
                                     },
                                     "tax": 1,
                                     "text": "Кроссовки новые"
