@@ -240,6 +240,7 @@ $(function () {
         event.stopPropagation();
     };
 
+
     var delete_order_item = function () {
         var el = $(this).closest("li");
         var id = el.attr("id");
