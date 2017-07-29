@@ -90,7 +90,7 @@
     display: none;
 }
 
-#delivery_export_el,#success_buy{
+#delivery_export_el{
     display: none;
 }
 #independent_export_el p,#delivery_export_el p{
@@ -99,12 +99,6 @@
 }
 #delivery_order form div{
     width: 50%;
-}
-#success_buy{
-    margin-top: 20px;
-    font-size: 24px;
-    font-weight: bold;
-    color: #cc6a3b;
 }
 .hide_field{
     display: none;

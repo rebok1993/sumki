@@ -27,14 +27,13 @@ function set_k_oplate(summa) {
 
 $(function () {
     var order = {
-        'summ':0,
         'name':'',
         'surname':'',
         'fon_number':'',
         'delivery':false,
         'city':'Нижний Новгород',
         'adress':'Самовывоз',
-        'amount':300.00,
+        'amount':0,
         'items':[]
     };
 
@@ -64,14 +63,15 @@ $(function () {
         order.name =name.val();
         order.surname = surname.val();
         order.fon_number = phone.val();
-        order.summ = korzina.summa;
-        if(korzina.delivery == "delivery_export") order.summ += 300;
+        order.fon_number = order.fon_number.replace(/[-() ]+/g,'');
+        order.amount = korzina.summa;
+        if(korzina.delivery == "delivery_export") order.amount += 300;
 
         $("#order_final_items p").remove();
         $.each(korzina.products, function (index, value) {
             $("#order_final_items").append("<span>"+value.name+" "+value.number+" шт.</span><br>");
         });
-        $("#order_final_summ span").text(order.summ+" руб.");
+        $("#order_final_summ span").text(order.amount+" руб.");
         $("#order_final_fio span").text(order.surname+" "+order.name);
 
         if(!order.delivery){
@@ -82,25 +82,30 @@ $(function () {
 
         $("#order_final_fon span").text(order.fon_number);
 
+
+        var items = [];
+        $.each(korzina.products, function (index, value) {
+             items.push({
+                 "quantity": value.number,
+                 "price": {
+                    "amount": value.price
+                 },
+                 "tax": 1,
+                 "text": value.name
+             });
+        });
         var ym_merchant_receipt = {
-                                "customerContact": order.fon_number+"",
+                                "customerContact": order.fon_number,
                                 "taxSystem": 2,
-                                "items": [{
-                                    "quantity": 1.000,
-                                    "price": {
-                                        "amount": 90.70
-                                    },
-                                    "tax": 1,
-                                    "text": "Кроссовки новые"
-                                }]
+                                "items": items
                             };
 
         //отправляем данные формы
-        /*fon_2.show();*/
+        fon_2.show();
         var csrftoken = $.cookie('csrftoken');
         order.items = korzina['products'];
         var data_json = JSON.stringify(order);
-
+        console.log(order);
         $.ajaxSetup({
             beforeSend: function(xhr, settings) {
                 if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
@@ -111,22 +116,14 @@ $(function () {
                 }
             }
         });
-        $("#ym_merchant_receipt").val(JSON.stringify(ym_merchant_receipt));
 
-        /*$.post("/order/ready/",{"order":data_json}).done(function (data_json) {
+        $.post("/order/ready/",{"order":data_json}).done(function (data_json) {
                 var data_responce= $.parseJSON(data_json);
-                console.log(data_responce);/!*
-                $("#payment_method").append(data_responce['payform']);*!/
+                $("#payment_method").append(data_responce['payform']);
                 $("#ym_merchant_receipt").val(JSON.stringify(ym_merchant_receipt));
-            /!*$("#order_steps").hide();
-                $("#number_order").text(data_responce['number_order']);
                 $("#summa_k_oplate_right").hide();
-                $("#payment_method").hide();
-                $("#name_buyer").text(data['name']);
-                $("#success_buy").show();
-                clear_korzina();
-                fon_2.hide();*!/
-            });*/
+                fon_2.hide();
+        });
 
         event.preventDefault();
         $("#delivery_order").hide();
@@ -236,6 +233,7 @@ $(function () {
     };
     //отправляем заказ
     var order_ready = function (event) {
+        clear_korzina();
         $("form[name='ShopForm']").submit();
         event.stopPropagation();
     };

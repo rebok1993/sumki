@@ -243,9 +243,8 @@ def order_ready(request):
         data = json.loads(request.POST.get('order'))
         form = OrderForm(data)
         if form.is_valid():
-            #return HttpResponse(json.dumps(["Тута"]));
             # создаём новый заказ
-            payment = Payment(order_amount=90.70, payment_type='')
+            payment = Payment(order_amount=round(float((data['amount'])),2), payment_type='')
             payment.save()
             payform = PaymentForm(instance=payment)
             adress = form.cleaned_data['city'] + " " + form.cleaned_data['adress']
@@ -303,7 +302,6 @@ def order_ready(request):
             }
             json_str['payform'] = render_to_string('pay_form.html', context)
             json_str['result'] = True
-            json_str['number_order'] = order_par.id
             return HttpResponse(json.dumps(json_str))
     json_str['result'] = False
 
@@ -312,12 +310,9 @@ def order_ready(request):
 
 def order(request):
     form = OrderForm()
-    payment = Payment(order_amount=90.70, payment_type='')
-    payment.save()
-    payform = PaymentForm(instance=payment)
+
     context = {
         "form":form,
-        "payform": payform
     }
     return HttpResponse(render_to_string('order.html',context))
 

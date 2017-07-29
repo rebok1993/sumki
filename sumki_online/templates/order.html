@@ -79,16 +79,6 @@
                         </div>
                     </div>
                     <div id="payment_method">
-                        <div style="">
-                            <form name="ShopForm" method="POST" action="https://demomoney.yandex.ru/eshop.xml">
-                                <ul>
-                                    {{ payform.as_ul|safe }}
-                                    <li>
-                                        <input id="ym_merchant_receipt" name="ym_merchant_receipt" value='' type="hidden"/>
-                                    </li>
-                                </ul>
-                            </form>
-                        </div>
                         <div style="padding: 10px 0 10px 10px; margin: 20px 0 20px 0" id="order_final_win">
                             <h4 style="color: #333">Ваш заказ:</h4>
                             <p id="order_final_items">Товары в заказе:<br>
@@ -101,7 +91,6 @@
                         </div>
                         <button type="submit" class="btn btn-danger" id="order_ready">Оплатить</button>
                     </div>
-                    <div id="success_buy"> <span id="name_buyer"></span>, спасибо за покупку) Номер вашего заказа: №<span id="number_order"></span></div>
                 </div>
             </div>
             <div class="col-md-3 right_side_bar">
