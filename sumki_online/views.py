@@ -229,7 +229,7 @@ def checkout(request):
 
     return HttpResponse(json.dumps(json_str))
 
-
+@csrf_exempt
 def order_ready(request):
     json_str = {}
 
