@@ -130,81 +130,6 @@ def home(request):
     return HttpResponse(render_to_string('index.html', context))
 
 def item(request,category, number):
-    '''
-    insert = [
-        {'articul':'1388-1','name':'Женские кроссовки','price':1500,'image':'first.jpg',
-            'discount':0,'description':'','number':1,'data':datetime.today()},
-        {'articul': '617-8', 'name': 'Женские кроссовки', 'price': 1500, 'image': 'first.jpg',
-            'discount': 0, 'description': '', 'number': 1, 'data': datetime.today()},
-        {'articul': '617-9', 'name': 'Женские кроссовки', 'price': 1500, 'image': 'first.jpg',
-            'discount': 0, 'description': '', 'number': 1, 'data': datetime.today()},
-        {'articul': '911-6', 'name': 'Женские кроссовки', 'price': 1500, 'image': 'first.jpg',
-            'discount': 0, 'description': '', 'number': 1, 'data': datetime.today()},
-        {'articul': 'K977-4M', 'name': 'Женские ботинки', 'price': 1500, 'image': 'first.jpg',
-            'discount': 0, 'description': '', 'number': 1, 'data': datetime.today()},
-        {'articul': 'KCM208-1', 'name': 'Женские кроссовки', 'price': 1500, 'image': 'first.jpg',
-            'discount': 0, 'description': '', 'number': 1, 'data': datetime.today()},
-        {'articul': '51-7-N-BLACK', 'name': 'Женские ботинки', 'price': 1500, 'image': 'first.jpg',
-            'discount': 0, 'description': '', 'number': 1, 'data': datetime.today()},
-        {'articul': '251-7', 'name': 'Женские кроссовки', 'price': 1500, 'image': 'first.jpg',
-            'discount': 0, 'description': '', 'number': 1, 'data': datetime.today()},
-        {'articul': 'FT2312-RD1', 'name': 'Женские туфли', 'price': 1500, 'image': 'first.jpg',
-            'discount': 0, 'description': '', 'number': 1, 'data': datetime.today()},
-        {'articul': 'B2390-9', 'name': 'Женские кроссовки', 'price': 1500, 'image': 'first.jpg',
-            'discount': 0, 'description': '', 'number': 1, 'data': datetime.today()},
-        {'articul': '5016-5', 'name': 'Женские кроссовки', 'price': 1500, 'image': 'first.jpg',
-            'discount': 0, 'description': '', 'number': 1, 'data': datetime.today()},
-        {'articul': 'BZ001-2', 'name': 'Женские кроссовки', 'price': 1500, 'image': 'first.jpg',
-            'discount': 0, 'description': '', 'number': 1, 'data': datetime.today()},
-        {'articul': 'BZ001-3', 'name': 'Женские кроссовки', 'price': 1500, 'image': 'first.jpg',
-            'discount': 0, 'description': '', 'number': 1, 'data': datetime.today()},
-        {'articul': 'K28-5', 'name': 'Женские ботинки', 'price': 1500, 'image': 'first.jpg',
-            'discount': 0, 'description': '', 'number': 1, 'data': datetime.today()},
-        {'articul': 'K28-4', 'name': 'Женские ботинки', 'price': 1500, 'image': 'first.jpg',
-            'discount': 0, 'description': '', 'number': 1, 'data': datetime.today()},
-        {'articul': 'K10-5', 'name': 'Женские ботинки', 'price': 1500, 'image': 'first.jpg',
-            'discount': 0, 'description': '', 'number': 1, 'data': datetime.today()},
-        {'articul': 'K10-2', 'name': 'Женские ботинки', 'price': 1500, 'image': 'first.jpg',
-            'discount': 0, 'description': '', 'number': 1, 'data': datetime.today()},
-        {'articul': 'K10-1', 'name': 'Женские ботинки', 'price': 1500, 'image': 'first.jpg',
-            'discount': 0, 'description': '', 'number': 1, 'data': datetime.today()},
-        {'articul': 'H03-1', 'name': 'Женские дутики', 'price': 1500, 'image': 'first.jpg',
-            'discount': 0, 'description': '', 'number': 1, 'data': datetime.today()},
-        {'articul': '8007-1-153', 'name': 'Женские мокасины', 'price': 1500, 'image': 'first.jpg',
-            'discount': 0, 'description': '', 'number': 1, 'data': datetime.today()},
-        {'articul': '8007-2-153', 'name': 'Женские мокасины', 'price': 1500, 'image': 'first.jpg',
-            'discount': 0, 'description': '', 'number': 1, 'data': datetime.today()},
-        {'articul': '335-5', 'name': 'Женские мокасины', 'price': 1500, 'image': 'first.jpg',
-            'discount': 0, 'description': '', 'number': 1, 'data': datetime.today()},
-        {'articul': '335-32', 'name': 'Женские мокасины', 'price': 1500, 'image': 'first.jpg',
-            'discount': 0, 'description': '', 'number': 1, 'data': datetime.today()},
-        {'articul': '2106B-8', 'name': 'Женские кроссовки', 'price': 1500, 'image': 'first.jpg',
-            'discount': 0, 'description': '', 'number': 1, 'data': datetime.today()},
-        {'articul': '330-10-161', 'name': 'Женские мокасины', 'price': 1500, 'image': 'first.jpg',
-            'discount': 0, 'description': '', 'number': 1, 'data': datetime.today()},
-    ]
-    for itemm in insert:
-        size = Size.objects.get(id=1)
-        category = Category.objects.get(id=1)
-        type_ob = TypeObuv.objects.get(id=1)
-        brend = BrendObuv.objects.get(id=1)
-        b = Item(name=itemm['name'],
-                 price=itemm['price'],
-                 image=itemm['image'],
-                 description=itemm['description'],
-                 data=itemm['data'],
-                 category=category)
-        b.save()
-        c = OptionsObuv(
-            item=b,
-            size=size,
-            type=type_ob,
-            brend=brend,
-            number=1
-        )
-        c.save()
-    '''
-
     tovar = Item.objects.get(pk=number)
     number_view = NumberViews.objects.filter(item=tovar)
     category = Category.objects.get(alias=category)
@@ -305,18 +230,94 @@ def checkout(request):
     return HttpResponse(json.dumps(json_str))
 
 
+def order_ready(request):
+    json_str = {}
+
+    if request.is_ajax() and request.method == 'POST':
+        data_json = request.POST.get('order')
+
+        if not data_json:
+            json_str['result'] = False
+            return HttpResponse(json.dumps(json_str))
+
+        data = json.loads(request.POST.get('order'))
+        form = OrderForm(data)
+        if form.is_valid():
+            #return HttpResponse(json.dumps(["Тута"]));
+            # создаём новый заказ
+            payment = Payment(order_amount=90.70, payment_type='')
+            payment.save()
+            payform = PaymentForm(instance=payment)
+            adress = form.cleaned_data['city'] + " " + form.cleaned_data['adress']
+
+            order_par = Order_params(
+                name=form.cleaned_data['name'],
+                surname=form.cleaned_data['surname'],
+                adress=adress,
+                amount=data['amount'],
+                payment=payment,
+                data=datetime.today()
+            )
+            order_par.save()  # создали номер заказа
+
+            # добавляем товары в заказ
+            for itemm in data['items']:
+                try:
+                    el = Item.objects.get(pk=itemm['id'])
+                    order_items = Order_items(
+                        item=el,
+                        order=order_par,
+                        number=int(itemm['number'])
+                    )
+                    order_items.save()  # указали какие товары в заказе
+
+                    # если обувь то добавляем информацию по размерам
+                    if itemm.get('size', False):
+                        size_id = Size.objects.get(name=itemm['size'])
+                        if StoreObuv.objects.filter(item=el, size=size_id).exists():
+                            if not Order_size_obuv.objects.filter(order=order_par, item=el, size=size_id).exists():
+                                order_size = Order_size_obuv(
+                                    order=order_par,
+                                    item=el,
+                                    size=size_id
+                                )
+                                order_size.save()
+                        # уменьшаем количество оставшегося размера
+                        store_obuv = StoreObuv.objects.get(item=el, size=size_id)
+                        store_obuv.number -= int(itemm['number'])
+                        if store_obuv.number < 0:
+                            store_obuv.number = 0
+                        store_obuv.save()
+                    # уменьшаем количество оставшегося товара
+                    el.number -= int(itemm['number'])
+                    if el.number < 0:
+                        el.number = 0
+                    el.save()
+
+                except ObjectDoesNotExist:
+                    json_str['result'] = False
+                    return HttpResponse(json.dumps(json_str))
+
+            context = {
+                "payform": payform
+            }
+            json_str['payform'] = render_to_string('pay_form.html', context)
+            json_str['result'] = True
+            json_str['number_order'] = order_par.id
+            return HttpResponse(json.dumps(json_str))
+    json_str['result'] = False
+
+    return HttpResponse(json.dumps(json_str))
+
+
 def order(request):
     form = OrderForm()
     payment = Payment(order_amount=90.70, payment_type='')
     payment.save()
     payform = PaymentForm(instance=payment)
-    order_par = Order_params(name='Ivan', surname='Базин', adress='Нижний Новгород', amount=300.75, payment=payment)
-    order_par.save()
-
     context = {
-        "order":order,
         "form":form,
-        "payform":payform
+        "payform": payform
     }
     return HttpResponse(render_to_string('order.html',context))
 

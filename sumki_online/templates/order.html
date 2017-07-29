@@ -18,7 +18,7 @@
                         <ul>
                             <li class="active_step" id="order_elements">Cборка заказа</li>
                             <li id="delivery_order_btn">Способ и адрес доставки</li>
-                            <li id="payment_method_btn">Способ оплаты</li>
+                            <li id="payment_method_btn">Оплата</li>
                     </ul>
                 </div>
                 <div>
@@ -79,23 +79,25 @@
                         </div>
                     </div>
                     <div id="payment_method">
-                        <div style="border: 1px dotted gray; padding: 15px 15px 0; margin: 30px auto; width: 300px;">
+                        <div style="">
                             <form name="ShopForm" method="POST" action="https://demomoney.yandex.ru/eshop.xml">
-                                <ul style="list-style: none;">
-                                    <li style="margin-bottom: 20px;">
-                                        Сумма заказа: <b>{{ payform.sum.value }}</b>
-                                    </li>
-
+                                <ul>
                                     {{ payform.as_ul|safe }}
-
                                     <li>
                                         <input id="ym_merchant_receipt" name="ym_merchant_receipt" value='' type="hidden"/>
                                     </li>
-                                    <li style="margin-top: 20px;">
-                                        <input type="submit" value="Оплатить">
-                                    </li>
                                 </ul>
                             </form>
+                        </div>
+                        <div style="padding: 10px 0 10px 10px; margin: 20px 0 20px 0" id="order_final_win">
+                            <h4 style="color: #333">Ваш заказ:</h4>
+                            <p id="order_final_items">Товары в заказе:<br>
+
+                            </p>
+                            <p id="order_final_summ">Сумма заказа: <span></span></p>
+                            <p id="order_final_fio">Получатель: <span></span></p>
+                            <p id="order_final_dil">Способ доставки: <span></span></p>
+                            <p id="order_final_fon">Телефон: <span></span></p>
                         </div>
                         <button type="submit" class="btn btn-danger" id="order_ready">Оплатить</button>
                     </div>

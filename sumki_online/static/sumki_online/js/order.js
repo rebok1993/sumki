@@ -26,7 +26,20 @@ function set_k_oplate(summa) {
 }
 
 $(function () {
+    var order = {
+        'summ':0,
+        'name':'',
+        'surname':'',
+        'fon_number':'',
+        'delivery':false,
+        'city':'Нижний Новгород',
+        'adress':'Самовывоз',
+        'amount':300.00,
+        'items':[]
+    };
+
     var next_step_payment = function (event) {
+        order.delivery = false;
         var name = $("#id_name");
         var surname = $("#id_surname");
         var phone = $("#id_fon_number");
@@ -44,10 +57,33 @@ $(function () {
                 if(adress.val().length < 2) $("#id_adress").parent(".form-group").addClass("has-error");
                 return;
             }
+            order.city = city.val();
+            order.adress = adress.val();
+            order.delivery = true;
+        }
+        order.name =name.val();
+        order.surname = surname.val();
+        order.fon_number = phone.val();
+        order.summ = korzina.summa;
+        if(korzina.delivery == "delivery_export") order.summ += 300;
+
+        $("#order_final_items p").remove();
+        $.each(korzina.products, function (index, value) {
+            $("#order_final_items").append("<span>"+value.name+" "+value.number+" шт.</span><br>");
+        });
+        $("#order_final_summ span").text(order.summ+" руб.");
+        $("#order_final_fio span").text(order.surname+" "+order.name);
+
+        if(!order.delivery){
+            $("#order_final_dil span").text("Самовывоз");
+        }else{
+            $("#order_final_dil span").text(order.city+", "+order.adress);
         }
 
+        $("#order_final_fon span").text(order.fon_number);
+
         var ym_merchant_receipt = {
-                                "customerContact": "+79159364054",
+                                "customerContact": order.fon_number+"",
                                 "taxSystem": 2,
                                 "items": [{
                                     "quantity": 1.000,
@@ -58,7 +94,40 @@ $(function () {
                                     "text": "Кроссовки новые"
                                 }]
                             };
+
+        //отправляем данные формы
+        /*fon_2.show();*/
+        var csrftoken = $.cookie('csrftoken');
+        order.items = korzina['products'];
+        var data_json = JSON.stringify(order);
+
+        $.ajaxSetup({
+            beforeSend: function(xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
+                    // Send the token to same-origin, relative URLs only.
+                    // Send the token only if the method warrants CSRF protection
+                    // Using the CSRFToken value acquired earlier
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            }
+        });
         $("#ym_merchant_receipt").val(JSON.stringify(ym_merchant_receipt));
+
+        /*$.post("/order/ready/",{"order":data_json}).done(function (data_json) {
+                var data_responce= $.parseJSON(data_json);
+                console.log(data_responce);/!*
+                $("#payment_method").append(data_responce['payform']);*!/
+                $("#ym_merchant_receipt").val(JSON.stringify(ym_merchant_receipt));
+            /!*$("#order_steps").hide();
+                $("#number_order").text(data_responce['number_order']);
+                $("#summa_k_oplate_right").hide();
+                $("#payment_method").hide();
+                $("#name_buyer").text(data['name']);
+                $("#success_buy").show();
+                clear_korzina();
+                fon_2.hide();*!/
+            });*/
+
         event.preventDefault();
         $("#delivery_order").hide();
         $("#payment_method").fadeIn();
@@ -167,56 +236,8 @@ $(function () {
     };
     //отправляем заказ
     var order_ready = function (event) {
+        $("form[name='ShopForm']").submit();
         event.stopPropagation();
-        fon_2.show();
-        var csrftoken = $.cookie('csrftoken');
-        var data = {};
-        var el = $(".active_el:eq(0)");
-        var form_el = $("#delivery_order form");
-        data['name'] = form_el.find("#id_name").val();
-        data['surname'] = form_el.find("#id_surname").val();
-        data['fon_number'] = form_el.find("#id_fon_number").val();
-        data['city'] = "Нижний Новгород";
-        data['adress'] = "Самовывоз";
-        if(el.attr("id")=="delivery_export"){
-            data['city'] = form_el.find("#id_city").val();
-            data['adress'] = form_el.find("#id_adress").val();
-        }
-
-
-        data['items'] = korzina['products'];
-        var data_json = JSON.stringify(data);
-
-        $.ajaxSetup({
-            beforeSend: function(xhr, settings) {
-                if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
-                    // Send the token to same-origin, relative URLs only.
-                    // Send the token only if the method warrants CSRF protection
-                    // Using the CSRFToken value acquired earlier
-                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
-                }
-            }
-        });
-        /*$.get("/checkout/",{"order":data_json}).done(function (data_json) {
-            data = $.parseJSON(data_json);
-            $("#order_steps").hide();
-            $("#success_buy span").text(data['number_order']);
-            $("#summa_k_oplate_right").hide();
-            $("#payment_method").hide();
-            $("#success_buy").show();
-        });*/
-        $.post("/checkout/",{"order":data_json})
-            .done(function (data_json) {
-                var data_responce= $.parseJSON(data_json);
-                $("#order_steps").hide();
-                $("#number_order").text(data_responce['number_order']);
-                $("#summa_k_oplate_right").hide();
-                $("#payment_method").hide();
-                $("#name_buyer").text(data['name']);
-                $("#success_buy").show();
-                clear_korzina();
-                fon_2.hide();
-            });
     };
 
     var delete_order_item = function () {

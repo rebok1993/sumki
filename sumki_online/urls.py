@@ -13,6 +13,7 @@ urlpatterns = [
     url(r'^order/$', views.order, name='order'),
     url(r'^order/success$', views.order_success, name='order_success'),
     url(r'^order/fail$', views.order_fail, name='order_fail'),
+    url(r'^order/ready/$', views.order_ready, name='order_ready'),
     url(r'^checkout/$', views.checkout, name='checkout'),
     url(r'payment-form/$', OrderPage.as_view(), name='payment_form'),
     url(r'^getOptionsAjax/(?P<elem>[^/]+)/$', views.get_options_ajax, name='getopt'),

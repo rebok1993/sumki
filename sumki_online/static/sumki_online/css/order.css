@@ -78,8 +78,8 @@
     content: "";
 }
 #order_steps li.active_step{
-    color: #fff;
-    background-color: #cc6633;
+    color: inherit;
+    font-weight: bold;
 }
 
 #delivery_order{
@@ -130,4 +130,18 @@
     color: #cc6633;
     font-weight: bold;
     font-size: 16px;
+}
+#order_final_win{
+    color: #b8b8b8;
+    font-size: 14px;
+    background-color: #FFFCDF;
+}
+#order_final_win p{
+    padding-bottom: 5px;
+}
+
+#order_final_win span{
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
 }
