@@ -1,0 +1,10 @@
+<div style="display: none">
+    <form name="ShopForm" method="POST" action="https://demomoney.yandex.ru/eshop.xml">
+        <ul>
+            {{ payform.as_ul|safe }}
+            <li>
+                <input id="ym_merchant_receipt" name="ym_merchant_receipt" value='' type="hidden"/>
+            </li>
+        </ul>
+    </form>
+</div>
