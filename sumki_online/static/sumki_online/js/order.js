@@ -88,7 +88,7 @@ $(function () {
                                 "items": [{
                                     "quantity": 1.000,
                                     "price": {
-                                        "amount": 300.75
+                                        "amount": 90.70
                                     },
                                     "tax": 1,
                                     "text": "Кроссовки новые"
