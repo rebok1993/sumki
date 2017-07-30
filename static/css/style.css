@@ -60,6 +60,7 @@ a{
 .wrapper .header{
     min-height: 150px;
     background-color: #fff;
+    margin-bottom: 10px;
 }
 .wrapper .header .header_inform_row{
     background-color: transparent;
@@ -304,9 +305,6 @@ a{
 #btn_right{
     right:20%;
     top:35%;
-}
-.main_content{
-    margin-top: 10px;
 }
 .main_content .content_items .item{
     position: relative;
