@@ -185,6 +185,17 @@ class DepthSumki(models.Model):
     def __str__(self):
         return self.name
 
+class Color(models.Model):
+    name = models.CharField(max_length=255, verbose_name='Цвет', blank=True)
+
+    class Meta:
+        verbose_name = "Цвет"
+        verbose_name_plural = "Цвет"
+
+    def __str__(self):
+        return self.name
+
+
 class OptionsSumki(models.Model):
     item = models.ForeignKey(Item)
     type = models.ForeignKey(TypeSumki)
@@ -193,6 +204,7 @@ class OptionsSumki(models.Model):
     width = models.ForeignKey(WidthSumki, default='1')
     height = models.ForeignKey(HeightSumki, default='1')
     depth = models.ForeignKey(DepthSumki, default='1')
+    color = models.ForeignKey(Color, default='1')
     dop_des = models.TextField(verbose_name='Доп. описание', default='')
 
 

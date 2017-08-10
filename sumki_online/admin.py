@@ -162,7 +162,7 @@ class OrderOptObuv(admin.ModelAdmin):
 admin.site.register(
     (MaterialInternal,Season,MaterialInsole,
      MaterialSole,TopMaterial,TypeSumki,
-     TypeObuv,BrendSumki,Size, NumberViews, MaterialSumki, WidthSumki, HeightSumki, DepthSumki))
+     TypeObuv,BrendSumki,Size, NumberViews, MaterialSumki, WidthSumki, HeightSumki, DepthSumki, Color))
 
 admin.site.register(BrendObuv, BrendObuvAdmin)
 admin.site.register(OptionsObuv, OptionsObuvAdmin)

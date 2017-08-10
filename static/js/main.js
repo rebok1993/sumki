@@ -150,7 +150,10 @@ $(function () {
             event.stopPropagation();
         }
         $("#korzina_block").children(".korzina_inactive").toggleClass("korzina_inactive korzina_active");
-        $("#korzina_block").css("border", "1px solid #CC6A3B");
+        $("#korzina_block").css({
+            "border":"1px solid #CC6A3B",
+            "background-color":"#fff"
+        });
         $("#korzina_block").children("#korzina_content").slideDown();
     };
     //функция скрытия корзины
@@ -159,9 +162,12 @@ $(function () {
             event.stopPropagation();
         }
         time_id = setTimeout(function () {
-            $("#korzina_block").find(".korzina_active").toggleClass("korzina_inactive korzina_active");
             $("#korzina_block").children("#korzina_content").slideUp(400, function () {
-                $("#korzina_block").css("border", "1px solid transparent");
+                $("#korzina_block").css({
+                    "border":"1px solid transparent",
+                    "background-color":"transparent"
+                });
+                $("#korzina_block").find(".korzina_active").toggleClass("korzina_inactive korzina_active");
             });
         },500);
     };
@@ -263,6 +269,7 @@ $(function () {
         var price = item.find(".price_item").text();
         var name = item.find(".name_item").text();
         var id = item.attr("id");
+        var category = item.data("itemCategory");
         var sizes = item.find(".size_item");
         if(sizes.length>0){
             var size_option = "";
@@ -309,7 +316,7 @@ $(function () {
             img_n2[i].src = new_way;
             i++;
         }
-        $.get("/getOptionsAjax/"+id+"/").done(function (data) {
+        $.get("/getOptionsAjax/"+category+"/"+id+"/").done(function (data) {
             $("#description_item_full").append(data);
         });
         window_inf.find("#more_information_price").text(price);

@@ -328,11 +328,7 @@ def order_fail(request):
     }
     return HttpResponse(render_to_string('order_fail.html', context))
 
-def catalog_sumki(request, alias):
-    context= {
-
-    }
-    return HttpResponse(render_to_string('warning.html', context))
+def catalog_sumkki(request, alias):
     try:
         brends = {}
         types = {}
@@ -446,6 +442,129 @@ def change_key(key, array):
     for elem_array in array:
         new_array[elem_array[key]] = elem_array
     return new_array
+
+def catalog_sumki(request, alias):
+    try:
+        #получение данных
+        category = Category.objects.get(alias=alias)
+        category_a = Category.objects.all().values()
+
+        items_list = None #список товаров отправляемых пользователю
+        #получаем атрибуты обуви
+        options = OptionsSumki.objects.all()
+
+        option_query = {
+            'category':category,
+            'number__gt':0,
+        }
+        #если запрос ajax заполняем выбранные в фильтре атрибуты
+        if request.is_ajax():
+            data_json = request.GET.get('options')
+            data_json_sort = request.GET.get('sort')
+            #если установлены фильтры
+            if data_json:
+                data = json.loads(request.GET.get('options'))
+                if data['brend_sumki']:
+                    option_query['optionssumki__brend__name__in'] = [data['brend_sumki'][key] for key in data['brend_sumki']]
+                if data['type_sumki']:
+                    option_query['optionssumki__type__name__in'] = [data['type_sumki'][key] for key in data['type_sumki']]
+                if 'hit' in data['special_obuv']:
+                    option_query['hit_sales'] = True
+                if 'disc' in data['special_obuv']:
+                    option_query['discount__gt'] = 0
+                if 'new' in data['special_obuv']:
+                    option_query['new_item'] = True
+
+            #если установлена сортировка
+            if data_json_sort:
+                data_sort = json.loads(request.GET.get('sort'))
+                if data_sort['type_sort'] == 'popular':
+                    if data_sort['way_sort'] == 'desc':
+                        items_list = Item.objects.filter(**option_query).order_by("-numberviews__number").distinct()
+                    else:
+                        items_list = Item.objects.filter(**option_query).order_by("numberviews__number").distinct()
+                else:
+                    if data_sort['way_sort'] == 'desc':
+                        items_list = Item.objects.filter(**option_query).order_by("-price").distinct()
+                    else:
+                        items_list = Item.objects.filter(**option_query).order_by("price").distinct()
+
+        #получаем список товаров
+        if not items_list:
+            items_list = Item.objects.filter(**option_query).order_by("-numberviews__number").distinct()
+
+        #получаем информацию об обуви на складе
+        brends_all = BrendSumki.objects.filter(optionssumki__isnull=False).distinct().values()
+        types_all = TypeSumki.objects.filter(optionssumki__isnull=False).distinct().values()
+
+        number_hits = 0
+        number_disc = 0
+        number_new = 0
+        brends_all = change_key('id', brends_all)
+        types_all = change_key('id', types_all)
+
+        #заполняем атрибуты товаров
+        category_a = change_key('id', category_a)
+
+        for itemm in items_list:
+            if itemm.hit_sales: number_hits+=1
+            if itemm.discount: number_disc+=1
+            if itemm.new_item: number_new+=1
+            itemm.category_alias = category_a[itemm.category_id]['alias']
+            for option in options:
+               if option.item_id==itemm.id:
+                   #добавляем атрибуты обуви
+                   types_all[option.type.id]['number'] = types_all[option.type.id]['number'] + 1 if 'number' in types_all[option.type.id] else 1
+                   brends_all[option.brend.id]['number'] = brends_all[option.brend.id]['number'] + 1 if 'number' in brends_all[option.brend.id] else 1
+
+                   # добавляем атрибут бренда к элементу
+                   if not hasattr(itemm, "brend"): itemm.brend = option.brend.name
+                   # добавляем атрибут типа к элементу
+                   if not hasattr(itemm, "type"): itemm.type = option.type.name
+        paginator = Paginator(items_list, 12)
+        page = request.GET.get('page')
+        items = paginator.page(page)
+    except PageNotAnInteger:
+        items = paginator.page(1)
+    except EmptyPage:
+        items = paginator.page(paginator.num_pages)
+
+    options_items = [
+        {'name':'special',
+                   'all':
+                       {
+                           'hit':{'name':'Хит продаж', 'number':number_hits},
+                           'disc':{'name':'Товары со скидкой','number':number_disc},
+                           'new':{'name':'Новинки','number':number_new}
+                       },
+                    'label':'Статус товара'},
+        {'name':'type','all':types_all, 'label':'Тип сумки'},
+        {'name':'brend','all':brends_all, 'label':'Бренд сумки'}
+    ]
+
+    context = {
+        "options":options_items,
+        "items": items,
+        "category": category,
+    }
+
+    if request.is_ajax():
+        options_items_ajax = {
+            "brend_sumki": brends_all,
+            "type_sumki": types_all,
+            "special_sumki": {
+                'hit':{'name':'Хит продаж', 'number':number_hits},
+                'disc':{'name':'Товары со скидкой','number':number_disc},
+                'new':{'name':'Новинки','number':number_new}
+            },
+        }
+        json_str = json.dumps({
+            "paginator":render_to_string('paginator.html', context),
+            "items":render_to_string('items.html', context),
+            "options":options_items_ajax,
+        })
+        return HttpResponse(json_str)
+    return HttpResponse(render_to_string('catalog.html', context))
 
 def catalog_obuv(request, alias):
     try:
@@ -597,9 +716,14 @@ def catalog(request, alias='obuv'):
     elif alias == 'accessories':
         return catalog_accessories(request, alias)
 
-def get_options_ajax(request, elem='1'):
-    options = OptionsObuv.objects.get(item=elem)
+def get_options_ajax(request, category='obuv', elem='1'):
+    if category == 'obuv':
+        options = OptionsObuv.objects.get(item=elem)
+    else:
+        options = OptionsSumki.objects.get(item=elem)
+
     context = {
         "options": options,
+        "category":category
     }
     return HttpResponse(render_to_string('options_elem.html', context))

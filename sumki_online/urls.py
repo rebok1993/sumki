@@ -16,7 +16,7 @@ urlpatterns = [
     url(r'^order/ready/$', views.order_ready, name='order_ready'),
     url(r'^checkout/$', views.checkout, name='checkout'),
     url(r'payment-form/$', OrderPage.as_view(), name='payment_form'),
-    url(r'^getOptionsAjax/(?P<elem>[^/]+)/$', views.get_options_ajax, name='getopt'),
+    url(r'^getOptionsAjax/(?P<category>[^/]+)/(?P<elem>[^/]+)/$', views.get_options_ajax, name='getopt'),
     url(r'^addNumberViews/(?P<elem>[^/]+)/$', views.add_number_views),
     #url(r'^(?  P<alias>[^/]+)', views.get_category, name='category'),
     # ex: /polls/5/
