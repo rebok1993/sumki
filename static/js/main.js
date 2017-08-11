@@ -264,7 +264,7 @@ $(function () {
         //добавляем всю информацию о товаре в мини окно товара
         var item = $(this).closest(".item");
         var src = item.find("img").attr("src");
-        src = src.replace("200_on_200", "main");
+        src = src.replace("200_on_200", "400_on_400");
         var way_bas = src.replace(".jpg", "");
         var price = item.find(".price_item").text();
         var name = item.find(".name_item").text();

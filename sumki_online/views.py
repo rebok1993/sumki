@@ -462,17 +462,18 @@ def catalog_sumki(request, alias):
             data_json = request.GET.get('options')
             data_json_sort = request.GET.get('sort')
             #если установлены фильтры
+
             if data_json:
                 data = json.loads(request.GET.get('options'))
                 if data['brend_sumki']:
                     option_query['optionssumki__brend__name__in'] = [data['brend_sumki'][key] for key in data['brend_sumki']]
                 if data['type_sumki']:
                     option_query['optionssumki__type__name__in'] = [data['type_sumki'][key] for key in data['type_sumki']]
-                if 'hit' in data['special_obuv']:
+                if 'hit' in data['special_sumki']:
                     option_query['hit_sales'] = True
-                if 'disc' in data['special_obuv']:
+                if 'disc' in data['special_sumki']:
                     option_query['discount__gt'] = 0
-                if 'new' in data['special_obuv']:
+                if 'new' in data['special_sumki']:
                     option_query['new_item'] = True
 
             #если установлена сортировка
