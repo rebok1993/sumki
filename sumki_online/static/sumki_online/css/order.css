@@ -44,6 +44,7 @@
 }
 #order_korzina .block_name_item{
     overflow: hidden;
+    cursor: pointer;
     padding-left: 15px !important;
 }
 #summa_k_oplate, #summa_k_oplate_with_delivery span{

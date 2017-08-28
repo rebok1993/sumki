@@ -16,7 +16,7 @@
 {% endblock %}
 
 {% block main_block %}
-    <div class="main_content container-fluid" style="width: 93%; margin: auto">
+    <div class="main_content container" style="width: 1206px; margin: auto">
         <div class="row">
         <div class="col-md-12">
         <div class="row">
@@ -26,10 +26,22 @@
                     <div id="{{ option.name }}_{{ category.alias }}" class="option_items">
                         <div class="name_header"><span class="glyphicon glyphicon-list"></span> {{ option.label }}</div>
                         {% for key2, value2 in option.all.items %}
-                            <div class="option_item option_image_out">
-                                <span class="option_item_image"></span><span class="option_item_value option_not_active" id="{{ option.name }}_{{ category.alias }}_{{ key2 }}_option" data-option-id="{{ key2 }}">{% if value2.name == "" %}Прочие{% else %}{{ value2.name }}{% endif %}</span>
-                                <span style="vertical-align: top; font-size: 8px; display: inline-block; width: 15px">({{ value2.number }})</span>
-                            </div>
+                            {% if value2.selected %}
+                                <div class="option_item option_image_in">
+                                    <span class="option_item_image"></span><span class="option_item_value option_active" id="{{ option.name }}_{{ category.alias }}_{{ key2 }}_option" data-option-id="{{ key2 }}">{% if value2.name == "" %}Прочие{% else %}{{ value2.name }}{% endif %}</span>
+                                    <span style="vertical-align: top; font-size: 8px; display: inline-block; width: 15px">({{ value2.number }})</span>
+                                </div>
+                            {% else %}
+                                <div class="option_item option_image_out">
+                                    {% if 'number' in value2 and value2.number != 0 %}
+                                        <span class="option_item_image"></span><span class="option_item_value option_not_active" id="{{ option.name }}_{{ category.alias }}_{{ key2 }}_option" data-option-id="{{ key2 }}">{% if value2.name == "" %}Прочие{% else %}{{ value2.name }}{% endif %}</span>
+                                        <span style="vertical-align: top; font-size: 8px; display: inline-block; width: 15px">({{ value2.number }})</span>
+                                    {% else %}
+                                        <span class="option_item_image"></span><span class="option_item_value option_not_active null_number" id="{{ option.name }}_{{ category.alias }}_{{ key2 }}_option" data-option-id="{{ key2 }}">{% if value2.name == "" %}Прочие{% else %}{{ value2.name }}{% endif %}</span>
+                                        <span style="vertical-align: top; font-size: 8px; display: inline-block; width: 15px"></span>
+                                    {% endif %}
+                                </div>
+                            {% endif %}
                         {% endfor %}
                     </div>
                 {% endfor %}
@@ -37,20 +49,31 @@
             </div>
             <div class="col-md-9 content_items">
 
-                <div id="sorting">
-                    <span>Сортировать по:</span>
-                    <ul id="sorting_switcher">
-                        <li class="active desc popular_sorting">
+                <div id="sorting" style="padding-top: 20px">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label" for="select_sort_type">Сортировать:</label>
+                            <div class="col-md-3">
+                                <select id="select_sort_type" class="form-control">
+                                    <option {% if sort == 'popular_sorting_desc' %} selected {% endif %} class="desc popular_sorting_desc" value="popular_sorting">по популярности</option>
+                                    <option {% if sort == 'price_sorting_desc' %} selected {% endif %} class="desc price_sorting_desc" value="price_sorting">по убыванию цены</option>
+                                    <option {% if sort == 'price_sorting_asc' %} selected {% endif %} class="asc price_sorting_asc" value="price_sorting">по возрастанию цены</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                    {% comment %}<ul id="sorting_switcher">
+                        <li class="el_sorting_switcher active desc popular_sorting">
                             <a>
-                                <span><span class="glyphicon glyphicon-arrow-down"></span> популярности</span>
+                                <span>убыванию популярности</span>
                             </a>
                         </li>
-                        <li class="inactive desc price_sorting">
+                        <li class="el_sorting_switcher inactive desc price_sorting">
                             <a>
-                                <span><span class="glyphicon glyphicon-arrow-down"></span> цене</span>
+                                <span>росту цены</span>
                             </a>
                         </li>
-                    </ul>
+                    </ul>{% endcomment %}
                 </div>
                 <div class="pagination_el">
                     <ul class="pagination">{% comment %}
@@ -71,7 +94,7 @@
                 </div>
                 <div class="row block_items">
                     <span class="hidden" id="category_cat">{{ category.alias }}</span>
-                    {% include 'more_inform_window.html' %}
+                    {% comment %}{% include 'more_inform_window.html' %}{% endcomment %}
                     {% include 'items.html' %}
                 </div>
                 <div class="pagination_el">

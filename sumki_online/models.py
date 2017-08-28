@@ -208,7 +208,7 @@ class OptionsSumki(models.Model):
     dop_des = models.TextField(verbose_name='Доп. описание', default='')
 
 
-#ПРОЧИК МОДЕЛИ
+#ПРОЧИЕ МОДЕЛИ
 class MainOffer(models.Model):
     image = models.CharField(max_length=255, verbose_name='Ссылка на картинку')
     color = models.CharField(max_length=255, verbose_name='Цвет фона')

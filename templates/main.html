@@ -17,8 +17,8 @@
     <script type="text/javascript" src="{% static 'js/jquery.cookie.js' %}"></script>
     {% block new_js %}{% endblock %}
 </head>
-<body>
-    <div id="fon_wait"></div>
+<body {% if show_more_window %}class="stop-scrolling"{% endif %}>
+    <div id="fon_wait" {% if show_more_window %}style="display: block"{% endif %}>{% if show_more_window %}{% include 'more_inform_window.html' %}{% endif %}</div>
     <div id="fon_wait_2">
         <div class="cssload-box-loading">
         </div>

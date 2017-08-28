@@ -1,25 +1,61 @@
-<div id="more_information_window" data-item-element="">
+{% load staticfiles %}
+{% load filters %}
+<div id="more_information_window" data-item-element="{{ elem.id }}" data-item-name="{{ options_elem.type.name }}"
+     data-item-price="{% if elem.discount > 0 %}{{ elem.price|discount:elem.discount}}{% else %}{{ elem.price }}{% endif %}"
+     data-item-image="{% if images %}{% static 'sumki_online/images/' %}{{ category.alias }}/64_on_64/{{ elem.id }}.jpg{% endif %}"
+     data-item-category="{{ category.alias }}">
     <div id="more_information_close"><span class="glyphicon glyphicon-remove" title="закрыть"></span></div>
     <div id="more_information_image">
         <div style="overflow: hidden; width: 440px; height: 440px; position: relative">
             <ul id="main_image_el">
-
+            {% if images %}
+                <li data-index-ib="0">
+                        <img src="{% static 'sumki_online/images/' %}{{ category.alias }}/400_on_400/{{ elem.id }}.jpg" height="440" width="440">
+                </li>
+                {% if images|length != 0 %}
+                    {% for imag in images %}
+                        <li data-index-ib="{{ forloop.counter }}">
+                            <img src="{% static 'sumki_online/images/' %}{{ category.alias }}/400_on_400/{{ elem.id }}v{{ forloop.counter }}.jpg" height="440" width="440">
+                        </li>
+                    {% endfor %}
+                {% endif %}
+            {% endif %}
             </ul>
         </div>
         <ul id="other_image">
             <li id="other_image_item_window"></li>
-
+            {% if images %}
+                <li data-index-im="0" class="active_other_image other_image_item">
+                    <img src="{% static 'sumki_online/images/' %}{{ category.alias  }}/400_on_400/{{ elem.id }}.jpg" height="120" width="120">
+                </li>
+                {% if images|length != 0 %}
+                    {% for imag in images %}
+                        <li data-index-im="{{ forloop.counter }}" class="active_other_image other_image_item">
+                            <img src="{% static 'sumki_online/images/' %}{{ category.alias  }}/400_on_400/{{ elem.id }}v{{ forloop.counter }}.jpg" height="120" width="120">
+                        </li>
+                    {% endfor %}
+                {% endif %}
+            {% endif %}
         </ul>
     </div>
     <div id="more_information_description">
-        <div id="more_information_name"></div>
-        <div id="more_information_price"></div>
+        <div id="more_information_name">{{ options_elem.type.name }} / {{ options_elem.brend.name }}</div>
+        <div id="more_information_price">
+            {% if elem.discount > 0 %}
+                {{ elem.price|discount:elem.discount|price_format }}
+            {% else %}
+                {{ elem.price|price_format }}
+            {% endif %} руб.</div>
         <div style="height: 80px; margin-bottom: 14px">
-            <div id="more_information_sizes" style="display: none">
+            <div id="more_information_sizes" {% if category.alias != 'obuv' %} style="display: none"{% endif %}>
                 <form>
                     <label for="size_obuv_available">Выберите размер</label>
                     <select id="size_obuv_available" class="form-control" style="width: auto !important; margin-top: 20px">
-
+                        {% if store_elem %}
+                            {% for store_pos in store_elem %}
+                                <option>{{ store_pos.size.name }}</option>
+                            {% endfor %}
+                        {% endif %}
                     </select>
                 </form>
             </div>
@@ -30,7 +66,7 @@
         </div>
         <span style="display: inline-block; margin-top: 15px; font-weight: 700;">Описание товара</span>
         <div id="description_item_full">
-
+            {% if options_elem_render %}{{ options_elem_render }}{% endif %}
         </div>
     </div>
 </div>

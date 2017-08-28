@@ -36,7 +36,14 @@ $(function () {
         'amount':0,
         'items':[]
     };
+    var delivery_export = $("#delivery_export");//элемент способ доставки - доставка
+    var delivery_order = $("#delivery_order");//вкладка выбора способа доставки
+    var payment_method = $("#payment_method");//вкладка оплаты
+    var delivery_price = 0;
+    var delivery_price_default = 300;
+    var price_order_discount = 5000;
 
+    //третий шаг
     var next_step_payment = function (event) {
         order.delivery = false;
         var name = $("#id_name");
@@ -48,7 +55,7 @@ $(function () {
             if(phone.val().length != 17) $("#id_fon_number").parent(".form-group").addClass("has-error");
             return;
         }
-        if($("#delivery_export").is(':checked')){
+        if(korzina["delivery"]){
             var city = $("#id_city");
             var adress = $("#id_adress");
             if((city.val().length < 2) || (adress.val().length < 2)){
@@ -65,12 +72,14 @@ $(function () {
         order.fon_number = phone.val();
         order.fon_number = order.fon_number.replace(/[-() ]+/g,'');
         order.amount = korzina.summa;
-        if(korzina.delivery == "delivery_export") order.amount += 300;
+        if(order.delivery && order.amount < price_order_discount) order.amount += delivery_price;
 
+        //формируем итоговый лист заказа
         $("#order_final_items p").remove();
         $.each(korzina.products, function (index, value) {
             $("#order_final_items").append("<span>"+value.name+" "+value.number+" шт.</span><br>");
         });
+
         $("#order_final_summ span").text(order.amount+" руб.");
         $("#order_final_fio span").text(order.surname+" "+order.name);
 
@@ -80,10 +89,20 @@ $(function () {
             $("#order_final_dil span").text(order.city+", "+order.adress);
         }
 
-        $("#order_final_fon span").text(order.fon_number);
+        $("#order_final_fon span").text(phone.val());
 
 
         var items = [];
+        if(order.delivery){
+            items.push({
+                 "quantity": 1,
+                 "price": {
+                    "amount": delivery_price
+                 },
+                 "tax": 1,
+                 "text": 'Доставка товара'
+             });
+        }
         $.each(korzina.products, function (index, value) {
              items.push({
                  "quantity": value.number,
@@ -105,7 +124,6 @@ $(function () {
         var csrftoken = $.cookie('csrftoken');
         order.items = korzina['products'];
         var data_json = JSON.stringify(order);
-        console.log(order);
         $.ajaxSetup({
             beforeSend: function(xhr, settings) {
                 if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
@@ -119,50 +137,58 @@ $(function () {
 
         $.post("/order/ready/",{"order":data_json}).done(function (data_json) {
                 var data_responce= $.parseJSON(data_json);
-                $("#payment_method").append(data_responce['payform']);
+                payment_method.append(data_responce['payform']);
                 $("#ym_merchant_receipt").val(JSON.stringify(ym_merchant_receipt));
                 $("#summa_k_oplate_right").hide();
                 fon_2.hide();
         });
 
         event.preventDefault();
-        $("#delivery_order").hide();
-        $("#payment_method").fadeIn();
+        delivery_order.hide();
+        payment_method.fadeIn();
         $("#delivery_order_btn").removeClass("active_step");
         $("#payment_method_btn").addClass("active_step");
     };
-    //изменил способ доставки
+
+    //измение способа доставки
     var change_method_delivery = function (event) {
         event.stopPropagation();
-        var choice = $(this).val();
-        korzina["delivery"] = choice;
+        korzina["delivery"] = ($(this).val()=="delivery_export")?true:false;
         save_korzina();
-        if(choice=="independent_export"){
+
+        //если выбран самовывоз
+        if(!korzina["delivery"]){
             $("#independent_export_el").fadeIn();
             $("#delivery_export_el, #delivery_order .hide_field").hide();
             $("#price_for_delivery, #summa_k_oplate_with_delivery, #summa_k_oplate2").hide();
             $("#summa_k_oplate").fadeIn();
         }
-        if(choice=="delivery_export"){
+        //если выбрана доставка
+        if(korzina["delivery"]){
+            if (korzina.summa < price_order_discount) delivery_price = delivery_price_default;
             $("#delivery_export_el,#delivery_order .hide_field").fadeIn();
             $("#independent_export_el").hide();
+            $("#price_for_delivery span").text(delivery_price);
             $("#price_for_delivery, #summa_k_oplate_with_delivery, #summa_k_oplate2").fadeIn();
             $("#summa_k_oplate").hide();
             $("#summa_k_oplate2").text(format_price(korzina['summa'])+" руб.  (покупка)");
-            $("#summa_k_oplate_with_delivery span").text(format_price((korzina['summa']+300))+" руб.");
+            $("#summa_k_oplate_with_delivery span").text(format_price((korzina['summa']+delivery_price))+" руб.");
         }
     };
 
+    //появление второй вкладки
     var checkout = function () {
         if(typeof korzina["delivery"] != 'undefined'){
-            if(korzina["delivery"]=="delivery_export"){
+            if(korzina["delivery"]){
+                if (korzina.summa < price_order_discount) delivery_price = delivery_price_default;
                 $("#delivery_export_el,#delivery_order .hide_field").fadeIn();
                 $("#independent_export_el").hide();
-                $("#delivery_export").attr("checked", true);
+                delivery_export.attr("checked", true);
                 $("#price_for_delivery, #summa_k_oplate_with_delivery, #summa_k_oplate2").fadeIn();
+                $("#price_for_delivery span").text(delivery_price);
                 $("#summa_k_oplate").hide();
                 $("#summa_k_oplate2").text(format_price(korzina['summa'])+" руб. (покупка)");
-                $("#summa_k_oplate_with_delivery span").text(format_price((korzina['summa']+300))+" руб.");
+                $("#summa_k_oplate_with_delivery span").text(format_price((korzina['summa']+delivery_price))+" руб.");
             }
             else{
                 $("#summa_k_oplate").fadeIn();
@@ -171,11 +197,12 @@ $(function () {
         }
         $(this).hide();
         $("#build_order").hide();
-        $("#delivery_order").fadeIn();
+        delivery_order.fadeIn();
         $("#order_elements").removeClass("active_step");
         $("#delivery_order_btn").addClass("active_step");
     };
 
+    //изменить количество  товара
     var change_number = function () {
         var summa;
         var el = $(this).closest("li");
@@ -209,7 +236,7 @@ $(function () {
             var image_val = value['image'].replace("64_on_64", "100_on_100");
             var dop_field = "";
             if(value['size']) dop_field = "<br><span style='color: #aaa; font-size: 12px'>"+value['size']+" размер</span>";
-            var el = "<li id='"+value['id']+"'>" +
+            var el = "<li id='"+value['id']+"' class='item_in_mini_korz' data-item-category='"+value['category']+"' data-item-id='"+value['id']+"'>" +
                 "<div class='row item_in_order'>" +
                     "<div class='col-md-6 block_name_item'>" +
                         "<div class='img_item'>" +
@@ -249,7 +276,7 @@ $(function () {
     //main
     fill_korzina_full();
     $(".next_step_payment").on("click", next_step_payment);
-    $("#delivery_order").on("click",".delivery_method",change_method_delivery);
+    delivery_order.on("click",".delivery_method",change_method_delivery);
     $("#checkout").on("click", checkout);
     $(".order_delete_item").on("click", delete_order_item);
     $(".number_item").on("change", change_number);

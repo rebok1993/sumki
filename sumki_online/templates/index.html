@@ -40,54 +40,67 @@
         <span id="btn_left" class="glyphicon glyphicon-chevron-left"></span>
         <span id="btn_right" class="glyphicon glyphicon-chevron-right"></span>
     </div>
-    <div class="main_content container-fluid" style="width: 93%; margin: auto">
-    <div class="row">
-    <div class="col-md-12">
-        <div class="content_items" style="margin-top: 20px">
-            <div class="switcher_type_tovar row">
-                <span>СПЕЦИАЛЬНЫЕ ПРЕДЛОЖЕНИЯ</span>
-            </div>
-            <div id="skidki_group">
-                <div class="row block_items">
-                    {% include 'more_inform_window.html' %}
-                    {% for item in items_disc %}
-                        {% include 'item_elem.html' %}
-                    {% endfor %}
-                </div>
-            </div>
-            <div style="text-align: center; margin: 50px 0;">
-                <div style="display: inline-block; width: 32%; border: 1px solid #ccc; border-radius: 7px; overflow: hidden">
-                    <img width="100%" src="/static_media/images/special_offer/second_line/first.jpg">
-                </div>
-                <div style="display: inline-block; width: 32%;margin: 0 1%;border: 1px solid #ccc; border-radius: 7px; overflow: hidden">
-                    <img width="100%" src="/static_media/images/special_offer/second_line/second.jpg">
-                </div>
-                <div style="display: inline-block; width: 32%;border: 1px solid #ccc; border-radius: 7px; overflow: hidden">
-                    <img width="100%" src="/static_media/images/special_offer/second_line/second.jpg">
-                </div>
-            </div>
-            <div class="switcher_type_tovar row">
-                <span>ХИТЫ ПРОДАЖ</span>
-            </div>
-            <div id="now_buy_group">
-                <div class="row block_items">
-                    {% for item in items_hits %}
-                        {% include 'item_elem.html' %}
-                    {% endfor %}
-                </div>
-            </div>
-            <div class="switcher_type_tovar row">
-                <span>НОВЫЕ ПОСТУПЛЕНИЯ</span>
-            </div>
-            <div id="new_offer_group">
-                <div class="row block_items">
-                    {% for item in items_new_offer %}
-                        {% include 'item_elem.html' %}
-                    {% endfor %}
+    <div class="main_content container" style="width: 1206px; margin: auto">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="content_items" style="margin-top: 20px">
+                    <div class="switcher_type_tovar row">
+                        <span>СПЕЦИАЛЬНЫЕ ПРЕДЛОЖЕНИЯ</span>
+                    </div>
+                    <div id="skidki_group">
+                        <div class="row block_items">
+                            {% comment %}{% include 'more_inform_window.html' %}{% endcomment %}
+                            {% for item in items_disc %}
+                                {% include 'item_elem.html' %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div style="text-align: center; margin: 50px 0;">
+                        <div class="second_line_href" style="margin-right: 2%">
+                           <a href="/catalog/obuv/?special_obuv=disc&options=1"><div class="second_line_href_inner">ПОСМОТРЕТЬ ВСЕ <span style="font-weight: bold">СПЕЦПРЕДЛОЖЕНИЯ<br> НА ОБУВЬ</span></div></a>
+                        </div>
+                        <div class="second_line_href">
+                            <a href="/catalog/sumki/?special_sumki=disc&options=1"><div class="second_line_href_inner">ПОСМОТРЕТЬ ВСЕ <span style="font-weight: bold">СПЕЦПРЕДЛОЖЕНИЯ<br> НА СУМКИ</span></div></a>
+                        </div>
+                    </div>
+                    <div class="switcher_type_tovar row">
+                        <span>ХИТЫ ПРОДАЖ</span>
+                    </div>
+                    <div id="now_buy_group">
+                        <div class="row block_items">
+                            {% for item in items_hits %}
+                                {% include 'item_elem.html' %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div style="text-align: center; margin: 50px 0;">
+                        <div class="second_line_href" style="margin-right: 2%">
+                            <a href="/catalog/obuv/?special_obuv=hit&options=1"><div class="second_line_href_inner">ПОСМОТРЕТЬ ТОП-10 <span style="font-weight: bold">САМОЙ ПОКУПАЕМОЙ<br> ОБУВИ</span></div></a>
+                        </div>
+                        <div class="second_line_href">
+                            <a href="/catalog/sumki/?special_sumki=hit&options=1"><div class="second_line_href_inner">ПОСМОТРЕТЬ ТОП-10 <span style="font-weight: bold">САМЫХ ПОКУПАЕМЫХ<br> СУМОК</span></div></a>
+                        </div>
+                    </div>
+                    <div class="switcher_type_tovar row">
+                        <span>НОВЫЕ ПОСТУПЛЕНИЯ</span>
+                    </div>
+                    <div id="new_offer_group">
+                        <div class="row block_items">
+                            {% for item in items_new_offer %}
+                                {% include 'item_elem.html' %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div style="text-align: center; margin: 50px 0;">
+                        <div class="second_line_href" style="margin-right: 2%">
+                            <a href="/catalog/obuv/?special_obuv=new&options=1"><div class="second_line_href_inner">ПОСМОТРЕТЬ ВСЕ <span style="font-weight: bold">НОВЫЕ ПОСТУПЛЕНИЯ<br> ОБУВИ</span></div></a>
+                        </div>
+                        <div class="second_line_href">
+                            <a href="/catalog/sumki/?special_sumki=new&options=1"><div class="second_line_href_inner">ПОСМОТРЕТЬ ВСЕ <span style="font-weight: bold">НОВЫЕ ПОСТУПЛЕНИЯ<br> СУМОК</span></div></a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    </div>
     </div>
 {% endblock %}

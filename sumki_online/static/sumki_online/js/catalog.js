@@ -1,11 +1,80 @@
-$(function () {
-    var choise = {};
-    var options = {};
-    var category = $("#category_cat").text();
-    var sort = {
-        'type_sort':'popular',
+var sort = {
+        'type_sort':'popular_sorting',
         'way_sort':'desc'
     };
+var options = {};
+
+function all_parametr() {
+    var choise = {};
+    $(".option_items").each(function (index,value) {
+        var options = $(value).find(".option_active");
+        if(options.length){
+            if(typeof choise.options == 'undefined'){
+                choise.options = 1;
+            }
+            var opt_active = '';
+            var name_opt = $(value).attr("id");
+            options.each(function (index, value) {
+                if(index>0) opt_active+=',';
+                opt_active+=$(value).data("optionId");
+            });
+            choise[name_opt] = opt_active;
+        }
+    });
+    choise.type_sort = sort.type_sort;
+    choise.way_sort = sort.way_sort;
+    return choise;
+}
+function update_item(data) {
+    //обновляем панель пагинации
+    $(".pagination_el").each(function (index,value) {
+        $(value).children(".pagination").remove();
+        $(value).prepend(data.paginator);
+    });
+    //обновляем список товаров
+    var items_block = $(".block_items:eq(0)");
+    items_block.find(".item").remove();
+    items_block.prepend(data.items);
+
+    //обновляем панель фильтрации
+    $.each(options, function (index, value) {
+        var name_opt = index;
+
+        $.each(value, function (index, value) {
+            var el = $("#"+name_opt).find('#'+name_opt+'_'+index+'_option');
+            if((data.options[name_opt][index]['number'] == undefined) || (parseInt(data.options[name_opt][index]['number']) == 0)){
+                el.next('span').text("");
+                el.addClass('null_number');
+            }
+            else{
+                el.removeClass('null_number');
+                el.next('span').text("("+data.options[name_opt][index]['number']+")");
+                el.css("color","").unbind();
+            }
+            var parent_el = el.parent('.option_item');
+            if(typeof(data.options[name_opt][index]['selected']) != 'undefined' && data.options[name_opt][index]['selected'] !== null){
+                if(!parent_el.hasClass('option_image_in'))
+                    parent_el.toggleClass("option_image_out option_image_in");
+                if(!el.hasClass('option_active'))
+                    el.toggleClass("option_not_active option_active");
+            }
+            else{
+                if(!parent_el.hasClass('option_image_out'))
+                    parent_el.toggleClass("option_image_out option_image_in");
+                if(!el.hasClass('option_not_active'))
+                    el.toggleClass("option_not_active option_active");
+            }
+        });
+    });
+    fon_2.hide();
+}
+
+function sort_el_get(data) {
+    $("."+data['sort']).prop('selected', true);
+}
+
+$(function () {
+    var category = $("#category_cat").text();
 
     //заполняем список опций
     var fill_options = function () {
@@ -19,89 +88,14 @@ $(function () {
         });
     };
 
-    //сохраняем выбранные опции
-    var save_choise = function () {
-        var a = [23,24];
-        $.cookie('choise', JSON.stringify(choise), {path: '/'});
-        $.cookie('age', JSON.stringify(a), {path: '/'});
-        /*console.log(a);
-        console.log(JSON.stringify(a));*/
-    };
-
-    //добавляем выбранную опцию
-    var add_choise = function () {
-        /*all_parametr();*/
-        save_choise();
-    };
-
-    var get_choise = function () {
-        var json;
-        json = $.cookie('choise');
-        if(!json)
-            json = '{}';
-        choise = $.parseJSON(json);
-    };
-
-    var all_parametr = function () {
-        var choise = {};
-        $(".option_items").each(function (index,value) {
-            var opt_active = {};
-            var name_opt = $(value).attr("id");
-            $(value).find(".option_item_value").each(function (index, value) {
-                var el = $(value);
-                if(el.hasClass("option_active"))
-                    opt_active[el.data("optionId")]=el.text();
-            });
-            choise[name_opt] = opt_active;
-        });
-        return choise;
-    };
-
-    var update_item = function (data) {
-        //обновляем панель пагинации
-        $(".pagination_el").each(function (index,value) {
-            $(value).children(".pagination").remove();
-            $(value).prepend(data.paginator);
-        });
-        //обновляем список товаров
-        var items_block = $(".block_items:eq(0)");
-        items_block.find(".item").remove();
-        items_block.prepend(data.items);
-
-        //обновляем панель фильтрации
-        add_choise();
-
-        $.each(options, function (index, value) {
-            var name_opt = index;
-
-            $.each(value, function (index, value) {
-                var el = $("#"+name_opt).find('#'+name_opt+'_'+index+'_option');
-                if((data.options[name_opt][index]['number'] == undefined) || (parseInt(data.options[name_opt][index]['number']) == 0)){
-                    el.next('span').text("");
-                    el.css("color","#ccc").hover(function () {
-                        $(this).css("color", "#999");
-                    },function () {
-                        $(this).css("color", "#ccc");
-                    });
-                }
-                else{
-                    el.next('span').text("("+data.options[name_opt][index]['number']+")");
-                    el.css("color","").unbind();
-                }
-            });
-        });
-        fon_2.hide();
-    };
-
     //переключаем страницу товаров
     var change_page = function (event) {
         event.preventDefault();
         fon_2.show();
         window.scrollTo(0,160);
-        var obj = JSON.stringify(all_parametr());
+        var obj = all_parametr();
         var href  = $(this).attr("href");
-        var obj_sort = JSON.stringify(sort);
-        $.get(href,{"options":obj,"sort":obj_sort}).done(function (data_json) {
+        $.get(href,obj).done(function (data_json) {
             var data = $.parseJSON(data_json);
             update_item(data);
         });
@@ -112,58 +106,37 @@ $(function () {
         fon_2.show();
         $(this).toggleClass("option_image_out option_image_in");
         $(this).find(".option_item_value").toggleClass("option_not_active option_active");
-        var obj = JSON.stringify(all_parametr());
-        var obj_sort = JSON.stringify(sort);
-        $.get("/catalog/"+category+"/",{"options":obj, "sort":obj_sort}).done(function (data_json) {
+
+        var obj = all_parametr();
+        $.get("/catalog/"+category+"/",obj).done(function (data_json) {
             var data = $.parseJSON(data_json);
+            if((window.location.pathname+window.location.search) != data['url_path']){
+                window.history.pushState(null, '', data['url_path']);
+            }
+            update_item(data);
+        });
+        return false;
+    };
+
+    var sort_el = function () {
+        fon_2.show();
+        var el = $(this);
+        var opt = el.find("option:selected");
+        el.val();
+        sort['type_sort'] = el.val();
+        sort['way_sort'] = opt.hasClass("desc") ? 'desc' : 'asc';
+        var obj = all_parametr();
+        $.get("/catalog/"+category+"/",obj).done(function (data_json) {
+            var data = $.parseJSON(data_json);
+            if((window.location.pathname+window.location.search) != data['url_path']){
+                window.history.pushState(null, '', data['url_path']);
+            }
             update_item(data);
         });
     };
 
-    $("#sorting_switcher").on("click",".inactive", function () {
-        fon_2.show();
-        var el = $(this);
-
-        sort['type_sort'] = $(this).hasClass("popular_sorting")? "popular" : "price";
-        sort['way_sort'] = el.hasClass("desc") ? 'desc' : 'asc';
-
-        var obj_sort = JSON.stringify(sort);
-        var obj = JSON.stringify(all_parametr());
-        $.get("/catalog/"+category+"/",{"options":obj,"sort":obj_sort}).done(function (data_json) {
-            var data = $.parseJSON(data_json);
-            update_item(data);
-        });
-
-        el.closest("#sorting_switcher").find(".active").removeClass("active").addClass("inactive");
-        el.removeClass("inactive").addClass("active");
-    });
-    $("#sorting_switcher").on("click",".active", function () {
-        fon_2.show();
-        var el = $(this);
-
-        sort['type_sort'] = $(this).hasClass("popular_sorting")? "popular" : "price";
-        if (el.hasClass("desc")){
-            sort['way_sort'] = 'asc';
-            el.removeClass("desc");
-            el.find(".glyphicon-arrow-down").removeClass("glyphicon-arrow-down").addClass("glyphicon-arrow-up");
-            el.addClass("asc");
-        }
-        else {
-            sort['way_sort'] = 'desc';
-            el.removeClass("asc");
-            el.find(".glyphicon-arrow-up").removeClass("glyphicon-arrow-up").addClass("glyphicon-arrow-down");
-            el.addClass("desc")
-        }
-        var obj_sort = JSON.stringify(sort);
-        var obj = JSON.stringify(all_parametr());
-        $.get("/catalog/"+category+"/",{"options":obj,"sort":obj_sort}).done(function (data_json) {
-            var data = $.parseJSON(data_json);
-            update_item(data);
-        });
-    });
-
-
     fill_options();
     $(".content_items").on("click",".href_active",change_page);
     $(".left_side_bar").on("click", ".option_item", change_parametr);
+    $("#sorting").on("change","#select_sort_type", sort_el);
 });

@@ -33,12 +33,6 @@
     height: 60px;
     text-align: center;
     display: block;
-    border-bottom:5px solid transparent;
-    transition: all .15s ease-in-out;
-}
-#sorting_switcher li a:hover{
-    border-bottom:5px solid #337AB7;
-    height: 55px;
 }
 #sorting_switcher li{
     display: table-cell;
@@ -46,7 +40,6 @@
 }
 #sorting{
     padding-top: 10px;
-    font-weight: bold;
 }
 #sorting>span{
     display: inline-block;
@@ -89,4 +82,10 @@
 .option_image_in{
     background: url('../images/other/select_in.png') left center no-repeat;
     background-size: 18px 16px;
+}
+.null_number{
+    color: #ccc;
+}
+.null_number:hover{
+    color: #999;
 }

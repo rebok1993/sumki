@@ -32,7 +32,6 @@ $(function () {
     };
 
     var select_slide_auto = function (step) {
-        console.log("121");
         step = step || false;
         if(step==1 || !step){
             index_slide++;
