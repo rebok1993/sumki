@@ -45,7 +45,7 @@ def home(request):
     for cat in categories:
         category[cat['id']] = cat
     #товары со скидками
-    items_disc = Item.objects.filter(discount__gt=0).order_by("?")[:4].values()
+    items_disc = Item.objects.filter(discount__gt=0, number__gt=0).order_by("?")[:4].values()
     for itemm in items_disc:
         for option in options_sumki:
             if option.item_id == itemm['id']:
@@ -59,7 +59,7 @@ def home(request):
     #новые товары
     #items_new_offer = Item.objects.exclude(id__in=[value['id'] for value in items_disc]).order_by("-data")[:4].values()
     items_new_offer = Item.objects.filter(
-        new_item=True).exclude(id__in=[value['id'] for value in items_disc]).order_by("?")[:4].values()
+        new_item=True, number__gt=0).exclude(id__in=[value['id'] for value in items_disc]).order_by("?")[:4].values()
 
     for itemm in items_new_offer:
         for option in options_sumki:
@@ -79,7 +79,7 @@ def home(request):
         id__in=[value['id'] for value in items_new_offer]).order_by(
         "-numberviews__number")[:4].values()'''
     items_hits = Item.objects.filter(
-        hit_sales=True).exclude(
+        hit_sales=True, number__gt=0).exclude(
         id__in=[value['id'] for value in items_disc]).exclude(
         id__in=[value['id'] for value in items_new_offer]).order_by("?")[:4].values()
     for itemm in items_hits:
