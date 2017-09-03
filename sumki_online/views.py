@@ -209,16 +209,20 @@ def checkout(request):
                                 )
                                 order_size.save()
                         #уменьшаем количество оставшегося размера
+                        '''
                         store_obuv = StoreObuv.objects.get(item=el, size=size_id)
                         store_obuv.number -= int(itemm['number'])
                         if store_obuv.number<0:
                             store_obuv.number = 0
                         store_obuv.save()
+                        '''
                     #уменьшаем количество оставшегося товара
+                    '''
                     el.number -= int(itemm['number'])
                     if el.number < 0:
                         el.number = 0
                     el.save()
+                    '''
 
                 except ObjectDoesNotExist:
                     json_str['result'] = False
@@ -283,18 +287,21 @@ def order_ready(request):
                                     size=size_id
                                 )
                                 order_size.save()
+                        '''
                         # уменьшаем количество оставшегося размера
                         store_obuv = StoreObuv.objects.get(item=el, size=size_id)
                         store_obuv.number -= int(itemm['number'])
                         if store_obuv.number < 0:
                             store_obuv.number = 0
                         store_obuv.save()
+                        '''
+                    '''
                     # уменьшаем количество оставшегося товара
                     el.number -= int(itemm['number'])
                     if el.number < 0:
                         el.number = 0
                     el.save()
-
+                    '''
                 except ObjectDoesNotExist:
                     json_str['result'] = False
                     return HttpResponse(json.dumps(json_str))
@@ -500,7 +507,7 @@ def catalog_obuv(request, alias):
         brends_selected = types_selected = sizes_selected = special_selected = []
         option_query = {
             'category':category,
-            'storeobuv__number__gt':0,
+            'number__gt':0,
         }
 
         # если установлены фильтры
