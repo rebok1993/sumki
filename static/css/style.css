@@ -79,10 +79,27 @@ a{
     right: 3%;
     z-index: 10;*/
 }
+.header_inform_row_menu{
+    cursor: pointer;
+    padding: 5px 10px;
+    border-bottom: 3px solid transparent;
+}
+.header_inform_row_menu a{
+    color: inherit;
+}
+.header_inform_row_menu:hover{
+    border-bottom: 3px solid #cc6a3b;
+    transition: all .45s ease-in-out;
+}
+.menu_inner_active{
+    border-bottom: 3px solid #cc6a3b;
+}
 .wrapper .header .header_main_area{
     height: 100px;
     text-align: center;
-    background-color: #232F3E66;
+    /*border-top: 1px solid #cc6a3b;
+    border-bottom: 1px solid #cc6a3b;*/
+    background-color: rgba(204,166,59,0.1);/*#A7ACB2*/
     padding-left: 100px;
     position: relative;
 }
@@ -167,7 +184,7 @@ a{
     /*background: #b44444;*/
 }
 #korzina_block .korzina_inactive{
-    background:url("../images/korzina_white.png") no-repeat center transparent;
+    background:url("../images/korzina_black.png") no-repeat center transparent;
     background-size: 100%;
 }
 #korzina_block .korzina_active{
