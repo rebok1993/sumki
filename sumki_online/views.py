@@ -21,6 +21,9 @@ from yandex_money.models import Payment
 #from django.contrib.staticfiles.finders import
 import re
 import os
+import urllib.request
+
+
 #import random
 #import string
 
@@ -253,18 +256,18 @@ def order_ready(request):
             payment = Payment(order_amount=round(float((data['amount'])),2), payment_type='')
             payment.save()
             payform = PaymentForm(instance=payment)
-            adress = form.cleaned_data['city'] + " " + form.cleaned_data['adress']
+            adress = form.cleaned_data['adress']
 
             order_par = Order_params(
                 name=form.cleaned_data['name'],
                 surname=form.cleaned_data['surname'],
                 adress=adress,
+                delivery=data['delivery_type'],
                 amount=data['amount'],
                 payment=payment,
                 data=datetime.today()
             )
             order_par.save()  # создали номер заказа
-
             # добавляем товары в заказ
             for itemm in data['items']:
                 try:
@@ -316,14 +319,29 @@ def order_ready(request):
 
     return HttpResponse(json.dumps(json_str))
 
+def sort_by_name(inputStr):
+    return inputStr['Name']
+
 
 def order(request):
+    responce_city = urllib.request.urlopen('http://api.boxberry.de/json.php?token=34248.rnpqcaeb&method=ListCitiesFull')
+    list_city = json.loads(responce_city.read().decode('utf8'))
+    res_citys = []
+    for city_el in list_city:
+        res = (city_el['Code'], city_el['Name']+' '+city_el['Prefix']+'.')
+        res_citys.append(res)
     form = OrderForm()
-
+    list_city.sort(key=sort_by_name)
     context = {
         "form":form,
+        "list_city":list_city
     }
     return HttpResponse(render_to_string('order.html',context))
+
+def order_get_list_point(request, code):
+    responce_points = urllib.request.urlopen('http://api.boxberry.de/json.php?token=34248.rnpqcaeb&method=ListPoints&prepaid=1&CityCode='+code)
+    list_points = responce_points.read().decode('utf8')
+    return HttpResponse(list_points)
 
 def order_success(request):
     context = {

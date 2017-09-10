@@ -17,6 +17,7 @@ urlpatterns = [
     url(r'^checkout/$', views.checkout, name='checkout'),
     url(r'payment-form/$', OrderPage.as_view(), name='payment_form'),
     url(r'^addNumberViews/(?P<elem>[^/]+)/$', views.add_number_views),
+    url(r'^getpoint/(?P<code>[^/]+)/$', views.order_get_list_point),
     #url(r'^(?  P<alias>[^/]+)', views.get_category, name='category'),
     # ex: /polls/5/
     #url(r'^(?P<question_id>[0-9]+)/$', views.detail, name='detail'),

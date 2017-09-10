@@ -293,8 +293,10 @@ $(function () {
             $('body').removeClass('stop-scrolling');
         }
         if(back_step === undefined){
+            console.log("back_step");
             var str = window.location.href;
             var res = str.replace(/&item=\d+/g,'');
+            res = res.replace(/\?item=\d+/g,'');
             window.history.pushState(null, '', res);
         }
     };

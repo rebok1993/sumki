@@ -229,11 +229,6 @@ class NumberViews(models.Model):
 
 # ВСЁ ПО ЗАКАЗАМ
 class OrderForm(forms.Form):
-    citis = (
-        ("Нижний Новгород", "Нижний Новгород"),
-        ("Москва", "Москва"),
-        ("Екатеринбург", "Екатеринбург")
-    )
     name = forms.CharField(
         max_length=100, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Введите имя'}))
     surname = forms.CharField(
@@ -241,16 +236,20 @@ class OrderForm(forms.Form):
     fon_number = forms.CharField(
         max_length=100,
         widget=forms.TextInput(attrs={'class': 'form-control bfh-phone', 'placeholder': 'Введите номер телефона', 'data-format': '+7 (ddd) ddd-dddd'}))
+    '''
     city = forms.CharField(
         max_length=200,
         widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Введите населённый пункт'}))
     '''
-    city = forms.ChoiceField(
-        widget=forms.Select(attrs={'class': 'form-control', 'placeholder': 'Выберите город доставки'}), choices=citis)
-    '''
+
+    city = forms.CharField(
+        max_length=200,
+        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Выберите город доставки'}))
+
     adress = forms.CharField(
         max_length=200,
         widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Введите улицу, дом, квартиру'}))
+
 
 
 # данные о покупателе товара и месте доставки(тут ID заказа)
@@ -258,6 +257,7 @@ class Order_params(models.Model):
     name = models.CharField(max_length=255, verbose_name='Имя покупателя')
     surname = models.CharField(max_length=255, verbose_name='Фамилия покупателя')
     adress = models.CharField(max_length=255, verbose_name='Адрес доставки', default='Самовывоз')
+    delivery = models.CharField(max_length=255, verbose_name='Вариант получения товара', default='Самовывоз')
     data = models.DateTimeField(auto_now=True)
     sent = models.BooleanField(default=False, verbose_name='Отправлено')
     received = models.BooleanField(default=False, verbose_name='Получено')

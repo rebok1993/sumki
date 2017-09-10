@@ -28,7 +28,7 @@
                         <div id="korzina_blank">На данный момент корзина пуста</div>
                     </div>
                     <div id="delivery_order">
-                        <h3>Способ доставки:</h3>
+                        <h3>Способ получения товара:</h3>
                         <label class="radio-inline">
                             <input class="delivery_method" type="radio" name="export" id="independent_export" value="independent_export" checked> Самовывоз
                         </label>
@@ -67,9 +67,26 @@
                                 <div class="form-group hide_field">
                                     {{ form.city.errors }}
                                     <label for="id_city">Адресс доставки</label>
-                                    {{ form.city }}
+                                    {% comment %}{{ form.city }}{% endcomment %}
+                                    <select class="form-control" placeholder="Выберите город доставки" id="id_city" required>
+                                        <option selected value="first_val" disabled>Выберите город доставки</option>
+                                        {% for city in list_city %}
+                                            <option value="{{ city.Code }}" data-courier-delivery="{{ city.CourierDelivery }}" data-pickup-point="{{ city.PickupPoint }}">{{ city.Name }} {{city.Prefix}}.</option>
+                                        {% endfor %}
+                                    </select>
                                 </div>
-                                <div class="form-group hide_field">
+                                <div class="form-group" id="delivery_way_block">
+                                    <h5 style="font-weight: bold">Выберите тип доставки из доступных:</h5>
+                                    <div id="delivery_way_block_inner">
+                                        <div class="delivery_way" id="delivery_way_courier" data-type-way="courier">Курьерская доставка до квартиры (дома)</div>
+                                        <hr>
+                                        <div id="delivery_way_pvz">
+                                            <div>Доставка до пункта самовывоза в Вашем городе:</div>
+                                            <div class="delivery_way" data-type-way="pvz"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group hide_field2">
                                     {{ form.adress.errors }}
                                     <label for="id_adress">Улица, дом, кв.</label>
                                     {{ form.adress }}

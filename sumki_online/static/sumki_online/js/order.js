@@ -31,6 +31,7 @@ $(function () {
         'surname':'',
         'fon_number':'',
         'delivery':false,
+        'delivery_type':'Самовывоз',
         'city':'Нижний Новгород',
         'adress':'Самовывоз',
         'amount':0,
@@ -43,7 +44,7 @@ $(function () {
     var delivery_price_default = 300;
     var price_order_discount = 5000;
 
-    //третий шаг
+    //третий шаг (проверка введённых покупателем данных)
     var next_step_payment = function (event) {
         order.delivery = false;
         var name = $("#id_name");
@@ -57,14 +58,30 @@ $(function () {
         }
         if(korzina["delivery"]){
             var city = $("#id_city");
-            var adress = $("#id_adress");
-            if((city.val().length < 2) || (adress.val().length < 2)){
-                if(city.val().length < 2) $("#id_city").parent(".form-group").addClass("has-error");
-                if(adress.val().length < 2) $("#id_adress").parent(".form-group").addClass("has-error");
+            order.city = $("#id_city option:selected").text();
+            var type_delivery = $('.active_delivery_way');
+            if(city.val()=='first_val'){
+                    city.parent(".form-group").addClass("has-error");
+                    return;
+            }
+            //тип доставки
+            if(type_delivery.data('typeWay') == 'courier'){
+                var adress = $("#id_adress");
+                if(adress.val().length < 2){
+                    adress.parent(".form-group").addClass("has-error");
+                    return;
+                }
+                order.adress = order.city+', '+adress.val();
+                order.delivery_type = 'Курьер';
+            }
+            else if(type_delivery.data('typeWay') == 'pvz'){
+                order.adress = type_delivery.text();
+                order.delivery_type = 'Пункт самовывоза'
+            }
+            else{
+                type_delivery.parent(".form-group").addClass("has-error");
                 return;
             }
-            order.city = city.val();
-            order.adress = adress.val();
             order.delivery = true;
         }
         order.name =name.val();
@@ -86,7 +103,7 @@ $(function () {
         if(!order.delivery){
             $("#order_final_dil span").text("Самовывоз");
         }else{
-            $("#order_final_dil span").text(order.city+", "+order.adress);
+            $("#order_final_dil span").text(order.adress+' ('+order.delivery_type+')');
         }
 
         $("#order_final_fon span").text(phone.val());
@@ -100,7 +117,7 @@ $(function () {
                     "amount": delivery_price
                  },
                  "tax": 1,
-                 "text": 'Доставка товара'
+                 "text": 'Доставка товара по адресу: '+order.adress
              });
         }
         $.each(korzina.products, function (index, value) {
@@ -236,10 +253,10 @@ $(function () {
             var image_val = value['image'].replace("64_on_64", "100_on_100");
             var dop_field = "";
             if(value['size']) dop_field = "<br><span style='color: #aaa; font-size: 12px'>"+value['size']+" размер</span>";
-            var el = "<li id='"+value['id']+"' class='item_in_mini_korz' data-item-category='"+value['category']+"' data-item-id='"+value['id']+"'>" +
+            var el = "<li id='"+value['id']+"' data-item-category='"+value['category']+"' data-item-id='"+value['id']+"'>" +
                 "<div class='row item_in_order'>" +
                     "<div class='col-md-6 block_name_item'>" +
-                        "<div class='img_item'>" +
+                        "<div class='img_item item_in_mini_korz' data-item-category='"+value['category']+"' data-item-id='"+value['id']+"'>" +
                         "<img src='"+image_val+"' width='100px' height='100px'>" +
                         "</div>" +
                         "<div class='name_item'>"+value['name']+dop_field+"</div>" +
@@ -260,9 +277,11 @@ $(function () {
     };
     //отправляем заказ
     var order_ready = function (event) {
+        console.log('1');
         clear_korzina();
         $("form[name='ShopForm']").submit();
         event.stopPropagation();
+        console.log('2');
     };
 
 
@@ -274,11 +293,56 @@ $(function () {
         set_k_oplate(count_summa());
     };
     //main
+
+    //изменили тип доставки
+    var delivery_way = function () {
+        $('.delivery_way.active_delivery_way').removeClass('active_delivery_way');
+        $(this).addClass('active_delivery_way');
+        if($(this).attr('id')=='delivery_way_courier')
+            $('.hide_field2').show();
+        else $('.hide_field2').hide();
+    };
+
+    var change_adress = function () {
+        $("#delivery_way_block").show();
+        $('.hide_field2').hide();
+        var option_sel = $("#id_city option:selected");
+        var hr_line = $('#delivery_way_block_inner hr');
+        var courier = option_sel.data('courierDelivery');
+        var pickup_point = option_sel.data('pickupPoint');
+        var delivery_way_pvz = $("#delivery_way_pvz");
+        var delivery_way_courier = $('#delivery_way_courier');
+        $('.delivery_way.active_delivery_way').removeClass('active_delivery_way');
+
+        courier && pickup_point ? hr_line.show() : hr_line.hide();
+        courier ? delivery_way_courier.show() : delivery_way_courier.hide();
+
+        if(pickup_point){
+            $("#delivery_way_pvz .delivery_way_other").remove();
+            var option_val = option_sel.val();
+            $.get("/getpoint/"+option_val).done(function (data_json) {
+                var data = $.parseJSON(data_json);
+                delivery_way_pvz.show();
+                delivery_way_pvz.find('.delivery_way').text(data[0]['Address']);
+                if(data.length > 1){
+                    var clone_el = delivery_way_pvz.find('.delivery_way').clone();
+                    clone_el.addClass('delivery_way_other');
+                    $.each(data, function (index, value) {
+                        delivery_way_pvz.append(clone_el.text(value['Address']));
+                    });
+                }
+            })
+        }
+        else delivery_way_pvz.hide();
+    };
+
     fill_korzina_full();
+    $("#id_city").on("change", change_adress);
     $(".next_step_payment").on("click", next_step_payment);
     delivery_order.on("click",".delivery_method",change_method_delivery);
     $("#checkout").on("click", checkout);
     $(".order_delete_item").on("click", delete_order_item);
     $(".number_item").on("change", change_number);
     $("#order_ready").on("click", order_ready);
+    $("#delivery_way_block").on('click', '.delivery_way', delivery_way);
 });
