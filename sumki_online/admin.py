@@ -117,7 +117,7 @@ class StoreObuvAdmin(admin.ModelAdmin):
     list_editable = ('number',)
 
 class OrderParamAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'surname', 'adress', 'delivery', 'data', 'sent', 'received')
+    list_display = ('id', 'name', 'surname', 'adress', 'data', 'sent', 'received')
     list_editable = ('sent','received')
 
 class OrderItemsAdmin(admin.ModelAdmin):
