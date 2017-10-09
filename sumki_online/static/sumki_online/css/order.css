@@ -23,12 +23,15 @@
     color: #337ab7;
 }
 #order_korzina .row{
-    height: 100px;
+    height: 150px;
 }
 #order_korzina .row div{
     height: 100%;
     text-align: center;
     padding: 0;
+}
+.description_el_order{
+    margin-top: 20px;
 }
 #order_korzina .block_number_item{
     position: relative;

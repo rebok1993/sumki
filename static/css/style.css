@@ -28,8 +28,9 @@
 
 .header_navbar .active_elem a{
     /*color: #aaa;*/
-    border-bottom:5px solid #cc6a3b; /*#337AB7*/
-    height: 60px;
+    /*border-bottom:5px solid #cc6a3b;*/ /*#337AB7*/
+    /*height: 60px;*/
+    opacity: .65;
 }
 .header_navbar li a{
     line-height: 60px;
@@ -42,10 +43,14 @@
     transition: all .15s ease-in-out;
 }
 .header_navbar li a:hover{
-    /*color: #aaa;*/
+    opacity: .65;
+}
+/*.header_navbar li a:hover{
+    !*color: #aaa;*!
     border-bottom:5px solid #cc6a3b;
     height: 60px;
-}
+}*/
+
 ul{
     list-style: none;
     padding-left: 0;
@@ -72,8 +77,12 @@ a{
     text-align: right;
 }
 #number_fon_top{
+    letter-spacing: 1px;
+    font-size: 16px;
     display: inline-block;
-    padding: 0 20px;
+    padding: 0 20px 0 38px;
+    background:url("../images/icons_phone_black.png") no-repeat center left transparent;
+    background-size: 27px 27px;
     /*position: absolute;
     top:50%;
     right: 3%;
@@ -126,6 +135,7 @@ a{
     background:url("../images/logo.png") no-repeat center transparent;
 }
 .title_footer{
+    display: inline-block;
     margin-top: 10px;
     font-size: 12px;
     color: #919191;
@@ -157,7 +167,7 @@ a{
 }
 .price_item{
     text-align: right;
-    font-size: 18px;
+    font-size: 18px !important;
     font-weight: bold;
     display: inline-block;
 }
@@ -223,6 +233,7 @@ a{
     padding: 10px;
     font-weight: bold;
     width: 10%;
+    margin-top: 10px;
 }
 #korzina_content .delete_item:hover{
     color: #337ab7;
@@ -337,8 +348,11 @@ a{
     position: relative;
     text-align: center;
     border: 1px solid transparent;
-    height: 340px;
     transition: all .15s ease-in-out;
+    padding-bottom: 20px;
+    display: inline-block;
+    width: 33%;
+    vertical-align: top;
 }
 .main_content .content_items .item:hover{
     /*z-index: 10;*/
@@ -487,10 +501,13 @@ a{
     position: absolute;
     top:0;
     left:0;
+    font-size: 0;
     overflow: hidden;
 }
 #main_image_el li{
+    font-size: 14px;
     display: inline-block;
+    vertical-align: top;
 }
 .other_image_item{
     text-align: center;
@@ -753,5 +770,146 @@ loader*/
     height: 100%;
     overflow: hidden;
 }
+
+/*лупа для сайта*/
+
+/*.magnify {
+	position: relative;
+	width: 450px;
+	height: 675px;
+}
+.magnify_glass {
+    border: 1px solid #000;
+	z-index: 100;
+	position: absolute;
+	overflow: hidden;
+    height: 338px;
+    width: 225px;
+}
+.element_to_magnify {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+}
+#elementBeingMagnified {
+
+}
+.magnified_element {
+
+}*/
+
+
+/*лупа для сайта*/
+
+* {margin: 0; padding: 0;}
+.magnify {
+    width: 400px;
+    margin: 50px auto;
+    position: relative;
+    cursor: none;
+}
+
+/*Lets create the magnifying glass*/
+.large {
+	height: 325px;
+    width: 250px;
+	position: absolute;
+    z-index: 2;
+	/*border-radius: 100%;*/
+
+	/*Multiple box shadows to achieve the glass effect*/
+	box-shadow: 0 0 0 7px rgba(255, 255, 255, 0.85),
+	0 0 7px 7px rgba(0, 0, 0, 0.25),
+	inset 0 0 40px 2px rgba(0, 0, 0, 0.25);
+
+	/*hide the glass by default*/
+	display: none;
+}
+
+/*To solve overlap bug at the edges during magnification*/
+.small {
+    display: block;
+}
+
+.zoom_image{
+    display: none;
+    width:500px;
+    height: 650px;
+    position: absolute;
+    top:0;
+    left:450px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    overflow: hidden;
+    z-index: 100;
+    box-shadow: 0px 6px 8px 2px rgba(0, 0, 0, 0.25);
+    /*transform-origin: top left;
+    transform: scale(2,2);*/
+}
+.zoom_image img{
+    position: absolute;
+    top:0;
+    left: 0;
+    transform-origin: top left;
+    transform: scale(2,2);
+}
+.wrapper_image{
+    display: inline-block;
+    width: 220px;
+    height: 329px;
+    background-size: cover;
+    transition: opacity .3s ease-out;
+    background: #eee url("data:image/png;base64,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") 50% no-repeat;
+}
+/*лупа для сайта*/
+
+.pagination > li > a{
+    border: none;
+}
+.pagination > .active > a, .pagination > .active > a:hover, .pagination > .active > a:focus{
+    color: inherit;
+    background-color: inherit;
+}
+.pagination{
+    width: auto !important;
+    vertical-align: middle;
+}
+.pagination > li:last-child > a{
+    border-radius: 4px !important;
+}
+.header_pag_el{
+    display: inline-block;
+    vertical-align: middle;
+}
+#time_work{
+    background:url("../images/icon_time.png") no-repeat center left transparent;
+    background-size: 35px 35px;
+}
+#adress_work{
+    background:url("../images/icons_adress.png") no-repeat center left transparent;
+    background-size: 35px 35px;
+}
+#phone_work{
+    background:url("../images/icon-phone.png") no-repeat center left transparent;
+    background-size: 35px 35px;
+}
+.icon_fotter{
+    padding: 7px 0 7px 45px;
+    display: inline-block;
+}
+#links_to_partners{
+    border-top:1px solid #ccc;
+    height: 20px;
+    margin-top: 10px;
+    padding: 10px 0;
+    font-size: 12px;
+    font-style: normal;
+}
+#links_to_partners a{
+    color: #fff;
+}
+
 /*
 loader*/

@@ -80,8 +80,11 @@ function delete_from_korzina(event, id_item) {
 //изменение изображения в окне товара
 function change_image(){
     var index = $(this).data("indexIm");
+    $("#main_image_el .small").removeClass('small');
+    $("#main_image_el li[data-index-ib = '"+index+"'] img").addClass('small');
     $("#main_image_el").css("left", "-"+index*440);
     $("#other_image_item_window").css("transform", "translate3d("+index*134+"px, 0px, 0px)");
+    new_image = true;
     /*$(".active_other_image").removeClass("active_other_image");
     $(this).addClass("active_other_image");*/
 }
@@ -107,9 +110,9 @@ $(function () {
         return "<li id='item_in_korzina_"+korzina_elem['id']+"' data-item-id='"+korzina_elem['id']+"' data-item-category='"+korzina_elem['category']+"' class='item_in_mini_korz'>" +
                      "<a class='item_in_korzina'>" +
                          "<div class='img_item'>" +
-                            "<img width='64' height='64' src='"+korzina_elem['image']+"'>" +
+                            "<img src='"+korzina_elem['image']+"'>" +
                          "</div>" +
-                         "<div style='margin-left: 70px'>" +
+                         "<div style='margin-left: 70px; margin-top: 20px'>" +
                             "<div style='overflow: hidden'>" +
                                 "<div class='name_item_in_korz'>"+korzina_elem['name']+dop_field+"</div>" +
                                 "<div class='number_in_korz'>"+korzina_elem['number']+" шт</div>" +
@@ -284,6 +287,7 @@ $(function () {
             window.history.pushState(null, '', data['url_path']);
         }
         $("#fon_wait").append(data['more_info_win']);
+        update_el();
     };
     //скрываем окно больше информации о товаре
     var hide_more_info = function (event, added_item, back_step) {
@@ -293,7 +297,6 @@ $(function () {
             $('body').removeClass('stop-scrolling');
         }
         if(back_step === undefined){
-            console.log("back_step");
             var str = window.location.href;
             var res = str.replace(/&item=\d+/g,'');
             res = res.replace(/\?item=\d+/g,'');
@@ -361,6 +364,7 @@ $(function () {
     $("body").on("click", "#next_order", function () {
        document.location.href="/order";
     });
+    //смена фотографии в доп. окне
     $("body").on("click", ".other_image_item", change_image);
     //для активации кнопок вперёд и назад
     $(window).on('popstate', step_back_or_forward);

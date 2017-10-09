@@ -12,8 +12,11 @@
     {% block new_css %}{% endblock %}
     <script type="text/javascript" src="{% static 'js/jquery-3.1.1.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/jquery.cookie.js' %}"></script>
+    <script src="{% static 'js/jquery.Magnify.js' %}"></script>
+    {% comment %}<script src="{% static 'js/jquery-ui.js' %}"></script>
+    <script src="{% static 'js/jquery.jfMagnify.js' %}"></script>{% endcomment %}
+    <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
     {% block new_js %}{% endblock %}
 </head>
 <body {% if show_more_window %}class="stop-scrolling"{% endif %}>
@@ -60,7 +63,7 @@
                         <span class="header_inform_row_menu {% block menu_about_tab %}{% endblock %}"><a href="/about">О нас</a></span>
                     </div>
                     <div class="col-md-6">
-                        <span id="number_fon_top">Тел. 8(910)-877-49-69</span>
+                        <span id="number_fon_top">8 (910)-877-49-69</span>
                     </div>
                 </div>
             </div>
@@ -116,15 +119,22 @@
         </div>
         <div class="footer row">
             <div class="contact_data col-md-8 col-md-offset-1">
-                <div class="title_footer">АДРЕС МАГАЗИНА:</div>
-                <div style="color: #fff">Нижний Новгород,<br>
-                ул.Карла Маркса, д.7<br>
-                    Режим работы с 10:00 до 20:00 ежедневно
+                <div style="color: #fff">
+                    <span class="icon_fotter" id="adress_work">
+                        <span class="title_footer">АДРЕС КОМПАНИИ:</span><br>
+                        Нижний Новгород, ул.Карла Маркса, д.7
+                    </span><br>
+                    <span class="icon_fotter" id="time_work">Режим работы: с 10:00 до 20:00 ежедневно</span>
                 </div>
             </div>
             <div class="contact_data col-md-2">
-                <div class="title_footer">ТЕЛЕФОН</div>
-                <div style="color: #fff">8(910)-877-49-69</div>
+                <span class="icon_fotter" id="phone_work">
+                    <span class="title_footer">ТЕЛЕФОН</span><br>
+                    <span style="color: #fff">8(910)-877-49-69</span>
+                </span>
+            </div>
+            <div id="links_to_partners" class="col-md-12">
+                <a href="https://ru.icons8.com">Набор иконок от Icons8</a>
             </div>
         </div>
     </div>

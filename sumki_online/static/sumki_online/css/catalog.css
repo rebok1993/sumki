@@ -68,6 +68,10 @@
 }
 .block_items{
     position: relative;
+    font-size: 0;
+}
+.block_items div{
+    font-size: 14px;
 }
 .option_item{
     padding:5px 0 5px 22px;

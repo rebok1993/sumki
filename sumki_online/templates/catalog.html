@@ -24,7 +24,7 @@
                 {% if options %}
                 {% for option in options %}
                     <div id="{{ option.name }}_{{ category.alias }}" class="option_items">
-                        <div class="name_header"><span class="glyphicon glyphicon-list"></span> {{ option.label }}</div>
+                        <div class="name_header">{% comment %}<span class="glyphicon glyphicon-list"></span>{% endcomment %} {{ option.label }}</div>
                         {% for key2, value2 in option.all.items %}
                             {% if value2.selected %}
                                 <div class="option_item option_image_in">
@@ -76,6 +76,7 @@
                     </ul>{% endcomment %}
                 </div>
                 <div class="pagination_el">
+                    <div class="header_pag_el">Страница:</div>
                     <ul class="pagination">{% comment %}
                         {% if items.has_previous %}
                             <li><a href="{% url 'sumki_online:catalog' 'obuv' %}?page={{ items.previous_page_number }}">&laquo;</a></li>
@@ -98,6 +99,7 @@
                     {% include 'items.html' %}
                 </div>
                 <div class="pagination_el">
+                    <div class="header_pag_el">Страница:</div>
                     <ul class="pagination">
                         {% comment %}{% if items.has_previous %}
                             <li><a href="{% url 'sumki_online:catalog' 'obuv' %}?page={{ items.previous_page_number }}">&laquo;</a></li>

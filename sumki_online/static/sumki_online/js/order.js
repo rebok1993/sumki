@@ -257,18 +257,18 @@ $(function () {
                 "<div class='row item_in_order'>" +
                     "<div class='col-md-6 block_name_item'>" +
                         "<div class='img_item item_in_mini_korz' data-item-category='"+value['category']+"' data-item-id='"+value['id']+"'>" +
-                        "<img src='"+image_val+"' width='100px' height='100px'>" +
+                        "<img src='"+image_val+"' width='100px'>" +
                         "</div>" +
-                        "<div class='name_item'>"+value['name']+dop_field+"</div>" +
+                        "<div class='name_item description_el_order'>"+value['name']+dop_field+"</div>" +
                     "</div>" +
-                    "<div class='col-md-2' style='font-weight: bold'><span>"+format_price(value['price'])+" руб.</span></div>" +
-                    "<div class='col-md-1 block_number_item'>" +
+                    "<div class='col-md-2 description_el_order' style='font-weight: bold'><span>"+format_price(value['price'])+" руб.</span></div>" +
+                    "<div class='col-md-1 block_number_item  description_el_order'>" +
                     "<form class='number_item'>" +
                         "<select class='form-control' style='width: auto !important;'>"+select+"</select>" +
                     "</form>" +
                     "</div>" +
-                    "<div class='col-md-2'><span class='order_item_summa'  style='font-weight: bold'>"+format_price(value['price']*value['number'])+" руб.</span></div>" +
-                    "<div class='col-md-1'><span class='order_delete_item'>x</span></div>" +
+                    "<div class='col-md-2 description_el_order'><span class='order_item_summa'  style='font-weight: bold'>"+format_price(value['price']*value['number'])+" руб.</span></div>" +
+                    "<div class='col-md-1 description_el_order'><span class='order_delete_item'>x</span></div>" +
                 "</div>" +
                 "</li>";
             $("#order_korzina").prepend(el);

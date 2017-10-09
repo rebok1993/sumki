@@ -432,8 +432,8 @@ def catalog_sumki(request, alias):
             items_list = Item.objects.filter(**option_query).order_by("-numberviews__number").distinct()
 
         #получаем информацию об обуви на складе
-        brends_all = BrendSumki.objects.filter(optionssumki__isnull=False).distinct().values()
-        types_all = TypeSumki.objects.filter(optionssumki__isnull=False).distinct().values()
+        brends_all = BrendSumki.objects.filter(optionssumki__item__number__gt=0).distinct().values()
+        types_all = TypeSumki.objects.filter(optionssumki__item__number__gt=0).distinct().values()
         special_all = {
             'hit': {'name': 'Хит продаж', 'number': 0},
             'disc': {'name': 'Товары со скидкой', 'number': 0},
@@ -567,9 +567,9 @@ def catalog_obuv(request, alias):
 
         #получаем информацию об обуви на складе
         stores = StoreObuv.objects.filter(item__in=items_list)
-        sizes_all = Size.objects.filter(storeobuv__isnull=False).distinct().values()
-        brends_all = BrendObuv.objects.filter(optionsobuv__isnull=False).distinct().values()
-        types_all = TypeObuv.objects.filter(optionsobuv__isnull=False).distinct().values()
+        sizes_all = Size.objects.filter(storeobuv__item__number__gt=0).distinct().values()
+        brends_all = BrendObuv.objects.filter(optionsobuv__item__number__gt=0).distinct().values()
+        types_all = TypeObuv.objects.filter(optionsobuv__item__number__gt=0).distinct().values()
         special_all = {
                            'hit':{'name':'Хит продаж', 'number':0},
                            'disc':{'name':'Товары со скидкой', 'number':0},

@@ -29,7 +29,7 @@ function update_item(data) {
     //обновляем панель пагинации
     $(".pagination_el").each(function (index,value) {
         $(value).children(".pagination").remove();
-        $(value).prepend(data.paginator);
+        $(value).append(data.paginator);
     });
     //обновляем список товаров
     var items_block = $(".block_items:eq(0)");
