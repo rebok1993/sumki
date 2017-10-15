@@ -674,7 +674,7 @@ def get_item(request,alias):
     context['options_elem'] = options_elem
     context['options_elem_render'] = render_to_string('options_elem.html', {'options':options_elem, 'category': alias})
     context['images'] = []
-    for i in range(1,4):
+    for i in range(1,6):
         path_var = STATIC_ROOT+"sumki_online/images/"+alias+"/400_on_400/"+str(elem_id)+"v"+str(i)+".jpg"
         if os.path.exists(path_var):
             context['images'].append("1")
