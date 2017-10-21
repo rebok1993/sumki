@@ -360,11 +360,12 @@ a{
     box-shadow: 0 10px 50px 0 rgba(30, 30, 30, 0.2);*/
 }
 .main_content .content_items .item_description{
-    text-align: left;
-    padding: 2px 0 2px 30px;
+    text-align: center;
+    padding: 2px 0 2px 0;
 }
 .item .name_item{
-    font-weight: 500;
+    font-weight: 400;
+    font-size: 16px;
 }
 .item .discount_item{
     text-decoration: line-through;

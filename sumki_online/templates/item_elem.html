@@ -4,17 +4,17 @@
 <div class="item more_information" id="{{ item.id }}" data-item-category="{{ item.category_alias }}">
     <a {% comment %}href="{% url 'sumki_online:item' item.category_alias item.id %}"{% endcomment %}>
         <div class="wrapper_image">
-            <img class="image_item" alt="{{ item.type }}" src="{% static 'sumki_online/images/' %}{{ item.category_alias }}/200_on_200/{{ item.id }}.jpg" width="220">
+            <img class="image_item" alt="{{ item.type }} {{ item.brend }}" src="{% static 'sumki_online/images/' %}{{ item.category_alias }}/200_on_200/{{ item.id }}.jpg" width="220">
         </div>
         <div class="item_description name_item" data-item-name="{{ item.type }}">{{ item.type }} / <span style="color: #999999">{{ item.brend }}</span></div>
         {% if item.discount > 0 %}
-            <div style="text-align: left">
+            <div style="text-align: center">
                 <div class="item_description price_item" data-item-price="{{ item.price|discount:item.discount }}">{{ item.price|discount:item.discount|price_format }} руб.</div>
                 <div class="item_description discount_item">{{ item.price|price_format }} руб.</div>
             </div>
             <div class="item_description saving_item"><span class="glyphicon glyphicon-tag"></span> {{ item.price|saving:item.discount|price_format }} руб. экономия</div>
         {% else %}
-            <div style="text-align: left">
+            <div style="text-align: center">
                 <div class="item_description price_item" data-item-price="{{ item.price }}">{{ item.price|price_format }} руб.</div>
             </div>
         {% endif %}
