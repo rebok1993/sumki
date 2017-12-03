@@ -50,6 +50,9 @@ class MainOfferAdmin(admin.ModelAdmin):
     list_display = ('image', 'color', 'link')
     list_editable = ('color',)
 
+class MainOfferMiniAdmin(admin.ModelAdmin):
+    list_display = ('image', 'link')
+
 class ItemAdmin(admin.ModelAdmin):
     class Media:
         js = (
@@ -170,6 +173,7 @@ admin.site.register(Item, ItemAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(StoreObuv, StoreObuvAdmin)
 admin.site.register(MainOffer, MainOfferAdmin)
+admin.site.register(MainOfferMini, MainOfferMiniAdmin)
 admin.site.register(Order_params, OrderParamAdmin)
 admin.site.register(Order_items, OrderItemsAdmin)
 admin.site.register(Order_size_obuv, OrderOptObuv)

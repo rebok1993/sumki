@@ -1,6 +1,13 @@
 .wrapper .body .main_offer{
     background: #aaa;
     text-align: center;
+    width: 1206px;
+    border-radius: 7px;
+    overflow: hidden;
+    margin:10px auto;
+    border-color: #E1E1E1;
+    border-width: 1px 2px;
+    border-style: solid;
 }
 .wrapper .body .main_content{
     margin-top: -20px;

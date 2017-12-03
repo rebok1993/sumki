@@ -10,6 +10,7 @@
     border-radius: 0 10px 10px 0;
 }
 .main_content .left_side_bar{
+    font-weight: 200 !important;
     border-left: 1px solid #e1e8ed;
     background-color: #fff;/*#E6ECF0*/
 }
@@ -92,4 +93,11 @@
 }
 .null_number:hover{
     color: #999;
+}
+#scrolling_wrapper{
+    border-bottom: 1px solid #333;
+    width: 1206px;
+    height: 110px;
+    background-color: #aaa;
+    position: relative;
 }

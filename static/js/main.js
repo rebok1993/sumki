@@ -105,23 +105,20 @@ $(function () {
     //елемент в мини корзине
     var item = function (korzina_elem) {
         var dop_field = '';
+        var copy_li = $('#copy_elem_mini_korz').clone();
         if(korzina_elem['size'])
             dop_field = "<br><span style='color: #aaa; font-size: 12px'>"+korzina_elem['size']+" размер</span>";
-        return "<li id='item_in_korzina_"+korzina_elem['id']+"' data-item-id='"+korzina_elem['id']+"' data-item-category='"+korzina_elem['category']+"' class='item_in_mini_korz'>" +
-                     "<a class='item_in_korzina'>" +
-                         "<div class='img_item'>" +
-                            "<img src='"+korzina_elem['image']+"'>" +
-                         "</div>" +
-                         "<div style='margin-left: 70px; margin-top: 20px'>" +
-                            "<div style='overflow: hidden'>" +
-                                "<div class='name_item_in_korz'>"+korzina_elem['name']+dop_field+"</div>" +
-                                "<div class='number_in_korz'>"+korzina_elem['number']+" шт</div>" +
-                            "</div>" +
-                            "<div style='text-align: right'>"+format_price(korzina_elem['price'])+" руб.</div>" +
-                         "</div>" +
-                     "</a>" +
-                     "<div class='delete_item' data-delete-item='"+korzina_elem['id']+"' title='удалить'>x</div>" +
-                  "</li>";
+        copy_li.data('itemId', korzina_elem['id']);
+        copy_li.data('itemCategory', korzina_elem['category']);
+        copy_li.data('itemCategory', korzina_elem['category']);
+        copy_li.attr('id', 'item_in_korzina_'+korzina_elem['id']);
+        copy_li.find('img').attr('src', korzina_elem['image']);
+        copy_li.find('.name_item_in_korz').html(korzina_elem['name']+dop_field);
+        copy_li.find('.number_in_korz').text(korzina_elem['number']+' шт');
+        copy_li.find('.price_in_mini_korz').text(format_price(korzina_elem['price'])+' руб.');
+        copy_li.find('.delete_item').data('deleteItem',korzina_elem['id']);
+        copy_li.show();
+        return copy_li;
     };
     //функция заполнения корзины товарами из куки
     var fill_korzina = function () {
@@ -148,7 +145,6 @@ $(function () {
         }
         $("#korzina_block").children(".korzina_inactive").toggleClass("korzina_inactive korzina_active");
         $("#korzina_block").css({
-            "border":"1px solid #CC6A3B",
             "background-color":"#fff"
         });
         $("#korzina_block").children("#korzina_content").slideDown();
@@ -280,13 +276,24 @@ $(function () {
         /*window_inf.fadeIn();*/
     };
 
+    //события после загрузки изображений
+    var img_loaded = function () {
+        console.log('Загрузилось');
+        $('.wait_load_image').hide();
+        $(this).parent().addClass('loaded');
+        flag1=true;
+    };
+
     var more_info_get = function (data) {
+        flag1 = false;
+        $('.wait_load_image').show();
         $('body').addClass('stop-scrolling');
         $("#fon_wait").show();
         if((window.location.pathname+window.location.search) != data['url_path']){
             window.history.pushState(null, '', data['url_path']);
         }
         $("#fon_wait").append(data['more_info_win']);
+        $("#fon_wait").find('img').on('load', img_loaded);
         update_el();
     };
     //скрываем окно больше информации о товаре
@@ -350,7 +357,7 @@ $(function () {
 
     $(".main_content .content_items").on("mouseover",".item",function (event) {
         event.stopPropagation();
-        $(this).css({"box-shadow": "0 10px 50px 0 rgba(30, 30, 30, 0.2)","border":"1px solid #d4dbe0","z-index":"10"});
+        $(this).css({"border":"1px solid #d4dbe0","z-index":"10"});
         $(this).find(".hide_element").css("visibility","visible");
     });
     $(".main_content .content_items").on("mouseout",".item",function (event) {
@@ -368,4 +375,5 @@ $(function () {
     $("body").on("click", ".other_image_item", change_image);
     //для активации кнопок вперёд и назад
     $(window).on('popstate', step_back_or_forward);
+    $('#main_image_el img').on('load', img_loaded);
 });

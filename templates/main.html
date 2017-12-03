@@ -9,6 +9,7 @@
     <title>Онлайн магазин женской обуви и сумок</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:600" rel="stylesheet">
     {% block new_css %}{% endblock %}
     <script type="text/javascript" src="{% static 'js/jquery-3.1.1.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
@@ -51,7 +52,7 @@
     <!-- /Yandex.Metrika counter -->
     <div id="fon_wait" {% if show_more_window %}style="display: block"{% endif %}>{% if show_more_window %}{% include 'more_inform_window.html' %}{% endif %}</div>
     <div id="fon_wait_2">
-        <div class="cssload-box-loading">
+        <div class="wait_load_doc">{% comment %}cssload-box-loading{% endcomment %}
         </div>
     </div>
     <div class="wrapper container-fluid main_fon">
@@ -69,54 +70,56 @@
                 </div>
             </div>
             <div class="header_main_area">
-                <a class="logo" href="/"></a>
-                <div id="korzina_block">
-                    <div class="korzina korzina_inactive"></div>
-                    <div id="korzina_content"  onmousedown="return false" onselectstart="return false">
-                        <ul>
-                            <li id="item_absent">
-                                <div>Корзина пуста</div>
-                            </li>
-                            <li style='padding: 20px 0' id='result_block'>
-                                <div class='name_result price_item'>Итого</div>
-                                <div id='result' class='price_item'>0 руб.</div>
-                                <div style="clear: both; text-align: center; padding-top: 20px"><a href="/order" style="display: inline-block"><button type="button" class="btn btn-danger">Перейти в корзину</button></a></div>
-                            </li>
-                        </ul>
+                <div style="width: 1206px; margin: auto; position: relative">
+                    <a class="logo" href="/"></a>
+                    <ul id="menu_ul">
+                        <li {% if category.alias == 'obuv' %}class="active_elem"{% endif %}>
+                            <a href="{% url 'sumki_online:catalog' 'obuv' %}" class="menu_name">
+                                <span class="name_menu_span">Женская обувь</span>
+                            </a>
+                        </li>
+                        <li style="padding-left: 45px" {% if category.alias == 'sumki' %}class="active_elem"{% endif %}>
+                            <a href="{% url 'sumki_online:catalog' 'sumki' %}" class="menu_name">
+                                <span class="name_menu_span">Сумки женские</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <div id="welcome"><span>Welcome to us</span></div>
+                    <div id="korzina_block">
+                        <div class="korzina korzina_inactive"></div>
+                        <div id="korzina_content"  onmousedown="return false" onselectstart="return false">
+                            <ul>
+                                <li id='copy_elem_mini_korz' data-item-id='' data-item-category='' class='item_in_mini_korz'>
+                                     <a class='item_in_korzina'>
+                                         <div class='img_item'>
+                                            <img src=''>
+                                         </div>
+                                         <div class="descript_in_mini_korz">
+                                            <div style='overflow: hidden'>
+                                                <div class='name_item_in_korz'></div>
+                                                <div class='number_in_korz'></div>
+                                            </div>
+                                            <div class='price_in_mini_korz'></div>
+                                         </div>
+                                     </a>
+                                     <div class='delete_item' data-delete-item='' title='удалить'>x</div>
+                                </li>
+                                <li id="item_absent">
+                                    <div>Корзина пуста</div>
+                                </li>
+                                <li style='padding: 20px 0' id='result_block'>
+                                    <div class='name_result price_item'>Итого</div>
+                                    <div id='result' class='price_item'>0 руб.</div>
+                                    <div style="clear: both; text-align: center; padding-top: 20px"><a href="/order" style="display: inline-block"><button type="button" class="btn btn-danger">Перейти в корзину</button></a></div>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="header_navbar"  onmousedown="return false" onselectstart="return false">
-                <ul>
-                    <li {% if category.alias == 'obuv' %}class="active_elem"{% endif %}>
-                        <a href="{% url 'sumki_online:catalog' 'obuv' %}" class="menu_name">
-                            <span class="obuv_logo">&nbsp;</span>
-                            <span>Женская обувь</span>
-                        </a>
-                    </li>
-                    <li {% if category.alias == 'sumki' %}class="active_elem"{% endif %}>
-                        <a href="{% url 'sumki_online:catalog' 'sumki' %}" class="menu_name">
-                            <span class="sumki_logo">&nbsp;</span>
-                            <span>Сумки</span>
-                        </a>
-                    </li>
-                    {% comment %}<li {% if category.alias == 'accessories' %}class="active_elem"{% endif %}>
-                        <a href="{% url 'sumki_online:catalog' 'accessories' %}" class="menu_name">
-                            <span class="other_logo">&nbsp;</span>
-                            <span>Акссесуары</span>
-                        </a>
-                    </li>{% endcomment %}
-                </ul>
             </div>
         </div>
         <div class="body row" {% comment %}onmousedown="return false"{% endcomment %}>
             {% block main_block %}{% endblock %}
-            {% comment %}
-            <ul class="list_category">
-                {%for category in categories%}
-                    <li><a href="{{ category.alias }}/">{{ category.name }}</a></li>
-                {%endfor%}
-            </ul>{% endcomment %}
         </div>
         <div class="footer row">
             <div class="contact_data col-md-8 col-md-offset-1">

@@ -1,4 +1,4 @@
-var large, zoom_image, small, new_image = true;
+var large, zoom_image, small, new_image = true, flag1 = false;
 
 function update_el() {
     large = $(".large");
@@ -15,6 +15,7 @@ $(document).ready(function(){
     small = $(".small");
 
     var magnify = function (e) {
+		if(!flag1) return;
         if(new_image){
             new_image = false;
             small = $(".small");

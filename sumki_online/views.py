@@ -326,15 +326,20 @@ def sort_by_name(inputStr):
 def order(request):
     responce_city = urllib.request.urlopen('http://api.boxberry.de/json.php?token=34248.rnpqcaeb&method=ListCitiesFull')
     list_city = json.loads(responce_city.read().decode('utf8'))
-    res_citys = []
+    res_citys = dict()
     for city_el in list_city:
-        res = (city_el['Code'], city_el['Name']+' '+city_el['Prefix']+'.')
-        res_citys.append(res)
+        res_citys[city_el['Name'].lower().replace(' ','')] = {
+            'Code':city_el['Code'],
+            'CourierDelivery':city_el['CourierDelivery'],
+            'PickupPoint':city_el['PickupPoint']
+        }
     form = OrderForm()
     list_city.sort(key=sort_by_name)
+    json_exam = json.dumps(res_citys)
     context = {
         "form":form,
-        "list_city":list_city
+        "list_city":list_city,
+        "exam":json_exam
     }
     return HttpResponse(render_to_string('order.html',context))
 
@@ -484,11 +489,14 @@ def catalog_sumki(request, alias):
         {'name':'brend','all':brends_all, 'label':'Бренд сумки'}
     ]
 
+    main_offer_mini = MainOfferMini.objects.all()
+
     context = {
         "sort":t_sort+'_'+w_sort,
         "options":options_items,
         "items": items,
         "category": category,
+        "main_offer_mini":main_offer_mini,
     }
 
     if "item" in request.GET:
@@ -632,11 +640,15 @@ def catalog_obuv(request, alias):
         {'name':'size','all':sizes_all, 'label':'Размер обуви'},
         {'name':'brend','all':brends_all, 'label':'Бренд обуви'}
     ]
+
+    main_offer_mini = MainOfferMini.objects.all()
+
     context = {
         "sort":t_sort+'_'+w_sort,
         "options":options_items,
         "items": items,
         "category": category,
+        "main_offer_mini":main_offer_mini,
     }
 
     if "item" in request.GET:

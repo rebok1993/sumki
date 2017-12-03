@@ -13,10 +13,39 @@
 
 {% block new_js %}
     <script type="text/javascript" src="{% static 'sumki_online/js/catalog.js' %}"></script>
+    <script type="text/javascript" src="{% static 'sumki_online/js/home.js' %}"></script>
 {% endblock %}
 
 {% block main_block %}
     <div class="main_content container" style="width: 1206px; margin: auto">
+        <div class="row" style="border-radius: 5px; overflow: hidden; margin-top: 10px; margin-bottom: 10px">
+            <div class="col-md-12" style="display: none">
+                <div class="row" id="scrolling_wrapper">
+                    <div id="scrolling_elements" style="height: 110px">
+                        <ul>
+                            {% for elem in main_offer_mini %}
+                                <li>
+                                    <a href="{{ elem.link }}">
+                                        <img src="{% static 'images/mini_special_offer/' %}{{ elem.image }}" width="1206" height="110">
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div id="scroll_main_offer">
+                        {% for i in main_offer_mini %}
+                            {% if forloop.first %}
+                                <a class="select_slide selected_slide" data-index="{{ forloop.counter }}"></a>
+                            {% else %}
+                                <a class="select_slide" data-index="{{ forloop.counter }}"></a>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    {% comment %}<span id="btn_left" class="glyphicon glyphicon-chevron-left"></span>
+                    <span id="btn_right" class="glyphicon glyphicon-chevron-right"></span>{% endcomment %}
+                </div>
+            </div>
+        </div>
         <div class="row">
         <div class="col-md-12">
         <div class="row">

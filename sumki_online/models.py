@@ -218,6 +218,14 @@ class MainOffer(models.Model):
         verbose_name = "Специальные предложения"
         verbose_name_plural = "Специальные предложения"
 
+class MainOfferMini(models.Model):
+    image = models.CharField(max_length=255, verbose_name='Ссылка на картинку')
+    link = models.CharField(max_length=255, verbose_name='Ссылка на каталог с параметрами')
+
+    class Meta:
+        verbose_name = "Специальные предложения мини"
+        verbose_name_plural = "Специальные предложения мини"
+
 class NumberViews(models.Model):
     item = models.ForeignKey(Item)
     number = models.SmallIntegerField(verbose_name='Количество просмотров')

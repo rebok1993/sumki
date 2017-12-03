@@ -97,6 +97,13 @@
 #delivery_export_el{
     display: none;
 }
+#delivery_export_el, #independent_export_el{
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 4px;
+    background-color: #FAF6EB;
+    margin-bottom: 10px;
+}
 #independent_export_el p,#delivery_export_el p{
     margin-top: 10px;
 }
@@ -124,7 +131,7 @@
     font-weight: bold;
 }
 #price_for_delivery, #summa_k_oplate2{
-    color: #cc6633;
+    color: #04AB59;
     font-weight: bold;
     font-size: 16px;
 }
@@ -157,6 +164,12 @@
 #delivery_way_block, #delivery_way_courier, #delivery_way_pvz{
     display: none;
 }
+#delivery_way_pvz{
+    padding-top: 10px;
+}
+.deliv_top_line{
+    border-top:1px solid #ccc;
+}
 #delivery_way_block_inner{
     border: 1px solid #ccc;
     padding: 10px;
@@ -165,5 +178,28 @@
 }
 #delivery_way_block_inner hr{
     border-top:1px solid #ccc;
+    display: none;
+}
+.size_item_el{
+    color: #aaa !important;
+    font-size: 12px !important;
+}
+.delivery_method span{
+    display: inline-block;
+    padding: 5px 5px 5px 22px;
+    cursor: pointer;
+}
+.delivery_method_in{
+    background: url('../images/other/select_in.png') left center no-repeat;
+    background-size: 18px 16px;
+}
+.delivery_method_out{
+    background: url('../images/other/select_out.png') left center no-repeat;
+    background-size: 18px 16px;
+}
+.content_item{
+    margin-bottom: 50px;
+}
+.step2_opt2,.step2_opt3{
     display: none;
 }

@@ -6,6 +6,7 @@
      data-item-category="{{ category.alias }}">
     <div id="more_information_close"><span class="glyphicon glyphicon-remove" title="закрыть"></span></div>
     <div id="more_information_image" class="magnify">
+        <div class="wait_load_image"></div>
         <div class="zoom_image">
             <img src="" width="440">
         </div>
@@ -16,7 +17,7 @@
                 <li data-index-ib="0">
                     {% comment %}<div class="large"></div>{% endcomment %}
                     {% comment %}<div class="magnify_glass"></div>{% endcomment %}
-                    <img alt="{{ options_elem.type.name }} {{ options_elem.brend.name }}" class="small" src="{% static 'sumki_online/images/' %}{{ category.alias }}/400_on_400/{{ elem.id }}.jpg" width="440">
+                    <img {% comment %}onload="console.log('here')"{% endcomment %} alt="{{ options_elem.type.name }} {{ options_elem.brend.name }}" class="small" src="{% static 'sumki_online/images/' %}{{ category.alias }}/400_on_400/{{ elem.id }}.jpg" width="440">
                 </li>
                 {% if images|length != 0 %}
                     {% for imag in images %}

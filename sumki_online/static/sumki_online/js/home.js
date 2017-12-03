@@ -1,15 +1,11 @@
 $(function () {
-    var width_ul = 100;
-    var width_screen = $(window).width();
+    var width_screen = 1206;
     var index_slide = 0;
-    var number_slide = 0;
     var id;
-
-    var number_slide_count = function () {
-        $("#scrolling_elements li").each(function () {
-            number_slide++;
-        });
-    };
+    var slider = $("#scrolling_elements");
+    var slider_ul = slider.find('ul');
+    var slider_li = slider.find('li');
+    var number_slide = slider_li.length;
 
     var stop_time = function (event) {
         event.stopPropagation();
@@ -19,16 +15,6 @@ $(function () {
     var run_time = function (event) {
         event.stopPropagation();
         id = setInterval(select_slide_auto, 7000);
-    };
-
-    var set_width_el = function () {
-        width_ul = 100;
-        width_screen = $(window).width();
-        $("#scrolling_elements li").each(function () {
-            $(this).css("width",width_screen);
-            width_ul += width_screen;
-        });
-        $("#scrolling_elements ul").eq(0).css("width",width_ul);
     };
 
     var select_slide_auto = function (step) {
@@ -45,7 +31,7 @@ $(function () {
         $("#scroll_main_offer .selected_slide").removeClass("selected_slide");
         var next_el = $("#scroll_main_offer a:eq("+index_slide+")");
         next_el.addClass("selected_slide");
-        $("#scrolling_elements ul").css("left", "-"+width_screen*index_slide);
+        slider_ul.css("left", "-"+width_screen*index_slide);
     };
 
     var select_slide = function (event) {
@@ -54,18 +40,20 @@ $(function () {
         event.stopPropagation();
         $(this).closest("#scroll_main_offer").find(".selected_slide").removeClass("selected_slide");
         $(this).addClass("selected_slide");
-        $("#scrolling_elements ul").css("left", "-"+width_screen*index_slide);
+        slider_ul.css("left", "-"+width_screen*index_slide);
     };
+    //устанавливаем ширину Ul
+    slider_ul.css("width",100+number_slide*1206);
 
     //запускаются при загрузке сайта
-    id = setInterval(select_slide_auto, 7000);
-    set_width_el();
-    number_slide_count();
+    id = setInterval(select_slide_auto, 5000);
 
-    $(window).on("resize", set_width_el);
+    //перемещение слайда при клики на кнопки снизу
     $(".select_slide").on("click", select_slide);
-    $("#scrolling_elements").on("mouseover", stop_time);
-    $("#scrolling_elements").on("mouseout", run_time);
+    //прекращение пролистывания слайда при наведение
+    slider.on("mouseover", stop_time).on("mouseout", run_time);
+
+    //перемещение слайда при клики на кнопки слева или права
     $("#btn_left").on("click", function () {
         select_slide_auto(-1);
     });
