@@ -4,6 +4,9 @@
 #result,#korzina_block,#korzina_content .description_item,#korzina_content .delete_item{
     float: right;
 }
+#result_block div{
+    color: inherit !important;
+}
 .nav a,.nav .active a:hover{
     color: #fff !important;
 }
@@ -35,7 +38,7 @@ body{
     /*opacity: .65;*/
 }
 .header_main_area .active_elem a{
-    border: 2px solid #fff !important;
+    /*border: 2px solid #fff !important;*/
 }
 /*.header_main_area .name_menu_span{
     border-bottom: 2px solid transparent;
@@ -80,7 +83,7 @@ a{
     background-color: #fff;
     position: relative;
     font-weight: bold;
-    height: 55px;
+    height: 122px;
     line-height: 55px;
     text-align: right;
 }
@@ -113,13 +116,13 @@ a{
     border-bottom: 3px solid #00b258;
 }
 .wrapper .header .header_main_area{
-    height: 80px;
+    height: 52px;
     text-align: left;
     /*border-top: 1px solid #cc6a3b;
     border-bottom: 1px solid #cc6a3b;*/
-    background: #00b258;/*#232F3E;*//*#A7ACB2*/
+    background: #034369;/*#232F3E;*//*#A7ACB2#00b258*/
     position: relative;
-    border-bottom: 1px solid #00a251;
+    /*border-bottom: 1px solid #00a251;*/
 }
 .header_main_area #menu_ul{
     display: inline-block;
@@ -141,10 +144,10 @@ a{
 #welcome span{
     display: inline-block;
     vertical-align: bottom;
-    line-height: 80px;
+    line-height: 52px;
 }
 .header_main_area #menu_ul li{
-    line-height: 80px;
+    line-height: 52px;
     display: inline-block;
     height: 100%;
 }
@@ -152,14 +155,45 @@ a{
     color: #fff;
     font-weight: bold;
     vertical-align: middle;
-    line-height: 1.25;
+    line-height: 30px;
     font-size: 14px;
-    padding: 10px !important;
+    padding: 5px !important;
     display: inline-block;
-    border: 1px solid #fff;
-    border-radius: 4px;
+    /*border: 1px solid #fff;
+    border-radius: 4px;*/
     /*background-color: #fff;
     color: #00B25A;*/
+}
+.menu_name{
+    padding: 0 !important;
+}
+#menu_ul span{
+    padding-left: 38px;
+    display: inline-block;
+}
+#obuv_icon{
+    background: url("../images/icons_obuv.png") no-repeat center left transparent;
+    background-size: 27px 27px;
+}
+#sumka_icon{
+    background: url("../images/icons_sumka.png") no-repeat center left transparent;
+    background-size: 27px 27px;
+}
+#home_icon{
+    background: url("../images/icons_home.png") no-repeat center left transparent;
+    background-size: 27px 27px;
+}
+#delivery_icon{
+    background: url("../images/icons_del.png") no-repeat center left transparent;
+    background-size: 27px 27px;
+}
+#about_icon{
+    background: url("../images/icons_about.png") no-repeat center left transparent;
+    background-size: 27px 27px;
+}
+.header_main_area .active_elem a{
+    border-radius: 4px;
+    border: 2px solid #fff !important;
 }
 .wrapper .body{
     min-height: 600px;
@@ -174,7 +208,7 @@ a{
 .logo{
     display: inline-block;
     margin: auto;
-    height: 80px;
+    height: 122px;
     width: 300px;
     background:url("../images/logo.png") no-repeat center transparent;
 }
@@ -183,12 +217,6 @@ a{
     margin-top: 10px;
     font-size: 12px;
     color: #919191;
-}
-.menu_name{
-    padding: 0 !important;
-}
-.menu_name span{
-    display: inline-block;
 }
 .price_item{
     color: #04AB59;

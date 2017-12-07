@@ -58,11 +58,13 @@
     <div class="wrapper container-fluid main_fon">
         <div class="header row">
             <div class="header_inform_row">
-                <div style="width: 1206px; margin: auto">
-                    <div class="col-md-6" style="text-align: left">
-                        <span class="header_inform_row_menu {% block main_menu_tab %}{% endblock %}"><a href="/">Главная</a></span>
+                <div style="width: 1206px; height: 100%; margin: auto">
+                    <div class="col-md-6" style="text-align: left; height: 100%;">
+                        {% comment %}<span class="header_inform_row_menu {% block main_menu_tab %}{% endblock %}"><a href="/">Главная</a></span>
                         <span class="header_inform_row_menu {% block menu_delivery_tab %}{% endblock %}"><a href="/delivery">Доставка</a></span>
                         <span class="header_inform_row_menu {% block menu_about_tab %}{% endblock %}"><a href="/about">О нас</a></span>
+                        {% endcomment %}
+                        <a class="logo" href="/"></a>
                     </div>
                     <div class="col-md-6">
                         <span id="number_fon_top">8 (910)-877-49-69</span>
@@ -71,16 +73,31 @@
             </div>
             <div class="header_main_area">
                 <div style="width: 1206px; margin: auto; position: relative">
-                    <a class="logo" href="/"></a>
+                    {% comment %}<a class="logo" href="/"></a>{% endcomment %}
                     <ul id="menu_ul">
                         <li {% if category.alias == 'obuv' %}class="active_elem"{% endif %}>
                             <a href="{% url 'sumki_online:catalog' 'obuv' %}" class="menu_name">
-                                <span class="name_menu_span">Женская обувь</span>
+                                <span id="obuv_icon" class="name_menu_span">Женская обувь</span>
                             </a>
                         </li>
-                        <li style="padding-left: 45px" {% if category.alias == 'sumki' %}class="active_elem"{% endif %}>
+                        <li style="padding-left: 38px" {% if category.alias == 'sumki' %}class="active_elem"{% endif %}>
                             <a href="{% url 'sumki_online:catalog' 'sumki' %}" class="menu_name">
-                                <span class="name_menu_span">Сумки женские</span>
+                                <span id="sumka_icon" class="name_menu_span">Сумки женские</span>
+                            </a>
+                        </li>
+                        <li style="padding-left: 38px">
+                            <a href="/">
+                                <span id="home_icon" style="opacity: .65;">Главная</span>
+                            </a>
+                        </li>
+                        <li style="padding-left: 38px">
+                            <a href="/delivery">
+                                <span id="delivery_icon" style="opacity: .65;">Доставка</span>
+                            </a>
+                        </li>
+                        <li style="padding-left: 38px">
+                            <a href="/about">
+                                <span id="about_icon" style="opacity: .65;">О нас</span>
                             </a>
                         </li>
                     </ul>
