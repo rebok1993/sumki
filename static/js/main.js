@@ -249,11 +249,10 @@ $(function () {
     };
     //показываем окно больше информации о товаре
     var show_more_info = function (event, item_mini) {
-        console.log('1');
         var item, id, category;
         //показываем серый фон
         $('body').addClass('stop-scrolling');
-        $("#fon_wait").show();
+        fon_2.show();
 
         if(item_mini === undefined){
             item = $(this).closest(".item");
@@ -270,9 +269,8 @@ $(function () {
             obj = all_parametr();
         }
         obj.item = id;
-        console.log(obj);
         $.get("/catalog/"+category+"/", obj).done(function (data_json) {
-            console.log('2');
+            fon_2.hide();
             var data = $.parseJSON(data_json);
             more_info_get(data);
         }).fail(function (data) {
