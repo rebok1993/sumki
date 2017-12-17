@@ -15,6 +15,16 @@ def price_format(value, separator=u' '):
     return separator.join(parts)
 
 @register.filter
+def smart_ending(number, forms):
+    number_el = str(number)
+    rest = number % 10
+    if number >= 100:
+        number %= 100
+    if rest==1 and number != 11: return number_el+' '+forms[0]
+    elif (rest in (2,3,4)) and (number not in (12,13,14)): return number_el+' '+forms[1]
+    else: return number_el+' '+forms[2]
+
+@register.filter
 def discount(value, disc):
     new_value = int(value)*(1-int(disc)/100)
     return int(new_value)

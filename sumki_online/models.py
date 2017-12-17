@@ -229,6 +229,7 @@ class MainOfferMini(models.Model):
 class NumberViews(models.Model):
     item = models.ForeignKey(Item)
     number = models.SmallIntegerField(verbose_name='Количество просмотров')
+    number_week = models.SmallIntegerField(verbose_name='Количество просмотров за неделю',default=0)
     data = models.DateTimeField(verbose_name='Дата последнего просмотра')
 
     class Meta:

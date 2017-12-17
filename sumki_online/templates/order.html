@@ -63,7 +63,7 @@
                                 <p>Кто заберёт товар:</p>
                             </div>
                             <div id="delivery_export_el" class="step2_opt2">
-                                <p>Мы доставляем товар транспортной компанией Boxberry в большинство населённых пунктов России</p>
+                                <p>Мы доставляем товар Почтой Росии и транспортной компанией Boxberry в большинство населённых пунктов России</p>
                                 <p>Срок доставки от 2 дня, в зависимости от региона получателя.</p>
                                 <p>Введите данные получателя:</p>
                             </div>
@@ -99,7 +99,7 @@
                                 </div>
                                 <div class="form-group">
                                     {{ form.name.errors }}
-                                    <label for="id_name">Имя</label>
+                                    <label for="id_name">Имя, Отчество</label>
                                     {{ form.name }}
                                 </div>
                                 <div class="form-group">
@@ -132,8 +132,9 @@
                 </div>
             </div>
             <div class="col-md-3 right_side_bar">
-                <div style="margin-bottom: 20px" id="summa_k_oplate_right">
-                    <div style="font-weight: bold; font-size: 18px; color: #fff">Сумма к оплате</div>
+                <div style="margin-bottom: 20px;padding-top: 50px" id="summa_k_oplate_right">
+                    {% comment %}<div style="font-weight: bold; font-size: 18px;">Сумма к оплате</div>{% endcomment %}
+                    <h3>Сумма к оплате</h3>
                     <div id="summa_k_oplate" class="step2_opt1">0 руб</div>
                     <div id="summa_k_oplate2" class="step2_opt2">0 руб</div>
                     <div id="price_for_delivery" class="step2_opt2">Бесплатная доставка{% comment %}+<span>0</span> руб. (доставка){% endcomment %}</div>

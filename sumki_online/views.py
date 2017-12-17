@@ -671,18 +671,36 @@ def catalog_obuv(request, alias):
         return HttpResponse(json_str)
     return HttpResponse(render_to_string('catalog.html', context))
 
+
 def get_item(request,alias):
+    elem_id = request.GET.get('item')
+    item_elem = Item.objects.get(id=elem_id)
+    number_views_week = 1
+    number_views_week_obj = NumberViews.objects.filter(item=item_elem)
+
+    if len(number_views_week_obj):
+        number_views_week_obj[0].number_week += 1
+        number_views_week = number_views_week_obj[0].number_week
+        number_views_week_obj[0].save()
+    else:
+        try:
+            number_views_week_obj_new = NumberViews(item=item_elem, number=1, number_week=1, data=datetime.today())
+            number_views_week_obj_new.save()
+        except Exception as e:
+            print(e)
+
     context = {
         'show_more_window':True,
+        'number_views_week':number_views_week,
+        'ending_views': ('просмотр', 'просмотра', 'просмотров')
     }
-    elem_id = request.GET.get('item')
     if alias == 'obuv':
-        context['store_elem'] = StoreObuv.objects.filter(item=elem_id)
-        options_elem = OptionsObuv.objects.get(item=elem_id)
+        context['store_elem'] = StoreObuv.objects.filter(item=item_elem)
+        options_elem = OptionsObuv.objects.get(item=item_elem)
     elif alias == 'sumki':
-        options_elem = OptionsSumki.objects.get(item=elem_id)
+        options_elem = OptionsSumki.objects.get(item=item_elem)
     else: return {}
-    context['elem'] = Item.objects.get(pk=elem_id)
+    context['elem'] = item_elem
     context['options_elem'] = options_elem
     context['options_elem_render'] = render_to_string('options_elem.html', {'options':options_elem, 'category': alias})
     context['images'] = []
@@ -695,22 +713,39 @@ def get_item(request,alias):
 def catalog(request, alias='obuv'):
     if "item" in request.GET and request.is_ajax():
         elem_id = request.GET.get('item')
+        item_elem = Item.objects.get(id=elem_id)
+        number_views_week = 1
+        number_views_week_obj = NumberViews.objects.filter(item=item_elem)
+
+        if len(number_views_week_obj):
+            number_views_week_obj[0].number_week += 1
+            number_views_week = number_views_week_obj[0].number_week
+            number_views_week_obj[0].save()
+        else:
+            try:
+                number_views_week_obj_new = NumberViews(item=item_elem, number=1, number_week=1, data=datetime.today())
+                number_views_week_obj_new.save()
+            except Exception as e:
+                print(e)
+
         context = {
-            'category':Category.objects.get(alias=alias)
+            'category':Category.objects.get(alias=alias),
+            'number_views_week': number_views_week,
+            'ending_views':('просмотр', 'просмотров', 'просмотра')
         }
         if alias == 'obuv':
-            options_elem = OptionsObuv.objects.get(item=elem_id)
-            context['store_elem'] = StoreObuv.objects.filter(item=elem_id)
+            options_elem = OptionsObuv.objects.get(item=item_elem)
+            context['store_elem'] = StoreObuv.objects.filter(item=item_elem)
         elif alias == 'sumki':
-            options_elem = OptionsSumki.objects.get(item=elem_id)
+            options_elem = OptionsSumki.objects.get(item=item_elem)
         else: return Http404
 
-        context['elem'] = Item.objects.get(pk=elem_id)
+        context['elem'] = item_elem
         context['options_elem'] = options_elem
         context['images'] = []
         context['show_more_window'] = True
         context['options_elem_render'] = render_to_string('options_elem.html', {'options':options_elem, 'category': alias})
-        for i in range(1,4):
+        for i in range(1,6):
             path_var = STATIC_ROOT+"sumki_online/images/"+alias+"/400_on_400/"+str(elem_id)+"v"+str(i)+".jpg"
             if os.path.exists(path_var):
                 context['images'].append("1")

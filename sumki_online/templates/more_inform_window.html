@@ -1,32 +1,58 @@
 {% load staticfiles %}
 {% load filters %}
+<script type="text/javascript">
+    function img_loaded (elem) {
+        $('.wait_load_image').hide();
+        $(elem).parent().addClass('loaded');
+        flag1=true;
+    }
+</script>
 <div id="more_information_window" data-item-element="{{ elem.id }}" data-item-name="{{ options_elem.type.name }}"
      data-item-price="{% if elem.discount > 0 %}{{ elem.price|discount:elem.discount}}{% else %}{{ elem.price }}{% endif %}"
      data-item-image="{% if images %}{% static 'sumki_online/images/' %}{{ category.alias }}/64_on_64/{{ elem.id }}.jpg{% endif %}"
      data-item-category="{{ category.alias }}">
     <div id="more_information_close"><span class="glyphicon glyphicon-remove" title="закрыть"></span></div>
-    <div id="more_information_image" class="magnify">
-        <div class="wait_load_image"></div>
-        <div class="zoom_image">
-            <img src="" width="440">
-        </div>
-        <div style="overflow: hidden; width: 440px; height: 675px; position: relative">
-            <div class="large"></div>
-            <ul id="main_image_el">
-            {% if images %}
-                <li data-index-ib="0">
-                    {% comment %}<div class="large"></div>{% endcomment %}
-                    {% comment %}<div class="magnify_glass"></div>{% endcomment %}
-                    <img {% comment %}onload="console.log('here')"{% endcomment %} alt="{{ options_elem.type.name }} {{ options_elem.brend.name }}" class="small" src="{% static 'sumki_online/images/' %}{{ category.alias }}/400_on_400/{{ elem.id }}.jpg" width="440">
-                </li>
-                {% if images|length != 0 %}
-                    {% for imag in images %}
-                        <li data-index-ib="{{ forloop.counter }}">
-                            <img alt="{{ options_elem.type.name }} {{ options_elem.brend.name }}" src="{% static 'sumki_online/images/' %}{{ category.alias }}/400_on_400/{{ elem.id }}v{{ forloop.counter }}.jpg" width="440">
-                        </li>
-                    {% endfor %}
+    <div style="float: left;width: 550px;min-height: 450px">
+        <div id="more_information_image" class="magnify">
+            <div class="views_tovar"><span class="icon_more_inner"></span><span style="margin-left: 10px">{{ number_views_week|smart_ending:ending_views }}<br> на этой неделе</span></div>
+            <div class="wait_load_image"></div>
+            <div class="zoom_image">
+                <img src="" width="440">
+            </div>
+            <div style="overflow: hidden; width: 440px; height: 675px; position: relative">
+                <div class="large"></div>
+                <ul id="main_image_el">
+                {% if images %}
+                    <li data-index-ib="0">
+                        {% comment %}<div class="large"></div>{% endcomment %}
+                        {% comment %}<div class="magnify_glass"></div>{% endcomment %}
+                        <img onload="img_loaded(this)" alt="{{ options_elem.type.name }} {{ options_elem.brend.name }}" class="small" src="{% static 'sumki_online/images/' %}{{ category.alias }}/400_on_400/{{ elem.id }}.jpg" width="440">
+                    </li>
+                    {% if images|length != 0 %}
+                        {% for imag in images %}
+                            <li data-index-ib="{{ forloop.counter }}">
+                                <img onload="img_loaded(this)" alt="{{ options_elem.type.name }} {{ options_elem.brend.name }}" src="{% static 'sumki_online/images/' %}{{ category.alias }}/400_on_400/{{ elem.id }}v{{ forloop.counter }}.jpg" width="440">
+                            </li>
+                        {% endfor %}
+                    {% endif %}
                 {% endif %}
-            {% endif %}
+                </ul>
+            </div>
+        </div>
+        <div {% comment %}style="clear: both;float: left;width: 550px;"{% endcomment %}>
+            <ul id="other_image">
+                {% if images %}
+                    <li data-index-im="0" class="active_other_image other_image_item">
+                        <img alt="{{ options_elem.type.name }} {{ options_elem.brend.name }}" src="{% static 'sumki_online/images/' %}{{ category.alias  }}/400_on_400/{{ elem.id }}.jpg" height="120">
+                    </li>
+                    {% if images|length != 0 %}
+                        {% for imag in images %}
+                            <li data-index-im="{{ forloop.counter }}" class="other_image_item">
+                                <img alt="{{ options_elem.type.name }} {{ options_elem.brend.name }}" src="{% static 'sumki_online/images/' %}{{ category.alias  }}/400_on_400/{{ elem.id }}v{{ forloop.counter }}.jpg" height="120">
+                            </li>
+                        {% endfor %}
+                    {% endif %}
+                {% endif %}
             </ul>
         </div>
     </div>
@@ -38,11 +64,11 @@
             {% else %}
                 {{ elem.price|price_format }}
             {% endif %} руб.</div>
-        <div style="height: 80px; margin-bottom: 14px">
+        <div style=" margin-bottom: 14px">
             <div id="more_information_sizes" {% if category.alias != 'obuv' %} style="display: none"{% endif %}>
                 <form>
                     <label for="size_obuv_available">Выберите размер</label>
-                    <select id="size_obuv_available" class="form-control" style="width: auto !important; margin-top: 20px">
+                    <select id="size_obuv_available" class="form-control" style="width: auto !important;">
                         {% if store_elem %}
                             {% for store_pos in store_elem %}
                                 <option>{{ store_pos.size.name }}</option>
@@ -56,28 +82,47 @@
             <button type="button" class="btn btn-primary add_in_korzina"><span class="glyphicon glyphicon-plus"></span> Добавить в корзину</button>
             <button type="button" class="btn btn-info in_korzina"><span class="glyphicon glyphicon-ok"></span> В корзине</button>
         </div>
-        <span style="display: inline-block; margin-top: 15px; font-weight: 700;">Описание товара</span>
-        <div id="description_item_full">
+        <span style="display: inline-block; margin-top: 50px; font-size: 18px;">Описание товара</span>
+        <div id="description_item_full" style="margin-top: 30px">
             {% if options_elem_render %}{{ options_elem_render }}{% endif %}
         </div>
+        <div style="padding-top: 50px; margin-bottom: 30px">
+            <h4>Преимущества Vittora</h4>
+            <div class="adv_elem">
+                <div class="icon_del_adv"></div>
+                <div class="title_adv">Бесплатная доставка по всей России</div>
+                <div class="descrip_adv">Мы доставляем товар бесплатно в любую точку России</div>
+            </div>
+            <div class="adv_elem">
+                <div class="icon_safe_adv"></div>
+                <div class="title_adv">Безопасность</div>
+                <div class="descrip_adv">Безопасность платежей гарантируется использованием SSL протокола.
+                    Данные вашей банковской карты надежно защищены при оплате онлайн.
+                </div>
+            </div>
+            <div class="adv_elem">
+                <div class="icon_diver_adv"></div>
+                <div class="title_adv">Разнообразие ассортимента</div>
+                <div class="descrip_adv">В нашем интернет-магазине представлены товары на любой вкус</div>
+            </div>
+        </div>
     </div>
-    <div>
+    {% comment %}<div style="clear: both;float: left;width: 550px;">
         <ul id="other_image">
-            <li id="other_image_item_window"></li>
             {% if images %}
                 <li data-index-im="0" class="active_other_image other_image_item">
                     <img alt="{{ options_elem.type.name }} {{ options_elem.brend.name }}" src="{% static 'sumki_online/images/' %}{{ category.alias  }}/400_on_400/{{ elem.id }}.jpg" height="120">
                 </li>
                 {% if images|length != 0 %}
                     {% for imag in images %}
-                        <li data-index-im="{{ forloop.counter }}" class="active_other_image other_image_item">
+                        <li data-index-im="{{ forloop.counter }}" class="other_image_item">
                             <img alt="{{ options_elem.type.name }} {{ options_elem.brend.name }}" src="{% static 'sumki_online/images/' %}{{ category.alias  }}/400_on_400/{{ elem.id }}v{{ forloop.counter }}.jpg" height="120">
                         </li>
                     {% endfor %}
                 {% endif %}
             {% endif %}
         </ul>
-    </div>
+    </div>{% endcomment %}
 </div>
 <div id="add_or_next_window" align="center">
     <h4 align="center"><span class="glyphicon glyphicon-ok"></span> Ваш товар добавлен в корзину</h4>

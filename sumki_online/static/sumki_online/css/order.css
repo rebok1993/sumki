@@ -10,7 +10,7 @@
 }
 .right_side_bar{
     min-height: 400px;
-    background: #0D4646;
+    border: 1px solid #e1e8ed;
 }
 #order_korzina li{
     overflow: hidden;
@@ -52,9 +52,10 @@
 }
 #summa_k_oplate, #summa_k_oplate_with_delivery span{
     font-size: 25px;
-    font-weight: 700;
     line-height: 0.6;
-    color: #fff;
+}
+#summa_k_oplate{
+    margin-top: 40px;
 }
 #order_steps{
     margin-top: 10px;
@@ -126,17 +127,11 @@
 #order_ready,.next_step_payment,#checkout, #summa_k_oplate_with_delivery{
     font-size: 20px;
 }
-#summa_k_oplate_with_delivery{
-    color: #fff;
-    font-weight: bold;
-}
 #price_for_delivery, #summa_k_oplate2{
-    color: #04AB59;
-    font-weight: bold;
     font-size: 16px;
 }
 #order_final_win{
-    color: #b8b8b8;
+    font-weight: bold;
     font-size: 14px;
     background-color: #FFFCDF;
 }
@@ -146,7 +141,7 @@
 
 #order_final_win span{
     font-size: 14px;
-    font-weight: bold;
+    font-weight: normal;
     color: #333;
 }
 .delivery_way{

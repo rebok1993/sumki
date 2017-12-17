@@ -9,12 +9,23 @@ function update_el() {
 $(document).ready(function(){
 	var native_width = 0;
 	var native_height = 0;
+	var id_time;
     new_image = true;
 	large = $(".large");
 	zoom_image = $('.zoom_image');
     small = $(".small");
 
+	var magnify_out = function () {
+		id_time = setTimeout(function () {
+			native_width = 0;
+			native_height = 0;
+			large.fadeOut(100);
+			zoom_image.fadeOut(100);
+		}, 500);
+	};
+
     var magnify = function (e) {
+		clearTimeout(id_time);
 		if(!flag1) return;
         if(new_image){
             new_image = false;
@@ -72,4 +83,5 @@ $(document).ready(function(){
     };
 
 	$("#fon_wait").on('mousemove', '.magnify', magnify);
+	$("#fon_wait").on('mouseout', '.magnify', magnify_out);
 });

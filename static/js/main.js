@@ -37,6 +37,18 @@ function count_summa() {
 function  set_summa_korzina(summa) {
     $("#result").text(format_price(summa)+" руб.");
 }
+//изменение изображения в окне товара
+function change_image(){
+    var index = $(this).data("indexIm");
+    $("#main_image_el .small").removeClass('small');
+    $('.active_other_image').removeClass('active_other_image');
+    $("#main_image_el li[data-index-ib = '"+index+"'] img").addClass('small');
+    $("#other_image li[data-index-im = '"+index+"']").addClass('active_other_image');
+    $("#main_image_el").css("left", "-"+index*440);
+    new_image = true;
+    /*$(".active_other_image").removeClass("active_other_image");
+     $(this).addClass("active_other_image");*/
+}
 //форматирования цен
 function format_price(numeric) {
     return new Intl.NumberFormat('ru').format(numeric);
@@ -77,22 +89,12 @@ function delete_from_korzina(event, id_item) {
     save_korzina();
     if(korzina['products'].length==0) clear_korzina();
 }
-//изменение изображения в окне товара
-function change_image(){
-    var index = $(this).data("indexIm");
-    $("#main_image_el .small").removeClass('small');
-    $("#main_image_el li[data-index-ib = '"+index+"'] img").addClass('small');
-    $("#main_image_el").css("left", "-"+index*440);
-    $("#other_image_item_window").css("transform", "translate3d("+index*134+"px, 0px, 0px)");
-    new_image = true;
-    /*$(".active_other_image").removeClass("active_other_image");
-    $(this).addClass("active_other_image");*/
-}
 //учитываем количество просмотров товара в базе
 function add_number_views(id_elem) {
     $.get("/addNumberViews/"+id_elem+"/").done(function (data) {}).fail(function (data) {});
 }
 
+//события после загрузки изображений
 
 $(function () {
     fon_2 = $("#fon_wait_2");
@@ -247,6 +249,7 @@ $(function () {
     };
     //показываем окно больше информации о товаре
     var show_more_info = function (event, item_mini) {
+        console.log('1');
         var item, id, category;
         //показываем серый фон
         $('body').addClass('stop-scrolling');
@@ -267,22 +270,26 @@ $(function () {
             obj = all_parametr();
         }
         obj.item = id;
+        console.log(obj);
         $.get("/catalog/"+category+"/", obj).done(function (data_json) {
+            console.log('2');
             var data = $.parseJSON(data_json);
             more_info_get(data);
+        }).fail(function (data) {
+            console.log('fail');
         });
 
         //показываем мини окно товара
         /*window_inf.fadeIn();*/
     };
 
-    //события после загрузки изображений
+    /*//события после загрузки изображений
     var img_loaded = function () {
         console.log('Загрузилось');
         $('.wait_load_image').hide();
         $(this).parent().addClass('loaded');
         flag1=true;
-    };
+    };*/
 
     var more_info_get = function (data) {
         flag1 = false;
@@ -375,5 +382,5 @@ $(function () {
     $("body").on("click", ".other_image_item", change_image);
     //для активации кнопок вперёд и назад
     $(window).on('popstate', step_back_or_forward);
-    $('#main_image_el img').on('load', img_loaded);
+    //действие после загрузки фотографии
 });
