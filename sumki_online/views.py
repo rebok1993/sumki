@@ -21,6 +21,7 @@ from yandex_money.models import Payment
 #from django.contrib.staticfiles.finders import
 import re
 import os
+import random
 import urllib.request
 
 
@@ -671,6 +672,17 @@ def catalog_obuv(request, alias):
         return HttpResponse(json_str)
     return HttpResponse(render_to_string('catalog.html', context))
 
+def change_number(request):
+    items = Item.objects.all()
+    for item_el in items:
+        number = NumberViews.objects.filter(item=item_el)
+        num = random.randint(20, 100)
+        if not len(number):
+            number_new = NumberViews(item=item_el, number=num, number_week=num, data=datetime.today())
+            number_new.save()
+        else:
+            number[0].number_week = num
+            number[0].save()
 
 def get_item(request,alias):
     elem_id = request.GET.get('item')
