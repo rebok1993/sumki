@@ -510,6 +510,8 @@ a{
     color: #337AB7;
 }
 #more_information_image{
+    float: left;
+    width:440px;
     /*float: left;
     width:550px;
     min-height: 450px;*/

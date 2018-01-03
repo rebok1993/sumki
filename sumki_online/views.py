@@ -429,13 +429,13 @@ def catalog_sumki(request, alias):
             w_sort = request.GET.get('way_sort')
             sign = '-' if w_sort == 'desc' else ''
             if t_sort == 'popular_sorting':
-                items_list = Item.objects.filter(**option_query).order_by(sign + "numberviews__number").distinct()
+                items_list = Item.objects.filter(**option_query).order_by(sign + "top_views").distinct()
             else:
                 items_list = Item.objects.filter(**option_query).order_by(sign + "price").distinct()
 
         #получаем список товаров
         if not items_list:
-            items_list = Item.objects.filter(**option_query).order_by("-numberviews__number").distinct()
+            items_list = Item.objects.filter(**option_query).order_by("-top_views").distinct()
 
         #получаем информацию об обуви на складе
         brends_all = BrendSumki.objects.filter(optionssumki__item__number__gt=0).distinct().values()
@@ -566,13 +566,13 @@ def catalog_obuv(request, alias):
             w_sort = request.GET.get('way_sort')
             sign = '-' if w_sort=='desc' else ''
             if t_sort == 'popular_sorting':
-                items_list = Item.objects.filter(**option_query).order_by(sign+"numberviews__number").distinct()
+                items_list = Item.objects.filter(**option_query).order_by(sign+"top_views").distinct()
             else:
                 items_list = Item.objects.filter(**option_query).order_by(sign+"price").distinct()
 
         #получаем список товаров
         if not items_list:
-            items_list = Item.objects.filter(**option_query).order_by("-numberviews__number").distinct()
+            items_list = Item.objects.filter(**option_query).order_by("-top_views").distinct()
 
         #получаем информацию об обуви на складе
         stores = StoreObuv.objects.filter(item__in=items_list)
@@ -672,7 +672,7 @@ def catalog_obuv(request, alias):
         return HttpResponse(json_str)
     return HttpResponse(render_to_string('catalog.html', context))
 
-def change_number(request):
+def change_number():
     items = Item.objects.all()
     for item_el in items:
         number = NumberViews.objects.filter(item=item_el)
