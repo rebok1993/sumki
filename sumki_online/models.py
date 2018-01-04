@@ -27,7 +27,7 @@ class Item(models.Model):
     category = models.ForeignKey(Category)
     hit_sales = models.BooleanField(default=False, verbose_name='Хит продаж')
     new_item = models.BooleanField(default=False, verbose_name='Новый товар')
-    #top_views = models.SmallIntegerField(default=0, verbose_name='Ранжирование')
+    top_views = models.SmallIntegerField(default=0, verbose_name='Ранжирование')
 
     class Meta:
         verbose_name = "Товар"
