@@ -2,9 +2,9 @@
     background: #aaa;
     text-align: center;
     width: 1206px;
-    border-radius: 7px;
+    border-radius: 0 0 2px 2px;
     overflow: hidden;
-    margin:30px auto 10px;
+    margin:0 auto 10px;
     /*border-color: #E1E1E1;
     border-width: 0 0;
     border-style: solid;*/

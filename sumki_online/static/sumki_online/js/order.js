@@ -65,6 +65,7 @@ $(function () {
             if(phone.val().length != 17) $("#id_fon_number").parent(".form-group").addClass("has-error");
             return;
         }
+        //если доставка
         if(korzina["delivery"]){
             order.city = city;
             var type_delivery = $('.active_delivery_way');
@@ -380,13 +381,29 @@ $(function () {
         }
     });
     fill_korzina_full();
-    $(".next_step_payment").on("click", next_step_payment);
+
+    //смена способа доставки заказа
     delivery_order.on("click",".delivery_method span",change_method_delivery);
+
+    //1-й этап оформления заказа
     $("#checkout").on("click", checkout);
-    $(".order_delete_item").on("click", delete_order_item);
-    $(".number_item").on("change", change_number);
+
+    //2-й этап оформления заказа
+    $(".next_step_payment").on("click", next_step_payment);
+
+    //3-й этап оформления заказа (оплата)
     $("#order_ready").on("click", order_ready);
+
+    //удалить товар из заказа
+    $(".order_delete_item").on("click", delete_order_item);
+
+    //изменяем количество товара в заказе
+    $(".number_item").on("change", change_number);
+
+
+
     delivery_way_block.on('click', '.delivery_way', delivery_way);
+
     //смена способа доставки (доставка или самовывоз)
     $('.delivery_method span').on('click', function () {
         var el = $(this);

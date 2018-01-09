@@ -166,6 +166,8 @@ def add_number_views(request, elem):
             number_v = NumberViews(item=tovar, number=1, data=datetime.today())
             number_v.save()
 
+#МЕТОДЫ ОТВЕЧАЮЩИЕ ЗА ЗАКАЗ НАЧАЛО
+
 @csrf_exempt
 def checkout(request):
     json_str = {}
@@ -323,7 +325,7 @@ def order_ready(request):
 def sort_by_name(inputStr):
     return inputStr['Name']
 
-
+#первоначальный экран заказа
 def order(request):
     responce_city = urllib.request.urlopen('http://api.boxberry.de/json.php?token=34248.rnpqcaeb&method=ListCitiesFull')
     list_city = json.loads(responce_city.read().decode('utf8'))
@@ -360,6 +362,8 @@ def order_fail(request):
 
     }
     return HttpResponse(render_to_string('order_fail.html', context))
+
+#МЕТОДЫ ОТВЕЧАЮЩИЕ ЗА ЗАКАЗ КОНЕЦ
 
 def catalog_accessories(request,alias):
     try:

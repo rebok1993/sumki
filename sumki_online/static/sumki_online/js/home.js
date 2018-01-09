@@ -46,7 +46,10 @@ $(function () {
     slider_ul.css("width",100+number_slide*1206);
 
     //запускаются при загрузке сайта
-    id = setInterval(select_slide_auto, 5000);
+    if(number_slide > 1){
+        $("#btn_left, #btn_right, #scroll_main_offer).show();
+        id = setInterval(select_slide_auto, 5000);
+    }
 
     //перемещение слайда при клики на кнопки снизу
     $(".select_slide").on("click", select_slide);

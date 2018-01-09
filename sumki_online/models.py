@@ -267,6 +267,7 @@ class Order_params(models.Model):
     name = models.CharField(max_length=255, verbose_name='Имя покупателя')
     surname = models.CharField(max_length=255, verbose_name='Фамилия покупателя')
     adress = models.CharField(max_length=255, verbose_name='Адрес доставки', default='Самовывоз')
+    phone = models.CharField(max_length=255, verbose_name='Номер телефона', default='Не указан')
     delivery = models.CharField(max_length=255, verbose_name='Вариант получения товара', default='Самовывоз')
     data = models.DateTimeField(auto_now=True)
     sent = models.BooleanField(default=False, verbose_name='Отправлено')
