@@ -243,9 +243,11 @@ def checkout(request):
 
 @csrf_exempt
 def order_ready(request):
+
     json_str = {}
 
     if request.is_ajax() and request.method == 'POST':
+
         data_json = request.POST.get('order')
 
         if not data_json:
@@ -255,68 +257,71 @@ def order_ready(request):
         data = json.loads(request.POST.get('order'))
         form = OrderForm(data)
         if form.is_valid():
-            # создаём новый заказ
-            payment = Payment(order_amount=round(float((data['amount'])),2), payment_type='')
-            payment.save()
-            payform = PaymentForm(instance=payment)
-            adress = form.cleaned_data['adress'] + data['fon_number']
+            try:
+                # создаём новый заказ
+                payment = Payment(order_amount=round(float((data['amount'])),2), payment_type='')
+                payment.save()
+                payform = PaymentForm(instance=payment)
+                adress = form.cleaned_data['adress'] + data['fon_number']
 
-            order_par = Order_params(
-                name=form.cleaned_data['name'],
-                surname=form.cleaned_data['surname'],
-                adress=adress,
-                delivery=data['delivery_type'],
-                amount=data['amount'],
-                payment=payment,
-                data=datetime.today()
-            )
-            order_par.save()  # создали номер заказа
-            # добавляем товары в заказ
-            for itemm in data['items']:
-                try:
-                    el = Item.objects.get(pk=itemm['id'])
-                    order_items = Order_items(
-                        item=el,
-                        order=order_par,
-                        number=int(itemm['number'])
-                    )
-                    order_items.save()  # указали какие товары в заказе
+                order_par = Order_params(
+                    name=form.cleaned_data['name'],
+                    surname=form.cleaned_data['surname'],
+                    adress=adress,
+                    delivery=data['delivery_type'],
+                    amount=data['amount'],
+                    payment=payment,
+                    data=datetime.today()
+                )
+                order_par.save()  # создали номер заказа
+                # добавляем товары в заказ
+                for itemm in data['items']:
+                    try:
+                        el = Item.objects.get(pk=itemm['id'])
+                        order_items = Order_items(
+                            item=el,
+                            order=order_par,
+                            number=int(itemm['number'])
+                        )
+                        order_items.save()  # указали какие товары в заказе
 
-                    # если обувь то добавляем информацию по размерам
-                    if itemm.get('size', False):
-                        size_id = Size.objects.get(name=itemm['size'])
-                        if StoreObuv.objects.filter(item=el, size=size_id).exists():
-                            if not Order_size_obuv.objects.filter(order=order_par, item=el, size=size_id).exists():
-                                order_size = Order_size_obuv(
-                                    order=order_par,
-                                    item=el,
-                                    size=size_id
-                                )
-                                order_size.save()
+                        # если обувь то добавляем информацию по размерам
+                        if itemm.get('size', False):
+                            size_id = Size.objects.get(name=itemm['size'])
+                            if StoreObuv.objects.filter(item=el, size=size_id).exists():
+                                if not Order_size_obuv.objects.filter(order=order_par, item=el, size=size_id).exists():
+                                    order_size = Order_size_obuv(
+                                        order=order_par,
+                                        item=el,
+                                        size=size_id
+                                    )
+                                    order_size.save()
+                            '''
+                            # уменьшаем количество оставшегося размера
+                            store_obuv = StoreObuv.objects.get(item=el, size=size_id)
+                            store_obuv.number -= int(itemm['number'])
+                            if store_obuv.number < 0:
+                                store_obuv.number = 0
+                            store_obuv.save()
+                            '''
                         '''
-                        # уменьшаем количество оставшегося размера
-                        store_obuv = StoreObuv.objects.get(item=el, size=size_id)
-                        store_obuv.number -= int(itemm['number'])
-                        if store_obuv.number < 0:
-                            store_obuv.number = 0
-                        store_obuv.save()
+                        # уменьшаем количество оставшегося товара
+                        el.number -= int(itemm['number'])
+                        if el.number < 0:
+                            el.number = 0
+                        el.save()
                         '''
-                    '''
-                    # уменьшаем количество оставшегося товара
-                    el.number -= int(itemm['number'])
-                    if el.number < 0:
-                        el.number = 0
-                    el.save()
-                    '''
-                except ObjectDoesNotExist:
-                    json_str['result'] = False
-                    return HttpResponse(json.dumps(json_str))
+                    except ObjectDoesNotExist:
+                        json_str['result'] = False
+                        return HttpResponse(json.dumps(json_str))
 
-            context = {
-                "payform": payform
-            }
-            json_str['payform'] = render_to_string('pay_form.html', context)
-            json_str['result'] = True
+                context = {
+                    "payform": payform
+                }
+                json_str['payform'] = render_to_string('pay_form.html', context)
+                json_str['result'] = True
+            except Exception as e:
+                print(e)
             return HttpResponse(json.dumps(json_str))
     json_str['result'] = False
 
