@@ -259,7 +259,7 @@ def order_ready(request):
             payment = Payment(order_amount=round(float((data['amount'])),2), payment_type='')
             payment.save()
             payform = PaymentForm(instance=payment)
-            adress = form.cleaned_data['adress']
+            adress = form.cleaned_data['adress'] + data['fon_number']
 
             order_par = Order_params(
                 name=form.cleaned_data['name'],
