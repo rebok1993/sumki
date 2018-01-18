@@ -2,7 +2,7 @@
 
 {% load filters %}
 <div class="item more_information" id="{{ item.id }}" data-item-category="{{ item.category_alias }}">
-    <a {% comment %}href="{% url 'sumki_online:item' item.category_alias item.id %}"{% endcomment %}>
+    <a href="{% url 'sumki_online:catalog' item.category_alias %}?item={{ item.id }}" onclick="return false">
         <div class="icon_more_block hide_element"><span class="icon_more_inner"></span> <span>Подробнее</span></div>
         <div class="wrapper_image">
             <img class="image_item" alt="{{ item.type }} {{ item.brend }}" src="{% static 'sumki_online/images/' %}{{ item.category_alias }}/200_on_200/{{ item.id }}.jpg" width="220">

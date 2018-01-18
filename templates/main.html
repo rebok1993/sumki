@@ -7,7 +7,8 @@
     <meta name='wmail-verification' content='4fd93e3acfb2756aae8d063cf783c553' />
     <meta name="keywords" content="женская обувь, женские сумки, низкие цены, кроссовки, туфли, кеды, макасины">
     {% block meta_new %}{% endblock %}
-    <title>Онлайн магазин женской обуви и сумок</title>
+    <title>Интернет-магазин женских сумок и обуви. Купить женскую обувь, женские сумки в онлайн магазине Vittora.ru</title>
+    <link rel="shortcut icon" href="{%  static 'sumki_online/images/other/favicon2.ico' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&amp;subset=cyrillic" rel="stylesheet">
@@ -60,21 +61,22 @@
         <div class="header row">
             <div class="header_inform_row">
                 <div style="width: 1206px; height: 100%; margin: auto">
-                    <div class="col-md-6" style="text-align: left; height: 100%;">
-                        {% comment %}<span class="header_inform_row_menu {% block main_menu_tab %}{% endblock %}"><a href="/">Главная</a></span>
-                        <span class="header_inform_row_menu {% block menu_delivery_tab %}{% endblock %}"><a href="/delivery">Доставка</a></span>
-                        <span class="header_inform_row_menu {% block menu_about_tab %}{% endblock %}"><a href="/about">О нас</a></span>
-                        {% endcomment %}
+                    <div class="col-md-2" style="text-align: left; height: 100%;">
                         <a class="logo" href="/"></a>
                     </div>
-                    <div class="col-md-6" style="height:100%; line-height: 80px">
-                        <span id="number_fon_top">8 (910)-877-49-69</span>
+                    <div class="col-md-4" style="height:100%; line-height: 80px;text-align: center">
+                        <span style="font-size: 16px">БОЛЬШОЙ ВЫБОР СУМОК <span style="font-weight: 100">В VITTORA<span></span>
                     </div>
+                    <div class="col-md-6" id="top_image_sumki" style="height:100%; line-height: 80px">
+
+                    </div>
+                    {% comment %}<div class="col-md-3" style="height:100%; line-height: 80px">
+                        <span id="number_fon_top">8 (910)-877-49-69</span>
+                    </div>{% endcomment %}
                 </div>
             </div>
             <div class="header_main_area">
-                <div style="width: 1206px; margin: auto; position: relative">
-                    {% comment %}<a class="logo" href="/"></a>{% endcomment %}
+                <div id="header_main_area_inner">
                     <ul id="menu_ul">
                         <li {% if category.alias == 'obuv' %}class="active_elem"{% endif %}>
                             <a href="{% url 'sumki_online:catalog' 'obuv' %}" class="menu_name">
@@ -102,7 +104,7 @@
                             </a>
                         </li>
                     </ul>
-                    <div id="welcome"><span>Welcome to us</span></div>
+                    <div id="welcome"><span><span>Welcome</span> to us</span></div>
                     <div id="korzina_block">
                         <div class="korzina korzina_inactive"></div>
                         <div id="korzina_content"  onmousedown="return false" onselectstart="return false">
@@ -131,6 +133,11 @@
                                     <div style="clear: both; text-align: center; padding-top: 20px"><a href="/order" style="display: inline-block"><button type="button" class="btn btn-danger">Перейти в корзину</button></a></div>
                                 </li>
                             </ul>
+                        </div>
+                    </div>
+                    <div id="korzina_desc">
+                        <div style="display: inline-block;">
+                            <span>Корзина</span><br><span>1 товар</span>
                         </div>
                     </div>
                 </div>

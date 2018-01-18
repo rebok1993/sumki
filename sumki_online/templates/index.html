@@ -19,12 +19,12 @@
 
 {% block main_block %}
     <div class="main_offer">
-        <div id="scrolling_elements" style="height: 350px">
+        <div id="scrolling_elements" style="height: 300px">
             <ul>
                 {% for elem in main_offer %}
                     <li>
                         <a href="{{ elem.link }}">
-                            <img src="{% static 'images/special_offer/' %}{{ elem.image }}" {% comment %}width="1206"{% endcomment %} height="350">
+                            <img src="{% static 'images/special_offer/' %}{{ elem.image }}" {% comment %}width="1206"{% endcomment %} height="300">
                         </a>
                     </li>
                 {% endfor %}
@@ -45,7 +45,7 @@
     <div class="main_content container" style="width: 1206px; margin: auto">
         <div class="row">
             <div class="col-md-12">
-                <div class="content_items" style="margin-top: 20px">
+                <div class="content_items" style="margin-top: 70px">
                     {% comment %}<div class="switcher_type_tovar row">
                         <span>ОФОРМЛЕНИЕ ЗАКАЗА</span>
                     </div>

@@ -1,7 +1,7 @@
 .name_result,#korzina_content .img_item,.item_in_korzina{
     float: left;
 }
-#result,#korzina_block,#korzina_content .description_item,#korzina_content .delete_item{
+#result,#korzina_content .description_item,#korzina_content .delete_item{
     float: right;
 }
 #result_block div{
@@ -118,39 +118,43 @@ a{
 .wrapper .header .header_main_area{
     height: 52px;
     text-align: left;
-    /*border-top: 1px solid #cc6a3b;
-    border-bottom: 1px solid #cc6a3b;*/
-    background: #034369;/*#232F3E;*//*#A7ACB2#00b258*/
+    background: #034369;
     position: relative;
-    /*border-bottom: 1px solid #00a251;*/
 }
 .header_main_area #menu_ul{
     display: inline-block;
     width: auto;
-    vertical-align: top;
     height: 100%;
 }
 #welcome{
     display: inline-block;
     width: auto;
-    vertical-align: top;
     height: 100%;
-    padding-left: 50px;
+    padding-left: 20px;
     color: #fff;
     font-weight: 100;
     font-size: 28px;
-    line-height: 80px;
-}
-#welcome span{
-    font-weight: bold;
-    display: inline-block;
-    vertical-align: bottom;
     line-height: 52px;
 }
-.header_main_area #menu_ul li{
-    line-height: 52px;
+#korzina_desc{
     display: inline-block;
     height: 100%;
+    color: #fff;
+    text-align: right;
+    line-height: 52px;
+}
+#korzina_desc span{
+    font-size: 13px;
+    display: inline-block;
+}
+#welcome span{
+    display: inline-block;
+}
+#welcome span span{
+    font-weight: bold;
+}
+.header_main_area #menu_ul li{
+    display: inline-block;
 }
 .header_main_area #menu_ul li:before{
     display: inline-block;
@@ -158,11 +162,20 @@ a{
     vertical-align: middle;
     content: "";
 }
+#header_main_area_inner{
+    position: relative;
+    width: 1206px;
+    margin: auto;
+    height: 100%;
+    font-size: 0;
+}
+#header_main_area_inner>div,#header_main_area_inner>ul{
+    vertical-align: top;
+}
 .header_main_area #menu_ul li a{
     border: 2px solid transparent;
     border-radius: 4px;
     color: #fff;
-    font-weight: bold;
     vertical-align: middle;
     line-height: 36px;
     height: 40px;
@@ -238,36 +251,28 @@ a{
     display: none;
 }
 #korzina_block{
-    margin: auto;
-    top: 0;
-    right: 2%;
-    bottom: 0;
-    /*margin-top: 30px;
-    margin-right: 50px;*/
-    height: 50px;
+    display: inline-block;
+    height: 52px;
     width: 70px;
+    font-size: 14px;
     background: transparent;
-    border-radius: 10px 10px 0 0;
-    padding: 7px 5px;
-    position: absolute;
+    margin-left: 10px;
     cursor: pointer;
+    text-align: center;
     border:1px solid transparent;
 }
-#korzina_block:hover{
-    /*background: #b44444;*/
-}
 #korzina_block .korzina_inactive{
-    background:url("../images/korzina_white.png") no-repeat center transparent;
-    background-size: 100%;
+    background:url("../images/korzina_white.png") no-repeat center center transparent;
+    background-size: 30px 30px;
 }
 #korzina_block .korzina_active{
-    background:url("../images/korzina_black.png") no-repeat center transparent;
-    background-size: 100%;
+    opacity: 0.5;
+    background:url("../images/korzina_white.png") no-repeat center center transparent;
+    background-size: 30px 30px;
 }
 .korzina{
-    vertical-align: middle;
-    margin: auto;
-    height: 32px;
+    display: inline-block;
+    height: 100%;
     width: 30px;
 }
 #korzina_content{
@@ -281,7 +286,7 @@ a{
     border: 1px solid #e1e8ed;
     border-top: none !important;
     padding: 10px 10px 0;
-    border-radius: 7px 0 7px 7px;
+    border-radius: 7px;
 }
 #korzina_content li{
     overflow: hidden;
@@ -1103,6 +1108,9 @@ loader*/
 }
 .adv_elem{
     margin-top: 30px;
+}
+#top_image_sumki{
+    background: url("../images/sumki_top2.jpg") no-repeat transparent;
 }
 /*
 loader*/

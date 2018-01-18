@@ -146,9 +146,6 @@ $(function () {
             event.stopPropagation();
         }
         $("#korzina_block").children(".korzina_inactive").toggleClass("korzina_inactive korzina_active");
-        $("#korzina_block").css({
-            "background-color":"#fff"
-        });
         $("#korzina_block").children("#korzina_content").slideDown();
     };
     //функция скрытия корзины

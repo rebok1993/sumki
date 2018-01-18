@@ -1,16 +1,56 @@
 {% extends 'main.html' %}
+{% load staticfiles %}
+{% block new_js %}
+    <script type="text/javascript" src="{% static 'sumki_online/js/delivery.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/places.js@1.4.15"></script>
+    <script type="text/javascript">
+        var citys_dost = {{ exam|safe }};
+    </script>
+{% endblock %}
+
 {% block menu_delivery_tab %}menu_inner_active{% endblock %}
 {% block main_block %}
-    <div class="main_content container" style="width: 1206px; margin: auto">
-        <h3>Доставка:</h3>
-        <p style="font-weight: normal; font-size: 14px">
-            Мы доставляем товар Почтой России и транспортной компанией Boxberry в большинство населённых пунктов России.
-            <br>Срок доставки от 2 дней, в зависимости от региона получателя.
-        </p>
-        <p style="font-weight: normal; font-size: 14px">
-            Самовывоз осуществляется по адресу г.Нижний Новгород, ул. Карда Маркса д.7
-        </p>
-        <p style="font-weight: 100; font-size: 14px">По всем вопросам просьба обращаться по телефону 8(910)-877-49-69.</p>
-        <p style="font-weight: bold; font-size: 14px">УДАЧНЫХ ПОКУПОК )</p>
+    <div class="main_content container row" style="width: 1206px; margin: 30px auto">
+        <div class="col-md-6">
+            <h1 style="font-weight: 100">Доставка товаров Vittora:</h1>
+            <p style="font-size: 15px; margin:30px 0 20px">Наш интернет-магазин осуществляет доставку следующими способами:</p>
+            <ol style="list-style-type: disc;margin: 0.2em 1em 0.2em 20px; font-size: 15px">
+                <li style="border: 1px solid #ccc;background-color: #FAF6EB;border-radius: 4px;padding: 10px; margin-bottom: 10px">
+                    <strong>Почтой России</strong> по всей России - <span style="color: #2EB973;font-weight: bold">бесплатно</span>
+                    <p style="margin: 1em 0;">Срок доставки от 5 дней в зависимости от региона.</p>
+                    <p>
+                        <img src="{% static 'images/pochtarussia.png' %}" width="125" height="60" alt="Почта России">
+                    </p>
+                </li>
+                <li style="border: 1px solid #ccc;background-color: #FAF6EB;border-radius: 4px;padding: 10px; margin-bottom: 10px">
+                    <strong>Доставка до пункта самовывоза</strong> в Вашем населённом пункте - <span style="color: #2EB973;font-weight: bold"">бесплатно</span>
+                    <p style="margin: 1em 0;">Срок доставки от 3 дней в зависимости от региона.</p>
+                    <p>
+                        <img src="{% static 'images/boxberry.png' %}" height="50" alt="BoxBerry">
+                    </p>
+                </li>
+                <li style="border: 1px solid #ccc;background-color: #FAF6EB;border-radius: 4px;padding: 10px; margin-bottom: 10px">
+                    <strong>Доставка курьером</strong> в Вашем <населённом></населённом> пункте - <span style="color: #2EB973;font-weight: bold">бесплатно</span>
+                    <p style="margin: 1em 0;">Срок доставки от 3 дней в зависимости от региона.</p>
+                    <p>
+                        <img src="{% static 'images/boxberry.png' %}" height="50" alt="BoxBerry">
+                    </p>
+                </li>
+            </ol>
+            <p style="font-weight: normal; font-size: 15px; margin-top:20px">
+                <strong>Самовывоз</strong> осуществляется по адресу г.Нижний Новгород, ул. Карда Маркса д.7
+            </p>
+            <p style="font-weight: 100; font-size: 15px">По всем вопросам просьба обращаться по телефону 8(910)-877-49-69.</p>
+            <p style="font-weight: bold; font-size: 15px; margin-bottom: 70px">УДАЧНЫХ ПОКУПОК )</p>
+        </div>
+        <div class="col-md-6">
+            {% comment %}<h4>Выберите населённый пункт для проверки доступных способов доставки:</h4>
+            <form role="form">
+                <div class="form-group">
+                    <label for="id_city">Населённый пункт</label>
+                    <input type="search" id="id_city" placeholder="Введите город доставки" />
+                </div>
+            </form>{% endcomment %}
+        </div>
     </div>
 {% endblock %}
