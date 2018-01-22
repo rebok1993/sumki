@@ -54,13 +54,13 @@
     <!-- /Yandex.Metrika counter -->
     <div id="fon_wait" {% if show_more_window %}style="display: block"{% endif %}>
         {% if show_more_window %}{% include 'more_inform_window.html' %}{% endif %}
-        <div id="special_skidka">
+        {% comment %}<div id="special_skidka">
             <div id="special_skidka_close"><span class="glyphicon glyphicon-remove" title="закрыть"></span></div>
             <div style="background-color: #aaa">
                 <img width="420" height="200" src="">
             </div>
             При покупке товара в течении 30 мин получите скидку 10%
-        </div>
+        </div>{% endcomment %}
     </div>
 
     <div id="fon_wait_2">
