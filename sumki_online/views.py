@@ -166,6 +166,7 @@ def add_number_views(request, elem):
             number_v = NumberViews(item=tovar, number=1, data=datetime.today())
             number_v.save()
 
+
 #МЕТОДЫ ОТВЕЧАЮЩИЕ ЗА ЗАКАЗ НАЧАЛО
 
 @csrf_exempt
@@ -681,18 +682,6 @@ def catalog_obuv(request, alias):
         return HttpResponse(json_str)
     return HttpResponse(render_to_string('catalog.html', context))
 
-def change_number():
-    items = Item.objects.all()
-    for item_el in items:
-        number = NumberViews.objects.filter(item=item_el)
-        num = random.randint(20, 100)
-        if not len(number):
-            number_new = NumberViews(item=item_el, number=num, number_week=num, data=datetime.today())
-            number_new.save()
-        else:
-            number[0].number_week = num
-            number[0].save()
-
 def get_item(request,alias):
     elem_id = request.GET.get('item')
     item_elem = Item.objects.get(id=elem_id)
@@ -700,7 +689,7 @@ def get_item(request,alias):
     number_views_week_obj = NumberViews.objects.filter(item=item_elem)
 
     if len(number_views_week_obj):
-        number_views_week_obj[0].number_week += 1
+        #number_views_week_obj[0].number_week += 1
         number_views_week = number_views_week_obj[0].number_week
         number_views_week_obj[0].save()
     else:
@@ -713,7 +702,7 @@ def get_item(request,alias):
     context = {
         'show_more_window':True,
         'number_views_week':number_views_week,
-        'ending_views': ('просмотр', 'просмотра', 'просмотров')
+        'ending_views': ('человек', 'человека', 'человек')
     }
     if alias == 'obuv':
         context['store_elem'] = StoreObuv.objects.filter(item=item_elem)
@@ -739,7 +728,7 @@ def catalog(request, alias='obuv'):
         number_views_week_obj = NumberViews.objects.filter(item=item_elem)
 
         if len(number_views_week_obj):
-            number_views_week_obj[0].number_week += 1
+            #number_views_week_obj[0].number_week += 1
             number_views_week = number_views_week_obj[0].number_week
             number_views_week_obj[0].save()
         else:
@@ -752,7 +741,7 @@ def catalog(request, alias='obuv'):
         context = {
             'category':Category.objects.get(alias=alias),
             'number_views_week': number_views_week,
-            'ending_views':('просмотр', 'просмотров', 'просмотра')
+            'ending_views':('человек', 'человека', 'человек')
         }
         if alias == 'obuv':
             options_elem = OptionsObuv.objects.get(item=item_elem)

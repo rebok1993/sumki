@@ -52,7 +52,17 @@
     </script>
     <noscript><div><img src="https://mc.yandex.ru/watch/45907743" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     <!-- /Yandex.Metrika counter -->
-    <div id="fon_wait" {% if show_more_window %}style="display: block"{% endif %}>{% if show_more_window %}{% include 'more_inform_window.html' %}{% endif %}</div>
+    <div id="fon_wait" {% if show_more_window %}style="display: block"{% endif %}>
+        {% if show_more_window %}{% include 'more_inform_window.html' %}{% endif %}
+        <div id="special_skidka">
+            <div id="special_skidka_close"><span class="glyphicon glyphicon-remove" title="закрыть"></span></div>
+            <div style="background-color: #aaa">
+                <img width="420" height="200" src="">
+            </div>
+            При покупке товара в течении 30 мин получите скидку 10%
+        </div>
+    </div>
+
     <div id="fon_wait_2">
         <div class="wait_load_doc">{% comment %}cssload-box-loading{% endcomment %}
         </div>
@@ -65,12 +75,12 @@
                         <a class="logo" href="/"></a>
                     </div>
                     <div class="col-md-4" style="height:100%; line-height: 80px;text-align: center">
-                        <span style="font-size: 16px">БОЛЬШОЙ ВЫБОР СУМОК <span style="font-weight: 100">В VITTORA<span></span>
+                        <span style="font-size: 16px">БОЛЬШОЙ ВЫБОР СУМОК <span style="font-weight: 100">В VITTORA</span></span>
                     </div>
                     <div class="col-md-6" id="top_image_sumki" style="height:100%; line-height: 80px">
 
                     </div>
-                    {% comment %}<div class="col-md-3" style="height:100%; line-height: 80px">
+                    {% comment %}<div class="col-md-6" style="height:100%; line-height: 80px">
                         <span id="number_fon_top">8 (910)-877-49-69</span>
                     </div>{% endcomment %}
                 </div>
@@ -106,7 +116,7 @@
                     </ul>
                     <div id="welcome"><span><span>Welcome</span> to us</span></div>
                     <div id="korzina_block">
-                        <div class="korzina korzina_inactive"></div>
+                        <a class="korzina korzina_inactive" href='/order'></a>
                         <div id="korzina_content"  onmousedown="return false" onselectstart="return false">
                             <ul>
                                 <li id='copy_elem_mini_korz' data-item-id='' data-item-category='' class='item_in_mini_korz'>
@@ -135,11 +145,11 @@
                             </ul>
                         </div>
                     </div>
-                    <div id="korzina_desc">
-                        <div style="display: inline-block;">
-                            <span>Корзина</span><br><span>1 товар</span>
+                    <a id="korzina_desc" href='/order'>
+                        <div id="korzina_desc_inner">
+                            <span>Корзина</span><br><span id="korzina_desc_inner_price">0 руб.</span>
                         </div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>

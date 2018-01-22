@@ -137,15 +137,34 @@ a{
     line-height: 52px;
 }
 #korzina_desc{
+    cursor: pointer;
     display: inline-block;
     height: 100%;
     color: #fff;
-    text-align: right;
-    line-height: 52px;
+    /*line-height: 52px;*/
+}
+#korzina_desc.korzina_desc_active{
+    opacity: 0.5;
+}
+#korzina_desc:before{
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    content: "";
+}
+#korzina_desc_inner{
+    display: inline-block;
+    line-height: normal;
+    vertical-align: middle;
+}
+#korzina_desc_inner_price{
+    color: #2EB973;
+    font-weight: bold;
+    font-size: 16px !important;
 }
 #korzina_desc span{
     font-size: 13px;
-    display: inline-block;
+    /*display: inline-block;*/
 }
 #welcome span{
     display: inline-block;
@@ -471,6 +490,28 @@ a{
     background-color: #fff;
     z-index: 100;
     border: 1px solid #ccc;
+}
+#special_skidka{
+    width: 506px;
+    height: 420px;
+    animation: popin .3s;
+    border-radius: 4px;
+    background-color: #ffffff;
+    z-index: 1;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 10px;
+}
+#special_skidka_close{
+    text-align: right;
+    cursor: pointer;
+}
+#special_skidka_close:hover{
+    color: #337AB7;
 }
 #fon_wait{
     display: none;
@@ -1009,17 +1050,17 @@ loader*/
     height: 18px;
 }
 .icon_more_block{
-    padding: 7px 0;
+    padding: 20px 0 0;
     color: #999;
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     text-align: center;
     line-height: 100%;
 }
 .icon_more_block span{
     vertical-align: middle;
+}
+.icon_more_block:hover{
+    color: #777;
 }
 .icon_more_inner{
     background:url("../images/icon_more.png") no-repeat center center transparent;

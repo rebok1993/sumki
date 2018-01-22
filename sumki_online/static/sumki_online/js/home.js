@@ -47,7 +47,7 @@ $(function () {
 
     //запускаются при загрузке сайта
     if(number_slide > 1){
-        $("#btn_left, #btn_right, #scroll_main_offer).show();
+        $("#btn_left, #btn_right, #scroll_main_offer").show();
         id = setInterval(select_slide_auto, 5000);
     }
 
