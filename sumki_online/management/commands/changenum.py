@@ -40,13 +40,14 @@ class Command(BaseCommand):
         numbers = NumberViews.objects.filter(item__in=items)
         item_num = [value['id'] for value in numbers.values()]
 
-        num = random.randint(start, end)
         for item_el in items:
+            num = random.randint(start, end)
             if item_el.id not in item_num:
                 number_new = NumberViews(item=item_el, number=num, number_week=num, data=timezone.now())
                 number_new.save()
 
         for number in numbers:
+            num = random.randint(start, end)
             number.number_week += num
             if clear: number.number_week = num
             number.save()
