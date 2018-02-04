@@ -17,51 +17,11 @@
 {% block main_block %}
     <div class="main_content container" style="width: 1206px; margin: auto">
         <div class="row">
-            <div class="col-md-9 content_item">
-                <div id="order_steps">
-                        <ul>
-                            <li class="active_step" id="order_elements">Cборка заказа</li>
-                            <li id="delivery_order_btn">Способ и адрес доставки</li>
-                            <li id="payment_method_btn">Оплата</li>
-                    </ul>
-                </div>
+            <div class="col-md-8 content_item">
                 <div>
-                    <div id="build_order">
-                        <h3>Корзина</h3>
-                        <ul id="order_korzina">
-                            <li style='display: none' id='copy_element_li'>
-                                <div class='row item_in_order'>
-                                    <div class='col-md-6 block_name_item'>
-                                        <div class='img_item item_in_mini_korz' data-item-category='' data-item-id=''>
-                                            <img src='' width='100px'>
-                                        </div>
-                                        <div class='name_item description_el_order'><span class="name_item_el"></span><br><span class="size_item_el"></span></div>
-                                    </div>
-                                    <div class='col-md-2 description_el_order price_item_order' style='font-weight: bold'><span></span></div>
-                                    <div class='col-md-1 block_number_item  description_el_order'>
-                                        <form class='number_item'>
-                                            <select class='form-control' style='width: auto !important;'></select>
-                                        </form>
-                                    </div>
-                                    <div class='col-md-2 description_el_order'><span class='order_item_summa'  style='font-weight: bold'></span></div>
-                                    <div class='col-md-1 description_el_order'><span class='order_delete_item'>x</span></div>
-                                </div>
-                            </li>
-                        </ul>
-                        <div id="korzina_blank">На данный момент корзина пуста</div>
-                    </div>
                     <div id="delivery_order">
-                        <h3>Способ получения товара:</h3>
-                        <div class="delivery_method">
-                            <span class="delivery_method_in" data-delivery-method="independent_export">Самовывоз</span>
-                            <span class="delivery_method_out" data-delivery-method="delivery_export">Доставка</span>
-                        </div>
+                        <h3 style="border-bottom: 1px solid #333; padding-bottom: 10px">Оформление заказа</h3>
                         <div style="margin-top: 20px">
-                            <div id="independent_export_el" class="step2_opt1">
-                                <p>Вы можете забрать товар по адресу: г.Нижний Новгород, ул.Карла Маркса, д.20</p>
-                                <p>Время работы: с 10-00 до 19-00 ежедневно</p>
-                                <p>Кто заберёт товар:</p>
-                            </div>
                             <div id="delivery_export_el" class="step2_opt2">
                                 <p>Мы доставляем товар Почтой Росии и транспортной компанией Boxberry в большинство населённых пунктов России</p>
                                 <p>Срок доставки от 2 дня, в зависимости от региона получателя.</p>
@@ -73,18 +33,13 @@
                                 <div class="form-group step2_opt2">
                                     {{ form.city.errors }}
                                     <label for="id_city">Населённый пункт</label>
-                                    <input type="search" id="id_city" placeholder="Введите город доставки" />
-                                    {% comment %}<select class="form-control" placeholder="Выберите город доставки" id="id_city" required>
-                                        <option selected value="first_val" disabled>Выберите город доставки</option>
-                                        {% for city in list_city %}
-                                            <option value="{{ city.Code }}" data-courier-delivery="{{ city.CourierDelivery }}" data-pickup-point="{{ city.PickupPoint }}">{{ city.Name }}</option>
-                                        {% endfor %}
-                                    </select>{% endcomment %}
+                                    <input class="form-control" type="search" id="id_city" placeholder="Введите город доставки" />
+                                    <span class='help-block'>Это поле необходимо заполнить</span>
                                 </div>
                                 <div class="form-group" id="delivery_way_block">
-                                    <h5 style="font-weight: bold">Выберите тип доставки из доступных:</h5>
+                                    <h5 style="font-weight: 600">Способ доставки:</h5>
                                     <div id="delivery_way_block_inner">
-                                        <div class="delivery_way" id="delivery_pochta_ru" data-type-way="pochta">Доставка Почтой России</div>
+                                        <div class="delivery_way active_delivery_way" id="delivery_pochta_ru" data-type-way="pochta">Доставка Почтой России</div>
                                         <div class="delivery_way deliv_top_line" id="delivery_way_courier" data-type-way="courier">Курьерская доставка до квартиры (дома)</div>
                                         <div id="delivery_way_pvz" class="deliv_top_line">
                                             <div>Доставка до пункта самовывоза в Вашем городе:</div>
@@ -96,27 +51,58 @@
                                     {{ form.adress.errors }}
                                     <label for="id_adress">Улица, дом, кв.</label>
                                     {{ form.adress }}
+                                    <span class='help-block'>Это поле необходимо заполнить</span>
                                 </div>
                                 <div class="form-group">
                                     {{ form.name.errors }}
                                     <label for="id_name">Имя, Отчество</label>
                                     {{ form.name }}
+                                    <span class='help-block'>Это поле необходимо заполнить</span>
                                 </div>
                                 <div class="form-group">
                                     {{ form.surname.errors }}
                                     <label for="id_surname">Фамилия</label>
                                     {{ form.surname }}
+                                    <span class='help-block'>Это поле необходимо заполнить</span>
                                 </div>
                                 <div class="form-group">
                                     {{ form.fon_number.errors }}
                                     <label for="id_fon_number">Телефон для связи</label>
                                     {{ form.fon_number }}
+                                    <span class='help-block'>Это поле необходимо заполнить</span>
                                 </div>
-                                <button type="submit" class="btn btn-danger next_step_payment">Следующий шаг</button>
                             </form>
                         </div>
                     </div>
-                    <div id="payment_method">
+                    <div id="build_order">
+                        <div style="font-size: 24px; font-weight: 500">Итого к оплате: <span id="total_summ_order">0</span> руб. <span id="summ_order_no_skidka"></span></div>
+                        <h3>Товары в заказе</h3>
+                        <ul id="order_korzina">
+                            <li style='display: none' id='copy_element_li'>
+                                <div class='row item_in_order'>
+                                    <div class='col-md-6 block_name_item'>
+                                        <div class='img_item item_in_mini_korz' data-item-category='' data-item-id=''>
+                                            <img src='' width='64px'>
+                                        </div>
+                                        <div class='name_item description_el_order'><span class="name_item_el"></span><br><span class="size_item_el"></span></div>
+                                    </div>
+                                    <div class='col-md-2 description_el_order price_item_order'><span></span></div>
+                                    <div class='col-md-1 block_number_item  description_el_order'>
+                                        <form class='number_item'>
+                                            <select class='form-control' style='width: auto !important;'></select>
+                                        </form>
+                                    </div>
+                                    <div class='col-md-2 description_el_order'><span class='order_item_summa'></span></div>
+                                    <div class='col-md-1 description_el_order'><span class='order_delete_item'>x</span></div>
+                                </div>
+                            </li>
+                        </ul>
+                        <button type="button" class="btn btn-danger" id="next_step_payment">Оформить заказ</button>
+                    </div>
+                    <div id="korzina_blank">В корзину ничего не добавлено</div>
+                    <div style="margin-top: 30px" id="payment_method" {% comment %}style="display: block"{% endcomment %}>
+                        <h3 style="border-bottom: 1px solid #333; padding-bottom: 10px">Оформление заказа</h3>
+                        <h4>Ваш заказ собирается. После <b>оплаты заказа</b> с вами свяжется специалист службы доставки.</h4>
                         <div style="padding: 10px 0 10px 10px; margin: 20px 0 20px 0" id="order_final_win">
                             <h4 style="color: #333">Ваш заказ:</h4>
                             <p id="order_final_items">Товары в заказе:<br>
@@ -124,24 +110,33 @@
                             </p>
                             <p id="order_final_summ">Сумма заказа: <span></span></p>
                             <p id="order_final_fio">Получатель: <span></span></p>
-                            <p id="order_final_dil">Способ получени заказа: <span></span></p>
+                            <p id="order_final_dil">Способ получения заказа: <span></span></p>
                             <p id="order_final_fon">Телефон: <span></span></p>
                         </div>
                         <button type="submit" class="btn btn-danger" id="order_ready">Оплатить</button>
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 right_side_bar">
-                <div style="margin-bottom: 20px;padding-top: 50px" id="summa_k_oplate_right">
-                    {% comment %}<div style="font-weight: bold; font-size: 18px;">Сумма к оплате</div>{% endcomment %}
-                    <h3>Сумма к оплате</h3>
-                    <div id="summa_k_oplate" class="step2_opt1">0 руб</div>
-                    <div id="summa_k_oplate2" class="step2_opt2">0 руб</div>
-                    <div id="price_for_delivery" class="step2_opt2">Бесплатная доставка{% comment %}+<span>0</span> руб. (доставка){% endcomment %}</div>
-                    <div id="summa_k_oplate_with_delivery" class="step2_opt2">Итого <span>0 руб.</span></div>
-                </div>
-                <div>
-                    <button type="button" class="btn btn-danger" id="checkout">Оформить заказ</button>
+            <div class="col-md-4 right_side_bar">
+                <div style="margin-bottom: 30px;margin-top: 70px">
+                    <h4>Преимущества интернет магазина Vittora</h4>
+                    <div class="adv_elem">
+                        <div class="icon_del_adv"></div>
+                        <div class="title_adv">Бесплатная доставка по всей России</div>
+                        <div class="descrip_adv">Мы доставляем товар бесплатно в любую точку России</div>
+                    </div>
+                    <div class="adv_elem">
+                        <div class="icon_safe_adv"></div>
+                        <div class="title_adv">Безопасность</div>
+                        <div class="descrip_adv">Безопасность платежей гарантируется использованием SSL протокола.
+                            Данные вашей банковской карты надежно защищены при оплате онлайн.
+                        </div>
+                    </div>
+                    <div class="adv_elem">
+                        <div class="icon_diver_adv"></div>
+                        <div class="title_adv">Разнообразие ассортимента</div>
+                        <div class="descrip_adv">В нашем интернет-магазине представлены товары на любой вкус</div>
+                    </div>
                 </div>
             </div>
         </div>

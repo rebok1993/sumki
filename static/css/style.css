@@ -4,8 +4,17 @@
 #result,#korzina_content .description_item,#korzina_content .delete_item{
     float: right;
 }
+#current_price_korz{
+
+}
 #result_block div{
-    color: inherit !important;
+    color: inherit;
+}
+#price_korz_without_skidka{
+    display: none;
+    font-size: 16px;
+    text-decoration: line-through;
+    color: #999999 !important;
 }
 .nav a,.nav .active a:hover{
     color: #fff !important;
@@ -29,6 +38,7 @@
 }
 
 body{
+    /*font-family: 'Roboto', sans-serif;*/
     font-family: 'Open Sans', sans-serif !important;
 }
 .header_main_area .active_elem a{
@@ -54,8 +64,11 @@ body{
     border-bottom:5px solid transparent;
     transition: all .15s ease-in-out;
 }*/
-.header_main_area li a:hover{
-    opacity: .65;
+#menu_ul li a:hover{
+    opacity: 0.8;
+}
+#menu_ul li{
+    padding: 0 14px;
 }
 /*.header_navbar li a:hover{
     !*color: #aaa;*!
@@ -82,7 +95,7 @@ a{
 .wrapper .header .header_inform_row{
     background-color: #fff;
     position: relative;
-    font-weight: bold;
+    font-weight: 600;
     height: 80px;
     line-height: 55px;
     text-align: right;
@@ -141,6 +154,8 @@ a{
     display: inline-block;
     height: 100%;
     color: #fff;
+    vertical-align: top;
+    margin-left: 10px;
     /*line-height: 52px;*/
 }
 #korzina_desc.korzina_desc_active{
@@ -233,10 +248,7 @@ a{
     background: url("../images/icons_about.png") no-repeat center left transparent;
     background-size: 27px 27px;
 }
-.header_main_area .active_elem a{
-    border-radius: 4px;
-    border: 2px solid #ccc !important;
-}
+
 .wrapper .body{
     min-height: 600px;
     position: relative;
@@ -270,15 +282,18 @@ a{
     display: none;
 }
 #korzina_block{
+    opacity: 0.8;
     display: inline-block;
     height: 52px;
-    width: 70px;
     font-size: 14px;
     background: transparent;
     margin-left: 10px;
     cursor: pointer;
-    text-align: center;
+    text-align: left;
     border:1px solid transparent;
+}
+#korzina_block:hover{
+    opacity: 1;
 }
 #korzina_block .korzina_inactive{
     background:url("../images/korzina_white.png") no-repeat center center transparent;
@@ -294,43 +309,8 @@ a{
     height: 100%;
     width: 30px;
 }
-#korzina_content{
-    display: none;
-    position: absolute;
-    top:100%;
-    right: -1px;
-    width:300px;
-    background-color: white;
-    z-index: 100;
-    border: 1px solid #e1e8ed;
-    border-top: none !important;
-    padding: 10px 10px 0;
-    border-radius: 7px;
-}
-#korzina_content li{
-    overflow: hidden;
-    border-bottom: 2px solid #e1e8ed;
-}
-#korzina_content li:last-child{
-    border: none;
-}
-#korzina_content .delete_item{
-    padding: 10px;
-    font-weight: bold;
-    width: 10%;
-    margin-top: 10px;
-}
-#korzina_content .delete_item:hover{
-    color: #337ab7;
-}
 .btns_item .in_korzina{
     display: none;
-}
-#item_absent{
-    padding: 20px;
-    font-weight: bold;
-    text-align: center;
-    border: none !important;
 }
 .item_in_korzina{
     overflow: hidden;
@@ -420,8 +400,9 @@ a{
     /*transition: all .15s ease-in-out;*/
     padding-bottom: 20px;
     display: inline-block;
-    width: 33%;
+    width: 25%;
     vertical-align: top;
+    padding-top: 30px;
 }
 .main_content .content_items .item:hover{
     /*z-index: 10;*/
@@ -492,8 +473,10 @@ a{
     border: 1px solid #ccc;
 }
 #special_skidka{
+    display: none;
+    text-align: center;
     width: 506px;
-    height: 420px;
+    height: 450px;
     animation: popin .3s;
     border-radius: 4px;
     background-color: #ffffff;
@@ -504,7 +487,13 @@ a{
     right: 0;
     bottom: 0;
     left: 0;
-    padding: 10px;
+    padding: 15px;
+}
+#special_skidka_image{
+    background:url("../images/stopwatch.png") no-repeat center center transparent;
+    background-size: 200px 200px;
+    height: 200px;
+    margin-bottom: 20px;
 }
 #special_skidka_close{
     text-align: right;
@@ -512,6 +501,18 @@ a{
 }
 #special_skidka_close:hover{
     color: #337AB7;
+}
+#time_end_skidka{
+    display: none;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 200px;
+    height: 70px;
+    background: #2EB973;
+    color: #fff;
+    z-index: 100;
+    padding: 5px;
 }
 #fon_wait{
     display: none;
@@ -522,7 +523,7 @@ a{
     right: 0;
     overflow: auto;
     background-color: rgba(0,0,0,0.55);
-    z-index: 90;
+    z-index: 110;
 }
 #fon_wait_2{
     display: block;
@@ -547,7 +548,7 @@ a{
     width: 960px;
     min-height: 500px;
     background-color: #fff;
-    z-index: 100;
+    z-index: 1000;
 }
 #more_information_close{
     text-align: right;

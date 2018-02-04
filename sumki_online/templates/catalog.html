@@ -17,7 +17,7 @@
 {% endblock %}
 
 {% block main_block %}
-    <div class="main_content container" style="width: 1206px; margin: auto">
+    <div class="main_content container" style="width: 1246px; margin: auto">
         <div class="row" style="border-radius: 5px; overflow: hidden; margin-top: 10px; margin-bottom: 10px">
             <div class="col-md-12" style="display: none">
                 <div class="row" id="scrolling_wrapper">
@@ -49,7 +49,7 @@
         <div class="row">
         <div class="col-md-12">
         <div class="row">
-            <div class="col-md-3 left_side_bar"  onmousedown="return false" onselectstart="return false">
+            <div class="col-md-2 left_side_bar"  onmousedown="return false" onselectstart="return false">
                 {% if options %}
                 {% for option in options %}
                     <div id="{{ option.name }}_{{ category.alias }}" class="option_items">
@@ -76,7 +76,7 @@
                 {% endfor %}
             {% endif %}
             </div>
-            <div class="col-md-9 content_items">
+            <div class="col-md-10 content_items">
 
                 <div id="sorting" style="padding-top: 20px">
                     <form class="form-horizontal">

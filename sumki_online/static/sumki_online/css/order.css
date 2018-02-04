@@ -40,7 +40,6 @@
     border-bottom: 1px solid #e1e8ed;
 }
 #order_korzina .name_item{
-    font-weight: bold;
     font-size: 16px;
     padding: 0 10px 10px 120px !important;
     text-align: left !important;
@@ -99,10 +98,10 @@
     display: none;
 }
 #delivery_export_el, #independent_export_el{
-    border: 1px solid #ccc;
+    /*border: 1px solid #d9f5ff;*/
     padding: 10px;
     border-radius: 4px;
-    background-color: #FAF6EB;
+    background-color: #FEF7CF;
     margin-bottom: 10px;
 }
 #independent_export_el p,#delivery_export_el p{
@@ -119,21 +118,21 @@
     padding: 10px;
 }
 #korzina_blank{
-    font-weight: bold;
+    font-weight: 600;
+    margin-top: 50px;
+    font-size: 20px;
 }
 #checkout, #price_for_delivery, #summa_k_oplate_with_delivery, #summa_k_oplate2{
     display: none;
 }
-#order_ready,.next_step_payment,#checkout, #summa_k_oplate_with_delivery{
-    font-size: 20px;
-}
+
 #price_for_delivery, #summa_k_oplate2{
     font-size: 16px;
 }
 #order_final_win{
     font-weight: bold;
     font-size: 14px;
-    background-color: #FFFCDF;
+    background-color: #FEF7CF;
 }
 #order_final_win p{
     padding-bottom: 5px;
@@ -166,10 +165,10 @@
     border-top:1px solid #ccc;
 }
 #delivery_way_block_inner{
-    border: 1px solid #ccc;
+    /*border: 1px solid #ccc;*/
     padding: 10px;
     border-radius: 4px;
-    background-color: #FAF6EB;
+    background-color: #FEF7CF;
 }
 #delivery_way_block_inner hr{
     border-top:1px solid #ccc;
@@ -196,5 +195,24 @@
     margin-bottom: 50px;
 }
 .step2_opt2,.step2_opt3{
+    display: block;
+}
+#delivery_order label{
+    font-weight: 600;
+}
+#next_step_payment{
+    margin-top:15px;
+}
+#build_order{
+    margin-top: 20px;
     display: none;
+}
+#delivery_order .help-block{
+    display: none;
+}
+#summ_order_no_skidka{
+    display: none;
+    font-size: 18px;
+    text-decoration: line-through;
+    color: #999999 !important;
 }

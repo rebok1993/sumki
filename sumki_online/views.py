@@ -14,7 +14,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.exceptions import ObjectDoesNotExist
 from django.views.decorators.csrf import csrf_exempt
 #import http.cookies
-import json
+import json, time
 from django.views.generic import TemplateView
 from yandex_money.forms import PaymentForm
 from yandex_money.models import Payment
@@ -538,6 +538,7 @@ def catalog_obuv(request, alias):
         w_sort = 'desc'
 
         items_list = None #список товаров отправляемых пользователю
+
         #получаем атрибуты обуви
         options = OptionsObuv.objects.all()
         sizes_all = Size.objects.filter()
@@ -719,6 +720,15 @@ def get_item(request,alias):
         if os.path.exists(path_var):
             context['images'].append("1")
     return context
+#устанавливаем когда пользователь пришёл на сайт
+def set_time_enter(request, responce):
+    if request.session.get('enter', False):
+        return responce
+    request.session['enter'] = True
+    request.session['time_enter'] = time.time()
+    responce.set_cookie('time_enter', request.session['time_enter'])
+    return responce
+    #print(request.session.get('time_on_site', False))
 
 def catalog(request, alias='obuv'):
     if "item" in request.GET and request.is_ajax():
@@ -765,9 +775,9 @@ def catalog(request, alias='obuv'):
         })
         return HttpResponse(json_str)
     if alias == 'obuv':
-        return catalog_obuv(request, alias)
+        return set_time_enter(request,catalog_obuv(request, alias))
     elif alias == 'sumki':
-        return  catalog_sumki(request, alias)
+        return set_time_enter(request, catalog_sumki(request, alias))
     elif alias == 'accessories':
         return catalog_accessories(request, alias)
 

@@ -12,6 +12,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&amp;subset=cyrillic" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i&amp;subset=cyrillic" rel="stylesheet">
     {% block new_css %}{% endblock %}
     <script type="text/javascript" src="{% static 'js/jquery-3.1.1.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
@@ -54,13 +55,23 @@
     <!-- /Yandex.Metrika counter -->
     <div id="fon_wait" {% if show_more_window %}style="display: block"{% endif %}>
         {% if show_more_window %}{% include 'more_inform_window.html' %}{% endif %}
-        {% comment %}<div id="special_skidka">
+        <div id="special_skidka">
             <div id="special_skidka_close"><span class="glyphicon glyphicon-remove" title="закрыть"></span></div>
-            <div style="background-color: #aaa">
-                <img width="420" height="200" src="">
+            <div id="special_skidka_image">
+
             </div>
-            При покупке товара в течении 30 мин получите скидку 10%
-        </div>{% endcomment %}
+            <h3 style="text-align: left; margin-bottom: 10px">Оформите заказ в течение 20 минут и получите скидку <span style="color: #2EB973; font-weight: 400;font-size: 28px">10%!</span></h3>
+            <div style="color: #aaa; text-align: left; margin-bottom: 40px">Скидка будет автоматически применена в вашей корзине пока не истекло указанное время.</div>
+            <button class="btn btn-danger" type="button">Получить скидку</button>
+        </div>
+    </div>
+    <div id="time_end_skidka">
+        <div>Окончание действия скидки 10% через:</div>
+        <div>
+            <span id="end_skidka_minute"></span>
+            <span>:</span>
+            <span id="end_skidka_sec"></span>
+        </div>
     </div>
 
     <div id="fon_wait_2">
@@ -93,22 +104,22 @@
                                 <span id="obuv_icon" class="name_menu_span">Женская обувь</span>
                             </a>
                         </li>
-                        <li style="padding-left: 38px" {% if category.alias == 'sumki' %}class="active_elem"{% endif %}>
+                        <li {% if category.alias == 'sumki' %}class="active_elem"{% endif %}>
                             <a href="{% url 'sumki_online:catalog' 'sumki' %}" class="menu_name">
                                 <span id="sumka_icon" class="name_menu_span">Сумки женские</span>
                             </a>
                         </li>
-                        <li style="padding-left: 38px">
+                        <li>
                             <a href="/">
                                 <span id="home_icon" style="opacity: .65;">Главная</span>
                             </a>
                         </li>
-                        <li style="padding-left: 38px">
+                        <li>
                             <a href="/delivery">
                                 <span id="delivery_icon" style="opacity: .65;">Доставка</span>
                             </a>
                         </li>
-                        <li style="padding-left: 38px">
+                        <li>
                             <a href="/about">
                                 <span id="about_icon" style="opacity: .65;">О нас</span>
                             </a>
@@ -117,39 +128,17 @@
                     <div id="welcome"><span><span>Welcome</span> to us</span></div>
                     <div id="korzina_block">
                         <a class="korzina korzina_inactive" href='/order'></a>
-                        <div id="korzina_content"  onmousedown="return false" onselectstart="return false">
-                            <ul>
-                                <li id='copy_elem_mini_korz' data-item-id='' data-item-category='' class='item_in_mini_korz'>
-                                     <a class='item_in_korzina'>
-                                         <div class='img_item'>
-                                            <img src=''>
-                                         </div>
-                                         <div class="descript_in_mini_korz">
-                                            <div style='overflow: hidden'>
-                                                <div class='name_item_in_korz'></div>
-                                                <div class='number_in_korz'></div>
-                                            </div>
-                                            <div class='price_in_mini_korz'></div>
-                                         </div>
-                                     </a>
-                                     <div class='delete_item' data-delete-item='' title='удалить'>x</div>
-                                </li>
-                                <li id="item_absent">
-                                    <div>Корзина пуста</div>
-                                </li>
-                                <li style='padding: 20px 0' id='result_block'>
-                                    <div class='name_result price_item'>Итого</div>
-                                    <div id='result' class='price_item'>0 руб.</div>
-                                    <div style="clear: both; text-align: center; padding-top: 20px"><a href="/order" style="display: inline-block"><button type="button" class="btn btn-danger">Перейти в корзину</button></a></div>
-                                </li>
-                            </ul>
-                        </div>
+                        <a id="korzina_desc" href='/order'>
+                            <div id="korzina_desc_inner">
+                                <span id="name_korz">Корзина</span><br><span id="korzina_desc_inner_price">0 руб.</span>
+                            </div>
+                        </a>
                     </div>
-                    <a id="korzina_desc" href='/order'>
+                    {% comment %}<a id="korzina_desc" href='/order'>
                         <div id="korzina_desc_inner">
-                            <span>Корзина</span><br><span id="korzina_desc_inner_price">0 руб.</span>
+                            <span id="name_korz">Корзина</span><br><span id="korzina_desc_inner_price">0 руб.</span>
                         </div>
-                    </a>
+                    </a>{% endcomment %}
                 </div>
             </div>
         </div>
