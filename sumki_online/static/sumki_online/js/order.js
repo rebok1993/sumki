@@ -295,7 +295,6 @@ $(function () {
 
     //при смене в поле адрес
     var change_adress = function (city) {
-        step2_opt3.hide();
         var courier = citys_dost[city]['CourierDelivery'];
         var pickup_point = citys_dost[city]['PickupPoint'];
         $('.delivery_way.active_delivery_way').removeClass('active_delivery_way');
