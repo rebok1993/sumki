@@ -486,7 +486,7 @@ def catalog_sumki(request, alias):
                    if not hasattr(itemm, "brend"): itemm.brend = option.brend.name
                    # добавляем атрибут типа к элементу
                    if not hasattr(itemm, "type"): itemm.type = option.type.name
-        paginator = Paginator(items_list, 12)
+        paginator = Paginator(items_list, 32)
         page = request.GET.get('page')
         items = paginator.page(page)
     except PageNotAnInteger:
@@ -638,7 +638,7 @@ def catalog_obuv(request, alias):
                    if not hasattr(itemm, "brend"): itemm.brend = option.brend.name
                    # добавляем атрибут типа к элементу
                    if not hasattr(itemm, "type"): itemm.type = option.type.name
-        paginator = Paginator(items_list, 12)
+        paginator = Paginator(items_list, 32)
         page = request.GET.get('page')
         items = paginator.page(page)
     except PageNotAnInteger:

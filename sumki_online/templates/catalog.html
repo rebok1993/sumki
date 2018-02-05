@@ -77,11 +77,15 @@
             {% endif %}
             </div>
             <div class="col-md-10 content_items">
-
+                <h3 id="header_category">
+                    {% if  category.alias == 'sumki'%} Женские сумки
+                    {% elif category.alias == 'obuv'%} Женская обувь
+                    {% endif %}
+                </h3>
                 <div id="sorting" style="padding-top: 20px">
                     <form class="form-horizontal">
                         <div class="form-group">
-                            <label class="col-md-2 control-label" for="select_sort_type">Сортировать:</label>
+                            <label style="float: left; padding-left: 15px" class="control-label" for="select_sort_type">Сортировать:</label>
                             <div class="col-md-3">
                                 <select id="select_sort_type" class="form-control">
                                     <option {% if sort == 'popular_sorting_desc' %} selected {% endif %} class="desc popular_sorting_desc" value="popular_sorting">по популярности</option>
