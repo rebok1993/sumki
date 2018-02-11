@@ -57,10 +57,10 @@ $(function () {
     slider.on("mouseover", stop_time).on("mouseout", run_time);
 
     //перемещение слайда при клики на кнопки слева или права
-    $("#btn_left").on("click", function () {
+    /*$("#btn_left").on("click", function () {
         select_slide_auto(-1);
     });
     $("#btn_right").on("click", function () {
         select_slide_auto(1);
-    });
+    });*/
 });

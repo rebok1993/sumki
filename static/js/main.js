@@ -8,6 +8,8 @@ var fon_2;
 var enter_time;
 var get_offer_skidka;
 var el_time;
+var number_image_tovar = 0;
+var index_image_current = 0;
 
 //сохранение корзины в куки
 function save_korzina() {
@@ -45,16 +47,33 @@ function count_summa() {
 }
 
 //изменение изображения в окне товара
-function change_image(){
-    var index = $(this).data("indexIm");
-    $("#main_image_el .small").removeClass('small');
+function change_image(event) {
+    event.stopPropagation();
+    var new_li;
+    var src_img;
+
     $('.active_other_image').removeClass('active_other_image');
-    $("#main_image_el li[data-index-ib = '"+index+"'] img").addClass('small');
-    $("#other_image li[data-index-im = '"+index+"']").addClass('active_other_image');
-    $("#main_image_el").css("left", "-"+index*440);
+
+    if (event.data === undefined) {
+        src_img = $(this).find('img').attr('src');
+        index_image_current = $(this).data("indexIm");
+        $("#other_image li[data-index-im = '" + index_image_current + "']").addClass('active_other_image');
+    }
+    else{
+        if(!number_image_tovar){
+            number_image_tovar = $('#other_image li').length;
+        }
+        if(event.data['change'] == 'left') index_image_current-=1;
+        if(event.data['change'] == 'right') index_image_current+=1;
+
+        if(index_image_current<0) index_image_current = number_image_tovar-1;
+        if(index_image_current>(number_image_tovar-1)) index_image_current = 0;
+        new_li = $("#other_image li[data-index-im = '" + index_image_current + "']")
+        src_img = new_li.find('img').attr('src');
+        new_li.addClass('active_other_image');
+    }
+    $('#main_image_el img').attr('src', src_img);
     new_image = true;
-    /*$(".active_other_image").removeClass("active_other_image");
-     $(this).addClass("active_other_image");*/
 }
 
 //форматирования цен
@@ -286,6 +305,9 @@ $(function () {
         fon.append(data['more_info_win']);
         fon.find('img').on('load', img_loaded);
         update_el();
+
+        number_image_tovar = $('#other_image li').length; //обновляем количество изображений товара
+        index_image_current = 0;
     };
 
     //скрываем окно больше информации о товаре
@@ -463,7 +485,9 @@ $(function () {
         .on("click", "#next_order", function () {document.location.href="/order";})
         .on("click", ".other_image_item", change_image) //смена фотографии в доп. окне
         .on('click', '.add_in_korzina', add_in_korzina) //добавление товара в корзину
-        .on('click', '.item_in_mini_korz',{item_mini:true}, show_more_info); //показываем карточка товара при клике из миини корзины
+        .on('click', '.item_in_mini_korz',{item_mini:true}, show_more_info) //показываем карточка товара при клике из миини корзины
+        .on('click', '#btn_left', {change:'left'},change_image)
+        .on('click', '#btn_right', {change:'right'},change_image);
 
     //для активации кнопок вперёд и назад
     $(window).on('popstate', step_back_or_forward);
