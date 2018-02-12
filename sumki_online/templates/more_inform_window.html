@@ -15,10 +15,10 @@
         <div id="more_information_name">{{ options_elem.type.name }} / {{ options_elem.brend.name }}</div>
         <div id="more_information_price">
             {% if elem.discount > 0 %}
-                {{ elem.price|discount:elem.discount|price_format }}
+                {{ elem.price|discount:elem.discount|price_format }} руб <span style="text-decoration: line-through; color: #999; font-size: 20px">{{  elem.price|price_format}} руб.</span>
             {% else %}
-                {{ elem.price|price_format }}
-            {% endif %} руб.
+                {{ elem.price|price_format }} руб
+            {% endif %}
         </div>
         <div id="more_information_sizes" {% if category.alias != 'obuv' %} style="display: none"{% endif %}>
             <form>
