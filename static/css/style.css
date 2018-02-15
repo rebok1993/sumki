@@ -129,9 +129,9 @@ a{
     border-bottom: 3px solid #00b258;
 }
 .wrapper .header .header_main_area{
-    height: 52px;
+    height: 60px;
     text-align: left;
-    background: #034369;
+    background: #2A2642;
     position: relative;
 }
 .header_main_area #menu_ul{
@@ -147,7 +147,7 @@ a{
     color: #fff;
     font-weight: 100;
     font-size: 28px;
-    line-height: 52px;
+    line-height: 60px;
 }
 #korzina_desc{
     cursor: pointer;
@@ -286,7 +286,7 @@ a{
 }
 #korzina_block{
     float: right;
-    height: 52px;
+    height: 60px;
     font-size: 14px;
     background: transparent;
     cursor: pointer;
@@ -1024,6 +1024,8 @@ loader*/
 .pagination > .active > a, .pagination > .active > a:hover, .pagination > .active > a:focus{
     color: inherit;
     background-color: inherit;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 .pagination{
     width: auto !important;

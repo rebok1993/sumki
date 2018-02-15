@@ -101,3 +101,18 @@
     background-color: #aaa;
     position: relative;
 }
+#dop_block_market{
+    height: 50px;
+    background-color: #AFA580;
+    line-height: 50px;
+    text-align: center;
+}
+#dop_block_market span{
+    color: #fff;
+    font-weight: 600;
+    font-size: 18px;
+    display: inline-block;
+    padding-right: 50px;
+    background: url('../images/other/icons_del_car.png') right center no-repeat;
+    background-size: 40px 40px;
+}
