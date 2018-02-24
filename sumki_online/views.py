@@ -137,21 +137,43 @@ def home(request):
 
 def item(request,category, number):
     tovar = Item.objects.get(pk=number)
-    number_view = NumberViews.objects.filter(item=tovar)
     category = Category.objects.get(alias=category)
-    if number_view:
-        number_view[0].number += 1
-        number_view[0].save()
-    else:
-        number_v = NumberViews(item=tovar, number=1, data=datetime.today())
-        number_v.save()
-
-
     context = {
-        "title": "Helloworld",
-        "item": tovar,
-        "category": category,
+        'images':[],
+        'ending_views': ('человек', 'человека', 'человек')
     }
+    for i in range(1, 6):
+        path_var = STATIC_ROOT + "sumki_online/images/" + category.alias + "/400_on_400/" + str(tovar.id) + "v" + str(i) + ".jpg"
+        if os.path.exists(path_var):
+            context['images'].append("1")
+
+    if category.alias == 'obuv':
+        context['store_elem'] = StoreObuv.objects.filter(item=tovar)
+        options_elem = OptionsObuv.objects.get(item=tovar)
+    elif category.alias == 'sumki':
+        options_elem = OptionsSumki.objects.get(item=tovar)
+    else: return {}
+
+    number_views_week = 1
+    number_views_week_obj = NumberViews.objects.filter(item=tovar)
+
+    if len(number_views_week_obj):
+        # number_views_week_obj[0].number_week += 1
+        number_views_week = number_views_week_obj[0].number_week
+        number_views_week_obj[0].save()
+    else:
+        try:
+            number_views_week_obj_new = NumberViews(item=tovar, number=1, number_week=1, data=datetime.today())
+            number_views_week_obj_new.save()
+        except Exception as e:
+            print(e)
+
+    context['number_views_week'] = number_views_week
+    context['options_elem'] = options_elem
+    context['options_elem_render'] = render_to_string('options_elem.html', {'options': options_elem, 'category': category.alias})
+    context['title'] = "Helloworld"
+    context['item'] = tovar
+    context['category'] = category
     return HttpResponse(render_to_string('item.html', context))
 
 #количество просмотров

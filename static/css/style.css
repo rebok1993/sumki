@@ -371,8 +371,10 @@ a{
 #scrolling_elements ul{
     transition: all 0.5s ease-in-out 0s;
 }
-#btn_left,#btn_right{
+.main_offer #btn_left, .main_offer #btn_right{
     display: none;
+}
+#btn_left,#btn_right{
     position: absolute;
     border: 1px solid #ccc;
     color: #fff;
@@ -392,11 +394,11 @@ a{
 }
 #btn_left{
     left:3%;
-    top:35%;
+    top:48%;
 }
 #btn_right{
     right:3%;
-    top:35%;
+    top:48%;
 }
 /*стили специальных предложений конец*/
 
@@ -428,9 +430,10 @@ a{
 }
 .item .discount_item{
     text-decoration: line-through;
-    color: #999999;
+    /*color: #999999;*/
     display: inline-block;
     padding-left: 5px !important;
+    font-size: 16px !important;
 }
 .item .saving_item{
     /*color: #CC6A3B;*/
@@ -661,14 +664,24 @@ a{
     vertical-align: top;
 }
 .other_image_item{
-    opacity: 0.5;
+    margin: 3px;
     text-align: center;
     width: 124px;
     height: 124px;
-    transition: opacity .3s ease-out;
+    transition: opacity .15s, border-color .15s ease-out;
     cursor: pointer;
+    border: 2px solid transparent;
+}
+.other_image_item img{
+    opacity: 0.5;
+}
+.other_image_item:hover{
+    border: 2px solid #E6BA17;
 }
 .other_image_item.active_other_image{
+    border: 2px solid #E6BA17;
+}
+.other_image_item.active_other_image img{
     opacity: 1;
 }
 #description_item_full>div{
@@ -1092,6 +1105,15 @@ loader*/
     width: 18px;
     height: 18px;
 }
+#icon_glass_magn{
+    background:url("../images/icon_glass_gray.png") no-repeat center center transparent;
+    background-size: 35px 35px;
+    position: absolute;
+    top:20px;
+    left: 30%;
+    width: 35px;
+    height: 35px;
+}
 .form-control{
     height: 40px !important;
 }
@@ -1105,22 +1127,32 @@ loader*/
     margin-left: 70px;
     margin-top: 20px;
 }
-#main_image_el li img{
+#main_image_el img{
     opacity: 0;
-    -webkit-transition: opacity 150ms;
-    -moz-transition: opacity 150ms;
-    -ms-transition: opacity 150ms;
-    transition: opacity 150ms;
+    -webkit-transition: opacity .15s ease-out;
+    -moz-transition: opacity .15s ease-out;
+    -ms-transition: opacity .15s ease-out;
+    transition: opacity .15s ease-out;
 }
-#main_image_el li.loaded img{
+#main_image_el.loaded img{
+    opacity: 1;
+}
+#other_image .other_image_item img{
+    opacity: 0;
+    -webkit-transition: opacity .15s ease-out;
+    -moz-transition: opacity .15s ease-out;
+    -ms-transition: opacity .15s ease-out;
+    transition: opacity .15s ease-out;
+}
+#other_image .other_image_item.loaded img{
     opacity: 1;
 }
 .wait_load_image{
     display: block;
     z-index: 100;
     position: absolute;
-    top: 40%;
-    left: 60%;
+    top: 50%;
+    left: 50%;
     width:45px;
     height: 51px;
     margin:-25px 0 0 -22px;

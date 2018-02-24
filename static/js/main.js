@@ -359,11 +359,30 @@ $(function () {
     //действие при наведение на товар
     var hover_item = function (event) {
         event.stopPropagation();
+        var img_el = $(this).find('.wrapper_image img');
+        var src_el = img_el.attr('src');
+        var new_img = new Image();
+
         if(event.data.hov){
+            console.log('in');
             $(this).css({"border":"1px solid #d4dbe0","z-index":"10"});
+            src_el = src_el.replace('.jpg','');
+
+            new_img.addEventListener('load', function () {
+                console.log('here');
+                img_el.attr('src', new_img.src);
+                /*img_el.animate({opacity:0.0},200);
+                img_el.animate({opacity:1.0},100);*/
+            });
+            new_img.src = src_el+'v3.jpg';
+            /*img_el.attr('src', new_src);*/
             $(this).find(".hide_element").css("visibility","visible");
         }
         else{
+            console.log('out');
+            src_el = src_el.replace('v3.jpg','');
+            var new_src = src_el+'.jpg';
+            img_el.attr('src', new_src);
             $(this).css({"border":"","z-index":"1"});
             $(this).find(".hide_element").css("visibility","hidden");
         }
@@ -473,8 +492,8 @@ $(function () {
 
     //действия при наведении на товар
     $('.main_content .content_items')
-        .on('mouseover','.item',{hov:true},hover_item)
-        .on("mouseout",".item",{hov:false},hover_item);
+        .on('mouseenter','.item',{hov:true},hover_item)
+        .on("mouseleave",".item",{hov:false},hover_item);
 
     $(".block_items").on("click", ".more_information", show_more_info);
 
