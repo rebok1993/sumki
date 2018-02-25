@@ -4,7 +4,7 @@
 <div class="item more_information" id="{{ item.id }}" data-item-category="{{ item.category_alias }}">
     <a href="{% url 'sumki_online:catalog' item.category_alias %}?item={{ item.id }}" onclick="return false">
         <div class="wrapper_image">
-            <img class="image_item" alt="{{ item.type }} {{ item.brend }}" src="{% static 'sumki_online/images/' %}{{ item.category_alias }}/200_on_200/{{ item.id }}.jpg" width="220">
+            <img data-itemimg-change="0" class="image_item" alt="{{ item.type }} {{ item.brend }}" src="{% static 'sumki_online/images/' %}{{ item.category_alias }}/200_on_200/{{ item.id }}.jpg" width="220">
         </div>
 
         {% if item.discount > 0 %}

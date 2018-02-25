@@ -214,7 +214,7 @@ a{
     line-height: 36px;
     height: 40px;
     padding: 0 5px !important;
-    font-size: 14px;
+    font-size: 13px;
     display: inline-block;
 }
 .menu_name{
@@ -225,28 +225,32 @@ a{
     overflow: hidden;
 }*/
 #menu_ul span{
-    padding-left: 30px;
+    /*padding-left: 30px;*/
     display: inline-block;
 }
+
 #obuv_icon{
-    background: url("../images/icons_obuv.png") no-repeat center left transparent;
-    background-size: 22px 22px;
-    font-weight: 600;
+    /*background: url("../images/icons_obuv.png") no-repeat center left transparent;
+    background-size: 22px 22px;*/
+    /*font-weight: 600;*/
 }
 #sumka_icon{
-    background: url("../images/icons_sumka.png") no-repeat center left transparent;
-    background-size: 22px 22px;
-    font-weight: 600;
+    /*background: url("../images/icons_sumka.png") no-repeat center left transparent;
+    background-size: 22px 22px;*/
+    /*font-weight: 600;*/
 }
 #home_icon{
+    padding-left: 30px;
     background: url("../images/icons_home.png") no-repeat center left transparent;
     background-size: 22px 22px;
 }
 #delivery_icon{
+    padding-left: 30px;
     background: url("../images/icons_del.png") no-repeat center left transparent;
     background-size: 22px 22px;
 }
 #about_icon{
+    padding-left: 30px;
     background: url("../images/icons_about.png") no-repeat center left transparent;
     background-size: 22px 22px;
 }

@@ -49,6 +49,14 @@
                         {% endif %}
                     </ul>
                 </div>
+                {% if item.description|length > 10 %}
+                    <div style="margin: 30px 0 30px 0; width: 750px" class="row">
+                        <div class="col-md-12">
+                            <span style="display: inline-block;font-size: 22px;border-bottom: 2px solid #333;padding: 0 30px 10px 0;">Описание товара</span>
+                            <div style="margin-top: 20px; font-size: 15px; line-height: 24px">{{ item.description }}</div>
+                        </div>
+                    </div>
+                {% endif %}
             </div>
             <div class="col-md-3 right_side_bar">
                 <div id="name_item">{{ options_elem.type.name }} / {{ options_elem.brend.name }}</div>
@@ -76,7 +84,7 @@
                 </div>
 
                 <div style="text-align: left">
-                    <div style="margin-top: 70px; font-size: 22px;border-bottom: 2px solid #333;padding-bottom: 10px;text-align: center">Описание товара</div>
+                    <div style="margin-top: 70px; font-size: 22px;border-bottom: 2px solid #333;padding-bottom: 10px;text-align: center">Характеристики</div>
                     <div id="description_item_full" style="margin-top: 30px">
                         {% if options_elem_render %}{{ options_elem_render }}{% endif %}
                     </div>

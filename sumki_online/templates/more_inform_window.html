@@ -77,18 +77,28 @@
         </div>
     </div>
     <hr style="margin: 0 !important;">
-    <div style="margin: 0 0 30px 80px" class="row">
-        <div class="col-md-6" style="text-align: center">
-            <div style="display: inline-block; text-align: left; vertical-align: top">
-                <div style="margin-top: 30px; text-align: center; font-size: 22px;border-bottom: 2px solid #333;padding-bottom: 10px;">Описание товара</div>
-                <div id="description_item_full" style="margin-top: 30px">
+
+    {% if elem.description|length > 10 %}
+    <div style="margin: 30px 0 30px 120px; width: 750px" class="row">
+        <div class="col-md-12">
+            <span style="display: inline-block;font-size: 22px;border-bottom: 2px solid #333;padding: 0 30px 10px 0;">Описание товара</span>
+            <div style="margin-top: 20px; font-size: 15px; line-height: 24px">{{ elem.description }}</div>
+        </div>
+    </div>
+    {% endif %}
+
+    <div style="margin: 30px 0 30px 120px" class="row">
+        <div class="col-md-6">
+            <div style="display: inline-block; vertical-align: top">
+                <div style=" font-size: 22px;border-bottom: 2px solid #333;padding-bottom: 10px;">Характеристики</div>
+                <div id="description_item_full" style="margin-top: 30px; font-size: 15px">
                     {% if options_elem_render %}{{ options_elem_render }}{% endif %}
                 </div>
             </div>
         </div>
-        <div class="col-md-6" style="text-align: center">
-            <div style="display: inline-block; text-align: left">
-                <div style="margin-top: 30px; text-align: center; font-size: 22px;border-bottom: 2px solid #333;padding-bottom: 10px;">Преимущества Vittora</div>
+        <div class="col-md-6">
+            <div style="display: inline-block; text-align: left; font-size: 15px">
+                <div style="text-align: center; font-size: 22px;border-bottom: 2px solid #333;padding-bottom: 10px;">Преимущества Vittora</div>
                 <div class="adv_elem">
                     <div class="icon_del_adv"></div>
                     <div class="title_adv">Бесплатная доставка по всей России</div>

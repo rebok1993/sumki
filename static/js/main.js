@@ -369,8 +369,8 @@ $(function () {
             src_el = src_el.replace('.jpg','');
 
             new_img.addEventListener('load', function () {
-                console.log('here');
                 img_el.attr('src', new_img.src);
+                img_el.data('itemimgChange','1');
                 /*img_el.animate({opacity:0.0},200);
                 img_el.animate({opacity:1.0},100);*/
             });
@@ -379,10 +379,13 @@ $(function () {
             $(this).find(".hide_element").css("visibility","visible");
         }
         else{
-            console.log('out');
-            src_el = src_el.replace('v3.jpg','');
-            var new_src = src_el+'.jpg';
-            img_el.attr('src', new_src);
+            if(img_el.data('itemimgChange') == '1'){
+                console.log('out');
+                src_el = src_el.replace('v3.jpg','');
+                var new_src = src_el+'.jpg';
+                img_el.attr('src', new_src);
+                img_el.data('imgChange','0');
+            }
             $(this).css({"border":"","z-index":"1"});
             $(this).find(".hide_element").css("visibility","hidden");
         }
