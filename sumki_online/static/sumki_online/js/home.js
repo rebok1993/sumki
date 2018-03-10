@@ -43,7 +43,7 @@ $(function () {
         slider_ul.css("left", "-"+width_screen*index_slide);
     };
     //устанавливаем ширину Ul
-    slider_ul.css("width",100+number_slide*1206);
+    slider_ul.css("max-width",100+number_slide*1206);
 
     //запускаются при загрузке сайта
     if(number_slide > 1){

@@ -18,10 +18,10 @@
 
 {% block main_block %}
     <div id="dop_block_market">
-        <span>БЕСПЛАТНАЯ ДОСТАВКА ВО ВСЕ ГОРОДА РОССИИ</span>
+        <span>БЕСПЛАТНАЯ ДОСТАВКА <span class="hidden-xs hidden-sm">ВО ВСЕ ГОРОДА РОССИИ</span></span>
     </div>
-    <div class="main_content container" style="width: 1246px; margin: auto">
-        <div class="row" style="border-radius: 5px; overflow: hidden; margin-top: 10px; margin-bottom: 10px">
+    <div class="main_content container-fluid" style="max-width: 1246px; margin: auto">
+        {% comment %}<div class="row" style="border-radius: 5px; overflow: hidden; margin-top: 10px; margin-bottom: 10px">
             <div class="col-md-12" style="display: none">
                 <div class="row" id="scrolling_wrapper">
                     <div id="scrolling_elements" style="height: 110px">
@@ -44,19 +44,17 @@
                             {% endif %}
                         {% endfor %}
                     </div>
-                    {% comment %}<span id="btn_left" class="glyphicon glyphicon-chevron-left"></span>
-                    <span id="btn_right" class="glyphicon glyphicon-chevron-right"></span>{% endcomment %}
+                    <span id="btn_left" class="glyphicon glyphicon-chevron-left"></span>
+                    <span id="btn_right" class="glyphicon glyphicon-chevron-right"></span>
                 </div>
             </div>
-        </div>
-        <div class="row">
-        <div class="col-md-12">
+        </div>{% endcomment %}
         <div class="row">
             <div class="col-md-2 left_side_bar"  onmousedown="return false" onselectstart="return false">
                 {% if options %}
                 {% for option in options %}
                     <div id="{{ option.name }}_{{ category.alias }}" class="option_items">
-                        <div class="name_header">{% comment %}<span class="glyphicon glyphicon-list"></span>{% endcomment %} {{ option.label }}</div>
+                        <div class="name_header"><span class="glyphicon glyphicon-list"></span> {{ option.label }}</div>
                         {% for key2, value2 in option.all.items %}
                             {% if value2.selected %}
                                 <div class="option_item option_image_in">

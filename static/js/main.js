@@ -257,9 +257,9 @@ $(function () {
 
     //показываем окно больше информации о товаре
     var show_more_info = function (event) {
+        event.stopPropagation();
         var item, id, category;
         var obj = {};
-
         //показываем серый фон
         $('body').addClass('stop-scrolling');
         fon_2.show();
@@ -364,7 +364,6 @@ $(function () {
         var new_img = new Image();
 
         if(event.data.hov){
-            console.log('in');
             $(this).css({"border":"1px solid #d4dbe0","z-index":"10"});
             src_el = src_el.replace('.jpg','');
 
@@ -380,7 +379,6 @@ $(function () {
         }
         else{
             if(img_el.data('itemimgChange') == '1'){
-                console.log('out');
                 src_el = src_el.replace('v3.jpg','');
                 var new_src = src_el+'.jpg';
                 img_el.attr('src', new_src);
@@ -470,7 +468,7 @@ $(function () {
     };
 
     var init_apply_skidka = function () {
-        console.log(korzina);
+        /*console.log(korzina);*/
         if(parseInt(korzina.dop_skidka) != 0){
             timer_id = setInterval(timer_skidka,1000);
         }
@@ -511,6 +509,15 @@ $(function () {
         .on('click', '#btn_left', {change:'left'},change_image)
         .on('click', '#btn_right', {change:'right'},change_image);
 
+    $('#but_list_menu_mob').on('click', function () {
+        $('body').addClass('stop-scrolling');
+        $('.wrapper .left_side_bar_menu').addClass('active_left_side_bar');
+        $('.fon_wait_5').show();
+    });
+    $('.fon_wait_5').on('click', function () {
+        $('.wrapper .left_side_bar_menu').removeClass('active_left_side_bar');
+        $(this).hide();
+    });
     //для активации кнопок вперёд и назад
     $(window).on('popstate', step_back_or_forward);
 

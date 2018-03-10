@@ -18,10 +18,10 @@
 {% endblock %}
 
 {% block main_block %}
-    <div class="main_content container" style="width: 1246px; margin: auto">
+    <div class="main_content container" style="max-width: 1246px; margin: auto">
         <div class="row">
             <div class="col-md-9 content_item">
-                <div class="item magnify">
+                <div class="item magnify hidden-sm hidden-xs">
                     <div class="views_tovar"><span class="icon_more_inner"></span><span style="margin-left: 10px"><span style="color: #333; font-weight: 600">{{ number_views_week|smart_ending:ending_views }}</span><br> купили этот товар <br> на неделе</span></div>
                     <div class="wait_load_image"></div>
                     <span id="btn_left" class="glyphicon glyphicon-chevron-left"></span>
@@ -33,15 +33,17 @@
                         <img onload="img_loaded(this)" class="small" width="350" src="{% static 'sumki_online/images/' %}{{ category.alias  }}/400_on_400/{{ item.id }}.jpg">
                     </div>
                 </div>
-                <div id="other_image_item">
+                <div id="other_image_item" class="hidden-sm hidden-xs">
                     <ul id="other_image">
                         {% if images %}
                             <li data-index-im="0" class="active_other_image other_image_item">
+                                <div class="ag_copying"></div>
                                 <img onload="img_loaded(this)" alt="{{ options_elem.type.name }} {{ options_elem.brend.name }}" src="{% static 'sumki_online/images/' %}{{ category.alias  }}/400_on_400/{{ item.id }}.jpg" height="120">
                             </li>
                             {% if images|length != 0 %}
                                 {% for imag in images %}
                                     <li data-index-im="{{ forloop.counter }}" class="other_image_item">
+                                        <div class="ag_copying"></div>
                                         <img onload="img_loaded(this)" alt="{{ options_elem.type.name }} {{ options_elem.brend.name }}" src="{% static 'sumki_online/images/' %}{{ category.alias  }}/400_on_400/{{ item.id }}v{{ forloop.counter }}.jpg" height="120">
                                     </li>
                                 {% endfor %}
@@ -49,8 +51,24 @@
                         {% endif %}
                     </ul>
                 </div>
+                <div>
+                    <ul style="overflow: scroll; white-space: nowrap">
+                        {% if images %}
+                            <li style="display: inline-block">
+                                <img onload="img_loaded(this)" alt="{{ options_elem.type.name }} {{ options_elem.brend.name }}" src="{% static 'sumki_online/images/' %}{{ category.alias  }}/400_on_400/{{ item.id }}.jpg" height="312">
+                            </li>
+                            {% if images|length != 0 %}
+                                {% for imag in images %}
+                                    <li style="display: inline-block">
+                                        <img onload="img_loaded(this)" alt="{{ options_elem.type.name }} {{ options_elem.brend.name }}" src="{% static 'sumki_online/images/' %}{{ category.alias  }}/400_on_400/{{ item.id }}v{{ forloop.counter }}.jpg" width="312">
+                                    </li>
+                                {% endfor %}
+                            {% endif %}
+                        {% endif %}
+                    </ul>
+                </div>
                 {% if item.description|length > 10 %}
-                    <div style="margin: 30px 0 30px 0; width: 750px" class="row">
+                    <div style="margin: 30px 0 30px 0; max-width: 750px" class="row">
                         <div class="col-md-12">
                             <span style="display: inline-block;font-size: 22px;border-bottom: 2px solid #333;padding: 0 30px 10px 0;">Описание товара</span>
                             <div style="margin-top: 20px; font-size: 15px; line-height: 24px">{{ item.description }}</div>

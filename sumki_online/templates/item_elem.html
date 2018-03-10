@@ -1,10 +1,11 @@
 {% load staticfiles %}
 
 {% load filters %}
-<div class="item more_information" id="{{ item.id }}" data-item-category="{{ item.category_alias }}">
-    <a href="{% url 'sumki_online:catalog' item.category_alias %}?item={{ item.id }}" onclick="return false">
+<div class="col-xs-6 col-sm-6 col-md-3 item" id="{{ item.id }}" data-item-category="{{ item.category_alias }}">
+    <a href="{% url 'sumki_online:item' item.category_alias item.id %}">
         <div class="wrapper_image">
-            <img data-itemimg-change="0" class="image_item" alt="{{ item.type }} {{ item.brend }}" src="{% static 'sumki_online/images/' %}{{ item.category_alias }}/200_on_200/{{ item.id }}.jpg" width="220">
+            <div class="ag_copying"></div>
+            <img data-itemimg-change="0" class="image_item" alt="{{ item.type }} {{ item.brend }}" src="{% static 'sumki_online/images/' %}{{ item.category_alias }}/200_on_200/{{ item.id }}.jpg" style="width: 100%">
         </div>
 
         {% if item.discount > 0 %}
@@ -18,7 +19,7 @@
                 <div class="item_description price_item" data-item-price="{{ item.price }}">{{ item.price|price_format }} руб</div>
             </div>
         {% endif %}
-        <div class="item_description name_item" data-item-name="{{ item.type }}">{{ item.type }} / <span style="color: #999999">{{ item.brend }}</span></div>
+        <div class="item_desc ription name_item" data-item-name="{{ item.type }}">{{ item.type }} / <span style="color: #999999">{{ item.brend }}</span></div>
         {% if item.category_alias == 'obuv' %}
             <div class="item_description hide_element">Размеры:
                 {% for size in item.size %}
@@ -36,6 +37,6 @@
                 {% endif %}
             </div>
         {% endif %}
-        <div class="icon_more_block hide_element"><span class="icon_more_inner"></span> <span>Быстрый просмотр</span></div>
     </a>
+    <div class="icon_more_block hide_element more_information hidden-sm hidden-xs">Быстрый просмотр</div>
 </div>

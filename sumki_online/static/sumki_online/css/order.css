@@ -109,6 +109,7 @@
 }
 #delivery_order form .form-group{
     width: 50%;
+    min-width: 290px;
 }
 .hide_field, .hide_field2{
     display: none;

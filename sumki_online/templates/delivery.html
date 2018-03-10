@@ -10,8 +10,8 @@
 
 {% block menu_delivery_tab %}menu_inner_active{% endblock %}
 {% block main_block %}
-    <div class="main_content container row" style="width: 1206px; margin: 30px auto">
-        <div class="col-md-6">
+    <div class="main_content container row" style="{% comment %}width: 1206px;{% endcomment %} margin: auto">
+        <div class="col-sm-12 col-xs-12 col-md-7">
             <h1 style="font-weight: 100">Доставка товаров Vittora:</h1>
             <p style="font-size: 15px; margin:30px 0 20px">Наш интернет-магазин осуществляет доставку следующими способами:</p>
             <ol style="list-style-type: disc;margin: 0.2em 1em 0.2em 20px; font-size: 15px">
@@ -43,14 +43,14 @@
             <p style="font-weight: 100; font-size: 15px">По всем вопросам просьба обращаться по телефону 8(910)-877-49-69.</p>
             <p style="font-weight: bold; font-size: 15px; margin-bottom: 70px">УДАЧНЫХ ПОКУПОК )</p>
         </div>
-        <div class="col-md-6">
-            {% comment %}<h4>Выберите населённый пункт для проверки доступных способов доставки:</h4>
+        {% comment %}<div class="col-md-6">
+            <h4>Выберите населённый пункт для проверки доступных способов доставки:</h4>
             <form role="form">
                 <div class="form-group">
                     <label for="id_city">Населённый пункт</label>
                     <input type="search" id="id_city" placeholder="Введите город доставки" />
                 </div>
-            </form>{% endcomment %}
-        </div>
+            </form>
+        </div>{% endcomment %}
     </div>
 {% endblock %}

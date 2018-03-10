@@ -13,6 +13,9 @@
     font-weight: 200 !important;
     border-left: 1px solid #e1e8ed;
     background-color: #fff;/*#E6ECF0*/
+    /*position: fixed;
+    left: 0;
+    top: 0;*/
 }
 
 .main_content .content_items{
@@ -107,7 +110,7 @@
     line-height: 50px;
     text-align: center;
 }
-#dop_block_market span{
+#dop_block_market>span{
     color: #fff;
     font-weight: 600;
     font-size: 18px;
