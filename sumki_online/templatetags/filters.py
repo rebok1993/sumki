@@ -15,6 +15,16 @@ def price_format(value, separator=u' '):
     return separator.join(parts)
 
 @register.filter
+def ost_del(value, arg):
+    try:
+        value = int(value)
+        arg = int(arg)
+        if arg: return value % arg
+    except:
+        pass
+    return 'no'
+
+@register.filter
 def smart_ending(number, forms):
     number_el = str(number)
     rest = number % 10

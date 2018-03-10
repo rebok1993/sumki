@@ -515,6 +515,7 @@ $(function () {
         $('.fon_wait_5').show();
     });
     $('.fon_wait_5').on('click', function () {
+        $('body').removeClass('stop-scrolling');
         $('.wrapper .left_side_bar_menu').removeClass('active_left_side_bar');
         $(this).hide();
     });
