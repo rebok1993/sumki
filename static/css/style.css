@@ -89,6 +89,7 @@ a{
     position: relative;
 }
 .wrapper .header{
+    border-bottom: 1px solid #333;
     /*min-width: 1246px;*/
     background-color: #fff;
     /*margin-bottom: 10px;*/
@@ -97,22 +98,28 @@ a{
     background-color: #fff;
     position: relative;
     font-weight: 600;
-    height: 80px;
+    height: 100px;
     line-height: 55px;
     text-align: right;
 }
-#number_fon_top{
+.number_fon_top{
     font-weight: normal;
     letter-spacing: 1px;
-    font-size: 15px;
+    font-size: 14px;
     display: inline-block;
     padding: 0 20px 0 38px;
-    background:url("../images/icons_phone_black.png") no-repeat center left transparent;
+    background:url("../images/icon-phone.png") no-repeat center left transparent;
     background-size: 27px 27px;
+    color: #fff;
     /*position: absolute;
     top:50%;
     right: 3%;
     z-index: 10;*/
+}
+.time_work_top{
+    color: #fff;
+    font-size: 14px;
+    display: inline-block;
 }
 .header_inform_row_menu{
     cursor: pointer;
@@ -132,7 +139,7 @@ a{
 .wrapper .header .header_main_area{
     height: 60px;
     text-align: left;
-    background: #2A2642;
+    /*background: #2A2642;*/
     position: relative;
 }
 .header_main_area #menu_ul{
@@ -145,7 +152,7 @@ a{
     width: auto;
     height: 100%;
     padding-left: 20px;
-    color: #fff;
+    color: #333;
     font-weight: 100;
     font-size: 28px;
     line-height: 60px;
@@ -156,14 +163,14 @@ a{
     top: 50%;
     margin-top: -17px;
     font-size: 32px;
-    color: #fff;
+    color: #333;
     cursor: pointer;
 }
 #korzina_desc{
     cursor: pointer;
     display: inline-block;
     height: 100%;
-    color: #fff;
+    color: #333;
     vertical-align: top;
     margin-left: 10px;
     /*line-height: 52px;*/
@@ -195,7 +202,7 @@ a{
     display: inline-block;
 }
 #welcome span span{
-    font-weight: bold;
+    font-weight: 600;
 }
 .header_main_area #menu_ul li{
     display: inline-block;
@@ -219,12 +226,13 @@ a{
 .header_main_area #menu_ul li a{
     border: 2px solid transparent;
     border-radius: 4px;
-    color: #fff;
+    color: #333;
+    font-weight: 600;
     vertical-align: middle;
     line-height: 36px;
     height: 40px;
     padding: 0 5px !important;
-    font-size: 13px;
+    font-size: 14px;
     display: inline-block;
 }
 .menu_name{
@@ -250,19 +258,19 @@ a{
     /*font-weight: 600;*/
 }
 #home_icon{
-    padding-left: 30px;
-    background: url("../images/icons_home.png") no-repeat center left transparent;
-    background-size: 22px 22px;
+    /*padding-left: 30px;
+    background: url("../images/icons_home_black.png") no-repeat center left transparent;
+    background-size: 25px 25px;*/
 }
 #delivery_icon{
-    padding-left: 30px;
+    /*padding-left: 30px;
     background: url("../images/icons_del.png") no-repeat center left transparent;
-    background-size: 22px 22px;
+    background-size: 22px 22px;*/
 }
 #about_icon{
-    padding-left: 30px;
+    /*padding-left: 30px;
     background: url("../images/icons_about.png") no-repeat center left transparent;
-    background-size: 22px 22px;
+    background-size: 22px 22px;*/
 }
 
 .wrapper .body{
@@ -328,7 +336,7 @@ a{
 .logo{
     display: inline-block;
     margin: auto;
-    max-height: 80px;
+    max-height: 100px;
     max-width: 300px;
     width: 100%;
     height: 100%;
@@ -364,12 +372,13 @@ a{
     opacity: 0.8;
 }
 #korzina_block .korzina_inactive{
-    background:url("../images/korzina_white.png") no-repeat center center transparent;
+    opacity: 0.8;
+    background:url("../images/korzina_black.png") no-repeat center center transparent;
     background-size: 30px 30px;
 }
 #korzina_block .korzina_active{
     opacity: 0.5;
-    background:url("../images/korzina_white.png") no-repeat center center transparent;
+    background:url("../images/korzina_black.png") no-repeat center center transparent;
     background-size: 30px 30px;
 }
 .korzina{
@@ -647,7 +656,7 @@ a{
 #add_or_next_window h4{
     margin-bottom: 20px;
 }
-#more_information_window{
+#fon_wait #more_information_window{
     padding: 65px 5px 5px;
     position: absolute;
     top:0;
@@ -1271,6 +1280,8 @@ loader*/
     height:30px;
     border: 1px solid #aaa;
     border-radius: 50%;
+    background: url("../images/icon_more.png") no-repeat center center;
+    background-size: 24px 24px;
 }
 .icon_del_adv,.icon_safe_adv,.icon_diver_adv{
     width: 50px;
@@ -1301,7 +1312,7 @@ loader*/
     margin-top: 30px;
 }
 #top_image_sumki{
-    background: url("../images/sumki_top2.jpg") no-repeat transparent;
+    background: url("../images/sumki_top2.jpg") no-repeat left center transparent;
 }
 #header_category{
     font-size: 24px;

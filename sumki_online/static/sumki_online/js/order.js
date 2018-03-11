@@ -26,7 +26,7 @@ function delete_order_item_el(el) {
 }
 
 function set_k_oplate(summa) {
-    $("#summa_k_oplate").text(format_price(summa)+" руб.");
+    $("#total_summ_order").text(format_price(summa)+" руб.");
 }
 
 $(function () {
@@ -210,7 +210,7 @@ $(function () {
             }
         });
         summa = count_summa();
-        set_summa_korzina(summa);
+        set_main_price_korz(summa)
         set_k_oplate(summa);
         save_korzina();
     };

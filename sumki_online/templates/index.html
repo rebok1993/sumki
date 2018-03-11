@@ -24,7 +24,7 @@
                 {% for elem in main_offer %}
                     <li>
                         <a href="{{ elem.link }}">
-                            <img src="{% static 'images/special_offer/' %}{{ elem.image }}" {% comment %}width="1206"{% endcomment %} {% comment %}height="300"{% endcomment %} width="306px">
+                            <img src="{% static 'images/special_offer/' %}{{ elem.image }}" {% comment %}width="1206"{% endcomment %} height="300" {% comment %}width="306px"{% endcomment %}>
                         </a>
                     </li>
                 {% endfor %}

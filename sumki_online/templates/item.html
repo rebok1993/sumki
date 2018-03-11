@@ -18,7 +18,10 @@
 {% endblock %}
 
 {% block main_block %}
-    <div class="main_content container" style="max-width: 1246px; margin: auto">
+    <div data-item-element="{{ item.id }}" data-item-name="{{ options_elem.type.name }}"
+     data-item-price="{% if item.discount > 0 %}{{ item.price|discount:item.discount}}{% else %}{{ item.price }}{% endif %}"
+     data-item-image="{% if images %}{% static 'sumki_online/images/' %}{{ category.alias }}/64_on_64/{{ item.id }}.jpg{% endif %}"
+     data-item-category="{{ category.alias }}" class="item_data_for_korz main_content container" style="max-width: 1246px; margin: auto">
         <div class="row">
             <div class="col-md-9 content_item">
                 <div class="item magnify hidden-sm hidden-xs">
@@ -51,7 +54,7 @@
                         {% endif %}
                     </ul>
                 </div>
-                <div>
+                <div class="hidden-lg hidden-md">
                     <ul style="overflow: scroll; white-space: nowrap">
                         {% if images %}
                             <li style="display: inline-block">
@@ -130,5 +133,10 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div id="add_or_next_window" align="center">
+        <h4 align="center"><span class="glyphicon glyphicon-ok"></span> Ваш товар добавлен в корзину</h4>
+        <button type="button" class="btn" id="next_buy"><span class="glyphicon glyphicon-share"></span> Продолжить покупки</button>
+        <button type="button" class="btn btn-danger" id="next_order"><span class=" glyphicon glyphicon-check"></span> Оформить заказ</button>
     </div>
 {% endblock %}

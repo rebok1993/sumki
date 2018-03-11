@@ -1,6 +1,6 @@
 {% load staticfiles %}
 {% load filters %}
-<div id="more_information_window" data-item-element="{{ elem.id }}" data-item-name="{{ options_elem.type.name }}"
+<div class="item_data_for_korz" id="more_information_window" data-item-element="{{ elem.id }}" data-item-name="{{ options_elem.type.name }}"
      data-item-price="{% if elem.discount > 0 %}{{ elem.price|discount:elem.discount}}{% else %}{{ elem.price }}{% endif %}"
      data-item-image="{% if images %}{% static 'sumki_online/images/' %}{{ category.alias }}/64_on_64/{{ elem.id }}.jpg{% endif %}"
      data-item-category="{{ category.alias }}">

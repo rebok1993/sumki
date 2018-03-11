@@ -211,7 +211,7 @@ $(function () {
         var size;
         var new_tovar = true;
 
-        var more_window = $(this).closest("#more_information_window");
+        var more_window = $('.item_data_for_korz').eq(0);
         id_elem = more_window.data("itemElement");
         korzina_elem['id'] = id_elem;
         korzina_elem['name'] = more_window.data("itemName");

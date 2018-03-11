@@ -81,15 +81,25 @@
     </div>
     <div class="wrapper main_fon">
         <div class="header">
+            <div class="hidden-sm hidden-xs" style="height: 30px; background: #222222;">
+                <div class="container-fluid" style="max-width: 1246px">
+                    <div class="row">
+                        <div class="col-md-4" style="height: 30px; line-height: 30px; white-space: nowrap">
+                            <span class="number_fon_top">Тел. 8 (915)-936-40-54</span>
+                            <span class="time_work_top">Консультация ежедневно: 09:00 - 22:00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="container-fluid header_inform_row" style="max-width: 1246px">
                 <div style="height: 100%; margin: auto">
                     <div class="col-sm-offset-3 col-sm-6 col-xs-offset-3 col-xs-6 col-md-offset-0 col-md-2" style="text-align: center; height: 100%;">
                         <a class="logo" href="/"></a>
                     </div>
-                    <div class="hidden-xs hidden-sm col-md-4" style="height:100%; line-height: 80px;text-align: center">
+                    <div class="hidden-xs hidden-sm col-md-4" style="height:100%; line-height: 100px;text-align: center">
                         <span style="font-size: 16px">БОЛЬШОЙ ВЫБОР СУМОК <span style="font-weight: 100">В VITTORA</span></span>
                     </div>
-                    <div class="hidden-xs hidden-sm col-md-6" id="top_image_sumki" style="height:100%; line-height: 80px">
+                    <div class="hidden-xs hidden-sm col-md-6" id="top_image_sumki" style="height:100%; line-height: 100px">
 
                     </div>
                     {% comment %}<div class="col-md-6" style="height:100%; line-height: 80px">
@@ -97,46 +107,48 @@
                     </div>{% endcomment %}
                 </div>
             </div>
-            <div class="container-fluid header_main_area">
-                <div id="header_main_area_inner" style="max-width: 1246px">
-                    <ul id="menu_ul" class="hidden-xs hidden-sm">
-                        <li {% if category.alias == 'obuv' %}class="active_elem"{% endif %}>
-                            <a href="{% url 'sumki_online:catalog' 'obuv' %}" class="menu_name">
-                                <span id="obuv_icon" class="name_menu_span">ЖЕНСКАЯ ОБУВЬ</span>
+            <div style="background: #E0FAFF">
+                <div class="container-fluid header_main_area" style="max-width: 1246px">
+                    <div id="header_main_area_inner" style="max-width: 1246px">
+                        <ul id="menu_ul" class="hidden-xs hidden-sm">
+                            <li {% if category.alias == 'obuv' %}class="active_elem"{% endif %}>
+                                <a href="{% url 'sumki_online:catalog' 'obuv' %}" class="menu_name">
+                                    <span id="obuv_icon" class="name_menu_span">ЖЕНСКАЯ ОБУВЬ</span>
+                                </a>
+                            </li>
+                            <li {% if category.alias == 'sumki' %}class="active_elem"{% endif %}>
+                                <a href="{% url 'sumki_online:catalog' 'sumki' %}" class="menu_name">
+                                    <span id="sumka_icon" class="name_menu_span">СУМКИ ЖЕНСКИЕ</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/">
+                                    <span id="home_icon" style="opacity: .65;">ГЛАВНАЯ</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/delivery">
+                                    <span id="delivery_icon" style="opacity: .65;">ДОСТАВКА</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/about">
+                                    <span id="about_icon" style="opacity: .65;">О НАС</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <div id="welcome" class="hidden-sm hidden-xs"><span><span>Welcome</span> to us</span></div>
+                        <div id="korzina_block">
+                            <a class="korzina korzina_inactive" href='/order'></a>
+                            <a id="korzina_desc" href='/order'>
+                                <div id="korzina_desc_inner">
+                                    <span id="name_korz">Корзина</span><br><span id="korzina_desc_inner_price">0 руб.</span>
+                                </div>
                             </a>
-                        </li>
-                        <li {% if category.alias == 'sumki' %}class="active_elem"{% endif %}>
-                            <a href="{% url 'sumki_online:catalog' 'sumki' %}" class="menu_name">
-                                <span id="sumka_icon" class="name_menu_span">СУМКИ ЖЕНСКИЕ</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/">
-                                <span id="home_icon" style="opacity: .65;">ГЛАВНАЯ</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/delivery">
-                                <span id="delivery_icon" style="opacity: .65;">ДОСТАВКА</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/about">
-                                <span id="about_icon" style="opacity: .65;">О НАС</span>
-                            </a>
-                        </li>
-                    </ul>
-                    <div id="welcome" class="hidden-sm hidden-xs"><span><span>Welcome</span> to us</span></div>
-                    <div id="korzina_block">
-                        <a class="korzina korzina_inactive" href='/order'></a>
-                        <a id="korzina_desc" href='/order'>
-                            <div id="korzina_desc_inner">
-                                <span id="name_korz">Корзина</span><br><span id="korzina_desc_inner_price">0 руб.</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div id="but_list_menu_mob" class="visible-xs visible-sm">
-                        <span class="glyphicon glyphicon-list"></span>
+                        </div>
+                        <div id="but_list_menu_mob" class="visible-xs visible-sm">
+                            <span class="glyphicon glyphicon-list"></span>
+                        </div>
                     </div>
                 </div>
             </div>
