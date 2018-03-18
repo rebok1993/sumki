@@ -61,8 +61,8 @@
             <div id="special_skidka_image">
 
             </div>
-            <h3 style="text-align: left; margin-bottom: 10px">Оформите заказ в течение 20 минут и получите скидку <span style="color: #2EB973; font-weight: 400;font-size: 28px">10%!</span></h3>
-            <div style="color: #aaa; text-align: left; margin-bottom: 40px">Скидка будет автоматически применена в вашей корзине пока не истекло указанное время.</div>
+            <h3 class="special_skidka_header">Оформите заказ в течение 20 минут и получите скидку <span>10%!</span></h3>
+            <div class="special_skidka_text">Скидка будет автоматически применена в вашей корзине пока не истекло указанное время.</div>
             <button class="btn btn-danger" type="button">Получить скидку</button>
         </div>
     </div>
@@ -81,36 +81,33 @@
     </div>
     <div class="wrapper main_fon">
         <div class="header">
-            <div class="hidden-sm hidden-xs" style="height: 30px; background: #222222;">
+            <div class="header_first_row hidden-sm hidden-xs">
                 <div class="container-fluid" style="max-width: 1246px">
                     <div class="row">
-                        <div class="col-md-4" style="height: 30px; line-height: 30px; white-space: nowrap">
+                        <div class="header_contact_inform col-md-4">
                             <span class="number_fon_top">Тел. 8 (915)-936-40-54</span>
                             <span class="time_work_top">Консультация ежедневно: 09:00 - 22:00</span>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="container-fluid header_inform_row" style="max-width: 1246px">
-                <div style="height: 100%; margin: auto">
-                    <div class="col-sm-offset-3 col-sm-6 col-xs-offset-3 col-xs-6 col-md-offset-0 col-md-2" style="text-align: center; height: 100%;">
+            <div class="container-fluid header_second_row">
+                <div style="height: 100%;" class="row">
+                    <div class="logo_block col-sm-offset-3 col-sm-6 col-xs-offset-3 col-xs-6 col-md-offset-0 col-md-2">
                         <a class="logo" href="/"></a>
                     </div>
-                    <div class="hidden-xs hidden-sm col-md-4" style="height:100%; line-height: 100px;text-align: center">
-                        <span style="font-size: 16px">БОЛЬШОЙ ВЫБОР СУМОК <span style="font-weight: 100">В VITTORA</span></span>
+                    <div class="advert_first_block hidden-xs hidden-sm col-md-4">
+                        <div>БОЛЬШОЙ ВЫБОР СУМОК <span>В VITTORA</span></div>
                     </div>
-                    <div class="hidden-xs hidden-sm col-md-6" id="top_image_sumki" style="height:100%; line-height: 100px">
+                    <div class="hidden-xs hidden-sm col-md-6 top_image_sumki">
 
                     </div>
-                    {% comment %}<div class="col-md-6" style="height:100%; line-height: 80px">
-                        <span id="number_fon_top">8 (910)-877-49-69</span>
-                    </div>{% endcomment %}
                 </div>
             </div>
-            <div style="background: #E0FAFF">
+            <div class="header_third_row">
                 <div class="container-fluid header_main_area" style="max-width: 1246px">
-                    <div id="header_main_area_inner" style="max-width: 1246px">
-                        <ul id="menu_ul" class="hidden-xs hidden-sm">
+                    <div id="header_main_area_inner" style="max-width: 1246px" class="row">
+                        <ul id="menu_ul" class="hidden-xs hidden-sm col-md-6">
                             <li {% if category.alias == 'obuv' %}class="active_elem"{% endif %}>
                                 <a href="{% url 'sumki_online:catalog' 'obuv' %}" class="menu_name">
                                     <span id="obuv_icon" class="name_menu_span">ЖЕНСКАЯ ОБУВЬ</span>
@@ -121,24 +118,24 @@
                                     <span id="sumka_icon" class="name_menu_span">СУМКИ ЖЕНСКИЕ</span>
                                 </a>
                             </li>
-                            <li>
+                            <li class="menu_li_second">
                                 <a href="/">
-                                    <span id="home_icon" style="opacity: .65;">ГЛАВНАЯ</span>
+                                    <span id="home_icon">ГЛАВНАЯ</span>
                                 </a>
                             </li>
-                            <li>
+                            <li class="menu_li_second">
                                 <a href="/delivery">
-                                    <span id="delivery_icon" style="opacity: .65;">ДОСТАВКА</span>
+                                    <span id="delivery_icon">ДОСТАВКА</span>
                                 </a>
                             </li>
-                            <li>
+                            <li class="menu_li_second">
                                 <a href="/about">
-                                    <span id="about_icon" style="opacity: .65;">О НАС</span>
+                                    <span id="about_icon">О НАС</span>
                                 </a>
                             </li>
                         </ul>
-                        <div id="welcome" class="hidden-sm hidden-xs"><span><span>Welcome</span> to us</span></div>
-                        <div id="korzina_block">
+                        <div id="welcome" class="hidden-sm hidden-xs col-md-3"><span><span>Welcome</span> to us</span></div>
+                        <div id="korzina_block" class="col-md-3">
                             <a class="korzina korzina_inactive" href='/order'></a>
                             <a id="korzina_desc" href='/order'>
                                 <div id="korzina_desc_inner">
@@ -152,6 +149,21 @@
                     </div>
                 </div>
             </div>
+            <div class="header_fourth_row">
+                <div class="advert_second_block">
+                    <span>БЕСПЛАТНАЯ ДОСТАВКА <span class="hidden-xs hidden-sm">ВО ВСЕ ГОРОДА РОССИИ</span></span>
+                </div>
+            </div>
+            {% if breadcrumbs %}
+            <div class="header_five_row">
+                {% comment %}<div class="container-fluid" style="max-width: 1246px">
+                    <span class="breadcrumb_element" style="padding:0 20px; text-decoration: underline">Главная</span>
+                    <span>/</span>
+                    <span style="padding:0 20px; text-decoration: underline">Женские сумки</span>
+                </div>{% endcomment %}
+                {{ breadcrumbs }}
+            </div>
+            {% endif %}
         </div>
         <aside class="left_side_bar_menu">
             <ul>

@@ -23,6 +23,8 @@ import re
 import os
 import random
 import urllib.request
+from django.db.models import Q
+import operator, functools
 
 
 #import random
@@ -177,16 +179,20 @@ def item(request,category, number):
     return HttpResponse(render_to_string('item.html', context))
 
 #количество просмотров
-def add_number_views(request, elem):
-    if request.is_ajax():
-        tovar = Item.objects.get(pk=elem)
-        number_view = NumberViews.objects.filter(item=tovar)
-        if number_view:
-            number_view[0].number += 1
-            number_view[0].save()
-        else:
-            number_v = NumberViews(item=tovar, number=1, data=datetime.today())
-            number_v.save()
+def add_number_views(item_elem):
+    number_views_week = 1
+    number_views_week_obj = NumberViews.objects.filter(item=item_elem)
+
+    if len(number_views_week_obj):
+        number_views_week = number_views_week_obj[0].number_week
+        number_views_week_obj[0].save()
+    else:
+        try:
+            number_views_week_obj_new = NumberViews(item=item_elem, number=1, number_week=1, data=datetime.today())
+            number_views_week_obj_new.save()
+        except Exception as e:
+            print(e)
+    return number_views_week
 
 
 #МЕТОДЫ ОТВЕЧАЮЩИЕ ЗА ЗАКАЗ НАЧАЛО
@@ -393,33 +399,19 @@ def order_fail(request):
 
 #МЕТОДЫ ОТВЕЧАЮЩИЕ ЗА ЗАКАЗ КОНЕЦ
 
-def catalog_accessories(request,alias):
-    try:
-        category = Category.objects.get(alias=alias)
-        option_query = {
-            'category':category,
-        }
-        # получаем список товаров
-        items_list = Item.objects.filter(**option_query).distinct()
-        paginator = Paginator(items_list, 12)
-        page = request.GET.get('page')
-        items = paginator.page(page)
-    except PageNotAnInteger:
-        items = paginator.page(1)
-    except EmptyPage:
-        items = paginator.page(paginator.num_pages)
-
-    context = {
-        "items": items,
-        "category": category,
-    }
-    return HttpResponse(render_to_string('catalog.html',context))
-
 def change_key(key, array):
     new_array = {}
     for elem_array in array:
         new_array[elem_array[key]] = elem_array
     return new_array
+
+def set_breadcrumbs(end_element, **kwargs):
+    context = {
+        'title':'Главная',
+        'content':kwargs,
+        'end_element':end_element
+    }
+    return render_to_string('breadcrumbs.html', context)
 
 def catalog_sumki(request, alias):
     try:
@@ -437,6 +429,8 @@ def catalog_sumki(request, alias):
             'category':category,
             'number__gt':0,
         }
+        option_query_arg = []
+
         # если установлены фильтры
         if 'options' in request.GET:
             data = request.GET
@@ -447,27 +441,28 @@ def catalog_sumki(request, alias):
                 types_selected = data.get('type_sumki').split(',')
                 option_query['optionssumki__type__id__in'] = types_selected
             if 'special_sumki' in data:
+                option_query_arg_inner = []
                 special_selected = data.get('special_sumki').split(',')
                 if 'hit' in special_selected:
-                    option_query['hit_sales'] = True
+                    option_query_arg_inner.append(Q(hit_sales=True))
                 if 'disc' in special_selected:
-                    option_query['discount__gt'] = 0
+                    option_query_arg_inner.append(Q(discount__gt=0))
                 if 'new' in special_selected:
-                    option_query['new_item'] = True
-
+                    option_query_arg_inner.append(Q(new_item=True))
+                if len(option_query_arg_inner) > 1:
+                    option_query_arg.append(functools.reduce(operator.or_,option_query_arg_inner))
+                else: option_query_arg = option_query_arg_inner
             # если установлена сортировка
         if "type_sort" in request.GET and "way_sort" in request.GET:
             t_sort = request.GET.get('type_sort')
             w_sort = request.GET.get('way_sort')
             sign = '-' if w_sort == 'desc' else ''
             if t_sort == 'popular_sorting':
-                items_list = Item.objects.filter(**option_query).order_by(sign + "top_views").distinct()
+                items_list = Item.objects.filter(*option_query_arg, **option_query).order_by(sign + "top_views").distinct()
             else:
-                items_list = Item.objects.filter(**option_query).order_by(sign + "price").distinct()
-
-        #получаем список товаров
-        if not items_list:
-            items_list = Item.objects.filter(**option_query).order_by("-top_views").distinct()
+                items_list = Item.objects.filter(*option_query_arg, **option_query).order_by(sign + "price").distinct()
+        else:
+            items_list = Item.objects.filter(*option_query_arg, **option_query).order_by("-top_views").distinct()
 
         #получаем информацию об обуви на складе
         brends_all = BrendSumki.objects.filter(optionssumki__item__number__gt=0).distinct().values()
@@ -480,7 +475,6 @@ def catalog_sumki(request, alias):
 
         brends_all = change_key('id', brends_all)
         types_all = change_key('id', types_all)
-
 
         for spec in special_selected:
             if spec in special_all:
@@ -517,19 +511,17 @@ def catalog_sumki(request, alias):
         items = paginator.page(paginator.num_pages)
 
     options_items = [
-        {'name':'special','all':special_all,'label':'Статус товара'},
-        {'name':'type','all':types_all, 'label':'Тип сумки'},
-        {'name':'brend','all':brends_all, 'label':'Бренд сумки'}
+        {'name': 'type', 'all': types_all, 'label': 'ТИП СУМКИ'},
+        {'name':'special','all':special_all,'label':'СТАТУС ТОВАРА'},
+        {'name':'brend','all':brends_all, 'label':'БРЕНД СУМКИ'}
     ]
 
-    main_offer_mini = MainOfferMini.objects.all()
-
     context = {
+        "breadcrumbs":set_breadcrumbs('Последний',**{'Женские сумки':'/catalog/sumki'}),
         "sort":t_sort+'_'+w_sort,
         "options":options_items,
         "items": items,
         "category": category,
-        "main_offer_mini":main_offer_mini,
     }
 
     if "item" in request.GET:
@@ -602,9 +594,7 @@ def catalog_obuv(request, alias):
                 items_list = Item.objects.filter(**option_query).order_by(sign+"top_views").distinct()
             else:
                 items_list = Item.objects.filter(**option_query).order_by(sign+"price").distinct()
-
-        #получаем список товаров
-        if not items_list:
+        else:
             items_list = Item.objects.filter(**option_query).order_by("-top_views").distinct()
 
         #получаем информацию об обуви на складе
@@ -675,14 +665,11 @@ def catalog_obuv(request, alias):
         {'name':'brend','all':brends_all, 'label':'Бренд обуви'}
     ]
 
-    main_offer_mini = MainOfferMini.objects.all()
-
     context = {
         "sort":t_sort+'_'+w_sort,
         "options":options_items,
         "items": items,
         "category": category,
-        "main_offer_mini":main_offer_mini,
     }
 
     if "item" in request.GET:
@@ -708,23 +695,10 @@ def catalog_obuv(request, alias):
 def get_item(request,alias):
     elem_id = request.GET.get('item')
     item_elem = Item.objects.get(id=elem_id)
-    number_views_week = 1
-    number_views_week_obj = NumberViews.objects.filter(item=item_elem)
-
-    if len(number_views_week_obj):
-        #number_views_week_obj[0].number_week += 1
-        number_views_week = number_views_week_obj[0].number_week
-        number_views_week_obj[0].save()
-    else:
-        try:
-            number_views_week_obj_new = NumberViews(item=item_elem, number=1, number_week=1, data=datetime.today())
-            number_views_week_obj_new.save()
-        except Exception as e:
-            print(e)
 
     context = {
         'show_more_window':True,
-        'number_views_week':number_views_week,
+        'number_views_week':add_number_views(item_elem),
         'ending_views': ('человек', 'человека', 'человек')
     }
     if alias == 'obuv':
@@ -756,23 +730,10 @@ def catalog(request, alias='obuv'):
     if "item" in request.GET and request.is_ajax():
         elem_id = request.GET.get('item')
         item_elem = Item.objects.get(id=elem_id)
-        number_views_week = 1
-        number_views_week_obj = NumberViews.objects.filter(item=item_elem)
-
-        if len(number_views_week_obj):
-            #number_views_week_obj[0].number_week += 1
-            number_views_week = number_views_week_obj[0].number_week
-            number_views_week_obj[0].save()
-        else:
-            try:
-                number_views_week_obj_new = NumberViews(item=item_elem, number=1, number_week=1, data=datetime.today())
-                number_views_week_obj_new.save()
-            except Exception as e:
-                print(e)
 
         context = {
             'category':Category.objects.get(alias=alias),
-            'number_views_week': number_views_week,
+            'number_views_week': add_number_views(item_elem),
             'ending_views':('человек', 'человека', 'человек')
         }
         if alias == 'obuv':
@@ -800,6 +761,4 @@ def catalog(request, alias='obuv'):
         return set_time_enter(request,catalog_obuv(request, alias))
     elif alias == 'sumki':
         return set_time_enter(request, catalog_sumki(request, alias))
-    elif alias == 'accessories':
-        return catalog_accessories(request, alias)
 

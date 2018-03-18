@@ -43,12 +43,12 @@ function update_item(data) {
         $.each(value, function (index, value) {
             var el = $("#"+name_opt).find('#'+name_opt+'_'+index+'_option');
             if((data.options[name_opt][index]['number'] == undefined) || (parseInt(data.options[name_opt][index]['number']) == 0)){
-                el.next('span').text("");
-                el.addClass('null_number');
+                /*el.next('span').text("");*/
+                /*el.addClass('null_number');*/
             }
             else{
-                el.removeClass('null_number');
-                el.next('span').text("("+data.options[name_opt][index]['number']+")");
+                /*el.removeClass('null_number');*/
+                /*el.next('span').text("("+data.options[name_opt][index]['number']+")");*/
                 el.css("color","").unbind();
             }
             var parent_el = el.parent('.option_item');
@@ -104,8 +104,15 @@ $(function () {
     var change_parametr = function (event) {
         event.stopPropagation();
         fon_2.show();
+        var parent_el = $(this).parents('.option_items').eq(0);
+
+        if(parent_el.attr('id') == 'type_sumki'){
+            parent_el.find('.option_active').toggleClass("option_not_active option_active");
+            parent_el.find('.option_image_in').toggleClass("option_image_out option_image_in");
+        }
         $(this).toggleClass("option_image_out option_image_in");
         $(this).find(".option_item_value").toggleClass("option_not_active option_active");
+
 
         var obj = all_parametr();
         $.get("/catalog/"+category+"/",obj).done(function (data_json) {

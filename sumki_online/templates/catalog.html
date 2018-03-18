@@ -17,9 +17,6 @@
 {% endblock %}
 
 {% block main_block %}
-    <div id="dop_block_market">
-        <span>БЕСПЛАТНАЯ ДОСТАВКА <span class="hidden-xs hidden-sm">ВО ВСЕ ГОРОДА РОССИИ</span></span>
-    </div>
     <div class="main_content container-fluid" style="max-width: 1246px; margin: auto">
         {% comment %}<div class="row" style="border-radius: 5px; overflow: hidden; margin-top: 10px; margin-bottom: 10px">
             <div class="col-md-12" style="display: none">
@@ -54,25 +51,20 @@
                 {% if options %}
                 {% for option in options %}
                     <div id="{{ option.name }}_{{ category.alias }}" class="option_items">
-                        <div class="name_header"><span class="glyphicon glyphicon-list"></span> {{ option.label }}</div>
+                        <div class="name_header">{{ option.label }}</div>
+                        <div style="max-height: 400px; overflow-y: auto">
                         {% for key2, value2 in option.all.items %}
                             {% if value2.selected %}
                                 <div class="option_item option_image_in">
-                                    <span class="option_item_image"></span><span class="option_item_value option_active" id="{{ option.name }}_{{ category.alias }}_{{ key2 }}_option" data-option-id="{{ key2 }}">{% if value2.name == "" %}Прочие{% else %}{{ value2.name }}{% endif %}</span>
-                                    <span style="vertical-align: top; font-size: 8px; display: inline-block; width: 15px">({{ value2.number }})</span>
+                                    <span class="option_item_value option_active" id="{{ option.name }}_{{ category.alias }}_{{ key2 }}_option" data-option-id="{{ key2 }}">{% if value2.name == "" %}Прочие{% else %}{{ value2.name }}{% endif %}</span>
                                 </div>
                             {% else %}
                                 <div class="option_item option_image_out">
-                                    {% if 'number' in value2 and value2.number != 0 %}
-                                        <span class="option_item_image"></span><span class="option_item_value option_not_active" id="{{ option.name }}_{{ category.alias }}_{{ key2 }}_option" data-option-id="{{ key2 }}">{% if value2.name == "" %}Прочие{% else %}{{ value2.name }}{% endif %}</span>
-                                        <span style="vertical-align: top; font-size: 8px; display: inline-block; width: 15px">({{ value2.number }})</span>
-                                    {% else %}
-                                        <span class="option_item_image"></span><span class="option_item_value option_not_active null_number" id="{{ option.name }}_{{ category.alias }}_{{ key2 }}_option" data-option-id="{{ key2 }}">{% if value2.name == "" %}Прочие{% else %}{{ value2.name }}{% endif %}</span>
-                                        <span style="vertical-align: top; font-size: 8px; display: inline-block; width: 15px"></span>
-                                    {% endif %}
+                                    <span class="option_item_value option_not_active" id="{{ option.name }}_{{ category.alias }}_{{ key2 }}_option" data-option-id="{{ key2 }}">{% if value2.name == "" %}Прочие{% else %}{{ value2.name }}{% endif %}</span>
                                 </div>
                             {% endif %}
                         {% endfor %}
+                        </div>
                     </div>
                 {% endfor %}
             {% endif %}

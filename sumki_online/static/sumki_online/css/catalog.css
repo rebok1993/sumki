@@ -11,7 +11,7 @@
 }
 .main_content .left_side_bar{
     font-weight: 200 !important;
-    border-left: 1px solid #e1e8ed;
+    /*border-left: 1px solid #e1e8ed;*/
     background-color: #fff;/*#E6ECF0*/
     /*position: fixed;
     left: 0;
@@ -20,7 +20,7 @@
 
 .main_content .content_items{
     min-height: 100%;
-    border-left: 1px solid #e1e8ed;
+    /*border-left: 1px solid #e1e8ed;*/
     background-color: #fff;
 }
 #sorting_switcher{
@@ -78,10 +78,15 @@
     font-size: 14px;
 }
 .option_item{
-    padding:5px 0 5px 22px;
-    display: inline-block;/*
-    padding: 5px 0 5px 0;*/
+    padding-left: 25px;
+    /*display: inline-block;*/
     cursor: pointer;
+    height: 40px;
+    line-height: 40px;
+    border-bottom: 1px solid #eeeeec;
+}
+.option_items{
+    margin-top: 10px;
 }
 .option_image_out{
     background: url('../images/other/select_out.png') left center no-repeat;
@@ -103,19 +108,4 @@
     height: 110px;
     background-color: #aaa;
     position: relative;
-}
-#dop_block_market{
-    height: 50px;
-    background-color: #AFA580;
-    line-height: 50px;
-    text-align: center;
-}
-#dop_block_market>span{
-    color: #fff;
-    font-weight: 600;
-    font-size: 18px;
-    display: inline-block;
-    padding-right: 50px;
-    background: url('../images/other/icons_del_car.png') right center no-repeat;
-    background-size: 40px 40px;
 }
