@@ -149,13 +149,15 @@
                     </div>
                 </div>
             </div>
-            <div class="header_fourth_row">
-                <div class="advert_second_block">
-                    <span>БЕСПЛАТНАЯ ДОСТАВКА <span class="hidden-xs hidden-sm">ВО ВСЕ ГОРОДА РОССИИ</span></span>
+            {% if advert_second %}
+                <div class="header_fourth_row">
+                    <div class="advert_second_block">
+                        <span>БЕСПЛАТНАЯ ДОСТАВКА <span class="hidden-xs hidden-sm">ВО ВСЕ ГОРОДА РОССИИ</span></span>
+                    </div>
                 </div>
-            </div>
+            {% endif %}
             {% if breadcrumbs %}
-            <div class="header_five_row">
+            <div class="header_five_row hidden-sm hidden-xs">
                 {% comment %}<div class="container-fluid" style="max-width: 1246px">
                     <span class="breadcrumb_element" style="padding:0 20px; text-decoration: underline">Главная</span>
                     <span>/</span>
@@ -166,12 +168,15 @@
             {% endif %}
         </div>
         <aside class="left_side_bar_menu">
+            <div style="text-align: center; margin-top: 10px">
+                <a class="logo_mini" href="/"></a>
+            </div>
             <ul>
-                <li><a href="{% url 'sumki_online:catalog' 'sumki' %}">ЖЕНСКИЕ СУМКИ</a></li>
-                <li><a href="{% url 'sumki_online:catalog' 'obuv' %}">ЖЕНСКАЯ ОБУВЬ</a></li>
-                <li><a href="/">ГЛАВНАЯ</a></li>
-                <li><a href="/delivery">ДОСТАВКА</a></li>
-                <li><a href="/about">О НАС</a></li>
+                <li><a href="{% url 'sumki_online:catalog' 'sumki' %}">ЖЕНСКИЕ СУМКИ</a><span class="glyphicon glyphicon-chevron-right glyphicon-name-header-left"></span></li>
+                <li><a href="{% url 'sumki_online:catalog' 'obuv' %}">ЖЕНСКАЯ ОБУВЬ</a><span class="glyphicon glyphicon-chevron-right glyphicon-name-header-left"></span></li>
+                <li><a href="/">ГЛАВНАЯ</a><span class="glyphicon glyphicon-chevron-right glyphicon-name-header-left"></span></li>
+                <li><a href="/delivery">ДОСТАВКА</a><span class="glyphicon glyphicon-chevron-right glyphicon-name-header-left"></span></li>
+                <li><a href="/about">О НАС</a><span class="glyphicon glyphicon-chevron-right glyphicon-name-header-left"></span></li>
             </ul>
         </aside>
         <div class="fon_wait_5"></div>

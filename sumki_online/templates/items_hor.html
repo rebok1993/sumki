@@ -1,7 +1,7 @@
 {% load staticfiles %}
 
 {% load filters %}
-<div class="col-xs-6 col-sm-6 col-md-3 item" id="{{ item.id }}" data-item-category="{{ item.category_alias }}">
+<div style="width: 40% !important; white-space: normal" class="item" id="{{ item.id }}" data-item-category="{{ item.category_alias }}">
     <a href="{% url 'sumki_online:item' item.category_alias item.id %}">
         <div class="wrapper_image">
             <div class="ag_copying"></div>
@@ -30,10 +30,10 @@
         {% if item.hit_sales or item.new_item %}
             <div class="status_item">
                 {% if item.hit_sales %}
-                    <div class="hit_sales_el">ХИТ</div>
+                    <div class="hit_sales_el">Хит</div>
                 {% endif %}
                 {% if item.new_item %}
-                    <div class="new_item_el">NEW</div>
+                    <div class="new_item_el">Новинка</div>
                 {% endif %}
             </div>
         {% endif %}

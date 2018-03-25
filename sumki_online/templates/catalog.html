@@ -48,11 +48,12 @@
         </div>{% endcomment %}
         <div class="row">
             <div class="col-md-2 left_side_bar"  onmousedown="return false" onselectstart="return false">
+                <div class="hidden-lg hidden-md" style="text-decoration: underline; margin-top: 10px" id="filter_mobile_button">Фильтр<span class="glyphicon glyphicon-chevron-down glyphicon-name-header glyphicon-name-header-inactive"></span></div>
                 {% if options %}
                 {% for option in options %}
-                    <div id="{{ option.name }}_{{ category.alias }}" class="option_items">
-                        <div class="name_header">{{ option.label }}</div>
-                        <div style="max-height: 400px; overflow-y: auto">
+                    <div id="{{ option.name }}_{{ category.alias }}" class="option_items hidden-sm hidden-xs">
+                        <div class="name_header">{{ option.label }}<span class="glyphicon glyphicon-chevron-down glyphicon-name-header"></span></div>
+                        <div style="max-height: 400px; overflow-y: auto" class="body_option body_option_active">
                         {% for key2, value2 in option.all.items %}
                             {% if value2.selected %}
                                 <div class="option_item option_image_in">
@@ -88,18 +89,6 @@
                             </div>
                         </div>
                     </form>
-                    {% comment %}<ul id="sorting_switcher">
-                        <li class="el_sorting_switcher active desc popular_sorting">
-                            <a>
-                                <span>убыванию популярности</span>
-                            </a>
-                        </li>
-                        <li class="el_sorting_switcher inactive desc price_sorting">
-                            <a>
-                                <span>росту цены</span>
-                            </a>
-                        </li>
-                    </ul>{% endcomment %}
                 </div>
                 <div class="pagination_el">
                     <div class="header_pag_el">Страница:</div>
@@ -121,7 +110,6 @@
                 </div>
                 <div class="row block_items">
                     <span class="hidden" id="category_cat">{{ category.alias }}</span>
-                    {% comment %}{% include 'more_inform_window.html' %}{% endcomment %}
                     {% include 'items.html' %}
                 </div>
                 <div class="pagination_el">

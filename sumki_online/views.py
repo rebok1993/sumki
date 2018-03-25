@@ -77,13 +77,6 @@ def home(request):
                 itemm['brend'] = option.brend.name
                 itemm['type'] = option.type.name
         itemm['category_alias'] = category[itemm['category_id']]['alias']
-    # товары с наибольшими просмотрами
-    '''
-    items_hits = Item.objects.filter(
-        numberviews__number__isnull=False).exclude(
-        id__in=[value['id'] for value in items_disc]).exclude(
-        id__in=[value['id'] for value in items_new_offer]).order_by(
-        "-numberviews__number")[:4].values()'''
     items_hits = Item.objects.filter(
         hit_sales=True, number__gt=0).exclude(
         id__in=[value['id'] for value in items_disc]).exclude(
@@ -138,9 +131,13 @@ def home(request):
     return HttpResponse(render_to_string('index.html', context))
 
 def item(request,category, number):
+    breadcrumbs = [
+        {'Женские сумки': '/catalog/sumki'}
+    ]
     tovar = Item.objects.get(pk=number)
     category = Category.objects.get(alias=category)
     context = {
+        'advert_second':True,
         'images':[],
         'ending_views': ('человек', 'человека', 'человек')
     }
@@ -156,11 +153,13 @@ def item(request,category, number):
         options_elem = OptionsSumki.objects.get(item=tovar)
     else: return {}
 
+    breadcrumbs.append({options_elem.type.name:'/catalog/'+category.alias+'/?options=1&type_sumki='+str(options_elem.type.id)})
+    breadcrumbs.append({options_elem.type.name+' '+options_elem.brend.name:''})
+
     number_views_week = 1
     number_views_week_obj = NumberViews.objects.filter(item=tovar)
 
     if len(number_views_week_obj):
-        # number_views_week_obj[0].number_week += 1
         number_views_week = number_views_week_obj[0].number_week
         number_views_week_obj[0].save()
     else:
@@ -170,6 +169,7 @@ def item(request,category, number):
         except Exception as e:
             print(e)
 
+    context['breadcrumbs'] = set_breadcrumbs(*breadcrumbs)
     context['number_views_week'] = number_views_week
     context['options_elem'] = options_elem
     context['options_elem_render'] = render_to_string('options_elem.html', {'options': options_elem, 'category': category.alias})
@@ -374,6 +374,7 @@ def order(request):
     list_city.sort(key=sort_by_name)
     json_exam = json.dumps(res_citys)
     context = {
+        "advert_second":True,
         "form":form,
         "list_city":list_city,
         "exam":json_exam
@@ -405,16 +406,32 @@ def change_key(key, array):
         new_array[elem_array[key]] = elem_array
     return new_array
 
-def set_breadcrumbs(end_element, **kwargs):
+def set_breadcrumbs(*arg):
     context = {
         'title':'Главная',
-        'content':kwargs,
-        'end_element':end_element
+        'content':arg,
     }
     return render_to_string('breadcrumbs.html', context)
 
+def sort_product(request, *arg, **kwargs):
+    if "type_sort" in request.GET and "way_sort" in request.GET:
+        t_sort = request.GET.get('type_sort')
+        w_sort = request.GET.get('way_sort')
+        sign = '-' if w_sort == 'desc' else ''
+        if t_sort == 'popular_sorting':
+            items_list = Item.objects.filter(*arg, **kwargs).order_by(sign + "top_views").distinct()
+        else:
+            items_list = Item.objects.filter(*arg, **kwargs).order_by(sign + "price").distinct()
+    else:
+        items_list = Item.objects.filter(*arg, **kwargs).order_by("-top_views").distinct()
+    return items_list
+
 def catalog_sumki(request, alias):
     try:
+        breadcrumbs = [
+            {'Женские сумки': '/catalog/sumki'}
+        ]
+
         #получение данных
         category = Category.objects.get(alias=alias)
         category_a = Category.objects.all().values()
@@ -439,6 +456,8 @@ def catalog_sumki(request, alias):
                 option_query['optionssumki__brend__id__in'] = brends_selected
             if 'type_sumki' in data:
                 types_selected = data.get('type_sumki').split(',')
+                name_type = TypeSumki.objects.filter(id=types_selected[0]).values()[0]['name']
+                breadcrumbs.append({name_type:''})
                 option_query['optionssumki__type__id__in'] = types_selected
             if 'special_sumki' in data:
                 option_query_arg_inner = []
@@ -453,16 +472,7 @@ def catalog_sumki(request, alias):
                     option_query_arg.append(functools.reduce(operator.or_,option_query_arg_inner))
                 else: option_query_arg = option_query_arg_inner
             # если установлена сортировка
-        if "type_sort" in request.GET and "way_sort" in request.GET:
-            t_sort = request.GET.get('type_sort')
-            w_sort = request.GET.get('way_sort')
-            sign = '-' if w_sort == 'desc' else ''
-            if t_sort == 'popular_sorting':
-                items_list = Item.objects.filter(*option_query_arg, **option_query).order_by(sign + "top_views").distinct()
-            else:
-                items_list = Item.objects.filter(*option_query_arg, **option_query).order_by(sign + "price").distinct()
-        else:
-            items_list = Item.objects.filter(*option_query_arg, **option_query).order_by("-top_views").distinct()
+        items_list = sort_product(request, *option_query_arg, **option_query)
 
         #получаем информацию об обуви на складе
         brends_all = BrendSumki.objects.filter(optionssumki__item__number__gt=0).distinct().values()
@@ -517,7 +527,8 @@ def catalog_sumki(request, alias):
     ]
 
     context = {
-        "breadcrumbs":set_breadcrumbs('Последний',**{'Женские сумки':'/catalog/sumki'}),
+        "advert_second":True,
+        "breadcrumbs":set_breadcrumbs(*breadcrumbs),
         "sort":t_sort+'_'+w_sort,
         "options":options_items,
         "items": items,
@@ -534,6 +545,7 @@ def catalog_sumki(request, alias):
             "special_sumki": special_all,
         }
         json_str = json.dumps({
+            "breadcrumbs": set_breadcrumbs(*breadcrumbs),
             "sort":t_sort+'_'+w_sort,
             "url_path": request.get_full_path(),
             "paginator":render_to_string('paginator.html', context),
@@ -561,6 +573,7 @@ def catalog_obuv(request, alias):
             'category':category,
             'number__gt':0,
         }
+        option_query_arg = []
 
         # если установлены фильтры
         if "options" in request.GET:
@@ -577,25 +590,21 @@ def catalog_obuv(request, alias):
                 sizes_selected = data.get('size_obuv').split(',')
                 option_query['storeobuv__size__id__in'] = sizes_selected
             if 'special_obuv' in data:
+                option_query_arg_inner = []
                 special_selected = data.get('special_obuv').split(',')
                 if 'hit' in special_selected:
-                    option_query['hit_sales'] = True
+                    option_query_arg_inner.append(Q(hit_sales=True))
                 if 'disc' in special_selected:
-                    option_query['discount__gt'] = 0
+                    option_query_arg_inner.append(Q(discount__gt=0))
                 if 'new' in special_selected:
-                    option_query['new_item'] = True
+                    option_query_arg_inner.append(Q(new_item=True))
+                if len(option_query_arg_inner) > 1:
+                    option_query_arg.append(functools.reduce(operator.or_, option_query_arg_inner))
+                else:
+                    option_query_arg = option_query_arg_inner
 
-        # если установлена сортировка
-        if "type_sort" in request.GET and "way_sort" in request.GET:
-            t_sort = request.GET.get('type_sort')
-            w_sort = request.GET.get('way_sort')
-            sign = '-' if w_sort=='desc' else ''
-            if t_sort == 'popular_sorting':
-                items_list = Item.objects.filter(**option_query).order_by(sign+"top_views").distinct()
-            else:
-                items_list = Item.objects.filter(**option_query).order_by(sign+"price").distinct()
-        else:
-            items_list = Item.objects.filter(**option_query).order_by("-top_views").distinct()
+        #сортировка
+        items_list = sort_product(request, *option_query_arg, **option_query)
 
         #получаем информацию об обуви на складе
         stores = StoreObuv.objects.filter(item__in=items_list)
@@ -666,6 +675,7 @@ def catalog_obuv(request, alias):
     ]
 
     context = {
+        "advert_second":True,
         "sort":t_sort+'_'+w_sort,
         "options":options_items,
         "items": items,

@@ -5,9 +5,37 @@
     border-radius: 0 0 2px 2px;
     overflow: hidden;
     margin:0 auto 10px;
-    /*border-color: #E1E1E1;
-    border-width: 0 0;
-    border-style: solid;*/
+}
+.special_offer_first{
+    width: 780px;
+    height: 600px;
+    float: left;
+}
+.special_offer_first_mobile{
+    height: 55%;
+}
+.special_offer_element a{
+    transition: transform .2s ease-out;
+    will-change: transform;
+    cursor: pointer;
+    background: #000;
+    opacity: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.special_offer_element a:hover{
+    opacity: 0.3;
+}
+.special_offer_second_block{
+    /*height: 602px;*/
+}
+.special_offer_second_inner{
+    width: 380px;
+    height: 300px;
+}
+.special_offer_second_inner:first-child{
+    margin-bottom: 40px;
 }
 .wrapper .body .main_content{
     margin-top: -20px;
@@ -23,9 +51,6 @@
     text-decoration: none;
     color: inherit;
 }
-/*.item a:hover{
-    text-decoration: none;
-}*/
 .wrapper .body .main_content .switcher_type_tovar{
     margin-bottom: 10px;
     padding: 10px;
@@ -34,6 +59,11 @@
     font-size: 20px;
     letter-spacing: 3px;
     position: relative;
+}
+@media (max-width: 990px) {
+    .wrapper .body .main_content .switcher_type_tovar{
+       font-size: 15px;
+    }
 }
 .switcher_type_tovar::before{
     content: '';
@@ -54,21 +84,16 @@
     width:24% !important;
 }
 .second_line_href{
+    background-color: #fff;
     position: relative;
     text-align: left;
-    display: inline-block;
-    width: 48%;
-    height: 210px;/*
-    margin: 0 1%;*/
-    border: 1px solid #EFEEEA;
-    border-radius: 7px;
+    height: 210px;
     overflow: hidden;
-    background: url("/static_media/images/special_offer/second_line/new3.jpg") no-repeat;
     background-size: 100%;
     cursor: pointer;
 }
 .second_line_href a:hover{
-    background-color: rgba(0,0,0,0.15);
+   transform: scale(1.05);
 }
 .second_line_href a{
     color: inherit;
@@ -80,35 +105,12 @@
     transform: translate3d(0px, 0px, 0px);
 }
 .second_line_href_inner{
-    /*font-style: italic;*/
-    /*color: #fff;*/
+    width: 100%;
+    text-align: center;
     font-size: 20px;
     padding-left: 20px;
-    transform: translateY(-50%);
+    transform: translate(-50%,-50%);
     top: 50%;
+    left: 50%;
     position: absolute;
 }
-/*.wrapper .body .main_content .switcher_type_tovar ul{
-    display: inline-block;
-}
-.wrapper .body .main_content .switcher_type_tovar ul li{
-    padding: 10px 40px;
-    display: inline-block;
-    border: 1px solid #000;
-    cursor: pointer;
-    text-align: center;
-    vertical-align: middle;
-    margin-right: -5px;
-    font-weight: bold;
-    background-color: #fff;
-}*/
-/*
-.main_content #skidki_group{
-    display: block;
-}
-.main_content #now_buy_group{
-    display: none;
-}
-.main_content #new_offer_group{
-    display: none;
-}*/

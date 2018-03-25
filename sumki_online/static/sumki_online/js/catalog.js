@@ -23,6 +23,7 @@ function all_parametr() {
     });
     choise.type_sort = sort.type_sort;
     choise.way_sort = sort.way_sort;
+    console.log(choise);
     return choise;
 }
 function update_item(data) {
@@ -35,6 +36,11 @@ function update_item(data) {
     var items_block = $(".block_items:eq(0)");
     items_block.find(".item").remove();
     items_block.prepend(data.items);
+
+    //обновляем хлебные крошки
+    var five_row = $('.header_five_row');
+    five_row.find('.breadcrumb_block').remove();
+    five_row.append(data['breadcrumbs']);
 
     //обновляем панель фильтрации
     $.each(options, function (index, value) {
@@ -146,4 +152,35 @@ $(function () {
     $(".content_items").on("click",".href_active",change_page);
     $(".left_side_bar").on("click", ".option_item", change_parametr);
     $("#sorting").on("change","#select_sort_type", sort_el);
+    $(".left_side_bar .name_header").on('click', function () {
+        var body_opt_el = $(this).siblings('.body_option');//toggleClass('body_option_active body_option_inactive')
+        if(body_opt_el.hasClass('body_option_active')){
+            body_opt_el.slideUp();
+            $(this).find('.glyphicon-name-header').addClass('glyphicon-name-header-inactive');
+        }
+        else{
+            $(this).find('.glyphicon-name-header').removeClass('glyphicon-name-header-inactive');
+            body_opt_el.slideDown();
+        }
+
+        body_opt_el.toggleClass('body_option_active body_option_inactive');
+    });
+    $('#filter_mobile_button').on('click', function () {
+        if($('.option_items').hasClass('hidden-sm') || $('.option_items').hasClass('hidden-xs')){
+            var body_opt = $('.body_option');
+            body_opt.each(function (index, value) {
+                if($(value).hasClass('body_option_active')){
+                    $(value).slideUp();
+                    $(value).siblings('.name_header').find('.glyphicon-name-header').addClass('glyphicon-name-header-inactive');
+                }
+                $(value).toggleClass('body_option_active body_option_inactive');
+            });
+            $('.option_items').removeClass('hidden-sm hidden-xs');
+            $(this).find('.glyphicon-name-header').toggleClass('glyphicon-name-header-inactive glyphicon-name-header-active');
+        }
+        else{
+            $('.option_items').slideToggle();
+            $(this).find('.glyphicon-name-header').toggleClass('glyphicon-name-header-inactive glyphicon-name-header-active');
+        }
+    });
 });

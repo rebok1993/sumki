@@ -1,0 +1,18 @@
+<div class="container-fluid breadcrumb_block" style="max-width: 1246px">
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a class="not_active" href="/">{{ title }}</a></li>
+            {% for item in content %}
+                {% if forloop.last %}
+                    {% for key, value in item.items %}
+                        <li class="active">{{ key }}</li>
+                    {% endfor %}
+                {% else %}
+                    {% for key, value in item.items %}
+                        <li><a class="not_active" href="{{ value }}">{{ key }}</a></li>
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
+        </ol>
+    </div>
+</div>

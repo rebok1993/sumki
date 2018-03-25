@@ -18,94 +18,127 @@
 {% block main_menu_tab %}menu_inner_active{% endblock %}
 
 {% block main_block %}
-    <div class="main_offer hidden-sm hidden-xs">
-        <div id="scrolling_elements" style="height: 300px">
-            <ul>
-                {% for elem in main_offer %}
-                    <li>
-                        <a href="{{ elem.link }}">
-                            <img src="{% static 'images/special_offer/' %}{{ elem.image }}" {% comment %}width="1206"{% endcomment %} height="300" {% comment %}width="306px"{% endcomment %}>
-                        </a>
-                    </li>
-                {% endfor %}
-            </ul>
+    <div class="main_content container-fluid" style="max-width: 1246px; margin: auto">
+        <div class="row hidden-sm hidden-xs" style="margin: 20px 0 70px">
+            <div class="col-md-8">
+                <div class="special_offer_element special_offer_first" style="background: url('{% static "images/special_offer/" %}spring.jpg') left top no-repeat;">
+                    <a href="/"></a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="special_offer_element special_offer_second_block">
+                    <div class="special_offer_second_inner" style="background: url('{% static "images/special_offer/" %}spring_second.jpg') left top no-repeat;">
+                        <a href="/catalog/sumki/?options=1&type_sumki=8"></a>
+                    </div>
+                    <div class="special_offer_second_inner" style="background: url('{% static "images/special_offer/" %}spring_third_var2.jpg') left top no-repeat;">
+                        <a href="/catalog/sumki/?options=1&type_sumki=5"></a>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div id="scroll_main_offer">
-            {% for i in main_offer %}
-                {% if forloop.first %}
-                    <a class="select_slide selected_slide" data-index="{{ forloop.counter }}"></a>
-                {% else %}
-                    <a class="select_slide" data-index="{{ forloop.counter }}"></a>
-                {% endif %}
-            {% endfor %}
+        <div class="row hidden-md hidden-lg">
+            <div{% comment %} class="col-sm-12 col-xs-12"{% endcomment %}>
+                <div class="special_offer_element special_offer_first_mobile" style="background: url('{% static "images/special_offer/" %}spring.jpg') left top no-repeat; background-size: contain">
+                    <a href="/"></a>
+                </div>
+            </div>
         </div>
-        <span id="btn_left" class="glyphicon glyphicon-chevron-left"></span>
-        <span id="btn_right" class="glyphicon glyphicon-chevron-right"></span>
-    </div>
-    <div class="main_content container" style="max-width: 1206px; margin: auto">
         <div class="row">
             <div class="col-md-12">
-                <div class="content_items" style="margin-top: 70px">
-                    {% comment %}<div class="switcher_type_tovar row">
-                        <span>ОФОРМЛЕНИЕ ЗАКАЗА</span>
-                    </div>
-                    <div>
-
-                    </div>{% endcomment %}
-                    <div class="switcher_type_tovar row">
+                <div class="content_items">
+                    <div class="switcher_type_tovar row hidden-xs hidden-sm">
                         <span>СПЕЦИАЛЬНЫЕ ПРЕДЛОЖЕНИЯ</span>
                     </div>
-                    <div id="skidki_group">
+                    <div id="skidki_group" class="hidden-xs hidden-sm">
                         <div class="row block_items">
-                            {% comment %}{% include 'more_inform_window.html' %}{% endcomment %}
                             {% for item in items_disc %}
                                 {% include 'item_elem.html' %}
                             {% endfor %}
                         </div>
                     </div>
-                    <div style="text-align: center; margin: 50px 0;">
-                        <div class="second_line_href" style="margin-right: 2%">
-                           <a href="/catalog/obuv/?special_obuv=disc&options=1"><div class="second_line_href_inner">ПОСМОТРЕТЬ ВСЕ <span style="font-weight: bold">СПЕЦПРЕДЛОЖЕНИЯ<br> НА ОБУВЬ</span></div></a>
+                    {% comment %}<div class="hidden-lg hidden-md">
+                        <div class="row block_items" style="overflow: scroll; white-space: nowrap">
+                            {% for item in items_disc %}
+                                {% include 'items_hor.html' %}
+                            {% endfor %}
                         </div>
-                        <div class="second_line_href">
-                            <a href="/catalog/sumki/?special_sumki=disc&options=1"><div class="second_line_href_inner">ПОСМОТРЕТЬ ВСЕ <span style="font-weight: bold">СПЕЦПРЕДЛОЖЕНИЯ<br> НА СУМКИ</span></div></a>
+                    </div>{% endcomment %}
+                    <div class="row hidden-xs hidden-sm" style="margin: 50px 0;">
+                        <div class="col-md-6">
+                            <div class="second_line_href" style="background: url('{% static "images/special_offer/" %}spec_offer_fon.jpg') left top no-repeat; background-size: contain">
+                               <a href="/catalog/obuv/?special_obuv=disc&options=1">
+                                   <div class="second_line_href_inner">ПОСМОТРЕТЬ ВСЕ <span style="font-weight: bold">СПЕЦПРЕДЛОЖЕНИЯ<br> НА ОБУВЬ</span></div>
+                               </a>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="second_line_href" style=";background: url('{% static "images/special_offer/" %}spec_offer_fon.jpg') left top no-repeat; background-size: contain">
+                                <a href="/catalog/sumki/?special_sumki=disc&options=1">
+                                    <div class="second_line_href_inner">ПОСМОТРЕТЬ ВСЕ <span style="font-weight: bold">СПЕЦПРЕДЛОЖЕНИЯ<br> НА СУМКИ</span></div>
+                                </a>
+                            </div>
                         </div>
                     </div>
                     <div class="switcher_type_tovar row">
                         <span>ХИТЫ ПРОДАЖ</span>
                     </div>
-                    <div id="now_buy_group">
+                    <div id="now_buy_group" class="hidden-xs hidden-sm">
                         <div class="row block_items">
                             {% for item in items_hits %}
                                 {% include 'item_elem.html' %}
                             {% endfor %}
                         </div>
                     </div>
-                    <div style="text-align: center; margin: 50px 0;">
-                        <div class="second_line_href" style="margin-right: 2%">
-                            <a href="/catalog/obuv/?special_obuv=hit&options=1"><div class="second_line_href_inner">ПОСМОТРЕТЬ ТОП-10 <span style="font-weight: bold">САМОЙ ПОКУПАЕМОЙ<br> ОБУВИ</span></div></a>
+                    <div class="hidden-lg hidden-md">
+                        <div class="row block_items" style="overflow: scroll; white-space: nowrap">
+                            {% for item in items_hits %}
+                                {% include 'items_hor.html' %}
+                            {% endfor %}
                         </div>
-                        <div class="second_line_href">
-                            <a href="/catalog/sumki/?special_sumki=hit&options=1"><div class="second_line_href_inner">ПОСМОТРЕТЬ ТОП-10 <span style="font-weight: bold">САМЫХ ПОКУПАЕМЫХ<br> СУМОК</span></div></a>
+                    </div>
+                    <div class="row hidden-xs hidden-sm" style="margin: 50px 0;">
+                        <div class="col-md-6">
+                            <div class="second_line_href" style="background: url('{% static "images/special_offer/" %}spec_offer_fon.jpg') left top no-repeat; background-size: contain">
+                                <a href="/catalog/obuv/?special_obuv=hit&options=1"><div class="second_line_href_inner">ПОСМОТРЕТЬ ТОП-10 <span style="font-weight: bold">САМОЙ ПОКУПАЕМОЙ<br> ОБУВИ</span></div></a>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="second_line_href" style=";background: url('{% static "images/special_offer/" %}spec_offer_fon.jpg') left top no-repeat; background-size: contain">
+                                <a href="/catalog/sumki/?special_sumki=hit&options=1"><div class="second_line_href_inner">ПОСМОТРЕТЬ ТОП-10 <span style="font-weight: bold">САМЫХ ПОКУПАЕМЫХ<br> СУМОК</span></div></a>
+                            </div>
                         </div>
                     </div>
                     <div class="switcher_type_tovar row">
                         <span>НОВЫЕ ПОСТУПЛЕНИЯ</span>
                     </div>
-                    <div id="new_offer_group">
+                    <div id="new_offer_group" class="hidden-xs hidden-sm">
                         <div class="row block_items">
                             {% for item in items_new_offer %}
                                 {% include 'item_elem.html' %}
                             {% endfor %}
                         </div>
                     </div>
-                    <div style="text-align: center; margin: 50px 0;">
-                        <div class="second_line_href" style="margin-right: 2%">
-                            <a href="/catalog/obuv/?special_obuv=new&options=1"><div class="second_line_href_inner">ПОСМОТРЕТЬ ВСЕ <span style="font-weight: bold">НОВЫЕ ПОСТУПЛЕНИЯ<br> ОБУВИ</span></div></a>
+                    <div class="hidden-lg hidden-md">
+                        <div class="row block_items" style="overflow: scroll; white-space: nowrap">
+                            {% for item in items_new_offer %}
+                                {% include 'items_hor.html' %}
+                            {% endfor %}
                         </div>
-                        <div class="second_line_href">
-                            <a href="/catalog/sumki/?special_sumki=new&options=1"><div class="second_line_href_inner">ПОСМОТРЕТЬ ВСЕ <span style="font-weight: bold">НОВЫЕ ПОСТУПЛЕНИЯ<br> СУМОК</span></div></a>
+                    </div>
+                    <div class="row hidden-xs hidden-sm" style="margin: 50px 0;">
+                        <div class="col-md-6">
+                            <div class="second_line_href" style="background: url('{% static "images/special_offer/" %}spec_offer_fon.jpg') left top no-repeat; background-size: contain">
+                                <a href="/catalog/obuv/?special_obuv=new&options=1"><div class="second_line_href_inner">ПОСМОТРЕТЬ ВСЕ <span style="font-weight: bold">НОВЫЕ ПОСТУПЛЕНИЯ<br> ОБУВИ</span></div></a>
+                            </div>
                         </div>
+                        <div class="col-md-6">
+                            <div class="second_line_href" style=";background: url('{% static "images/special_offer/" %}spec_offer_fon.jpg') left top no-repeat; background-size: contain">
+                                <a href="/catalog/sumki/?special_sumki=new&options=1"><div class="second_line_href_inner">ПОСМОТРЕТЬ ВСЕ <span style="font-weight: bold">НОВЫЕ ПОСТУПЛЕНИЯ<br> СУМОК</span></div></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="">
+
                     </div>
                 </div>
             </div>

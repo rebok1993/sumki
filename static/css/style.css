@@ -179,10 +179,10 @@ body::-webkit-scrollbar{
 }
 #but_list_menu_mob{
     position: absolute;
-    left: 0;
+    left: 5%;
     top: 50%;
-    margin-top: -17px;
-    font-size: 32px;
+    margin-top: -12px;
+    font-size: 24px;
     color: #333;
     cursor: pointer;
 }
@@ -294,6 +294,15 @@ body::-webkit-scrollbar{
     position: relative;
     background-color: #fff;
 }
+.wrapper .left_side_bar_menu .glyphicon-name-header-left {
+    font-size: 11px;
+    color: #999999;
+    position: absolute;
+    top: 50%;
+    right: 3%;
+    cursor: pointer;
+    transform: translate(0, -50%);
+}
 .wrapper .left_side_bar_menu{
     background: #fff;
     position: absolute;
@@ -324,11 +333,12 @@ body::-webkit-scrollbar{
     font-size: 16px;
     color: #333;
     font-weight: 600;
-    display: inline-block;
+    display: block;
     padding: 5px 0 5px 15px;
 }
 .wrapper .left_side_bar_menu li{
     border-bottom: 1px solid #ccc;
+    position: relative;
 }
 .wrapper .left_side_bar_menu ul{
     margin-top: 20px !important;
@@ -357,6 +367,12 @@ body::-webkit-scrollbar{
     background:url("../images/logo.png") no-repeat center transparent;
     background-size: contain;
 }
+.logo_mini{
+    display: inline-block;
+    background:url("../images/logo.png") no-repeat center transparent;
+    background-size: contain;
+    height: 50px;
+}
 .title_footer{
     display: inline-block;
     margin-top: 10px;
@@ -364,10 +380,8 @@ body::-webkit-scrollbar{
     color: #919191;
 }
 .price_item{
-    font-weight: 600;
-    color: #2EB973;
     text-align: right;
-    font-size: 18px !important;
+    font-size: 15px !important;
     display: inline-block;
 }
 #result_block{
@@ -1029,20 +1043,19 @@ loader*/
 .hit_sales_el{
     font-size: 12px;
     display: inline-block;
-    color:#CC6A3B;
-    border:1px solid #CC6A3B;
+    color:#fff;
     padding: 1px 7px 1px 7px;
     border-radius: 3px;
-    background-color: #fdfdfd;
+    background-color: #ccc;
 }
 .new_item_el{
     font-size: 12px;
     display: inline-block;
-    color:#2EB973;
-    border:1px solid #2EB973;
+    color:#fff;
+    /*border:1px solid #2EB973;*/
     padding: 1px 5px 1px 5px;
     border-radius: 3px;
-    background-color: #fdfdfd;
+    background-color: #ccc;
 }
 .status_item{
     position: absolute;
@@ -1189,7 +1202,7 @@ loader*/
     line-height: 28px;
     height: 28px;
     white-space: nowrap;
-    background-color: rgba(18, 187, 230, 0.3);
+    background-color: rgba(29, 161, 242, 0.3);
     padding: 0 15px;
     border-radius: 2px;
     /*-webkit-transition: all linear 0.2s;
@@ -1205,7 +1218,7 @@ loader*/
     vertical-align: middle;
 }
 .icon_more_block:hover{
-    background-color: rgba(18, 187, 230, 1);
+    background-color: rgba(29, 161, 242, 1);
 }
 #icon_glass_magn{
     background:url("../images/icon_glass_gray.png") no-repeat center center transparent;
@@ -1320,5 +1333,10 @@ loader*/
     font-weight: 600;
     border-bottom: 2px solid #333;
     padding-bottom: 10px;
-
+}
+.breadcrumb .not_active{
+    text-decoration: underline !important;
+}
+.breadcrumb .not_active:hover{
+    color: #1DA1F2 !important;
 }
