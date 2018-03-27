@@ -21,17 +21,20 @@
     transform: translate(0, -50%) rotate(0deg);
 }
 .glyphicon-name-header-inactive{
-    transform: translate(0, -50%) rotate(-90deg);
+    transform: translate(0, -50%) rotate(180deg);
+}
+@media (min-width: 990px){
+    .main_content .left_side_bar{
+        position: sticky;
+        top:-200px;
+    }
 }
 .main_content .left_side_bar{
     font-weight: 200 !important;
-    /*border-left: 1px solid #e1e8ed;*/
-    background-color: #fff;/*#E6ECF0*/
-    position: sticky;
-    top:-200px;
-    /*position: fixed;
-    left: 0;
-    top: 0;*/
+    background-color: #fff;
+}
+.option_items_inactive_el{
+    display: none;
 }
 #filter_mobile_button{
     padding-right: 20px;

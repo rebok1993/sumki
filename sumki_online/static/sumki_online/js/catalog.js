@@ -155,12 +155,12 @@ $(function () {
     $(".left_side_bar .name_header").on('click', function () {
         var body_opt_el = $(this).siblings('.body_option');//toggleClass('body_option_active body_option_inactive')
         if(body_opt_el.hasClass('body_option_active')){
-            body_opt_el.slideUp();
+            body_opt_el.hide();
             $(this).find('.glyphicon-name-header').addClass('glyphicon-name-header-inactive');
         }
         else{
             $(this).find('.glyphicon-name-header').removeClass('glyphicon-name-header-inactive');
-            body_opt_el.slideDown();
+            body_opt_el.show();
         }
 
         body_opt_el.toggleClass('body_option_active body_option_inactive');
@@ -170,7 +170,7 @@ $(function () {
             var body_opt = $('.body_option');
             body_opt.each(function (index, value) {
                 if($(value).hasClass('body_option_active')){
-                    $(value).slideUp();
+                    $(value).hide();
                     $(value).siblings('.name_header').find('.glyphicon-name-header').addClass('glyphicon-name-header-inactive');
                 }
                 $(value).toggleClass('body_option_active body_option_inactive');
@@ -179,7 +179,7 @@ $(function () {
             $(this).find('.glyphicon-name-header').toggleClass('glyphicon-name-header-inactive glyphicon-name-header-active');
         }
         else{
-            $('.option_items').slideToggle();
+            $('.option_items').toggleClass('option_items_active_el option_items_inactive_el');
             $(this).find('.glyphicon-name-header').toggleClass('glyphicon-name-header-inactive glyphicon-name-header-active');
         }
     });

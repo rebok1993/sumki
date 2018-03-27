@@ -48,11 +48,11 @@
         </div>{% endcomment %}
         <div class="row">
             <div class="col-md-2 left_side_bar"  onmousedown="return false" onselectstart="return false">
-                <div class="hidden-lg hidden-md" style="text-decoration: underline; margin-top: 10px" id="filter_mobile_button">Фильтр<span class="glyphicon glyphicon-chevron-down glyphicon-name-header glyphicon-name-header-inactive"></span></div>
+                <div class="hidden-lg hidden-md" style="text-decoration: underline; margin-top: 30px" id="filter_mobile_button">Фильтр<span class="glyphicon glyphicon-chevron-up glyphicon-name-header glyphicon-name-header-inactive"></span></div>
                 {% if options %}
                 {% for option in options %}
                     <div id="{{ option.name }}_{{ category.alias }}" class="option_items hidden-sm hidden-xs">
-                        <div class="name_header">{{ option.label }}<span class="glyphicon glyphicon-chevron-down glyphicon-name-header"></span></div>
+                        <div class="name_header">{{ option.label }}<span class="glyphicon glyphicon-chevron-up glyphicon-name-header"></span></div>
                         <div style="max-height: 400px; overflow-y: auto" class="body_option body_option_active">
                         {% for key2, value2 in option.all.items %}
                             {% if value2.selected %}

@@ -95,16 +95,15 @@ a{
 }
 .wrapper .header .header_third_row{
     background: #E0FAFF;
-    border-bottom: 1px solid #333;
+    /*border-bottom: 1px solid #333;*/
 }
 .wrapper .header .header_fourth_row .advert_second_block{
     height: 50px;
-    background-color: #AFA580;
+    /*background-color: #5bc0de;*/
     line-height: 50px;
     text-align: center;
 }
 .wrapper .header .header_fourth_row .advert_second_block > span{
-    color: #fff;
     font-weight: 600;
     font-size: 18px;
     display: inline-block;
@@ -209,7 +208,7 @@ body::-webkit-scrollbar{
     vertical-align: middle;
 }
 #korzina_desc_inner_price{
-    color: #2EB973;
+    color: #ED7D2F;
     font-weight: bold;
     font-size: 16px !important;
 }
@@ -240,16 +239,18 @@ body::-webkit-scrollbar{
     vertical-align: top;
 }
 .header_main_area #menu_ul li a{
-    border: 2px solid transparent;
-    border-radius: 4px;
+    border-bottom: 3px solid transparent;
     color: #333;
     font-weight: 600;
     vertical-align: middle;
-    line-height: 36px;
+    line-height: 42px;
     height: 40px;
     padding: 0 5px !important;
     font-size: 14px;
     display: inline-block;
+}
+.header_main_area #menu_ul li.active_elem a{
+    border-bottom-color: #333 !important;
 }
 .header_main_area #menu_ul li:first-child a{
     padding-left: 0 !important;
@@ -261,6 +262,30 @@ body::-webkit-scrollbar{
     /*padding-left: 30px;*/
     display: inline-block;
 }
+
+.icons_left_menu{
+    padding-left: 25px;
+}
+/*.obuv_icon_left_menu{
+    background: url("../images/icons_obuv.png") no-repeat center left transparent;
+    background-size: 22px 22px;
+}
+.sumka_icon_left_menu{
+    background: url("../images/icons_sumka.png") no-repeat center left transparent;
+    background-size: 22px 22px;
+}
+.home_icon_left_menu{
+    background: url("../images/icons_home_black.png") no-repeat center left transparent;
+    background-size: 22px 22px;
+}
+.delivery_icon_left_menu{
+    background: url("../images/icons_del_black.png") no-repeat center left transparent;
+    background-size: 22px 22px;
+}
+.about_icon_left_menu{
+    background: url("../images/icons_about.png") no-repeat center left transparent;
+    background-size: 22px 22px;
+}*/
 
 #obuv_icon{
     /*background: url("../images/icons_obuv.png") no-repeat center left transparent;
@@ -805,17 +830,17 @@ body::-webkit-scrollbar{
 }
 .btn-primary{
     padding: 8px 16px 8px 16px !important;
-    font-weight: bold !important;
-    background-color: #2EB973;
-    border-color: #2EB973;
+    font-weight: 600 !important;
+    background-color: #ED7D2F;
+    border-color: transparent;
 }
 .btn-primary:hover{
-    background-color: #2ec27c;
-    border-color: #2ec27c;
+    background-color: #ff8c31;
+    border-color: transparent;
 }
 .btn-primary:focus{
-    background-color: #2ec27c !important;
-    border-color: #2ec27c !important;
+    background-color: #ff8c31 !important;
+    border-color: transparent !important;
 }
 .btn-danger:hover{
     background-color: #2ec27c !important;
@@ -823,7 +848,7 @@ body::-webkit-scrollbar{
 }
 .btn-danger{
     padding: 8px 16px 8px 16px !important;
-    font-weight: bold !important;
+    font-weight: 600 !important;
     border-color: #2EB973 !important;
     background-color: #2EB973 !important;
     color: #fff;
