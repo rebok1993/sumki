@@ -42,7 +42,7 @@ body{
     opacity: 0.8;
 }
 #menu_ul li{
-    padding: 0 14px;
+    padding: 0 5px;
 }
 #menu_ul li:first-child{
     padding-left: 0;
@@ -95,21 +95,22 @@ a{
 }
 .wrapper .header .header_third_row{
     background: #E0FAFF;
-    /*border-bottom: 1px solid #333;*/
+    border-bottom: 1px solid #333;
 }
 .wrapper .header .header_fourth_row .advert_second_block{
     height: 50px;
-    /*background-color: #5bc0de;*/
+    background-color: #FFDF9C;
     line-height: 50px;
     text-align: center;
+    border-bottom: 1px solid #333;
 }
 .wrapper .header .header_fourth_row .advert_second_block > span{
     font-weight: 600;
     font-size: 18px;
     display: inline-block;
     padding-right: 50px;
-    background: url('../images/icons_del_car.png') right center no-repeat;
-    background-size: 40px 40px;
+    /*background: url('../images/icons_del_car.png') right center no-repeat;
+    background-size: 40px 40px;*/
 }
 .wrapper .header .header_five_row{
     margin-top: 10px;
@@ -380,7 +381,7 @@ body::-webkit-scrollbar{
 .footer{
     font-style: italic;
     padding: 20px;
-    background-color:#2C2C2C;
+    background-color:#E0FAFF;
 }
 .logo{
     display: inline-block;
@@ -1193,7 +1194,7 @@ loader*/
     background-size: 35px 35px;
 }
 #phone_work{
-    background:url("../images/icon-phone.png") no-repeat center left transparent;
+    background:url("../images/icons_phone_black.png") no-repeat center left transparent;
     background-size: 35px 35px;
 }
 .icon_fotter{
@@ -1209,7 +1210,7 @@ loader*/
     font-style: normal;
 }
 #links_to_partners a{
-    color: #fff;
+    color: #333;
 }
 .skidka_icons{
     background:url("../images/icon_skidka.png") no-repeat left top transparent;
