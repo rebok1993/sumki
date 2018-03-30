@@ -552,12 +552,17 @@ body::-webkit-scrollbar{
 .item .name_item{
     /*font-weight: 600;*/
     font-size: 13px;
+    color: #337ab7 !important;
+}
+.item .name_item:hover{
+    text-decoration: underline;
+    color: #333 !important;
 }
 .item .discount_item{
     text-decoration: line-through;
     display: inline-block;
     padding-left: 5px !important;
-    font-size: 16px !important;
+    font-size: 15px !important;
 }
 .item .saving_item{
     /*color: #CC6A3B;*/
@@ -1224,11 +1229,12 @@ loader*/
     top:50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: #fff;
-    line-height: 28px;
+    color: #333;
+    line-height: 26px;
     height: 28px;
     white-space: nowrap;
-    background-color: rgba(29, 161, 242, 0.3);
+    border: 1px solid #ccc;
+    background-color: rgba(255,255,255,.7);
     padding: 0 15px;
     border-radius: 2px;
     /*-webkit-transition: all linear 0.2s;
@@ -1244,7 +1250,7 @@ loader*/
     vertical-align: middle;
 }
 .icon_more_block:hover{
-    background-color: rgba(29, 161, 242, 1);
+    background-color: rgba(255,255,255,.9);
 }
 #icon_glass_magn{
     background:url("../images/icon_glass_gray.png") no-repeat center center transparent;

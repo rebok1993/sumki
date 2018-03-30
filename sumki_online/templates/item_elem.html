@@ -19,7 +19,7 @@
                 <div class="item_description price_item" data-item-price="{{ item.price }}">{{ item.price|price_format }} руб</div>
             </div>
         {% endif %}
-        <div class="item_desc ription name_item" data-item-name="{{ item.type }}">{{ item.type }} / <span style="color: #999999">{{ item.brend }}</span></div>
+        <div class="item_desc ription name_item" data-item-name="{{ item.type }}">{{ item.type }} / <span>{{ item.brend }}</span></div>
         {% if item.category_alias == 'obuv' %}
             <div class="item_description hide_element">Размеры:
                 {% for size in item.size %}
