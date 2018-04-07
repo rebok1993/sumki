@@ -364,27 +364,26 @@ $(function () {
         var new_img = new Image();
 
         if(event.data.hov){
-            hover_item = true;
+            img_el.addClass('active_hover');
             $(this).css({"border":"1px solid #d4dbe0","z-index":"10"});
             src_el = src_el.replace('.jpg','');
 
             new_img.addEventListener('load', function () {
-                if(hover_item){
+                if(img_el.hasClass('active_hover')){
                     img_el.attr('src', new_img.src);
-                    img_el.data('itemimgChange','1');
+                    img_el.addClass('change_img');
                 }
             });
             new_img.src = src_el+'v3.jpg';
-            /*img_el.attr('src', new_src);*/
             $(this).find(".hide_element").css("visibility","visible");
         }
         else{
-            hover_item = false;
-            if(img_el.data('itemimgChange') == '1'){
+            img_el.removeClass('active_hover');
+            if(img_el.hasClass('change_img')){
                 src_el = src_el.replace('v3.jpg','');
                 var new_src = src_el+'.jpg';
                 img_el.attr('src', new_src);
-                img_el.data('imgChange','0');
+                img_el.removeClass('change_img');
             }
             $(this).css({"border":"","z-index":"1"});
             $(this).find(".hide_element").css("visibility","hidden");
