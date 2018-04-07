@@ -10,6 +10,7 @@ var get_offer_skidka;
 var el_time;
 var number_image_tovar = 0;
 var index_image_current = 0;
+var hover_item = false;
 
 //сохранение корзины в куки
 function save_korzina() {
@@ -363,20 +364,22 @@ $(function () {
         var new_img = new Image();
 
         if(event.data.hov){
+            hover_item = true;
             $(this).css({"border":"1px solid #d4dbe0","z-index":"10"});
             src_el = src_el.replace('.jpg','');
 
             new_img.addEventListener('load', function () {
-                img_el.attr('src', new_img.src);
-                img_el.data('itemimgChange','1');
-                /*img_el.animate({opacity:0.0},200);
-                img_el.animate({opacity:1.0},100);*/
+                if(hover_item){
+                    img_el.attr('src', new_img.src);
+                    img_el.data('itemimgChange','1');
+                }
             });
             new_img.src = src_el+'v3.jpg';
             /*img_el.attr('src', new_src);*/
             $(this).find(".hide_element").css("visibility","visible");
         }
         else{
+            hover_item = false;
             if(img_el.data('itemimgChange') == '1'){
                 src_el = src_el.replace('v3.jpg','');
                 var new_src = src_el+'.jpg';
