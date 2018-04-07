@@ -1,6 +1,7 @@
 <html>
 <head>
     {% load staticfiles %}
+    {% load filters %}
     <meta http-equiv=content-type content="text/html;charset=UTF-8">
     <meta name="yandex-verification" content="c4e1c73a90f5cf45" />
     <meta name="google-site-verification" content="aHjoCujI3H0KcBepRoF8gicXWFAOvgYYEXoZiyLldS4" />
@@ -8,7 +9,13 @@
     <meta name="keywords" content="женская обувь, женские сумки, низкие цены, кроссовки, туфли, кеды, макасины">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
     {% block meta_new %}{% endblock %}
-    <title>Интернет-магазин женских сумок и обуви. Купить женскую обувь, женские сумки в онлайн магазине Vittora.ru</title>
+    {% if title_item %}
+        <title>{{ options_elem.type.name }} {{ options_elem.brend.name }} купить за {{ item.price|price_format }} руб в интернет-магазине Vittora.ru</title>
+    {% elif category %}
+        <title>{{ category.name }} в интернет-магазине Vittora.ru от 599 руб. Купить по низким ценам.</title>
+    {% else %}
+        <title>Интернет-магазин женских сумок и обуви. Купить женскую обувь, женские сумки в интернет-магазине Vittora.ru</title>
+    {% endif %}
     <link rel="shortcut icon" href="{%  static 'sumki_online/images/other/favicon2.ico' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
@@ -182,6 +189,23 @@
         <div class="fon_wait_5"></div>
         <div class="body" {% comment %}onmousedown="return false"{% endcomment %}>
             {% block main_block %}{% endblock %}
+        </div>
+        <div class="dop_about_shop">
+            <h1>Интернет-магазин женских сумок и обуви</h1>
+            <div style="padding-top: 15px">
+                <h2>Широкий ассортимент</h2>
+                <p>
+                    Vittora.ru - интернет магазин, на страницах которого представлены лучшие коллекции женских сумок и обуви по привлекательным ценам. Мы уверено, что наши коллекции заинтересуют каждого покупателя. Любая покупка на нашем сайте происходит в несколько кликов.
+                </p>
+                <h2>Удобная доставка</h2>
+                <p>
+                    Мы осуществляем бесплатную доставку по всей России транспортной компанией BoxBerry и Почтой России. Если товар не подошёл покупатель может вернуть товар в течении 14 дней.
+                </p>
+                <h2>Выгодные покупки</h2>
+                <p>
+                    В интернет магазине Vittora.ru постоянно проходят распродажи и различные акции, что позволит приобрести понравившийся товар по более привлекательной цене.
+                </p>
+            </div>
         </div>
         <div class="footer">
             <div class="container-fluid" style="max-width: 1246px;">

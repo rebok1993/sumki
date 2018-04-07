@@ -15,14 +15,11 @@ var index_image_current = 0;
 function save_korzina() {
     $.cookie('korzina', JSON.stringify(korzina), {path: '/'});
 }
-
 //очищаем корзину
 function clear_korzina() {
     $.cookie('korzina', '', {path: '/'});
     $('#name_korz').text('Корзина');
 }
-
-
 //склонение слов
 function smart_ending(number, forms) {
     var number_el = number;
@@ -45,7 +42,6 @@ function count_summa() {
     korzina['summa'] = summa;
     return summa;
 }
-
 //изменение изображения в окне товара
 function change_image(event) {
     event.stopPropagation();
@@ -75,17 +71,14 @@ function change_image(event) {
     $('#main_image_el img').attr('src', src_img);
     new_image = true;
 }
-
 //форматирования цен
 function format_price(numeric) {
     return new Intl.NumberFormat('ru').format(numeric);
 }
-
 //меняем количество товара в мини корзине
 function change_number_in_mini_korz(id, number) {
     $("#item_in_korzina_"+id+" .number_in_korz").text(number+" шт");
 }
-
 //установка суммы корзины в меню
 function set_main_price_korz(summa) {
     console.log(summa);
@@ -105,7 +98,6 @@ function set_main_price_korz(summa) {
     }
     main_price_korz.text(format_price(summa)+' руб.');
 }
-
 //удаление из мини корзины
 function delete_from_korzina(event, id_item) {
     var summa = 0;
@@ -143,13 +135,20 @@ function delete_from_korzina(event, id_item) {
     else set_main_price_korz(Number(korzina['summa']));
 
 }
-
 //учитываем количество просмотров товара в базе
 function add_number_views(id_elem) {
     $.get("/addNumberViews/"+id_elem+"/").done(function (data) {}).fail(function (data) {});
 }
-
 //события после загрузки изображений
+function img_loaded (elem) {
+    $('.wait_load_image').hide();
+    $(elem).parent().addClass('loaded');
+    flag1=true;
+}
+
+function imgs_loaded (elem) {
+    $(elem).siblings('.ag_copying').css('background-color', 'transparent');
+}
 
 $(function () {
     var time_id = 0;

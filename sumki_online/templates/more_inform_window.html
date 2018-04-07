@@ -4,13 +4,6 @@
      data-item-price="{% if elem.discount > 0 %}{{ elem.price|discount:elem.discount}}{% else %}{{ elem.price }}{% endif %}"
      data-item-image="{% if images %}{% static 'sumki_online/images/' %}{{ category.alias }}/64_on_64/{{ elem.id }}.jpg{% endif %}"
      data-item-category="{{ category.alias }}">
-    <script type="text/javascript">
-        function img_loaded (elem) {
-            $('.wait_load_image').hide();
-            $(elem).parent().addClass('loaded');
-            flag1=true;
-        }
-    </script>
     <div id="more_information_header_top">
         <div id="more_information_name">{{ options_elem.type.name }} / {{ options_elem.brend.name }}</div>
         <div id="more_information_price">

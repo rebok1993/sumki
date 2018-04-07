@@ -139,7 +139,8 @@ def item(request,category, number):
     context = {
         'advert_second':True,
         'images':[],
-        'ending_views': ('человек', 'человека', 'человек')
+        'ending_views': ('человек', 'человека', 'человек'),
+        'title_item':True
     }
     for i in range(1, 6):
         path_var = STATIC_ROOT + "sumki_online/images/" + category.alias + "/400_on_400/" + str(tovar.id) + "v" + str(i) + ".jpg"
@@ -512,7 +513,7 @@ def catalog_sumki(request, alias):
                    if not hasattr(itemm, "brend"): itemm.brend = option.brend.name
                    # добавляем атрибут типа к элементу
                    if not hasattr(itemm, "type"): itemm.type = option.type.name
-        paginator = Paginator(items_list, 32)
+        paginator = Paginator(items_list, 60)
         page = request.GET.get('page')
         items = paginator.page(page)
     except PageNotAnInteger:
@@ -659,7 +660,7 @@ def catalog_obuv(request, alias):
                    if not hasattr(itemm, "brend"): itemm.brend = option.brend.name
                    # добавляем атрибут типа к элементу
                    if not hasattr(itemm, "type"): itemm.type = option.type.name
-        paginator = Paginator(items_list, 32)
+        paginator = Paginator(items_list, 60)
         page = request.GET.get('page')
         items = paginator.page(page)
     except PageNotAnInteger:

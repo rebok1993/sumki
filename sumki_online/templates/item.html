@@ -21,7 +21,7 @@
     <div data-item-element="{{ item.id }}" data-item-name="{{ options_elem.type.name }}"
      data-item-price="{% if item.discount > 0 %}{{ item.price|discount:item.discount}}{% else %}{{ item.price }}{% endif %}"
      data-item-image="{% if images %}{% static 'sumki_online/images/' %}{{ category.alias }}/64_on_64/{{ item.id }}.jpg{% endif %}"
-     data-item-category="{{ category.alias }}" class="item_data_for_korz main_content container" style="max-width: 1246px; margin: auto">
+     data-item-category="{{ category.alias }}" class="item_data_for_korz main_content container-fluid" style="max-width: 1246px; margin: auto">
         <div class="row">
             <div class="col-md-9 content_item">
                 <div class="item magnify hidden-sm hidden-xs">

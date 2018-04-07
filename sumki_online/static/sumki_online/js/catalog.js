@@ -149,6 +149,13 @@ $(function () {
     };
 
     fill_options();
+    var first_el_item = $('.item').eq(0);
+
+    $(window).scroll(function () {
+
+        console.log(first_el_item.offset().top);
+    });
+
     $(".content_items").on("click",".href_active",change_page);
     $(".left_side_bar").on("click", ".option_item", change_parametr);
     $("#sorting").on("change","#select_sort_type", sort_el);

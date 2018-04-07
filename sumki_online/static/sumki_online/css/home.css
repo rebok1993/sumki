@@ -64,27 +64,6 @@
     .wrapper .body .main_content .switcher_type_tovar{
        font-size: 15px;
     }
-    .dop_about_shop h2{
-        font-size: 22px;
-    }
-}
-.dop_about_shop{
-    border-top: 1px solid #dedede;
-    line-height: 1.5;
-}
-.dop_about_shop h2{
-    font-weight: 100;
-}
-.dop_about_shop h5{
-    font-weight: 600;
-}
-@media (min-width: 990px) {
-    .dop_about_shop p{
-        width: 70%;
-    }
-    .dop_about_shop{
-        padding: 0 0 25px 10px;
-    }
 }
 .switcher_type_tovar::before{
     content: '';
