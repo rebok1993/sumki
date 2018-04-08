@@ -5,7 +5,7 @@
     <a href="{% url 'sumki_online:item' item.category_alias item.id %}">
         <div class="wrapper_image">
             <div class="ag_copying"></div>
-            <img onload="imgs_loaded(this)" data-itemimg-change="0" class="image_item" alt="{{ item.type }} {{ item.brend }}" src="{% static 'sumki_online/images/' %}{{ item.category_alias }}/200_on_200/{{ item.id }}.jpg" style="width: 100%">
+            <img onload="imgs_loaded(this)" class="image_item" alt="{{ item.type }} {{ item.brend }}" src="{% static 'sumki_online/images/' %}{{ item.category_alias }}/200_on_200/{{ item.id }}.jpg" style="width: 100%">
         </div>
 
         {% if item.discount > 0 %}
@@ -19,7 +19,7 @@
                 <div class="item_description price_item" data-item-price="{{ item.price }}">{{ item.price|price_format }} руб</div>
             </div>
         {% endif %}
-        <div class="item_desc ription name_item" data-item-name="{{ item.type }}">{{ item.type }} / <span>{{ item.brend }}</span></div>
+        <div class="item_description name_item" data-item-name="{{ item.type }}">{{ item.type }} / <span>{{ item.brend }}</span></div>
         {% if item.category_alias == 'obuv' %}
             <div class="item_description hide_element">Размеры:
                 {% for size in item.size %}

@@ -5,7 +5,7 @@
     <a href="{% url 'sumki_online:item' item.category_alias item.id %}">
         <div class="wrapper_image">
             <div class="ag_copying"></div>
-            <img data-itemimg-change="0" class="image_item" alt="{{ item.type }} {{ item.brend }}" src="{% static 'sumki_online/images/' %}{{ item.category_alias }}/200_on_200/{{ item.id }}.jpg" style="width: 100%">
+            <img onload="imgs_loaded(this)" class="image_item" alt="{{ item.type }} {{ item.brend }}" src="{% static 'sumki_online/images/' %}{{ item.category_alias }}/200_on_200/{{ item.id }}.jpg" style="width: 100%">
         </div>
 
         {% if item.discount > 0 %}

@@ -78,6 +78,14 @@
                         </div>
                     </div>
                 {% endif %}
+                <div>
+                    <h3>Вам могут понравиться</h3>
+                    <div class="row block_items" style="overflow: scroll; white-space: nowrap">
+                        {% for item in items_hits %}
+                            {% include 'items_hor.html' %}
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
             <div class="col-md-3 right_side_bar">
                 <div id="name_item">{{ options_elem.type.name }} / {{ options_elem.brend.name }}</div>

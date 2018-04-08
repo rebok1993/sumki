@@ -52,46 +52,25 @@ def home(request):
         category[cat['id']] = cat
     #товары со скидками
     items_disc = Item.objects.filter(discount__gt=0, number__gt=0).order_by("?")[:4].values()
-    for itemm in items_disc:
-        for option in options_sumki:
-            if option.item_id == itemm['id']:
-                itemm['brend'] = option.brend.name
-                itemm['type'] = option.type.name
-        for option in options_obuv:
-            if option.item_id == itemm['id']:
-                itemm['brend'] = option.brend.name
-                itemm['type'] = option.type.name
-        itemm['category_alias'] = category[itemm['category_id']]['alias']
-    #новые товары
-    #items_new_offer = Item.objects.exclude(id__in=[value['id'] for value in items_disc]).order_by("-data")[:4].values()
     items_new_offer = Item.objects.filter(
         new_item=True, number__gt=0).exclude(id__in=[value['id'] for value in items_disc]).order_by("?")[:4].values()
-
-    for itemm in items_new_offer:
-        for option in options_sumki:
-            if option.item_id == itemm['id']:
-                itemm['brend'] = option.brend.name
-                itemm['type'] = option.type.name
-        for option in options_obuv:
-            if option.item_id == itemm['id']:
-                itemm['brend'] = option.brend.name
-                itemm['type'] = option.type.name
-        itemm['category_alias'] = category[itemm['category_id']]['alias']
     items_hits = Item.objects.filter(
         hit_sales=True, number__gt=0).exclude(
         id__in=[value['id'] for value in items_disc]).exclude(
         id__in=[value['id'] for value in items_new_offer]).order_by("?")[:4].values()
-    for itemm in items_hits:
-        for option in options_sumki:
-            if option.item_id == itemm['id']:
-                itemm['brend'] = option.brend.name
-                itemm['type'] = option.type.name
-        for option in options_obuv:
-            if option.item_id == itemm['id']:
-                itemm['brend'] = option.brend.name
-                itemm['type'] = option.type.name
-        itemm['category_alias'] = category[itemm['category_id']]['alias']
-
+    # новые товары
+    # items_new_offer = Item.objects.exclude(id__in=[value['id'] for value in items_disc]).order_by("-data")[:4].values()
+    for elem in [items_disc, items_new_offer, items_hits]:
+        for itemm in elem:
+            for option in options_sumki:
+                if option.item_id == itemm['id']:
+                    itemm['brend'] = option.brend.name
+                    itemm['type'] = option.type.name
+            for option in options_obuv:
+                if option.item_id == itemm['id']:
+                    itemm['brend'] = option.brend.name
+                    itemm['type'] = option.type.name
+            itemm['category_alias'] = category[itemm['category_id']]['alias']
 
     main_offer = MainOffer.objects.all()
     items_common = []
@@ -103,24 +82,13 @@ def home(request):
     stores = StoreObuv.objects.filter(item__in=items_common)
 
     for store in stores:
-        for itemm in items_disc:
-            if itemm['id'] == store.item_id:
-                if not "size" in itemm:
-                    itemm['size'] = [store.size.name]
-                else:
-                    itemm['size'].append(store.size.name)
-        for itemm in items_new_offer:
-            if itemm['id'] == store.item_id:
-                if not "size" in itemm:
-                    itemm['size'] = [store.size.name]
-                else:
-                    itemm['size'].append(store.size.name)
-        for itemm in items_hits:
-            if itemm['id'] == store.item_id:
-                if not "size" in itemm:
-                    itemm['size'] = [store.size.name]
-                else:
-                    itemm['size'].append(store.size.name)
+        for elem in [items_disc, items_new_offer, items_hits]:
+            for itemm in elem:
+                if itemm['id'] == store.item_id:
+                    if not "size" in itemm:
+                        itemm['size'] = [store.size.name]
+                    else:
+                        itemm['size'].append(store.size.name)
     context = {
         "sitename": "Магазин сумок",
         "items_disc": items_disc,

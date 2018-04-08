@@ -37,7 +37,7 @@
             </div>
         </div>
         <div class="row hidden-md hidden-lg">
-            <div{% comment %} class="col-sm-12 col-xs-12"{% endcomment %}>
+            <div>
                 <div class="special_offer_element special_offer_first_mobile" style="background: url('{% static "images/special_offer/" %}spring.jpg') left top no-repeat; background-size: contain">
                     <a href="/"></a>
                 </div>
@@ -56,13 +56,6 @@
                             {% endfor %}
                         </div>
                     </div>
-                    {% comment %}<div class="hidden-lg hidden-md">
-                        <div class="row block_items" style="overflow: scroll; white-space: nowrap">
-                            {% for item in items_disc %}
-                                {% include 'items_hor.html' %}
-                            {% endfor %}
-                        </div>
-                    </div>{% endcomment %}
                     <div class="row hidden-xs hidden-sm" style="margin: 50px 0;">
                         <div class="col-md-6">
                             <div class="second_line_href" style="background: url('{% static "images/special_offer/" %}spec_offer_fon.jpg') left top no-repeat; background-size: contain">
