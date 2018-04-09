@@ -2,6 +2,10 @@
 {% load staticfiles %}
 {% load filters %}
 
+{% block meta_new %}
+    <meta name="description" content="{{ options_elem.type.name }} {{ options_elem.brend.name }} - цвет:{{ options_elem.color.name }}. БЕСПЛАТНАЯ доставка по России">
+{% endblock %}
+
 {% block new_css%}
     <link rel="stylesheet" type="text/css" href="{% static 'sumki_online/css/item.css' %}" />
 {% endblock %}
