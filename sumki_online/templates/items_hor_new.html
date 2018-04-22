@@ -1,7 +1,7 @@
 {% load staticfiles %}
 
 {% load filters %}
-<div style="white-space: normal" class="item col-md-3" id="{{ elem.item.id }}" data-item-category="{{ elem.item.category.alias }}">
+<div style="white-space: normal" class="item col-md-3 col-xs-6 col-sm-6" id="{{ elem.item.id }}" data-item-category="{{ elem.item.category.alias }}">
     <a href="{% url 'sumki_online:item' elem.item.category.alias elem.item.id %}">
         <div{% comment %} class="wrapper_image"{% endcomment %}>
             {% comment %}<div class="ag_copying"></div>{% endcomment %}
