@@ -28,7 +28,7 @@
      data-item-category="{{ category.alias }}" class="item_data_for_korz main_content container-fluid" style="max-width: 1246px; margin: auto">
         <div class="row">
             <div class="col-md-9 content_item">
-                <div class="item magnify hidden-sm hidden-xs">
+                <div class="item_elem magnify hidden-sm hidden-xs">
                     <div class="views_tovar"><span class="icon_more_inner"></span><span style="margin-left: 10px"><span style="color: #333; font-weight: 600">{{ number_views_week|smart_ending:ending_views }}</span><br> купили этот товар <br> на неделе</span></div>
                     <div class="wait_load_image"></div>
                     <span id="btn_left" class="glyphicon glyphicon-chevron-left"></span>
@@ -77,17 +77,19 @@
                 {% if item.description|length > 10 %}
                     <div style="margin: 30px 0 30px 0; max-width: 750px" class="row">
                         <div class="col-md-12">
-                            <span style="display: inline-block;font-size: 22px;border-bottom: 2px solid #333;padding: 0 30px 10px 0;">Описание товара</span>
-                            <div style="margin-top: 20px; font-size: 15px; line-height: 24px">{{ item.description }}</div>
+                            <h3 class="h3_item_page">Описание товара</h3>
+                            <div style="font-weight: 300; margin-top: 20px; font-size: 15px; line-height: 24px">{{ item.description }}</div>
                         </div>
                     </div>
                 {% endif %}
-                <div>
-                    <h3>Вам могут понравиться</h3>
-                    <div class="row block_items" style="overflow: scroll; white-space: nowrap">
-                        {% for item in items_hits %}
-                            {% include 'items_hor.html' %}
-                        {% endfor %}
+                <div style="margin: 30px 0 30px 0; padding-bottom: 50px" class="row">
+                    <div class="col-md-12">
+                        <h3 class="h3_item_page">Рекомендуем</h3>
+                        <div class="row block_items">
+                            {% for elem in other_items %}
+                                {% include 'items_hor_new.html' %}
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -117,14 +119,14 @@
                 </div>
 
                 <div style="text-align: left">
-                    <div style="margin-top: 70px; font-size: 22px;border-bottom: 2px solid #333;padding-bottom: 10px;text-align: center">Характеристики</div>
+                    <h3 class="h3_item_page">Характеристики</h3>
                     <div id="description_item_full" style="margin-top: 30px">
                         {% if options_elem_render %}{{ options_elem_render }}{% endif %}
                     </div>
                 </div>
 
                 <div style="margin-bottom: 30px; text-align: left">
-                    <div style="margin-top: 30px; font-size: 22px;border-bottom: 2px solid #333;padding-bottom: 10px; text-align: center">Преимущества Vittora</div>
+                    <h3 class="h3_item_page">Преимущества Vittora</h3>
                     <div class="adv_elem">
                         <div class="icon_del_adv"></div>
                         <div class="title_adv">Бесплатная доставка по всей России</div>
@@ -149,6 +151,6 @@
     <div id="add_or_next_window" align="center">
         <h4 align="center"><span class="glyphicon glyphicon-ok"></span> Ваш товар добавлен в корзину</h4>
         <button type="button" class="btn" id="next_buy"><span class="glyphicon glyphicon-share"></span> Продолжить покупки</button>
-        <button type="button" class="btn btn-danger" id="next_order"><span class=" glyphicon glyphicon-check"></span> Оформить заказ</button>
+        <button type="button" class="btn btn-primary" id="next_order"><span class=" glyphicon glyphicon-check"></span> Оформить заказ</button>
     </div>
 {% endblock %}

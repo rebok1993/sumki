@@ -23,6 +23,7 @@ import re
 import os
 import random
 import urllib.request
+
 from django.db.models import Q
 import operator, functools
 
@@ -46,18 +47,29 @@ class OrderPage(TemplateView):
 def home(request):
     category = {}
     categories =  Category.objects.all().values()
-    options_sumki = OptionsSumki.objects.all()
-    options_obuv = OptionsObuv.objects.all()
+    id_items = list()
+    exclude_items = list()
     for cat in categories:
         category[cat['id']] = cat
+
     #товары со скидками
     items_disc = Item.objects.filter(discount__gt=0, number__gt=0).order_by("?")[:4].values()
+    exclude_items.extend(items_disc)
+    #новые товары
     items_new_offer = Item.objects.filter(
-        new_item=True, number__gt=0).exclude(id__in=[value['id'] for value in items_disc]).order_by("?")[:4].values()
+        new_item=True, number__gt=0).exclude(id__in=[value['id'] for value in exclude_items]).order_by("?")[:4].values()
+    exclude_items.extend(items_new_offer)
+    #хиты продаж
     items_hits = Item.objects.filter(
         hit_sales=True, number__gt=0).exclude(
-        id__in=[value['id'] for value in items_disc]).exclude(
-        id__in=[value['id'] for value in items_new_offer]).order_by("?")[:4].values()
+        id__in=[value['id'] for value in exclude_items]).order_by("?")[:4].values()
+
+    for elem in [items_disc, items_new_offer, items_hits]:
+        for itemm in elem:
+            id_items.append(itemm['id'])
+    options_sumki = OptionsSumki.objects.filter(item__in=id_items)
+    options_obuv = OptionsObuv.objects.filter(item__in=id_items)
+
     # новые товары
     # items_new_offer = Item.objects.exclude(id__in=[value['id'] for value in items_disc]).order_by("-data")[:4].values()
     for elem in [items_disc, items_new_offer, items_hits]:
@@ -118,8 +130,13 @@ def item(request,category, number):
     if category.alias == 'obuv':
         context['store_elem'] = StoreObuv.objects.filter(item=tovar)
         options_elem = OptionsObuv.objects.get(item=tovar)
+        other_item = OptionsObuv.objects.select_related('item').filter(type=options_elem.type_id, item__number__gt=0).order_by('?')[:4]
+        #other_item = Item.objects.select_related('optionsobuv').filter(optionsobuv__type=options_elem.type_id).order_by("?")[:4].values()
     elif category.alias == 'sumki':
         options_elem = OptionsSumki.objects.get(item=tovar)
+        other_item = OptionsSumki.objects.select_related('item').filter(type=options_elem.type_id, item__number__gt=0).order_by('?')[:4]
+        #other_item = OptionsSumki.objects.select_related('item').get(item__id=353)
+        #other_item = Item.objects.select_related('optionssumki').filter(optionssumki__type=options_elem.type_id).order_by("?")[:4]
     else: return {}
 
     breadcrumbs.append({options_elem.type.name:'/catalog/'+category.alias+'/?options=1&type_sumki='+str(options_elem.type.id)})
@@ -137,7 +154,10 @@ def item(request,category, number):
             number_views_week_obj_new.save()
         except Exception as e:
             print(e)
+    #print('\n'.join(str(value) for value in other_item))
+    #print(other_item.item.price)
 
+    context['other_items'] = other_item
     context['breadcrumbs'] = set_breadcrumbs(*breadcrumbs)
     context['number_views_week'] = number_views_week
     context['options_elem'] = options_elem
@@ -463,9 +483,6 @@ def catalog_sumki(request, alias):
         category_a = change_key('id', category_a)
 
         for itemm in items_list:
-            if itemm.hit_sales: special_all['hit']['number']+=1
-            if itemm.discount: special_all['disc']['number']+=1
-            if itemm.new_item: special_all['new']['number']+=1
             itemm.category_alias = category_a[itemm.category_id]['alias']
             for option in options:
                if option.item_id==itemm.id:
@@ -610,9 +627,6 @@ def catalog_obuv(request, alias):
         category_a = change_key('id', category_a)
 
         for itemm in items_list:
-            if itemm.hit_sales: special_all['hit']['number']+=1
-            if itemm.discount: special_all['disc']['number']+=1
-            if itemm.new_item: special_all['new']['number']+=1
             itemm.category_alias = category_a[itemm.category_id]['alias']
             for option in options:
                if option.item_id==itemm.id:

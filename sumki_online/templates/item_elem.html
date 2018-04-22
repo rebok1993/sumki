@@ -2,21 +2,21 @@
 
 {% load filters %}
 <div class="col-xs-6 col-sm-6 col-md-3 item" id="{{ item.id }}" data-item-category="{{ item.category_alias }}">
-    <a href="{% url 'sumki_online:item' item.category_alias item.id %}">
+    <a class="href_item href_item_inactive" href="{% url 'sumki_online:item' item.category_alias item.id %}">
         <div class="wrapper_image">
             <div class="ag_copying"></div>
             <img onload="imgs_loaded(this)" class="image_item" alt="{{ item.type }} {{ item.brend }}" src="{% static 'sumki_online/images/' %}{{ item.category_alias }}/200_on_200/{{ item.id }}.jpg" style="width: 100%">
         </div>
 
         {% if item.discount > 0 %}
-            <div style="text-align: center">
-                <div class="item_description price_item" data-item-price="{{ item.price|discount:item.discount }}">{{ item.price|discount:item.discount|price_format }} руб</div>
-                <div class="item_description discount_item">{{ item.price|price_format }} руб</div>
+            <div class="item_description">
+                <div class="discount_item">{{ item.price|price_format }} руб</div>
+                <div class="price_item discount_price_item" data-item-price="{{ item.price|discount:item.discount }}">{{ item.price|discount:item.discount|price_format }} руб</div>
             </div>
             <div class="item_description saving_item"><span class="skidka_icons"></span><span> скидка -{{ item.discount }}{% comment %}{{ item.price|saving:item.discount|price_format }}{% endcomment %}%</span></div>
         {% else %}
-            <div style="text-align: center">
-                <div class="item_description price_item" data-item-price="{{ item.price }}">{{ item.price|price_format }} руб</div>
+            <div class="item_description">
+                <div class="price_item" data-item-price="{{ item.price }}">{{ item.price|price_format }} руб</div>
             </div>
         {% endif %}
         <div class="item_description name_item" data-item-name="{{ item.type }}">{{ item.type }} / <span>{{ item.brend }}</span></div>
@@ -36,6 +36,9 @@
                     <div class="new_item_el">NEW</div>
                 {% endif %}
             </div>
+        {% endif %}
+        {% if item.discount > 0 %}
+            <div class="status_item_skidka">-{{ item.discount }}%</div>
         {% endif %}
     </a>
     <div class="icon_more_block hide_element more_information hidden-sm hidden-xs">Быстрый просмотр</div>

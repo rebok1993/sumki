@@ -150,6 +150,19 @@ function img_loaded (elem) {
 function imgs_loaded (elem) {
     $(elem).siblings('.ag_copying').css('background-color', 'transparent');
 }
+function set_height_item () {
+    var item_el = $('.block_items .item > a.href_item');
+    var max_height = 0;
+
+    item_el.each(function (index, value) {
+        if($(value).outerHeight() > max_height)
+            max_height = $(value).outerHeight();
+    });
+    item_el.each(function (index, value) {
+        if($(value).outerHeight() < max_height)
+            $(value).css('height', max_height+'px');
+    });
+};
 
 $(function () {
     var time_id = 0;
@@ -165,6 +178,7 @@ $(function () {
         main_price_korz = $('#korzina_desc_inner_price');
         fill_korzina();
         init_apply_skidka();
+        set_height_item();
     };
 
     //елемент в мини корзине
@@ -365,7 +379,8 @@ $(function () {
 
         if(event.data.hov){
             img_el.addClass('active_hover');
-            $(this).css({"border":"1px solid #d4dbe0","z-index":"10"});
+            $(this).addClass('active_item_el');
+            $(this).find('a.href_item').addClass('href_item_active');
             src_el = src_el.replace('.jpg','');
 
             new_img.addEventListener('load', function () {
@@ -385,7 +400,8 @@ $(function () {
                 img_el.attr('src', new_src);
                 img_el.removeClass('change_img');
             }
-            $(this).css({"border":"","z-index":"1"});
+            $(this).removeClass('active_item_el');
+            $(this).find('a.href_item').removeClass('href_item_active');
             $(this).find(".hide_element").css("visibility","hidden");
         }
     };

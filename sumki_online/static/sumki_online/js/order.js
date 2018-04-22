@@ -82,6 +82,7 @@ $(function () {
 
     //оформление заказа
     var order_ready = function (event) {
+        $('body').scrollTop(0);
         order.delivery = false;
         var name = $("#id_name");
         var surname = $("#id_surname");

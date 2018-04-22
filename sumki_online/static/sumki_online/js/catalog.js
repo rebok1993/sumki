@@ -42,6 +42,9 @@ function update_item(data) {
     five_row.find('.breadcrumb_block').remove();
     five_row.append(data['breadcrumbs']);
 
+
+    //обновляем высота блоков товаров
+    set_height_item();
     //обновляем панель фильтрации
     $.each(options, function (index, value) {
         var name_opt = index;
@@ -155,7 +158,7 @@ $(function () {
     $(".left_side_bar").on("click", ".option_item", change_parametr);
     $("#sorting").on("change","#select_sort_type", sort_el);
     $(".left_side_bar .name_header").on('click', function () {
-        var body_opt_el = $(this).siblings('.body_option');//toggleClass('body_option_active body_option_inactive')
+        var body_opt_el = $(this).siblings('.body_option');
         if(body_opt_el.hasClass('body_option_active')){
             body_opt_el.hide();
             $(this).find('.glyphicon-name-header').addClass('glyphicon-name-header-inactive');

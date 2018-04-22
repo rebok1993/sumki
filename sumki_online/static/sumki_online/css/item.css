@@ -1,12 +1,21 @@
 .wrapper .body .main_content{
     min-height: 400px;
 }
-.main_content .item{
+.main_content .item_elem{
     width: 880px;
     text-align: center;
     position: relative;
     min-height: 534px;
 }
+.main_content .item_elem #btn_right{
+    right:-30px;
+    top:48%;
+}
+.main_content .item_elem #btn_left{
+    left:-30px;
+    top:48%;
+}
+
 #main_image_el{
     transition: all 0.5s ease-in-out 0s;
     font-size: 0;
@@ -52,7 +61,7 @@
 #other_image_item li{
     float: left;
 }
-.item .views_tovar{
+.item_elem .views_tovar{
     position: absolute;
     top: 50px;
     left:50px;
