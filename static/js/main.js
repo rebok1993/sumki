@@ -151,7 +151,7 @@ function imgs_loaded (elem) {
     $(elem).siblings('.ag_copying').css('background-color', 'transparent');
 }
 function set_height_item () {
-    var item_el = $('.block_items .item > a.href_item');
+    var item_el = $('.item > a.href_item');
     var max_height = 0;
 
     item_el.each(function (index, value) {
@@ -513,7 +513,7 @@ $(function () {
         .on('mouseenter','.item',{hov:true},hover_item)
         .on("mouseleave",".item",{hov:false},hover_item);
 
-    $(".block_items").on("click", ".more_information", show_more_info);
+    $(".block_items").on("click", ".icon_more_block", show_more_info);
 
     $("body")
         .on("click", "#more_information_close", hide_more_info)

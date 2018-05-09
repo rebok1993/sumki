@@ -99,13 +99,13 @@
                     </div>
                 </div>
             </div>
-            <div class="container-fluid header_second_row">
+            <div class="container-fluid header_second_row hidden-sm hidden-xs">
                 <div style="height: 100%;" class="row">
-                    <div class="logo_block col-sm-offset-3 col-sm-6 col-xs-offset-3 col-xs-6 col-md-offset-0 col-md-2">
+                    <div class="logo_block col-sm-offset-3 col-sm-6 col-xs-offset-3 col-xs-6 col-md-offset-0 col-md-3">
                         <a class="logo" href="/"></a>
                     </div>
-                    <div class="advert_first_block hidden-xs hidden-sm col-md-4">
-                        <div>БОЛЬШОЙ ВЫБОР СУМОК <span>В VITTORA</span></div>
+                    <div class="advert_first_block hidden-xs hidden-sm col-md-3">
+                        <div>БОЛЬШОЙ ВЫБОР СУМОК{% comment %} <span>В VITTORA</span>{% endcomment %}</div>
                     </div>
                     <div class="hidden-xs hidden-sm col-md-6 top_image_sumki">
 
@@ -142,10 +142,10 @@
                                 </a>
                             </li>
                         </ul>
-                        <div id="welcome" class="hidden-sm hidden-xs col-md-3"><span><span>Welcome</span> to us</span></div>
+                        {% comment %}<div id="welcome" class="hidden-sm hidden-xs col-md-3"><span><span>Welcome</span> to us</span></div>{% endcomment %}
                         <div id="korzina_block" class="col-md-3">
                             <a class="korzina korzina_inactive" href='/order'></a>
-                            <a id="korzina_desc" href='/order'>
+                            <a class="hidden-sm hidden-xs" id="korzina_desc" href='/order'>
                                 <div id="korzina_desc_inner">
                                     <span id="name_korz">Корзина</span><br><span id="korzina_desc_inner_price">0 руб.</span>
                                 </div>
@@ -154,18 +154,21 @@
                         <div id="but_list_menu_mob" class="visible-xs visible-sm">
                             <span class="glyphicon glyphicon-list"></span>
                         </div>
+                        <div class="logo_block col-sm-offset-3 col-sm-6 col-xs-offset-3 col-xs-6 hidden-md hidden-lg">
+                            <a class="logo_mobile" href="/"></a>
+                        </div>
                     </div>
                 </div>
             </div>
-            {% if advert_second %}
+            {% comment %}{% if advert_second %}
                 <div class="header_fourth_row">
                     <div class="advert_second_block">
                         <span>БЕСПЛАТНАЯ ДОСТАВКА <span class="hidden-xs hidden-sm">ВО ВСЕ ГОРОДА РОССИИ</span></span>
                     </div>
                 </div>
-            {% endif %}
+            {% endif %}{% endcomment %}
             {% if breadcrumbs %}
-            <div class="header_five_row hidden-sm hidden-xs">
+            <div class="header_five_row">
                 {% comment %}<div class="container-fluid" style="max-width: 1246px">
                     <span class="breadcrumb_element" style="padding:0 20px; text-decoration: underline">Главная</span>
                     <span>/</span>

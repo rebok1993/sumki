@@ -29,7 +29,13 @@
         <div class="row">
             <div class="col-md-9 content_item">
                 <div class="item_elem magnify hidden-sm hidden-xs">
-                    <div class="views_tovar"><span class="icon_more_inner"></span><span style="margin-left: 10px"><span style="color: #333; font-weight: 600">{{ number_views_week|smart_ending:ending_views }}</span><br> купили этот товар <br> на неделе</span></div>
+                    <div class="views_tovar">
+                        <span class="icon_more_inner"></span>
+                        <span style="margin-left: 10px">
+                            <span style="color: #333; font-weight: 600">{{ number_views_week|smart_ending:ending_views }}</span>
+                            <br> купили этот товар <br> на неделе
+                        </span>
+                    </div>
                     <div class="wait_load_image"></div>
                     <span id="btn_left" class="glyphicon glyphicon-chevron-left"></span>
                     <span id="btn_right" class="glyphicon glyphicon-chevron-right"></span>
@@ -58,15 +64,16 @@
                         {% endif %}
                     </ul>
                 </div>
-                <div class="hidden-lg hidden-md" style="margin: 0 -15px">
-                    <ul style="overflow: scroll; white-space: nowrap">
+
+                <div class="hidden-lg hidden-md item_elem_mobile">
+                    <ul>
                         {% if images %}
-                            <li style="display: inline-block">
+                            <li>
                                 <img onload="img_loaded(this)" alt="{{ options_elem.type.name }} {{ options_elem.brend.name }}" src="{% static 'sumki_online/images/' %}{{ category.alias  }}/400_on_400/{{ item.id }}.jpg" height="312">
                             </li>
                             {% if images|length != 0 %}
                                 {% for imag in images %}
-                                    <li style="display: inline-block">
+                                    <li>
                                         <img onload="img_loaded(this)" alt="{{ options_elem.type.name }} {{ options_elem.brend.name }}" src="{% static 'sumki_online/images/' %}{{ category.alias  }}/400_on_400/{{ item.id }}v{{ forloop.counter }}.jpg" width="312">
                                     </li>
                                 {% endfor %}
@@ -74,16 +81,56 @@
                         {% endif %}
                     </ul>
                 </div>
+                <h4 style="text-align: left; margin-top: 30px" class="hidden-md hidden-lg">{{ options_elem.type.name }} / {{ options_elem.brend.name }}</h4>
+
+                <div class="price_item_elem_mobile hidden-md hidden-lg">
+                    {% if item.discount > 0 %}
+                        <span style="text-decoration: line-through; color: #999;">{{  item.price|price_format}} руб. </span>{{ item.price|discount:item.discount|price_format }} руб.
+                    {% else %}
+                        {{ item.price|price_format }} руб
+                    {% endif %}
+                </div>
+
+                <div class="btns_item_el hidden-md hidden-lg">
+                    <button style="width: 100%" type="button" class="btn btn-primary add_in_korzina">Добавить в корзину</button>
+                </div>
+
                 {% if item.description|length > 10 %}
-                    <div style="margin: 30px 0 30px 0; max-width: 750px" class="row">
-                        <div class="col-md-12">
+                    <div style="margin: 30px 0 30px 0; max-width: 750px">
+                        <div>
                             <h3 class="h3_item_page">Описание товара</h3>
                             <div style="font-weight: 300; margin-top: 20px; font-size: 15px; line-height: 24px">{{ item.description }}</div>
                         </div>
                     </div>
                 {% endif %}
-                <div style="margin: 30px 0 30px 0; padding-bottom: 50px" class="row">
-                    <div class="col-md-12">
+                <div style="text-align: left" class="hidden-md hidden-lg">
+                    <h3 class="h3_item_page">Характеристики</h3>
+                    <div id="description_item_full" style="margin-top: 30px">
+                        {% if options_elem_render %}{{ options_elem_render }}{% endif %}
+                    </div>
+                </div>
+                <div style="margin-bottom: 30px; text-align: left" class="hidden-md hidden-lg">
+                    <h3 class="h3_item_page">Преимущества Vittora</h3>
+                    <div class="adv_elem">
+                        <div class="icon_del_adv"></div>
+                        <div class="title_adv">Бесплатная доставка по всей России</div>
+                        <div class="descrip_adv">Мы доставляем товар бесплатно в любую точку России</div>
+                    </div>
+                    <div class="adv_elem">
+                        <div class="icon_safe_adv"></div>
+                        <div class="title_adv">Безопасность</div>
+                        <div class="descrip_adv">Безопасность платежей гарантируется использованием SSL протокола.
+                            Данные вашей банковской карты надежно защищены при оплате онлайн.
+                        </div>
+                    </div>
+                    <div class="adv_elem">
+                        <div class="icon_diver_adv"></div>
+                        <div class="title_adv">Разнообразие ассортимента</div>
+                        <div class="descrip_adv">В нашем интернет-магазине представлены товары на любой вкус</div>
+                    </div>
+                </div>
+                <div style="margin-top: 30px;">
+                    <div>
                         <h3 class="h3_item_page">Рекомендуем</h3>
                         <div class="row block_items">
                             {% for elem in other_items %}
@@ -94,8 +141,8 @@
                 </div>
             </div>
             <div class="col-md-3 right_side_bar">
-                <div id="name_item">{{ options_elem.type.name }} / {{ options_elem.brend.name }}</div>
-                <div id="more_information_price">
+                <div id="name_item" class="hidden-xs hidden-sm">{{ options_elem.type.name }} / {{ options_elem.brend.name }}</div>
+                <div class="price_item_elem hidden-sm hidden-xs">
                     {% if item.discount > 0 %}
                         {{ item.price|discount:item.discount|price_format }} руб <span style="text-decoration: line-through; color: #999; font-size: 20px">{{  item.price|price_format}} руб.</span>
                     {% else %}
@@ -114,18 +161,19 @@
                         </select>
                     </form>
                 </div>
-                <div id="btns_item_el">
-                    <button type="button" class="btn btn-primary add_in_korzina"><span class="glyphicon glyphicon-plus"></span> Добавить в корзину</button>
+
+                <div class="btns_item_el hidden-sm hidden-xs">
+                    <button style="width: 100%" type="button" class="btn btn-primary add_in_korzina">Добавить в корзину</button>
                 </div>
 
-                <div style="text-align: left">
+                <div style="text-align: left" class="hidden-sm hidden-xs">
                     <h3 class="h3_item_page">Характеристики</h3>
                     <div id="description_item_full" style="margin-top: 30px">
                         {% if options_elem_render %}{{ options_elem_render }}{% endif %}
                     </div>
                 </div>
 
-                <div style="margin-bottom: 30px; text-align: left">
+                <div style="margin-bottom: 30px; text-align: left" class="hidden-sm hidden-xs">
                     <h3 class="h3_item_page">Преимущества Vittora</h3>
                     <div class="adv_elem">
                         <div class="icon_del_adv"></div>

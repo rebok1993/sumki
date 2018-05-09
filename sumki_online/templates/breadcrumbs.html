@@ -5,7 +5,7 @@
             {% for item in content %}
                 {% if forloop.last %}
                     {% for key, value in item.items %}
-                        <li class="active">{{ key }}</li>
+                        <li class="active hidden-sm hidden-xs">{{ key }}</li>
                     {% endfor %}
                 {% else %}
                     {% for key, value in item.items %}

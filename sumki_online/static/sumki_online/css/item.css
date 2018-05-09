@@ -27,18 +27,28 @@
     border-left: 1px solid #e1e8ed;
     min-height: 100%;
     text-align: center;
-    padding-top:50px;
 }
 #name_item{
     font-size: 32px;
     font-weight: 600;
 }
-#btns_item_el{
+.price_item_elem{
+    text-align: center;
+    vertical-align: middle;
+    margin-left: 20px;
+    display: inline-block;
+    font-size: 22px;
+}
+.price_item_elem_mobile{
+    font-size: 18px;
+}
+.btns_item_el{
+    text-align: center;
     margin: 30px 0;
 }
-#btns_item_el .btn-primary{
-    font-size: 15px;
-    padding: 12px 20px 12px 20px !important;
+.btns_item_el .btn-primary{
+    /*font-size: 15px;*/
+    padding: 8px 20px !important;
 }
 #description_item_full .name_option_elem {
     width: 80px !important;
@@ -55,6 +65,16 @@
 .right_side_bar .price_block .price_lable{
     display: inline-block;
 }
+.item .discount_price_item {
+    font-weight: normal;
+}
+.price_item {
+    font-size: 13px !important;
+}
+.item .discount_item {
+    font-size: 13px !important;
+}
+
 .main_content .content_item{
     background: inherit;
 }
@@ -67,3 +87,13 @@
     left:50px;
     right: auto;
 }
+.item_elem_mobile{
+    margin: 0 -15px;
+}
+    .item_elem_mobile ul{
+        overflow: scroll;
+        white-space: nowrap;
+    }
+        .item_elem_mobile ul li{
+            display: inline-block;
+        }

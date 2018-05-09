@@ -1,25 +1,25 @@
 {% load staticfiles %}
 
 {% load filters %}
-<div style="white-space: normal" class="item col-md-3 col-xs-6 col-sm-6" id="{{ elem.item.id }}" data-item-category="{{ elem.item.category.alias }}">
-    <a href="{% url 'sumki_online:item' elem.item.category.alias elem.item.id %}">
+<div style="white-space: normal" class="item col-md-2 col-xs-6 col-sm-6" id="{{ elem.item.id }}" data-item-category="{{ elem.item.category.alias }}">
+    <a class="href_item href_item_inactive" href="{% url 'sumki_online:item' elem.item.category.alias elem.item.id %}">
         <div{% comment %} class="wrapper_image"{% endcomment %}>
             {% comment %}<div class="ag_copying"></div>{% endcomment %}
             <img onload="imgs_loaded(this)" class="image_item" alt="{{ elem.type }} {{ elem.brend }}" src="{% static 'sumki_online/images/' %}{{ elem.item.category.alias }}/200_on_200/{{ elem.item.id }}.jpg" style="width: 100%">
         </div>
 
         {% if elem.item.discount > 0 %}
-            <div style="text-align: center">
-                <div class="item_description price_item" data-item-price="{{ elem.item.price|discount:elem.item.discount }}">{{ elem.item.price|discount:elem.item.discount|price_format }} руб</div>
-                <div class="item_description discount_item">{{ elem.item.price|price_format }} руб</div>
+            <div class="item_description">
+                <div class="discount_item">{{ elem.item.price|price_format }} руб</div>
+                <div class="price_item discount_price_item" data-item-price="{{ elem.item.price|discount:elem.item.discount }}">{{ elem.item.price|discount:elem.item.discount|price_format }} руб</div>
             </div>
             <div class="item_description saving_item"><span class="skidka_icons"></span><span> скидка -{{ elem.item.discount }}{% comment %}{{ item.price|saving:item.discount|price_format }}{% endcomment %}%</span></div>
         {% else %}
-            <div style="text-align: center">
-                <div class="item_description price_item" data-item-price="{{ elem.item.price }}">{{ elem.item.price|price_format }} руб</div>
+            <div class="item_description">
+                <div class="price_item" data-item-price="{{ elem.item.price }}">{{ elem.item.price|price_format }} руб</div>
             </div>
         {% endif %}
-        <div style="text-align: center" class="item_desc ription name_item" data-item-name="{{ elem.type }}">{{ elem.type }} / <span>{{ elem.brend }}</span></div>
+        <div class="item_description name_item" data-item-name="{{ elem.type }}">{% comment %}{{ elem.type }} / {% endcomment %}<span>{{ elem.brend }}</span></div>
         {% comment %}{% if elem.item.category.alias == 'obuv' %}
             <div class="item_description hide_element">Размеры:
                 {% for size in item.size %}

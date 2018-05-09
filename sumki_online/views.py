@@ -130,11 +130,11 @@ def item(request,category, number):
     if category.alias == 'obuv':
         context['store_elem'] = StoreObuv.objects.filter(item=tovar)
         options_elem = OptionsObuv.objects.get(item=tovar)
-        other_item = OptionsObuv.objects.select_related('item').filter(type=options_elem.type_id, item__number__gt=0).order_by('?')[:4]
+        other_item = OptionsObuv.objects.select_related('item').filter(type=options_elem.type_id, item__number__gt=0).order_by('?')[:6]
         #other_item = Item.objects.select_related('optionsobuv').filter(optionsobuv__type=options_elem.type_id).order_by("?")[:4].values()
     elif category.alias == 'sumki':
         options_elem = OptionsSumki.objects.get(item=tovar)
-        other_item = OptionsSumki.objects.select_related('item').filter(type=options_elem.type_id, item__number__gt=0).order_by('?')[:4]
+        other_item = OptionsSumki.objects.select_related('item').filter(type=options_elem.type_id, item__number__gt=0).order_by('?')[:6]
         #other_item = OptionsSumki.objects.select_related('item').get(item__id=353)
         #other_item = Item.objects.select_related('optionssumki').filter(optionssumki__type=options_elem.type_id).order_by("?")[:4]
     else: return {}
