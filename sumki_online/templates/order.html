@@ -80,29 +80,37 @@
                         <ul id="order_korzina">
                             <li style='display: none' id='copy_element_li'>
                                 <div class='row item_in_order'>
-                                    <div class='col-md-6 block_name_item'>
+                                    <div class='col-md-2 col-sm-3 col-xs-3 block_name_item'>
                                         <div class='img_item item_in_mini_korz' data-item-category='' data-item-id=''>
                                             <img src='' width='64px'>
                                         </div>
-                                        <div class='name_item description_el_order'><span class="name_item_el"></span><br><span class="size_item_el"></span></div>
                                     </div>
-                                    <div class='col-md-2 description_el_order price_item_order'><span></span></div>
-                                    <div class='col-md-1 block_number_item  description_el_order'>
-                                        <form class='number_item'>
-                                            <select class='form-control' style='width: auto !important;'></select>
-                                        </form>
+                                    <div class="col-md-9 col-sm-7 col-xs-7">
+                                        <div class="row">
+                                            <div class='col-md-6 col-sm-12 col-xs-12 name_item description_el_order'>
+                                                <span class="name_item_el"></span><br><span class="size_item_el"></span>
+                                            </div>
+                                            <div class="clearfix visible-xs visible-sm"></div>
+                                            <div style="text-align: left" class='col-md-3 col-sm-12 col-xs-12 block_number_item  description_el_order'>
+                                                <span class="btn_change_number_item" data-change-number="reduce">-</span>
+                                                <spam class="number_item" data-number-item=""></spam>
+                                                <span class="btn_change_number_item" data-change-number="increase">+</span>
+                                            </div>
+                                            <div class="clearfix visible-xs visible-sm"></div>
+                                            <div style="text-align: left" class='col-md-3 col-sm-12 col-xs-12 description_el_order'><span class='order_item_summa'></span></div>
+                                        </div>
                                     </div>
-                                    <div class='col-md-2 description_el_order'><span class='order_item_summa'></span></div>
-                                    <div class='col-md-1 description_el_order'><span class='order_delete_item'>x</span></div>
+                                    <div class='col-md-1 col-sm-2 col-xs-2 description_el_order'><span class='order_delete_item'>x</span></div>
                                 </div>
                             </li>
                         </ul>
-                        <button type="button" class="btn btn-primary" id="next_step_payment">Оформить заказ</button>
+                        <button type="button" class="btn btn-primary hidden-xs hidden-sm next_step_payment">Оформить заказ</button>
+                        <button type="button" class="btn btn-primary hidden-md hidden-lg next_step_payment" style="width: 100%">Оформить заказ</button>
                     </div>
                     <div id="korzina_blank">В корзину ничего не добавлено</div>
                     <div style="margin-top: 30px" id="payment_method" {% comment %}style="display: block"{% endcomment %}>
                         <h3 style="border-bottom: 1px solid #333; padding-bottom: 10px">Оформление заказа</h3>
-                        <h4>Ваш заказ собирается. После <b>оплаты заказа</b> с вами свяжется специалист службы доставки.</h4>
+                        <h5>Ваш заказ собирается. После <b>оплаты заказа</b> с вами свяжется специалист службы доставки.</h5>
                         <div style="padding: 10px 0 10px 10px; margin: 20px 0 20px 0" id="order_final_win">
                             <h4 style="color: #333">Ваш заказ:</h4>
                             <p id="order_final_items">Товары в заказе:<br>
@@ -113,7 +121,8 @@
                             <p id="order_final_dil">Способ получения заказа: <span></span></p>
                             <p id="order_final_fon">Телефон: <span></span></p>
                         </div>
-                        <button type="submit" class="btn btn-primary" id="order_ready">Оплатить</button>
+                        <button type="submit" class="btn btn-primary order_ready hidden-xs hidden-sm">Оплатить</button>
+                        <button type="submit" class="btn btn-primary order_ready hidden-md hidden-lg" style="width: 100%">Оплатить</button>
                     </div>
                 </div>
             </div>

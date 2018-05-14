@@ -26,9 +26,9 @@
     height: 150px;
 }
 #order_korzina .row div{
-    height: 100%;
+    /*height: 100%;*/
     text-align: center;
-    padding: 0;
+    /*padding: 0;*/
 }
 .description_el_order{
     margin-top: 20px;
@@ -40,8 +40,6 @@
     border-bottom: 1px solid #e1e8ed;
 }
 #order_korzina .name_item{
-    font-size: 16px;
-    padding: 0 10px 10px 120px !important;
     text-align: left !important;
 }
 #order_korzina .block_name_item{
@@ -201,7 +199,7 @@
 #delivery_order label{
     font-weight: 600;
 }
-#next_step_payment{
+.next_step_payment{
     margin-top:15px;
 }
 #build_order{
@@ -216,4 +214,26 @@
     font-size: 18px;
     text-decoration: line-through;
     color: #999999 !important;
+}
+.btn_change_number_item{
+    width: 25px;
+    height: 25px;
+    line-height: 21px;
+    border-radius: 100%;
+    color: #aaa;
+    border: 1px solid #aaa;
+    display: inline-block;
+    text-align: center;
+    padding: 0;
+    vertical-align: middle;
+    cursor: pointer;
+}
+.btn_change_number_item:hover{
+    border-color: #ccc;
+    background-color: #ccc;
+    color: #fff;
+}
+.number_item{
+    display: inline-block;
+    padding: 0 5px;
 }

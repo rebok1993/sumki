@@ -201,8 +201,14 @@ $(function () {
         var summa;
         var el = $(this).closest("li");
         var id = el.attr("id");
-        var number = el.find(".number_item select").val();
+        var number_el = el.find(".number_item");
+        var number = number_el.data('numberItem');
 
+        if($(this).data('changeNumber')=='reduce' && number > 1) number--;
+        else if($(this).data('changeNumber')=='increase') number++;
+
+        number_el.data('numberItem',number).text(number+' шт');
+        console.log('sfdsdf');
         change_number_in_mini_korz(id, number);
         $.each(korzina['products'], function(index, value) {
             if(value['id']==parseInt(id)){
@@ -211,7 +217,7 @@ $(function () {
             }
         });
         summa = count_summa();
-        set_main_price_korz(summa)
+        set_main_price_korz(summa);
         set_k_oplate(summa);
         save_korzina();
     };
@@ -222,12 +228,6 @@ $(function () {
         $("#delivery_order, #build_order").show();
         $("#korzina_blank").hide();
         $.each(korzina['products'], function (index, value) {
-            var select = '';
-            for(var i=1;i<=10;i++){
-                if(i==value['number'])
-                    select+="<option selected>"+i+"</option>";
-                else select+="<option>"+i+"</option>";
-            }
             var image_val = value['image'];
             var dop_field = "";
             if(value['size']) dop_field = value['size']+' размер';
@@ -243,8 +243,7 @@ $(function () {
             new_li.find('img').attr('src',image_val);
             new_li.find('.name_item .name_item_el').html(value['name']);
             new_li.find('.name_item .size_item_el').html(dop_field);
-            new_li.find('.price_item_order span').text(format_price(value['price'])+' руб.');
-            new_li.find('.number_item select').html(select);
+            new_li.find('.number_item').data('numberItem', value['number']).text(value['number']+' шт');
             new_li.find('.order_item_summa').text(format_price(value['price']*value['number'])+' руб.');
             $('#order_korzina').prepend(new_li);
 
@@ -383,16 +382,16 @@ $(function () {
     fill_korzina_full();
 
     //оформление заказа
-    $("#next_step_payment").on("click", order_ready);
+    $(".next_step_payment").on("click", order_ready);
 
     //оплата заказа
-    $("#order_ready").on("click", order_pay);
+    $(".order_ready").on("click", order_pay);
 
     //удалить товар из заказа
     $(".order_delete_item").on("click", delete_order_item);
 
     //изменяем количество товара в заказе
-    $(".number_item").on("change", change_number);
+    $(".btn_change_number_item").on("click", change_number);
 
     //изменяем способ доставки
     delivery_way_block.on('click', '.delivery_way', delivery_way);
