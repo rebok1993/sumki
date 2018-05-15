@@ -510,8 +510,8 @@ $(function () {
 
     //действия при наведении на товар
     $('.main_content .content_items')
-        .on('mouseenter','.item',{hov:true},hover_item)
-        .on("mouseleave",".item",{hov:false},hover_item);
+        .on('mouseenter','.block_items .item',{hov:true},hover_item)
+        .on("mouseleave",".block_items .item",{hov:false},hover_item);
 
     $(".block_items").on("click", ".icon_more_block", show_more_info);
 

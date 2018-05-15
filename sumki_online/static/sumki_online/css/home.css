@@ -114,3 +114,18 @@
     left: 50%;
     position: absolute;
 }
+.block_items_mobile{
+    position: relative;
+    font-size: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    overflow-x: auto;
+}
+.block_items_mobile .item{
+    width: 150px;
+    min-width: 40% !important;
+}
+.block_items_mobile .item a{
+    height: 100%;
+}

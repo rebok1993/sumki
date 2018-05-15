@@ -26,7 +26,7 @@ function delete_order_item_el(el) {
 }
 
 function set_k_oplate(summa) {
-    $("#total_summ_order").text(format_price(summa)+" руб.");
+    $("#total_summ_order").text(format_price(summa));
 }
 
 $(function () {

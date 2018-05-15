@@ -1,7 +1,7 @@
 {% load staticfiles %}
 
 {% load filters %}
-<div style="width: 40% !important; white-space: normal" class="item" id="{{ item.id }}" data-item-category="{{ item.category_alias }}">
+<div class="item" id="{{ item.id }}" data-item-category="{{ item.category_alias }}">
     <a href="{% url 'sumki_online:item' item.category_alias item.id %}">
         <div class="wrapper_image">
             <div class="ag_copying"></div>
