@@ -125,7 +125,10 @@
 .block_items_mobile .item{
     width: 150px;
     min-width: 40% !important;
+    align-items: stretch;
+    display: flex;
 }
 .block_items_mobile .item a{
-    height: 100%;
+
+
 }
