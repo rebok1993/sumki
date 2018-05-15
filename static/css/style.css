@@ -323,29 +323,26 @@ body::-webkit-scrollbar{
     display: inline-block;
 }
 
-.icons_left_menu{
-    padding-left: 25px;
-}
-/*.obuv_icon_left_menu{
-    background: url("../images/icons_obuv.png") no-repeat center left transparent;
-    background-size: 22px 22px;
+.obuv_icon_left_menu{
+    background: url("../images/icons_shoes_black.png") no-repeat 10px center transparent;
 }
 .sumka_icon_left_menu{
-    background: url("../images/icons_sumka.png") no-repeat center left transparent;
-    background-size: 22px 22px;
+    background: url("../images/icons_bag_black.png") no-repeat 10px center transparent;
 }
 .home_icon_left_menu{
-    background: url("../images/icons_home_black.png") no-repeat center left transparent;
-    background-size: 22px 22px;
+    background: url("../images/icons_home_black.png") no-repeat 10px center transparent;
 }
 .delivery_icon_left_menu{
-    background: url("../images/icons_del_black.png") no-repeat center left transparent;
-    background-size: 22px 22px;
+    background: url("../images/icons_del_black.png") no-repeat 10px center transparent;
 }
 .about_icon_left_menu{
-    background: url("../images/icons_about.png") no-repeat center left transparent;
-    background-size: 22px 22px;
-}*/
+    background: url("../images/icons_about_black.png") no-repeat 10px center transparent;
+}
+
+.icons_left_menu{
+    padding-left: 43px;
+    background-size: 30px 30px;
+}
 
 #obuv_icon{
     /*background: url("../images/icons_obuv.png") no-repeat center left transparent;
@@ -419,7 +416,7 @@ body::-webkit-scrollbar{
     color: #333;
     font-weight: 600;
     display: block;
-    padding: 5px 0 5px 15px;
+    padding: 12px 0 10px 7px;
 }
 .wrapper .left_side_bar_menu li{
     border-bottom: 1px solid #ccc;
