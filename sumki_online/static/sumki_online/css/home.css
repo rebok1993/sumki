@@ -127,8 +127,40 @@
     min-width: 40% !important;
     align-items: stretch;
     display: flex;
+    margin-right: 5px;
 }
 .block_items_mobile .item a{
 
 
+}
+.classic_bags{
+    background: url("../images/other/icons_bag_black.png") no-repeat 10px center transparent;
+}
+.soft_bags{
+    background: url("../images/other/icons_soft_bag_black.png") no-repeat 10px center transparent;
+}
+.backpack_bags{
+    background: url("../images/other/icons_backpack_black.png") no-repeat 10px center transparent;
+}
+.valise_bags{
+    background: url("../images/other/icons_balise_black.png") no-repeat 10px center transparent;
+}
+.clutch_bags{
+    background: url("../images/other/icons_clutch_black.png") no-repeat 10px center transparent;
+}
+.summer_bags{
+    background: url("../images/other/icons_summer_black.png") no-repeat 10px center transparent;
+}
+.woman_shoes{
+    background: url("../images/other/icons_shoes_black.png") no-repeat 10px center transparent;
+}
+.menu_center_mobile li{
+    padding: 15px 0 12px 52px;
+    border-bottom: 1px solid #ccc;
+    font-size: 14px;
+    background-size: 30px 30px;
+    font-weight: 600;
+}
+.menu_center_mobile li a{
+    color: #333;
 }
