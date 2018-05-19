@@ -1,45 +1,45 @@
 {% if category == "obuv" %}
     <div>
-        <span class="name_option_elem">Материал вверха</span>
-        <span class="option_elem">{{ options.top_material.name }}</span>
+        <span class="name_option_elem">Материал вверха: </span>
+        <span class="option_elem">{{ options.top_material.name|lower }}</span>
     </div>
     <div>
-        <span class="name_option_elem">Материал подошвы</span>
-        <span class="option_elem">{{ options.material_sole.name }}</span>
+        <span class="name_option_elem">Материал подошвы: </span>
+        <span class="option_elem">{{ options.material_sole.name|lower }}</span>
     </div>
     {% if options.material_insole.name != "" %}
     <div>
-        <span class="name_option_elem">Материал стельки</span>
-        <span class="option_elem">{{ options.material_insole.name }}</span>
+        <span class="name_option_elem">Материал стельки: </span>
+        <span class="option_elem">{{ options.material_insole.name|lower }}</span>
     </div>
     {% endif %}
     <div>
-        <span class="name_option_elem">Внутренний материал</span>
-        <span class="option_elem">{{ options.internal_material.name }}</span>
+        <span class="name_option_elem">Внутренний материал: </span>
+        <span class="option_elem">{{ options.internal_material.name|lower }}</span>
     </div>
     <div>
-        <span class="name_option_elem">Сезон</span>
-        <span class="option_elem">{{ options.season.name }}</span>
+        <span class="name_option_elem">Сезон: </span>
+        <span class="option_elem">{{ options.season.name|lower }}</span>
     </div>
 {% elif  category == "sumki"%}
     <div>
-        <span class="name_option_elem">Длинна</span>
-        <span class="option_elem">{{ options.width.name }} см.</span>
+        <span class="name_option_elem">Длинна: </span>
+        <span class="option_elem">{{ options.width.name|lower }} см.</span>
     </div>
     <div>
-        <span class="name_option_elem">Высота</span>
-        <span class="option_elem">{{ options.height.name }} см.</span>
+        <span class="name_option_elem">Высота: </span>
+        <span class="option_elem">{{ options.height.name|lower }} см.</span>
     </div>
     <div>
-        <span class="name_option_elem">Ширина</span>
-        <span class="option_elem">{{ options.depth.name }} см.</span>
+        <span class="name_option_elem">Ширина: </span>
+        <span class="option_elem">{{ options.depth.name|lower }} см.</span>
     </div>
     <div>
-        <span class="name_option_elem">Материал</span>
-        <span class="option_elem">{{ options.material.name }}</span>
+        <span class="name_option_elem">Материал: </span>
+        <span class="option_elem">{{ options.material.name|lower }}</span>
     </div>
     <div>
-        <span class="name_option_elem">Цвет</span>
-        <span class="option_elem">{{ options.color.name }}</span>
+        <span class="name_option_elem">Цвет: </span>
+        <span class="option_elem">{{ options.color.name|lower }}</span>
     </div>
 {% endif %}
