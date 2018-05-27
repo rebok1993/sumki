@@ -1,0 +1,42 @@
+{% load staticfiles %}
+
+{% load filters %}
+<div class="item" id="{{ elem.item.id }}" data-item-category="{{ elem.item.category.alias }}">
+    <a href="{% url 'sumki_online:item' elem.item.category.alias elem.item.id %}">
+        <div class="wrapper_image">
+            <div class="ag_copying"></div>
+            <img onload="imgs_loaded(this)" class="image_item" alt="{{ elem.type }} {{ elem.brend }}" src="{% static 'sumki_online/images/' %}{{ elem.item.category.alias }}/200_on_200/{{ elem.item.id }}.jpg" style="width: 100%">
+        </div>
+
+        {% if elem.item.discount > 0 %}
+            <div class="item_description">
+                <div class="discount_item">{{ elem.item.price|price_format }} руб</div>
+                <div class="price_item" data-item-price="{{ elem.item.price|discount:item.discount }}">{{ elem.item.price|discount:elem.item.discount|price_format }} руб</div>
+            </div>
+            <div class="item_description saving_item"><span class="skidka_icons"></span><span> скидка -{{ elem.item.discount }}%</span></div>
+        {% else %}
+            <div class="item_description">
+                <div class="price_item" data-item-price="{{ elem.item.price }}">{{ elem.item.price|price_format }} руб</div>
+            </div>
+        {% endif %}
+        <div class="item_description name_item" data-item-name="{{ elem.type }}">{{ elem.type }} / <span style="color: #999999">{{ elem.brend }}</span></div>
+        {% comment %}{% if item.category_alias == 'obuv' %}
+            <div class="item_description hide_element">Размеры:
+                {% for size in elem.item.size %}
+                    <span class="size_item">{{ size }}</span>
+                {% endfor %}
+            </div>
+        {% endif %}{% endcomment %}
+        {% if elem.item.hit_sales or elem.item.new_item %}
+            <div class="status_item">
+                {% if elem.item.hit_sales %}
+                    <div class="hit_sales_el">Хит</div>
+                {% endif %}
+                {% if elem.item.new_item %}
+                    <div class="new_item_el">Новинка</div>
+                {% endif %}
+            </div>
+        {% endif %}
+    </a>
+    <div class="icon_more_block hide_element more_information hidden-sm hidden-xs">Быстрый просмотр</div>
+</div>
