@@ -43,6 +43,7 @@ class OrderPage(TemplateView):
         ctx['form'] = PaymentForm(instance=payment)
         return ctx
 
+
 @cache_control(must_revalidate=0)
 def home(request):
     category = {}

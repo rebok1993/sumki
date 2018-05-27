@@ -129,12 +129,22 @@
                         <div class="descrip_adv">В нашем интернет-магазине представлены товары на любой вкус</div>
                     </div>
                 </div>
-                <div style="margin-top: 30px;">
+                <div class="hidden-sm hidden-xs" style="margin-top: 30px;">
                     <div>
                         <h3 class="h3_item_page">Рекомендуем</h3>
                         <div class="row block_items">
                             {% for elem in other_items %}
-                                {% include 'items_hor_new.html' %}
+                                {% include 'items_for_item_desc.html' %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden-md hidden-lg" style="margin-top: 30px; overflow: hidden">
+                    <div>
+                        <h3 class="h3_item_page">Рекомендуем</h3>
+                        <div class="block_items_mobile">
+                            {% for elem in other_items %}
+                                {% include 'items_for_item_mob.html' %}
                             {% endfor %}
                         </div>
                     </div>

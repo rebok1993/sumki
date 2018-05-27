@@ -114,25 +114,7 @@
     left: 50%;
     position: absolute;
 }
-.block_items_mobile{
-    position: relative;
-    font-size: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: stretch;
-    overflow-x: auto;
-}
-.block_items_mobile .item{
-    width: 150px;
-    min-width: 40% !important;
-    align-items: stretch;
-    display: flex;
-    margin-right: 5px;
-}
-.block_items_mobile .item a{
 
-
-}
 .classic_bags{
     background: url("../images/other/icons_bag_black.png") no-repeat 10px center transparent;
 }

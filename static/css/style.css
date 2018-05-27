@@ -614,6 +614,25 @@ body::-webkit-scrollbar{
     padding-bottom: 10px;
     margin: 0 -10px 0 -8px;
 }
+.block_items_mobile{
+    position: relative;
+    font-size: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    overflow-x: auto;
+}
+.block_items_mobile .item{
+    width: 150px;
+    min-width: 40% !important;
+    align-items: stretch;
+    display: flex;
+    margin-right: 5px;
+}
+.block_items_mobile .item a{
+
+
+}
 .main_content .content_items .item > a.href_item_active{
     border: 1px solid transparent;
     box-shadow: none;
