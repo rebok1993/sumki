@@ -372,6 +372,7 @@ $(function () {
 
     //действие при наведение на товар
     var hover_item = function (event) {
+        if(is_mobile()) return;
         event.stopPropagation();
         var img_el = $(this).find('.wrapper_image img');
         var src_el = img_el.attr('src');
@@ -490,7 +491,12 @@ $(function () {
             timer_id = setInterval(timer_skidka,1000);
         }
     };
+    var is_mobile = function () {
+        var width_scr = $(window).width();
 
+        if(width_scr <= 990) return true;
+        return false;
+    };
     //применяем скидку и включаем таймер
     var apply_skidka = function () {
         dop_skidka_close();
