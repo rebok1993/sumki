@@ -120,16 +120,25 @@ a{
     background-color: #fff;
 }
 .header_first_row{
+    color: #fff;
+    font-size: 14px;
     height: 44px;
     /*background: #222222;*/
-    /*background: rgba(0,0,0,0.8);*/
-    background: #EB4458;
+    background: rgba(0,0,0,0.8);
+    /*background: #EB4458;*/
     font-weight: 600 !important;
 }
-.header_first_row .header_contact_inform{
+.header_first_row .header_contact_inform,.header_first_row .header_enter{
     height: 44px;
     line-height: 44px;
     white-space: nowrap;
+}
+.header_first_row .header_enter{
+    text-align: right;
+}
+.header_first_row .header_enter span{
+    padding: 0 10px;
+    cursor: pointer;
 }
 .wrapper .header .header_second_row{
     background-color: #fff;
@@ -146,10 +155,24 @@ a{
 }
 .wrapper .header .header_second_row .advert_first_block{
     height:100%;
-    line-height: 100px;
+    display: flex;
     text-align: center;
     font-size: 16px;
     color: #66757f;
+}
+.wrapper .header .header_second_row .advert_first_block div{
+    margin: auto;
+}
+.top_search_str{
+    display: flex;
+    height: 100%;
+}
+.top_search_str form{
+    width: 100%;
+    margin: auto;
+}
+.top_search_str form .form-group{
+    margin-bottom: 0;
 }
 .wrapper .header .header_second_row .advert_first_block span{
     font-weight: 100;
@@ -189,17 +212,12 @@ body::-webkit-scrollbar{
 .number_fon_top{
     /*font-weight: 300;*/
     letter-spacing: 1px;
-    font-size: 16px;
     display: inline-block;
     padding: 0 60px 0 38px;
     background:url("../images/icon-phone.png") no-repeat center left transparent;
     background-size: 27px 27px;
-    color: #fff;
 }
 .time_work_top{
-    /*font-weight: 300;*/
-    color: #fff;
-    font-size: 16px;
     display: inline-block;
 }
 .header_inform_row_menu{
@@ -619,6 +637,11 @@ body::-webkit-scrollbar{
 .block_items .item > a{
     padding-bottom: 10px;
     margin: 0 -10px 0 -8px;
+}
+@media (max-width: 990px){
+    .block_items .item > a{
+        margin: 0 -14px 0 -14px;
+    }
 }
 .block_items_mobile{
     position: relative;
@@ -1432,11 +1455,7 @@ loader*/
 .adv_elem{
     margin-top: 30px;
 }
-.top_image_sumki{
-    background: url("../images/sumki_top2.jpg") no-repeat left center transparent;
-    height:100%;
-    line-height: 100px;
-}
+
 #header_category{
     font-size: 24px;
     font-weight: 600;
