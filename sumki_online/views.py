@@ -184,7 +184,6 @@ def add_number_views(item_elem):
             print(e)
     return number_views_week
 
-
 #МЕТОДЫ ОТВЕЧАЮЩИЕ ЗА ЗАКАЗ НАЧАЛО
 
 @csrf_exempt

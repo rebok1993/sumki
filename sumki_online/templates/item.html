@@ -28,7 +28,7 @@
      data-item-category="{{ category.alias }}" class="item_data_for_korz main_content container-fluid" style="max-width: 1246px; margin: auto">
         <div class="row">
             <div class="col-md-9 content_item">
-                <div class="item_elem magnify hidden-sm hidden-xs">
+                <div class="item_elem hidden-sm hidden-xs">
                     <div class="views_tovar">
                         <span class="icon_more_inner"></span>
                         <span style="margin-left: 10px">
@@ -39,7 +39,7 @@
                     <div class="wait_load_image"></div>
                     <span id="btn_left" class="glyphicon glyphicon-chevron-left"></span>
                     <span id="btn_right" class="glyphicon glyphicon-chevron-right"></span>
-                    <div id="main_image_el">
+                    <div id="main_image_el" class="magnify">
                         <div class="zoom_image">
                             <img src="" width="440">
                         </div>
@@ -99,7 +99,7 @@
                     <div style="margin: 30px 0 30px 0; max-width: 750px">
                         <div>
                             <h3 class="h3_item_page">Описание товара</h3>
-                            <div style="font-weight: 300; margin-top: 20px; font-size: 15px; line-height: 24px">{{ item.description }}</div>
+                            <div style="font-weight: 400; font-size: 14px; line-height: 24px">{{ item.description }}</div>
                         </div>
                     </div>
                 {% endif %}
@@ -132,7 +132,7 @@
                 <div class="hidden-sm hidden-xs" style="margin-top: 30px;">
                     <div>
                         <h3 class="h3_item_page">Рекомендуем</h3>
-                        <div class="row block_items">
+                        <div class="row block_items" style="margin-top: 10px">
                             {% for elem in other_items %}
                                 {% include 'items_for_item_desc.html' %}
                             {% endfor %}

@@ -29,9 +29,6 @@
             <button type="button" class="btn btn-info-2 add_in_korzina">Добавить в корзину</button>
             <button type="button" class="btn btn-info in_korzina"><span class="glyphicon glyphicon-ok"></span> В корзине</button>
         </div>
-        <div class="href_to_item">
-            <a href="/{{ category.alias }}/item/{{ elem.id }}">Подробнее</a>
-        </div>
         <div id="more_information_close"></div>
     </div>
     <div id="more_information_other_image_block">
@@ -73,25 +70,25 @@
     <hr style="margin: 0 !important;">
 
     {% if elem.description|length > 10 %}
-    <div style="margin: 30px 0 30px 120px; width: 750px" class="row">
+    <div style="margin: 30px 0 30px 120px; width: 750px" class="row" id="scroll_to_desc">
         <div class="col-md-12">
-            <h3 class="h3_item_page">Описание товара</h3>
-            <div style="font-weight: 300; margin-top: 15px; font-size: 15px; line-height: 24px">{{ elem.description }}</div>
+            <h3 class="h3_item_page" id="scroll_to_desc">Описание товара</h3>
+            <div style="font-weight: 400; font-size: 14px; line-height: 24px">{{ elem.description }}</div>
         </div>
     </div>
     {% endif %}
 
-    <div style="margin: 30px 0 30px 120px" class="row">
+    <div style="margin: 30px 0 30px 120px" class="row" id="scroll_to_opt">
         <div class="col-md-6">
             <div style="display: inline-block; vertical-align: top; width: 80%">
                 <h3 class="h3_item_page">Характеристики</h3>
-                <div id="description_item_full" style="font-weight: 300; margin-top: 15px; font-size: 15px">
+                <div id="description_item_full" style="font-weight: 400; margin-top: 15px; font-size: 14px">
                     {% if options_elem_render %}{{ options_elem_render }}{% endif %}
                 </div>
             </div>
         </div>
         <div class="col-md-6">
-            <div style="display: inline-block; text-align: left; font-size: 15px">
+            <div style="display: inline-block; text-align: left; font-size: 14px">
                 <h3 class="h3_item_page">Преимущества Vittora</h3>
                 <div class="adv_elem">
                     <div class="icon_del_adv"></div>
@@ -111,6 +108,20 @@
                     <div class="descrip_adv">В нашем интернет-магазине представлены товары на любой вкус</div>
                 </div>
         </div>
+        </div>
+    </div>
+    <div class="more_information_footer">
+        <div class="mini_menu">
+            <div class="active_mini_menu scroll_more_info" data-scroll-adr="home"><span>Фото</span></div>
+            <div class="scroll_more_info" data-scroll-adr="desc"><span>Описание</span></div>
+            <div class="scroll_more_info" data-scroll-adr="opt"><span>Характеристики</span></div>
+        </div>
+        <div class="href_to_item">
+            <div class="btns_item">
+                <a href="/{{ category.alias }}/item/{{ elem.id }}">
+                    <button type="button" class="btn btn-info-2">Подробнее</button>
+                </a>
+            </div>
         </div>
     </div>
 </div>

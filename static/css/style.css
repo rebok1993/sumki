@@ -725,6 +725,25 @@ body::-webkit-scrollbar{
     padding-right: 70px;
     font-size: 14px;
 }
+.mini_menu{
+    padding-left: 10px;
+    float: left;
+    font-size: 15px;
+}
+.mini_menu div{
+    cursor: pointer;
+    line-height: normal;
+    display: inline-block;
+}
+.mini_menu div span{
+    transition: all .3s ease-in-out;
+    border-bottom: 3px solid transparent;
+    display: inline-block;
+    padding: 5px 15px;
+}
+.mini_menu div.active_mini_menu span{
+    border-bottom: 3px solid #333;
+}
 #special_skidka{
     display: none;
     text-align: center;
@@ -819,7 +838,7 @@ body::-webkit-scrollbar{
 }
 #fon_wait #more_information_window{
     font-size: 0;
-    padding: 65px 0 5px;
+    padding: 65px 0 200px;
     position: absolute;
     top:0;
     left: 50%;
@@ -892,6 +911,18 @@ body::-webkit-scrollbar{
         right: auto;
         border-bottom: 1px solid #ddd;
         background-color:#fff;
+        width: 1010px;
+        height: 65px;
+        line-height: 62px;
+    }
+    #more_information_window .more_information_footer{
+        position: fixed;
+        z-index: 1110;
+        bottom: 0;
+        left: auto;
+        right: auto;
+        border-top: 1px solid #ddd;
+        background-color:rgba(255,255,255,0.8);
         width: 1010px;
         height: 65px;
         line-height: 62px;
@@ -1335,6 +1366,7 @@ loader*/
 }
 .icon_more_block{
     border: 1px solid #c9c9c9;
+    border-radius: 2px;
     position: absolute;
     top:50%;
     left: 50%;
@@ -1456,10 +1488,10 @@ loader*/
 .title_adv, .descrip_adv{
     padding-left: 70px;
     max-width: 330px;
-    font-weight: 300;
+    font-weight: 400;
 }
 .title_adv{
-    font-weight: 600;
+    font-weight: 700;
 }
 .adv_elem{
     margin-top: 15px;
